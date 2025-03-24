@@ -1,0 +1,45 @@
+{
+    "name": "PlayerActions",
+    "maps": [
+        {
+            "name": "Controls",
+            "id": "fd40396a-182d-4824-ab03-d0c51f88f5bb",
+            "actions": [
+                {
+                    "name": "Start Deck 1",
+                    "type": "Button",
+                    "id": "13097447-0a0e-47b9-a06f-173ea553e76f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "94da17ff-0a26-4a32-adbd-ff92ae930a70",
+                    "path": "<MidiDevice>/note007",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Start Deck 1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ca68007c-5483-4ef7-b508-74d5c999ee0c",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Start Deck 1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
