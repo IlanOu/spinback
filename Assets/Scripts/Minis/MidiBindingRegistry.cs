@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 
 namespace Minis
@@ -7,8 +8,11 @@ namespace Minis
     public class MidiBindingRegistry : MonoBehaviour
     {
         [SerializeField]
-        private List<NamedMidiBinding> bindings = new ();
-        private Dictionary<string, Action<MidiInput>> _namedListeners = new();
+        private List<MidiNoteBinding> noteBindings = new ();
+        [SerializeField]
+        private List<MidiControlBinding> controlBindings = new ();
+        
+        private Dictionary<ActionEnum, Action<MidiInput>> _namedListeners = new();
         
         private static MidiBindingRegistry _instance;
         public static MidiBindingRegistry Instance => _instance;
@@ -44,33 +48,33 @@ namespace Minis
             }
         }
 
-        public void Bind(string name, Action<MidiInput> listener)
+        public void Bind(ActionEnum action, Action<MidiInput> listener)
         {
-            if (!_namedListeners.ContainsKey(name))
+            if (!_namedListeners.ContainsKey(action))
             {
-                _namedListeners.Add(name, listener);
+                _namedListeners.Add(action, listener);
             }
             else
             {
-                _namedListeners[name] += listener;
+                _namedListeners[action] += listener;
             }
         }
 
-        public void Unbind(string name, Action<MidiInput> listener)
+        public void Unbind(ActionEnum action, Action<MidiInput> listener)
         {
-            if (_namedListeners.ContainsKey(name))
+            if (_namedListeners.ContainsKey(action))
             {
-                _namedListeners[name] -= listener;
+                _namedListeners[action] -= listener;
             }
         }
 
         private void OnNoteOn(MidiInput input)
         {
-            foreach (var binding in bindings)
+            foreach (var binding in noteBindings)
             {
-                if (!binding.isControl && binding.number == input.Number && binding.channel == input.Channel)
+                if (binding != null && binding.isPressed && binding.number == input.Number && binding.channel == input.Channel)
                 {
-                    if (_namedListeners.TryGetValue(binding.name, out var listener))
+                    if (_namedListeners.TryGetValue(binding.action, out var listener))
                     {
                         listener?.Invoke(input);
                     }
@@ -80,11 +84,11 @@ namespace Minis
         
         private void OnNoteOff(MidiInput input)
         {
-            foreach (var binding in bindings)
+            foreach (var binding in noteBindings)
             {
-                if (!binding.isControl && binding.number == input.Number && binding.channel == input.Channel)
+                if (binding != null && !binding.isPressed && binding.number == input.Number && binding.channel == input.Channel)
                 {
-                    if (_namedListeners.TryGetValue(binding.name, out var listener))
+                    if (_namedListeners.TryGetValue(binding.action, out var listener))
                     {
                         listener?.Invoke(input);
                     }
@@ -94,11 +98,11 @@ namespace Minis
         
         private void OnControlChange(MidiInput input)
         {
-            foreach (var binding in bindings)
+            foreach (var binding in controlBindings)
             {
-                if (binding.isControl && binding.number == input.Number && binding.channel == input.Channel)
+                if (binding != null && binding.number == input.Number && binding.channel == input.Channel)
                 {
-                    if (_namedListeners.TryGetValue(binding.name, out var listener))
+                    if (_namedListeners.TryGetValue(binding.action, out var listener))
                     {
                         listener?.Invoke(input);
                     }

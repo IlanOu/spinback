@@ -494,19 +494,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6304518dce18470388958525e0472e29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bindings:
-  - name: OnJump
+  noteBindings:
+  - action: 0
     number: 7
     channel: 2
-    isControl: 0
-  - name: OnNotJump
+    isPressed: 0
+  - action: 0
     number: 7
     channel: 2
-    isControl: 0
-  - name: OnZoom
-    number: 32
-    channel: 2
-    isControl: 1
+    isPressed: 0
+  controlBindings:
+  - action: 0
+    number: 0
+    channel: 0
 --- !u!4 &453684888
 Transform:
   m_ObjectHideFlags: 0

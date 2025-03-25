@@ -1,4 +1,5 @@
 using System;
+using DefaultNamespace;
 using Minis;
 using UnityEngine;
 
@@ -6,14 +7,14 @@ public class TestMinisEvent : MonoBehaviour
 {
     private void Start()
     {
-        MidiBindingRegistry.Instance.Bind("OnZoom",  OnZoom);
-        MidiBindingRegistry.Instance.Bind("OnJump",  OnJump);
-        MidiBindingRegistry.Instance.Bind("OnNotJump",  OnNotJump);
+        MidiBindingRegistry.Instance.Bind(ActionEnum.Zoom,  OnZoom);
+        MidiBindingRegistry.Instance.Bind(ActionEnum.Jump,  OnJump);
+        MidiBindingRegistry.Instance.Bind(ActionEnum.NotJump,  OnNotJump);
     }
 
     private void OnZoom(MidiInput input)
     {
-        Debug.Log("OnZoom");
+        Debug.Log($"OnZoom:  {input.Value}");
     }
     
     private void OnJump(MidiInput input)
