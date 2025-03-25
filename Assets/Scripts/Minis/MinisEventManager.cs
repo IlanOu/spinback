@@ -9,12 +9,13 @@ namespace Minis
         private static MinisEventManager _instance;
         public static MinisEventManager Instance => _instance;
 
-        public event Action<MinisInput> NoteOn;
-        public event Action<MinisInput> NoteOff;
-        public event Action<MinisInput> ControlChange;
+        public event Action<MidiInput> OnNoteOn;
+        public event Action<MidiInput> OnNoteOff;
+        public event Action<MidiInput> OnControlChange;
         private void Awake()
         {
-            if (_instance != null && _instance != this) {
+            if (_instance != null && _instance != this)
+            {
                 Destroy(gameObject);
                 return;
             }
@@ -41,12 +42,12 @@ namespace Minis
         {
             // ON
             midiDevice.onWillNoteOn += (note, velocity) => {
-                NoteOn?.Invoke(MinisInput.FromNote(note,  velocity));
+                OnNoteOn?.Invoke(MidiInput.FromNote(note,  velocity));
             };
 
             // OFF
             midiDevice.onWillNoteOff += (note) => {
-                NoteOff?.Invoke(MinisInput.FromNote(note, 0f));
+                OnNoteOff?.Invoke(MidiInput.FromNote(note, 0f));
             };
         }
     
@@ -54,7 +55,7 @@ namespace Minis
         {
             // ON SLIDE
             midiDevice.onWillControlChange += (cc, value) => {
-                ControlChange?.Invoke(MinisInput.FromControl(cc, value));
+                OnControlChange?.Invoke(MidiInput.FromControl(cc, value));
             };
         }
     }

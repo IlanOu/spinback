@@ -1,6 +1,6 @@
 namespace Minis
 {
-    public class MinisInput
+    public class MidiInput
     {
         public int Number;
         public string ShortName;
@@ -8,9 +8,9 @@ namespace Minis
         public float Velocity;
         public float Value;
 
-        public static MinisInput FromNote(MidiNoteControl note, float velocity)
+        public static MidiInput FromNote(MidiNoteControl note, float velocity)
         {
-            var minisInput = new MinisInput
+            var minisInput = new MidiInput
             {
                 Number = note.noteNumber,
                 ShortName = note.shortDisplayName,
@@ -21,9 +21,9 @@ namespace Minis
             return minisInput;
         }
     
-        public static MinisInput FromControl(MidiValueControl control, float value)
+        public static MidiInput FromControl(MidiValueControl control, float value)
         {
-            var minisInput = new MinisInput
+            var minisInput = new MidiInput
             {
                 Number = control.controlNumber,
                 ShortName = control.shortDisplayName,
