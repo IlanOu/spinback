@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using MidiJack;
 
 namespace Minis
 {
@@ -12,6 +12,7 @@ namespace Minis
         public event Action<MidiInput> OnNoteOn;
         public event Action<MidiInput> OnNoteOff;
         public event Action<MidiInput> OnControlChange;
+
         private void Awake()
         {
             if (_instance != null && _instance != this)
@@ -26,37 +27,72 @@ namespace Minis
 
         private void Start()
         {
-            InputSystem.onDeviceChange += (device, change) =>
+            // Debug.Log("=== MinisEventManager démarré avec MidiJack ===");
+            
+            // S'abonner aux événements MidiJack
+            MidiMaster.noteOnDelegate += HandleNoteOn;
+            MidiMaster.noteOffDelegate += HandleNoteOff;
+            MidiMaster.knobDelegate += HandleControlChange;
+        }
+        
+        private void OnDestroy()
+        {
+            // Nettoyer les abonnements
+            MidiMaster.noteOnDelegate -= HandleNoteOn;
+            MidiMaster.noteOffDelegate -= HandleNoteOff;
+            MidiMaster.knobDelegate -= HandleControlChange;
+        }
+
+        private void HandleNoteOn(MidiChannel channel, int note, float velocity)
+        {
+            // Debug.Log($"NOTE ON - Note: {note}, Vélocité: {velocity}");
+            
+            var midiInput = new MidiInput
             {
-                if (change != InputDeviceChange.Added) return;
-
-                var midiDevice = device as MidiDevice;
-                if (midiDevice == null) return;
-
-                SetupNoteCallbacks(midiDevice);
-                SetupControlCallback(midiDevice);
+                Number = note,
+                ShortName = $"Note {note}",
+                Channel = (int)channel,
+                Velocity = velocity,
+                Value = velocity  // Pour les notes, Value peut être égale à Velocity
             };
+            
+            OnNoteOn?.Invoke(midiInput);
         }
 
-        private void SetupNoteCallbacks(MidiDevice midiDevice)
+        private void HandleNoteOff(MidiChannel channel, int note)
         {
-            // ON
-            midiDevice.onWillNoteOn += (note, velocity) => {
-                OnNoteOn?.Invoke(MidiInput.FromNote(note,  velocity));
+            // Debug.Log($"NOTE OFF - Note: {note}");
+            
+            var midiInput = new MidiInput
+            {
+                Number = note,
+                ShortName = $"Note {note}",
+                Channel = (int)channel,
+                Velocity = 0,
+                Value = 0
             };
-
-            // OFF
-            midiDevice.onWillNoteOff += (note) => {
-                OnNoteOff?.Invoke(MidiInput.FromNote(note, 0f));
-            };
+            
+            OnNoteOff?.Invoke(midiInput);
         }
+
+        private void HandleControlChange(MidiChannel channel, int knobNumber, float knobValue)
+        {
+            // MidiJack fournit des valeurs entre 0 et 1, mais votre système attend des valeurs entre 0 et 127
+            float scaledValue = knobValue * 127f;
     
-        private void SetupControlCallback(MidiDevice midiDevice)
-        {
-            // ON SLIDE
-            midiDevice.onWillControlChange += (cc, value) => {
-                OnControlChange?.Invoke(MidiInput.FromControl(cc, value));
+            Debug.Log($"CONTROL CHANGE REÇU - CC: {knobNumber}, Canal: {(int)channel}, Valeur: {scaledValue}/127");
+    
+            var midiInput = new MidiInput
+            {
+                Number = knobNumber,
+                ShortName = $"CC {knobNumber}",
+                Channel = (int)channel,
+                Velocity = 0,
+                Value = scaledValue
             };
+    
+            Debug.Log($"ENVOI D'ÉVÉNEMENT OnControlChange - Number: {midiInput.Number}, Channel: {midiInput.Channel}");
+            OnControlChange?.Invoke(midiInput);
         }
     }
 }

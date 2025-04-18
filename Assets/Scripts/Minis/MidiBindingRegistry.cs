@@ -70,6 +70,7 @@ namespace Minis
 
         private void OnNoteOn(MidiInput input)
         {
+            Debug.Log($"NOTE ON - Number={input.Number}, Channel={input.Channel}, Value={input.Value}");
             foreach (var binding in noteBindings)
             {
                 if (binding != null && binding.isPressed && binding.number == input.Number && binding.channel == input.Channel)
@@ -98,13 +99,24 @@ namespace Minis
         
         private void OnControlChange(MidiInput input)
         {
+            // Debug.Log($"MidiBindingRegistry - OnControlChange reçu: Number={input.Number}, Channel={input.Channel}, Value={input.Value}");
+    
             foreach (var binding in controlBindings)
             {
+                // Debug.Log($"Vérification binding: Number={binding.number}, Channel={binding.channel}, Action={binding.action}");
+        
                 if (binding != null && binding.number == input.Number && binding.channel == input.Channel)
                 {
+                    // Debug.Log($"Binding trouvé! Action={binding.action}");
+            
                     if (_namedListeners.TryGetValue(binding.action, out var listener))
                     {
+                        // Debug.Log($"Listener trouvé pour action {binding.action}, invocation...");
                         listener?.Invoke(input);
+                    }
+                    else
+                    {
+                        // Debug.Log($"Aucun listener trouvé pour l'action {binding.action}");
                     }
                 }
             }
