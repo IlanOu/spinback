@@ -27,8 +27,8 @@ public class TimeRewindManager : MonoBehaviour
     [SerializeField] private float jogMinimumVelocity = 0.01f;
     
     
-    private float jogVelocity = 0f;
-    private bool isJogging = false;
+    private float _jogVelocity = 0f;
+    private bool _isJogging = false;
     
     [Tooltip("Use adaptive recording to reduce memory usage")]
     [SerializeField] private bool useAdaptiveRecording = true;
@@ -37,17 +37,17 @@ public class TimeRewindManager : MonoBehaviour
     [SerializeField] private int maxObjectsPerFrame = 5;
     
     // Internal state
-    private List<TimeRewindable> rewindableObjects = new List<TimeRewindable>();
-    private float recordingTime = 0f;
-    private float currentPlaybackTime = 0f;
-    private bool isRewinding = false;
-    private float lastRecordTime = 0f;
-    private int currentObjectIndex = 0;
+    private List<TimeRewindable> _rewindableObjects = new List<TimeRewindable>();
+    private float _recordingTime = 0f;
+    private float _currentPlaybackTime = 0f;
+    private bool _isRewinding = false;
+    private float _lastRecordTime = 0f;
+    private int _currentObjectIndex = 0;
     
     // Properties for external access
-    public float RecordingTime => recordingTime;
-    public float CurrentPlaybackTime => currentPlaybackTime;
-    public bool IsRewinding => isRewinding;
+    public float RecordingTime => _recordingTime;
+    public float CurrentPlaybackTime => _currentPlaybackTime;
+    public bool IsRewinding => _isRewinding;
     
     private void Awake()
     {
@@ -65,9 +65,9 @@ public class TimeRewindManager : MonoBehaviour
     private void Start()
     {
         // Find and initialize all rewindable objects in the scene
-        rewindableObjects.AddRange(FindObjectsOfType<TimeRewindable>());
+        _rewindableObjects.AddRange(FindObjectsByType<TimeRewindable>(FindObjectsInactive.Include, FindObjectsSortMode.None));
         
-        foreach (TimeRewindable obj in rewindableObjects)
+        foreach (TimeRewindable obj in _rewindableObjects)
         {
             if (obj != null)
                 obj.InitializeStateRecording(recordInterval, useAdaptiveRecording);
@@ -85,7 +85,7 @@ public class TimeRewindManager : MonoBehaviour
         if (input.Velocity > 0)
         {
             // Note ON - Activer le mode rewind s'il n'est pas déjà actif
-            if (!isRewinding)
+            if (!_isRewinding)
             {
                 Debug.Log("MIDI: Activation du mode rewind");
                 ActivateRewindMode();
@@ -94,7 +94,7 @@ public class TimeRewindManager : MonoBehaviour
         else
         {
             // Note OFF - Désactiver le mode rewind s'il est actif
-            if (isRewinding)
+            if (_isRewinding)
             {
                 Debug.Log("MIDI: Désactivation du mode rewind");
                 DeactivateRewindMode();
@@ -105,17 +105,17 @@ public class TimeRewindManager : MonoBehaviour
     private void OnMidiJog(MidiInput input)
     {
         // Si c'est un message avec une valeur (déplacement du jog)
-        if (isRewinding) // Seulement en mode rewind
+        if (_isRewinding) // Seulement en mode rewind
         {
             // Calcul de la vitesse de déplacement
             float raw = -(input.Value - 64);
-            jogVelocity = raw * jogSensitivity;
-            isJogging = Mathf.Abs(jogVelocity) > jogMinimumVelocity;
+            _jogVelocity = raw * jogSensitivity;
+            _isJogging = Mathf.Abs(_jogVelocity) > jogMinimumVelocity;
             
             // Application immédiate du déplacement
-            if (isJogging)
+            if (_isJogging)
             {
-                float deltaTime = jogVelocity * Time.deltaTime;
+                float deltaTime = _jogVelocity * Time.deltaTime;
                 SetPlaybackTime(CurrentPlaybackTime + deltaTime);
             }
         }
@@ -129,30 +129,30 @@ public class TimeRewindManager : MonoBehaviour
             ToggleRewindMode();
         }
 
-        if (isRewinding)
+        if (_isRewinding)
         {
             // Gestion de l'inertie du jog wheel
-            if (Mathf.Abs(jogVelocity) > jogMinimumVelocity)
+            if (Mathf.Abs(_jogVelocity) > jogMinimumVelocity)
             {
                 // Appliquer l'inertie actuelle
-                float deltaTime = jogVelocity * Time.deltaTime;
+                float deltaTime = _jogVelocity * Time.deltaTime;
                 SetPlaybackTime(CurrentPlaybackTime + deltaTime);
                 
                 // Réduire progressivement la vitesse (décélération)
-                jogVelocity *= jogInertiaFactor;
+                _jogVelocity *= jogInertiaFactor;
             }
             else
             {
                 // Arrêter complètement si on est sous le seuil minimum
-                jogVelocity = 0f;
-                isJogging = false;
+                _jogVelocity = 0f;
+                _isJogging = false;
             }
             
             // Time navigation using mouse scroll wheel
             float scrollInput = Input.mouseScrollDelta.y * scrollSensitivity;
             if (scrollInput != 0)
             {
-                currentPlaybackTime = Mathf.Clamp(currentPlaybackTime - scrollInput, 0f, recordingTime);
+                _currentPlaybackTime = Mathf.Clamp(_currentPlaybackTime - scrollInput, 0f, _recordingTime);
             }
             
             // Apply time to objects (distributed across frames)
@@ -161,17 +161,17 @@ public class TimeRewindManager : MonoBehaviour
         else // Mode enregistrement
         {
             // En mode normal, réinitialiser la vitesse du jog
-            jogVelocity = 0f;
-            isJogging = false;
+            _jogVelocity = 0f;
+            _isJogging = false;
             
             // Record states at regular intervals
-            recordingTime += Time.deltaTime;
-            if (recordingTime > maxRecordTime)
-                recordingTime = maxRecordTime;
+            _recordingTime += Time.deltaTime;
+            if (_recordingTime > maxRecordTime)
+                _recordingTime = maxRecordTime;
                 
-            if (recordingTime >= lastRecordTime + recordInterval)
+            if (_recordingTime >= _lastRecordTime + recordInterval)
             {
-                lastRecordTime = recordingTime;
+                _lastRecordTime = _recordingTime;
                 
                 // Record object states (distributed across frames)
                 ProcessObjectsInRecordMode();
@@ -182,35 +182,35 @@ public class TimeRewindManager : MonoBehaviour
     // Méthode pour activer le mode rewind
     private void ActivateRewindMode()
     {
-        isRewinding = true;
-        jogVelocity = 0f; // Réinitialiser la vitesse du jog
-        isJogging = false;
-        currentPlaybackTime = recordingTime;
-        Debug.Log("Rewind mode activated. Current time: " + currentPlaybackTime);
+        _isRewinding = true;
+        _jogVelocity = 0f; // Réinitialiser la vitesse du jog
+        _isJogging = false;
+        _currentPlaybackTime = _recordingTime;
+        Debug.Log("Rewind mode activated. Current time: " + _currentPlaybackTime);
     }
     
     // Méthode pour désactiver le mode rewind
     private void DeactivateRewindMode()
     {
-        isRewinding = false;
-        jogVelocity = 0f; // Réinitialiser la vitesse du jog
-        isJogging = false;
+        _isRewinding = false;
+        _jogVelocity = 0f; // Réinitialiser la vitesse du jog
+        _isJogging = false;
         
         // IMPORTANT: Truncate history at resume point
-        float oldRecordingTime = recordingTime;
-        recordingTime = currentPlaybackTime;
+        float oldRecordingTime = _recordingTime;
+        _recordingTime = _currentPlaybackTime;
         
         // Inform all objects to truncate their history
-        foreach (TimeRewindable obj in rewindableObjects)
+        foreach (TimeRewindable obj in _rewindableObjects)
         {
             if (obj != null)
-                obj.TruncateHistoryAfter(currentPlaybackTime);
+                obj.TruncateHistoryAfter(_currentPlaybackTime);
         }
         
         // Reset recording time to avoid jumps
-        lastRecordTime = recordingTime;
+        _lastRecordTime = _recordingTime;
         
-        Debug.Log("Rewind mode deactivated. Resuming recording from T=" + recordingTime);
+        Debug.Log("Rewind mode deactivated. Resuming recording from T=" + _recordingTime);
     }
     
     /// <summary>
@@ -219,18 +219,18 @@ public class TimeRewindManager : MonoBehaviour
     private void ProcessObjectsInRewindMode()
     {
         int objectsProcessed = 0;
-        int startIndex = currentObjectIndex;
+        int startIndex = _currentObjectIndex;
         
-        while (objectsProcessed < maxObjectsPerFrame && objectsProcessed < rewindableObjects.Count)
+        while (objectsProcessed < maxObjectsPerFrame && objectsProcessed < _rewindableObjects.Count)
         {
-            int index = (startIndex + objectsProcessed) % rewindableObjects.Count;
-            if (rewindableObjects[index] != null)
-                rewindableObjects[index].RewindToTime(currentPlaybackTime);
+            int index = (startIndex + objectsProcessed) % _rewindableObjects.Count;
+            if (_rewindableObjects[index] != null)
+                _rewindableObjects[index].RewindToTime(_currentPlaybackTime);
             
             objectsProcessed++;
         }
         
-        currentObjectIndex = (startIndex + objectsProcessed) % rewindableObjects.Count;
+        _currentObjectIndex = (startIndex + objectsProcessed) % _rewindableObjects.Count;
     }
     
     /// <summary>
@@ -239,18 +239,18 @@ public class TimeRewindManager : MonoBehaviour
     private void ProcessObjectsInRecordMode()
     {
         int objectsProcessed = 0;
-        int startIndex = currentObjectIndex;
+        int startIndex = _currentObjectIndex;
         
-        while (objectsProcessed < maxObjectsPerFrame && objectsProcessed < rewindableObjects.Count)
+        while (objectsProcessed < maxObjectsPerFrame && objectsProcessed < _rewindableObjects.Count)
         {
-            int index = (startIndex + objectsProcessed) % rewindableObjects.Count;
-            if (rewindableObjects[index] != null)
-                rewindableObjects[index].RecordState(recordingTime);
+            int index = (startIndex + objectsProcessed) % _rewindableObjects.Count;
+            if (_rewindableObjects[index] != null)
+                _rewindableObjects[index].RecordState(_recordingTime);
             
             objectsProcessed++;
         }
         
-        currentObjectIndex = (startIndex + objectsProcessed) % rewindableObjects.Count;
+        _currentObjectIndex = (startIndex + objectsProcessed) % _rewindableObjects.Count;
     }
     
     /// <summary>
@@ -258,7 +258,7 @@ public class TimeRewindManager : MonoBehaviour
     /// </summary>
     public void ToggleRewindMode()
     {
-        if (!isRewinding)
+        if (!_isRewinding)
         {
             ActivateRewindMode();
         }
@@ -274,9 +274,9 @@ public class TimeRewindManager : MonoBehaviour
     /// <param name="obj">Object to register</param>
     public void RegisterRewindableObject(TimeRewindable obj)
     {
-        if (!rewindableObjects.Contains(obj))
+        if (!_rewindableObjects.Contains(obj))
         {
-            rewindableObjects.Add(obj);
+            _rewindableObjects.Add(obj);
             obj.InitializeStateRecording(recordInterval, useAdaptiveRecording);
         }
     }
@@ -287,8 +287,8 @@ public class TimeRewindManager : MonoBehaviour
     /// <param name="obj">Object to unregister</param>
     public void UnregisterRewindableObject(TimeRewindable obj)
     {
-        if (rewindableObjects.Contains(obj))
-            rewindableObjects.Remove(obj);
+        if (_rewindableObjects.Contains(obj))
+            _rewindableObjects.Remove(obj);
     }
     
     /// <summary>
@@ -297,9 +297,9 @@ public class TimeRewindManager : MonoBehaviour
     /// <param name="time">Target playback time</param>
     public void SetPlaybackTime(float time)
     {
-        if (isRewinding)
+        if (_isRewinding)
         {
-            currentPlaybackTime = Mathf.Clamp(time, 0f, recordingTime);
+            _currentPlaybackTime = Mathf.Clamp(time, 0f, _recordingTime);
         }
     }
     
@@ -309,9 +309,9 @@ public class TimeRewindManager : MonoBehaviour
     /// <param name="seconds">Seconds to jump backward</param>
     public void JumpBackward(float seconds)
     {
-        if (isRewinding)
+        if (_isRewinding)
         {
-            SetPlaybackTime(currentPlaybackTime - seconds);
+            SetPlaybackTime(_currentPlaybackTime - seconds);
         }
     }
     
@@ -321,9 +321,9 @@ public class TimeRewindManager : MonoBehaviour
     /// <param name="seconds">Seconds to jump forward</param>
     public void JumpForward(float seconds)
     {
-        if (isRewinding)
+        if (_isRewinding)
         {
-            SetPlaybackTime(currentPlaybackTime + seconds);
+            SetPlaybackTime(_currentPlaybackTime + seconds);
         }
     }
     
@@ -332,14 +332,14 @@ public class TimeRewindManager : MonoBehaviour
     /// </summary>
     public void ClearAllHistory()
     {
-        foreach (TimeRewindable obj in rewindableObjects)
+        foreach (TimeRewindable obj in _rewindableObjects)
         {
             if (obj != null)
                 obj.ClearStates();
         }
         
-        recordingTime = 0f;
-        currentPlaybackTime = 0f;
-        lastRecordTime = 0f;
+        _recordingTime = 0f;
+        _currentPlaybackTime = 0f;
+        _lastRecordTime = 0f;
     }
 }

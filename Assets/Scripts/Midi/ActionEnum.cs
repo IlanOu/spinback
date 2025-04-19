@@ -8,6 +8,6 @@ namespace DefaultNamespace
         NotJump = 1,
         Zoom = 2,
         ScrubTimeline = 3,
-        ToggleRewind = 4
+        ToggleRewind = 4,
     }
 }
