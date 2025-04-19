@@ -14,13 +14,5 @@ public class SimpleMovement : MonoBehaviour
         // Déplacement gauche/droite avec les touches Q et D (ou A et D)
         float horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * horizontalInput * moveSpeed * Time.deltaTime);
-
-        /*
-        // Rotation avec les touches E et A (ou E et Q)
-        if (Input.GetKey(KeyCode.E))
-            transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
-        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.A))
-            transform.Rotate(Vector3.up, -rotationSpeed * Time.deltaTime);
-        */
     }
 }

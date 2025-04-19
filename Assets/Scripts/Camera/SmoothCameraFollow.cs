@@ -38,7 +38,7 @@ public class SmoothCameraFollow : MonoBehaviour
         targetRotation = currentRotation;
         
         // Initialiser le zoom
-        currentZoom = mainCamera.fieldOfView;
+        if (mainCamera != null) currentZoom = mainCamera.fieldOfView;
         targetZoom = currentZoom;
         
         MidiBindingRegistry.Instance.Bind(ActionEnum.Zoom, OnMidiZoom);
@@ -48,7 +48,7 @@ public class SmoothCameraFollow : MonoBehaviour
     {
         Debug.Log("MidiZoom: " + input.Value);
         
-        float normalizedValue = (input.Value / 127f);
+        float normalizedValue = 1 - (input.Value / 127f);
         targetZoom = Mathf.Lerp(minZoom, maxZoom, normalizedValue);
     }
     
