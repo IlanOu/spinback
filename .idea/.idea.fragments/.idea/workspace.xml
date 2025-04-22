@@ -5,12 +5,65 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bec0d240-2773-43da-a415-54460ae7df48" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Audio.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/NPC.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/NPC/NPCController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/NPC/NPCController.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.fragments/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.fragments/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DryWetController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DryWetController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Midi/ActionEnum.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Midi/ActionEnum.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TestMinisEvent.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TestMinisEvent.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DryWetController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/DryWetController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DryWetController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/DryWetController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Midi.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Midi.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Midi/ActionEnum.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Midi/ActionEnum.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Midi/ActionEnum.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Midi/ActionEnum.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Midi/DJMapper.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Midi/DJMapper.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Midi/MidiController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Midi/MidiController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Midi/MidiDeviceDetector.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Midi/MidiDeviceDetector.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Midi/MidiInputDebugger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Midi/MidiInputDebugger.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Midi/MidiInputDebugger.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Midi/MidiInputDebugger.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Midi/MidiJackDetector.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Midi/MidiJackDetector.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Minis.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/AxisActionConverter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Minis/AxisActionConverter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/AxisActionConverter.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Minis/AxisActionConverter.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/ControlCallback.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Minis/ControlCallback.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/ControlCallback.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Minis/ControlCallback.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/DeviceCallback.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Minis/DeviceCallback.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/DeviceCallback.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Minis/DeviceCallback.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/DeviceQuery.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Minis/DeviceQuery.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/DeviceQuery.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Minis/DeviceQuery.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/Editor.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Minis/Editor.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/Editor/AxisActionConverterEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Minis/Editor/AxisActionConverterEditor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/Editor/AxisActionConverterEditor.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Minis/Editor/AxisActionConverterEditor.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/MidiBindingRegistry.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Midi/MidiBindingRegistry.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/MidiBindingRegistry.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Midi/MidiBindingRegistry.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/MidiControlBinding.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Midi/MidiControlBinding.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/MidiControlBinding.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Midi/MidiControlBinding.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/MidiInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Minis/MidiInput.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/MidiInput.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Minis/MidiInput.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/MidiNoteBinding.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Minis/MidiNoteBinding.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/MidiNoteBinding.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Minis/MidiNoteBinding.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/MinisEventManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Midi/MinisEventManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/MinisEventManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Midi/MinisEventManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/NoteCallback.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/Minis/NoteCallback.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/NoteCallback.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/PlayByInputAction.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/PlayByInputAction.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/ScaleByInputValue.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Minis/ScaleByInputValue.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ReverbSendControl.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ReverbSendControl.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SimpleMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NPC/SimpleMovement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SimpleMovement.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NPC/SimpleMovement.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SoundEffect.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SoundEffect.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Test.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Test.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WetDryBalanceController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/WetDryBalanceController.cs.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +72,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Audio/Minis/ControlCallback.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Audio/Minis/DeviceCallback.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Audio/Minis/DeviceQuery.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Audio/Minis/MidiInput.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Audio/Minis/MidiNoteBinding.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Audio/Minis/NoteCallback.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -103,7 +164,7 @@
       <option name="presentableId" value="Default" />
       <updated>1745050703092</updated>
       <workItem from="1745050707705" duration="3168000" />
-      <workItem from="1745306376618" duration="1172000" />
+      <workItem from="1745306376618" duration="3384000" />
     </task>
     <servers />
   </component>
