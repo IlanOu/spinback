@@ -6,8 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Cinematic 1/Cinematic.unity
+    guid: 55041fadd60b19141933828fd90645a1
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/GameH1.unity
+    guid: 1a0b6fc5c3e20ec42bf531eaa7c310ca
+  - enabled: 1
+    path: Assets/Scenes/Pause.unity
+    guid: 77c04af506203e24abea559396106d64
+  - enabled: 1
+    path: Assets/Scenes/Start.unity
+    guid: ab0eac4e90b38f843b4fd2c71406561d
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 4000f64fee6ec964cb2f7a6d8cf9622a, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 359aafcbb18d4404ab066992b4077e44, type: 3}
