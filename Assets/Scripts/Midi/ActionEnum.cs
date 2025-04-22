@@ -4,13 +4,12 @@ namespace DefaultNamespace
 {
     public enum ActionEnum
     {
-        Jump = 0,
-        NotJump = 1,
+        DryWetController = 1,
         Zoom = 2,
         ScrubTimeline = 3,
         ToggleRewind = 4,
         FirstScreen = 5,
         SecondScreen = 6,
-        ThirdScreen = 7
+        ThirdScreen = 7,
     }
 }

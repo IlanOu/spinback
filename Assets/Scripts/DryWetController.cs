@@ -1,3 +1,5 @@
+using DefaultNamespace;
+using Minis;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -24,6 +26,8 @@ public class DryWetController : MonoBehaviour
     {
         // Le son "normal" est défini dans la plage -1 à 0
         normalSoundValue = Random.Range(-1f, 0f);
+        
+        MidiBindingRegistry.Instance.Bind(ActionEnum.DryWetController, OnMidiValue);
     }
 
     void Update()
@@ -50,4 +54,10 @@ public class DryWetController : MonoBehaviour
 
         mixer.SetFloat("DryLevel", dryDb);
     }
+    
+    void OnMidiValue(MidiInput input)
+    {
+        balance = input.Value * (1f / 127f) - 1f;
+    }
+
 }
