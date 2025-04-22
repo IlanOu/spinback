@@ -5,30 +5,49 @@ public class DryWetController : MonoBehaviour
 {
     public AudioMixer mixer;
 
-    [Range(-1f, 1f)]
-    public float balance = 0f; // -1 = dry+, 0 = normal, +1 = wet+
+    [Header("Valeur contrôlée entre -1 (wet) et 0 (dry normal)")]
+    [Range(-1f, 0f)]
+    public float balance = 0f;
 
-    float maxValue = 2000f;
+    [SerializeField, Range(-1f, 0f)]
+    private float normalSoundValue = 0f;
+
+    [Tooltip("Zone autour de la valeur normale où le son reste neutre (DryLevel = 0)")]
+    [SerializeField]
+    private float marginError = 0.1f;
+
+    [Tooltip("Amplitude maximale de l'effet dry en dB (plus c'est grand, plus l'effet est fort)")]
+    [SerializeField]
+    private float maxDryDb = 2000f;
+
+    void Start()
+    {
+        // Le son "normal" est défini dans la plage -1 à 0
+        normalSoundValue = Random.Range(-1f, 0f);
+    }
 
     void Update()
     {
-        float dryDb;
-        float wetDb;
+        float dryDb = 0f;
 
-        if (balance < 0f)
+        // Calcul de l'écart absolu par rapport à la zone normale
+        float distanceFromNormal = Mathf.Abs(balance - normalSoundValue);
+
+        if (distanceFromNormal > marginError)
         {
-            // Accentuer le dry : WetLevel reste à 0dB, on baisse DryLevel vers -80
-            wetDb = 0f;
-            dryDb = Mathf.Lerp(0f, -maxValue, -balance); // balance va de 0 à -1
+            // Hors de la zone normale : effet dry proportionnel à la distance
+            float excess = distanceFromNormal - marginError;
+
+            // Plus on s’éloigne, plus le dryDb est bas (effet plus fort)
+            float t = Mathf.InverseLerp(0f, 1f - marginError, excess); // normalise sur [0,1]
+            dryDb = Mathf.Lerp(0f, -maxDryDb, t);
         }
         else
         {
-            // Accentuer le wet : DryLevel reste à 0dB, on baisse WetLevel vers -80
+            // Dans la zone normale : pas d'effet
             dryDb = 0f;
-            wetDb = Mathf.Lerp(0f, maxValue, balance); // balance va de 0 à +1
         }
 
         mixer.SetFloat("DryLevel", dryDb);
-        mixer.SetFloat("WetLevel", wetDb);
     }
 }
