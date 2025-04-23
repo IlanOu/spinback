@@ -1,0 +1,135 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7306646774695074331
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 9
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Skin_test
+  m_Shader: {fileID: 4800000, guid: 6c046203321edf34fb092959a05e5b4a, type: 3}
+  m_Parent: {fileID: 2100000, guid: 442114cf6a5664d42bad66a08df2881b, type: 2}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _MK_ARTISTIC_ANIMATION_STUTTER
+  - _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
+  - _MK_LIGHT_BANDED
+  - _MK_OUTLINE_HULL_CLIP
+  - _MK_OUTLINE_NOISE
+  - _MK_RECEIVE_SHADOWS
+  - _MK_WRAPPED_DIFFUSE
+  m_InvalidKeywords:
+  - _BLEND_MODE_OVERWRITE
+  - _HEIGHT_MODE_1_WORLD
+  - _HEIGHT_MODE_OBJECT
+  - _RECEIVESHADOWS_ON
+  - _WRAPPEDLIGHTING_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap:
+    IGNOREPROJECTOR: False
+    RenderType: Opaque
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _DissolveMap:
+        m_Texture: {fileID: 2800000, guid: 089163c4a43ac6a478c932431e92ac2d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _DissolveAmount: 0
+    - _DissolveBorderSize: 0.14
+    - _LightBands: 5
+    - _LightBandsScale: 0.34
+    - _LightThreshold: 0
+    - _OutlineNoise: 1
+    - _OutlineSize: 20
+    - _Smoothness: 0.5
+    - _Specular: 0
+    m_Colors:
+    - _AlbedoColor: {r: 1, g: 0.4666667, b: 0.4666667, a: 1}
+    - _BaseColor: {r: 1, g: 0.34528297, b: 0.5926575, a: 1}
+    - _Color: {r: 1, g: 0.46666664, b: 0.46666664, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
+--- !u!28 &4259222888054179027
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: z__Gradient_ColorTex{"mode":0,"colorKeys":[{"color":{"r":0.15294118225574494,"g":0.16078431904315949,"b":0.4274509847164154,"a":1.0},"time":0.1250019073486328},{"color":{"r":0.3686274588108063,"g":0.38823530077934267,"b":0.7137255072593689,"a":1.0},"time":0.37500572204589846},{"color":{"r":0.6392157077789307,"g":0.5764706134796143,"b":0.9215686321258545,"a":1.0},"time":0.6249942779541016},{"color":{"r":0.9607843160629273,"g":0.7803921699523926,"b":0.9686274528503418,"a":1.0},"time":0.8749980926513672}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}]}
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 1
+  m_CompleteImageSize: 1024
+  m_MipsStripped: 0
+  m_TextureFormat: 5
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IsPreProcessed: 0
+  m_IgnoreMipmapLimit: 1
+  m_MipmapLimitGroupName: 
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_VTOnly: 0
+  m_AlphaIsTransparency: 0
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_LightmapFormat: 0
+  m_ColorSpace: 1
+  m_PlatformBlob: 
+  image data: 1024
+  _typelessdata: ff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff27296dff282a6eff292b6fff2a2c71ff2b2d72ff2b2e73ff2c2f74ff2d2f75ff2e3076ff2f3177ff303279ff31337aff31347bff32357cff33367dff34377eff35387fff363981ff373982ff373a83ff383b84ff393c85ff3a3d86ff3b3e87ff3c3f89ff3d408aff3e418bff3e428cff3f438dff40438eff41448fff424591ff434692ff444793ff444894ff454995ff464a96ff474b98ff484c99ff494d9aff4a4e9bff4a4e9cff4b4f9dff4c509eff4d51a0ff4e52a1ff4f53a2ff5054a3ff5155a4ff5156a5ff5257a6ff5358a8ff5458a9ff5559aaff565aabff575bacff575cadff585daeff595eb0ff5a5fb1ff5b60b2ff5c61b3ff5d62b4ff5d62b5ff5e63b6ff5f64b7ff6165b8ff6266b9ff6366baff6467baff6568bbff6669bcff6769bdff686abeff696bbfff6a6cbfff6b6cc0ff6c6dc1ff6e6ec2ff6f6fc3ff706fc4ff7170c4ff7271c5ff7372c6ff7472c7ff7573c8ff7674c9ff7775c9ff7875caff7976cbff7b77ccff7c78cdff7d78ceff7e79ceff7f7acfff807bd0ff817bd1ff827cd2ff837dd3ff847ed3ff857ed4ff867fd5ff8880d6ff8981d7ff8a81d8ff8b82d8ff8c83d9ff8d84daff8e84dbff8f85dcff9086ddff9187ddff9287deff9388dfff9589e0ff968ae1ff978ae2ff988be2ff998ce3ff9a8de4ff9b8de5ff9c8ee6ff9d8fe7ff9e90e7ff9f90e8ffa091e9ffa292eaffa393ebffa494ebffa594ebffa695ebffa896ecffa997ecffaa98ecffac98ecffad99ecffae9aedffaf9bedffb19cedffb29cedffb39dedffb59eeeffb69feeffb7a0eeffb8a1eeffbaa1eeffbba2efffbca3efffbea4efffbfa5efffc0a5efffc1a6efffc3a7f0ffc4a8f0ffc5a9f0ffc7aaf0ffc8aaf0ffc9abf1ffcaacf1ffccadf1ffcdaef1ffceaef1ffd0aff2ffd1b0f2ffd2b1f2ffd3b2f2ffd5b3f2ffd6b3f2ffd7b4f3ffd9b5f3ffdab6f3ffdbb7f3ffdcb7f3ffdeb8f4ffdfb9f4ffe0baf4ffe2bbf4ffe3bbf4ffe4bcf5ffe5bdf5ffe7bef5ffe8bff5ffe9c0f5ffebc0f5ffecc1f6ffedc2f6ffeec3f6fff0c4f6fff1c4f6fff2c5f7fff4c6f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7fff5c7f7
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
+--- !u!114 &7782993404517889080
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
