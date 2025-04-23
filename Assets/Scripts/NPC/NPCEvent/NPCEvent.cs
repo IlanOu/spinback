@@ -1,43 +1,76 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NPCEvent : MonoBehaviour
+[Serializable]
+public class NPCEvent
 {
-    [SerializeField] public float TimeToStart;
-    
-    protected NavMeshAgent _mainAgent;
-    float margeTime = 0.01f;
+    public NPCEventType npcEventType;
+    public float TimeToStart;
 
-    bool isLaunched = false;
-    protected bool isMoving = false;
+    private INPCEventStrategy _strategy;
 
-    protected virtual void Start()
+    [HideInInspector] public MonoBehaviour Obj;
+    [HideInInspector] public bool Enabled;
+
+    // SPECIFIC FIELDS PER TYPE
+    // To see default value, go check NPCEventDrawer
+    // ApproachToNPC
+    [SerializeField] private GameObject targetNpc;
+    [SerializeField] private float distance = 2f;
+
+    // Walk
+    [SerializeField] private float minWanderDistance = 5f;
+    [SerializeField] private float maxWanderDistance = 15f;
+
+    // WalkToLocation
+    [SerializeField] private GameObject targetLocation;
+
+    public void InitStrategy(MonoBehaviour obj)
     {
-        _mainAgent = GetComponent<NavMeshAgent>();
-    }
-
-    protected virtual void Update()
-    {
-        if (InRangeToStart())
+        Obj = obj;
+        Enabled = true;
+        switch (npcEventType)
         {
-            if (!isLaunched)
-            {
-                StartEvent();
-            }
-        } else if (isLaunched) 
-        {
-            isLaunched = false;
+            case NPCEventType.ApproachToNPC:
+                _strategy = new NPCEventApproachToNPC(this, targetNpc, distance);
+                break;
+            case NPCEventType.Walk:
+                _strategy = new NPCEventWalk(this, minWanderDistance, maxWanderDistance);
+                break;
+            case NPCEventType.WalkToLocation:
+                _strategy = new NPCEventWalkToLocation(this, targetLocation);
+                break;
+            case NPCEventType.Dance:
+                _strategy = new NPCEventDance(this);
+                break;
+            default:
+                Enabled = false;
+                Debug.LogWarning("Event type not implemented");
+                break;
         }
     }
 
-    bool InRangeToStart()
+    public bool InRangeToStart(float currentTime, float margeTime = 0.1f)
     {
-        float currentTime = TimeRewindManager.Instance.RecordingTime;
-        return currentTime > TimeToStart - margeTime && currentTime < TimeToStart + margeTime;
+        return Mathf.Abs(currentTime - TimeToStart) < margeTime;
     }
 
-    protected virtual void StartEvent()
+    public void StartEvent(NavMeshAgent mainAgent)
     {
-        isLaunched = true;
+        if (_strategy == null)
+        {
+            Debug.LogError("Strategy not initialized");
+            return;
+        }
+        
+        if (!Enabled)
+        {
+            Debug.LogError("Event not enabled");
+            return;
+        }
+        
+        _strategy.StartEvent(mainAgent);
+        return;
     }
 }
