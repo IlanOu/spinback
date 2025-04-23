@@ -1,6 +1,6 @@
 using UnityEngine;
 
-class NPCEventDance : NPCEventInterface
+class NPCEventDance : NPCEvent
 {   
     protected override void StartEvent()
     {

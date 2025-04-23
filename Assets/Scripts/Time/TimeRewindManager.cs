@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using DefaultNamespace;
 using Minis;
 using UnityEngine;
@@ -37,7 +38,7 @@ public class TimeRewindManager : MonoBehaviour
     [SerializeField] private int maxObjectsPerFrame = 5;
     
     // Internal state
-    private List<TimeRewindable> _rewindableObjects = new List<TimeRewindable>();
+    private List<ITimeRewindable> _rewindableObjects = new List<ITimeRewindable>();
     private float _recordingTime = 0f;
     private float _currentPlaybackTime = 0f;
     private bool _isRewinding = false;
@@ -65,9 +66,22 @@ public class TimeRewindManager : MonoBehaviour
     private void Start()
     {
         // Find and initialize all rewindable objects in the scene
-        _rewindableObjects.AddRange(FindObjectsByType<TimeRewindable>(FindObjectsInactive.Include, FindObjectsSortMode.None));
+        _rewindableObjects.AddRange(
+            FindObjectsByType<MonoBehaviour>(
+            FindObjectsInactive.Include, 
+            FindObjectsSortMode.None)
+            .OfType<ITimeRewindable>()
+        );
+
+        foreach (var mono in FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+        {
+            if (mono is ITimeRewindable rewindable)
+            {
+                _rewindableObjects.Add(rewindable);
+            }
+        }
         
-        foreach (TimeRewindable obj in _rewindableObjects)
+        foreach (ITimeRewindable obj in _rewindableObjects)
         {
             if (obj != null)
                 obj.InitializeStateRecording(recordInterval, useAdaptiveRecording);
@@ -201,7 +215,7 @@ public class TimeRewindManager : MonoBehaviour
         _recordingTime = _currentPlaybackTime;
         
         // Inform all objects to truncate their history
-        foreach (TimeRewindable obj in _rewindableObjects)
+        foreach (ITimeRewindable obj in _rewindableObjects)
         {
             if (obj != null)
                 obj.TruncateHistoryAfter(_currentPlaybackTime);
@@ -272,7 +286,7 @@ public class TimeRewindManager : MonoBehaviour
     /// Register a new rewindable object with the manager
     /// </summary>
     /// <param name="obj">Object to register</param>
-    public void RegisterRewindableObject(TimeRewindable obj)
+    public void RegisterRewindableObject(ITimeRewindable obj)
     {
         if (!_rewindableObjects.Contains(obj))
         {
@@ -285,7 +299,7 @@ public class TimeRewindManager : MonoBehaviour
     /// Unregister a rewindable object from the manager
     /// </summary>
     /// <param name="obj">Object to unregister</param>
-    public void UnregisterRewindableObject(TimeRewindable obj)
+    public void UnregisterRewindableObject(ITimeRewindable obj)
     {
         if (_rewindableObjects.Contains(obj))
             _rewindableObjects.Remove(obj);
@@ -332,7 +346,7 @@ public class TimeRewindManager : MonoBehaviour
     /// </summary>
     public void ClearAllHistory()
     {
-        foreach (TimeRewindable obj in _rewindableObjects)
+        foreach (ITimeRewindable obj in _rewindableObjects)
         {
             if (obj != null)
                 obj.ClearStates();

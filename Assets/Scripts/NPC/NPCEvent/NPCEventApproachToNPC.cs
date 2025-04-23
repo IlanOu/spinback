@@ -1,34 +1,60 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-class NPCEventApproachToNPC : NPCEventInterface
+class NPCEventApproachToNPC : NPCEvent
 {
-    [SerializeField]
-    GameObject targetNpc;
+    [SerializeField] GameObject targetNpc;
+    [SerializeField] float _distance = 2f;
 
-    void Start()
+    float stoppingDistance;
+    Vector3 targetPosition;
+
+    protected override void Start()
     {
+        base.Start();
+
         if (!targetNpc.CompareTag("NPC"))
         {
             Debug.LogError("Target must be a NPC");
             this.enabled = false;
         }
+    }
 
-        InitMainAgent();
+    protected override void Update()
+    {
+        base.Update();
+
+        UpdateTargetData();
+    }
+
+    void UpdateTargetData()
+    {
+        stoppingDistance = Mathf.Max(
+                targetNpc.transform.localScale.x, 
+                targetNpc.transform.localScale.z
+            ) + Mathf.Max(
+                transform.localScale.x, 
+                transform.localScale.z
+            ) + _distance;
+
+        NavMeshAgent targetAgent = targetNpc.GetComponent<NavMeshAgent>();
+        targetPosition = targetAgent != null ? targetAgent.destination : targetNpc.transform.position;
+
+        if (_mainAgent.destination != null) {
+            _mainAgent.stoppingDistance = stoppingDistance;
+            _mainAgent.SetDestination(targetPosition);
+        }
+
+        if (_mainAgent.remainingDistance <= stoppingDistance) {
+            _mainAgent.ResetPath();
+        }
     }
     
     protected override void StartEvent()
     {
         base.StartEvent();
 
-        float distance = Mathf.Max(
-                targetNpc.transform.localScale.x, 
-                targetNpc.transform.localScale.z
-            ) + Mathf.Max(
-                transform.localScale.x, 
-                transform.localScale.z
-            ) * 2f;
-        _mainAgent.stoppingDistance = distance;
-        _mainAgent.SetDestination(targetNpc.transform.position);
+        _mainAgent.stoppingDistance = stoppingDistance;
+        _mainAgent.SetDestination(targetPosition);
     }
 }
