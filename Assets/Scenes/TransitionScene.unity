@@ -152,10 +152,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1079610469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: -0.25}
-  m_AnchorMax: {x: 0.5, y: -0.25}
+  m_AnchorMin: {x: 0.5, y: -0.3}
+  m_AnchorMax: {x: 0.5, y: -0.3}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1930, y: 550}
+  m_SizeDelta: {x: 1930, y: 590}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &262717193
 MonoBehaviour:
@@ -243,10 +243,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1079610469}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1.25}
-  m_AnchorMax: {x: 0.5, y: 1.25}
+  m_AnchorMin: {x: 0.5, y: 1.3}
+  m_AnchorMax: {x: 0.5, y: 1.3}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1930, y: 550}
+  m_SizeDelta: {x: 1930, y: 590}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &344595075
 MonoBehaviour:
@@ -395,7 +395,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 7
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 32767
   m_TargetDisplay: 0
 --- !u!224 &1079610469
 RectTransform:
