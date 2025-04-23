@@ -35,13 +35,15 @@ namespace Game
             else
             {
                 Instance = this;
-                DontDestroyOnLoad(this.gameObject); // Persiste entre les scènes
+                DontDestroyOnLoad(this.gameObject);
             }
         }
 
         private void Start()
         {
-            // Exemple : on démarre sur le menu principal
+            SceneManager.LoadScene("TransitionScene", LoadSceneMode.Additive);
+            
+            // Set initial state to Cinematic
             ChangeState(GameState.Cinematic);
         }
 
@@ -72,34 +74,34 @@ namespace Game
             {
                 case GameState.Loading:
                     // Exemple : démarre un chargement de scène asynchrone
-                    StartCoroutine(LoadSceneAsync("Level1"));
+                    // StartCoroutine(LoadSceneAsync("Level1"));
                     break;
 
                 case GameState.Cinematic:
                     // Trouve la cinématique à jouer (ex: "IntroCinematic")
-                    PlayableDirector cine = GameObject.Find("CinematicController").GetComponent<PlayableDirector>();
-                    cine.Play(); // Joue la Timeline
+                    // PlayableDirector cine = GameObject.Find("CinematicController").GetComponent<PlayableDirector>();
+                    // cine.Play(); // Joue la Timeline
                     break;
 
                 case GameState.Gameplay:
                     // Active les contrôles joueur, les IA, la physique...
                     
-                    Time.timeScale = 1f; // (si jamais on revient d'une pause)
+                    // Time.timeScale = 1f; // (si jamais on revient d'une pause)
                     break;
 
                 case GameState.Paused:
-                    Time.timeScale = 0f; // Gèle le temps
+                    // Time.timeScale = 0f; // Gèle le temps
                     ShowPauseMenu(); // Affiche le menu de pause
                     break;
 
                 case GameState.MenuMain:
                     // Charge le menu principal (si ce n'est pas déjà fait)
-                    if (SceneManager.GetActiveScene().name != "MenuScene")
-                    {
-                        SceneManager.LoadScene("MenuScene");
-                    }
-                    HideAllGameUI(); // Cache les éléments de jeu (barre de vie, etc.)
-                    ShowMainMenuUI(); // Affiche les boutons "Jouer", "Options"...
+                    // if (SceneManager.GetActiveScene().name != "MenuScene")
+                    // {
+                    //     SceneManager.LoadScene("MenuScene");
+                    // }
+                    // HideAllGameUI(); // Cache les éléments de jeu (barre de vie, etc.)
+                    // ShowMainMenuUI(); // Affiche les boutons "Jouer", "Options"...
                     break;
 
                 case GameState.GameOver:
@@ -119,8 +121,7 @@ namespace Game
             switch (state)
             {
                 case GameState.Cinematic:
-                    // Assure-toi que la cinématique est stoppée (des fois utile)
-                    GameObject.Find("CinematicController").GetComponent<PlayableDirector>().Stop();
+                    
                     break;
 
                 case GameState.Gameplay:

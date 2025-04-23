@@ -1,94 +1,50 @@
-using System.Collections.Generic;
+using Game;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 namespace Cinematics
 {
     public class CinematicSequencer : MonoBehaviour
     {
-        [Tooltip("List of scene names to play in sequence")]
-        public List<string> cinematicScenes = new List<string>();
-    
-        private int _currentSceneIndex = 0;
-        private PlayableDirector _currentDirector;
-    
-        void Awake()
+        [SerializeField] private string nextSceneName;
+        [SerializeField] private PlayableDirector cinematicDirector;
+        [SerializeField] private bool isLastCinematicBeforeGameplay = false;
+
+        private void Awake()
         {
-            DontDestroyOnLoad(this.gameObject);
-            SceneManager.sceneLoaded += OnSceneLoaded;
+            if (cinematicDirector == null)
+                cinematicDirector = GetComponent<PlayableDirector>()
+                                  ?? FindFirstObjectByType<PlayableDirector>();
         }
-    
-        void OnDestroy()
+
+        private void Start()
         {
-            SceneManager.sceneLoaded -= OnSceneLoaded;
-        }
-    
-        void Start()
-        {
-            if (cinematicScenes.Count > 0)
+            if (cinematicDirector != null)
             {
-                LoadNextCinematic();
-            }
-            else
-            {
-                Debug.LogWarning("No cinematic scenes defined in the sequence!");
+                cinematicDirector.stopped += OnCinematicCompleted;
+                if (cinematicDirector.state != PlayState.Playing)
+                    cinematicDirector.Play();
             }
         }
-    
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+
+        private void OnDestroy()
         {
-            // Find the PlayableDirector in the new scene
-            _currentDirector = FindAnyObjectByType<PlayableDirector>();
-        
-            if (_currentDirector != null)
-            {
-                // Register for the stopped event
-                _currentDirector.stopped += OnCinematicCompleted;
-            
-                // Start the cinematic if it's not set to play automatically
-                if (_currentDirector.state != PlayState.Playing)
-                {
-                    _currentDirector.Play();
-                }
-            }
-            else
-            {
-                Debug.LogWarning("No PlayableDirector found in the scene: " + scene.name);
-                // If there's no director, move to the next scene
-                LoadNextCinematic();
-            }
+            if (cinematicDirector != null)
+                cinematicDirector.stopped -= OnCinematicCompleted;
         }
-    
-        void OnCinematicCompleted(PlayableDirector director)
+
+        private void OnCinematicCompleted(PlayableDirector _)
         {
-            // Unregister from the event to prevent memory leaks
-            if (_currentDirector != null)
-            {
-                _currentDirector.stopped -= OnCinematicCompleted;
-            }
-        
-            // Load the next cinematic
-            LoadNextCinematic();
+            StartCoroutine(TransitionToNextSceneWithBlink());
         }
-    
-        public void LoadNextCinematic()
+
+        private IEnumerator TransitionToNextSceneWithBlink()
         {
-            if (_currentSceneIndex < cinematicScenes.Count)
-            {
-                string nextScene = cinematicScenes[_currentSceneIndex];
-                _currentSceneIndex++;
-            
-                SceneManager.LoadScene(nextScene);
-            }
-            else
-            {
-                Debug.Log("All cinematics completed!");
-                // Load final scene or menu
-                // SceneManager.LoadScene("MainMenu");
-            
-                Destroy(gameObject);
-            }
+
+            SceneTransitionBlinker.Instance.TransitionToScene(nextSceneName);
+            yield break;
         }
     }
 }
