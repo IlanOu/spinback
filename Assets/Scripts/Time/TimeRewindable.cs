@@ -5,7 +5,7 @@ using UnityEngine;
 /// Component that must be added to any object that should be affected by time rewinding.
 /// Stores and restores position and rotation states.
 /// </summary>
-public class TimeRewindable : MonoBehaviour
+public class TimeRewindable : MonoBehaviour, ITimeRewindable
 {
     private class TimeState
     {
@@ -60,6 +60,7 @@ public class TimeRewindable : MonoBehaviour
             position = transform.position,
             rotation = transform.rotation,
             isKeyframe = true
+            
         };
         
         timeStates.Add(initialState);
