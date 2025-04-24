@@ -2557,15 +2557,35 @@ PrefabInstance:
       value: NPC (1)
       objectReference: {fileID: 0}
     - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+      propertyPath: npcEvents.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+      propertyPath: npcEvents.Array.data[1].distance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
       propertyPath: npcEvents.Array.data[0].TimeToStart
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+      propertyPath: npcEvents.Array.data[1].TimeToStart
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
       propertyPath: npcEvents.Array.data[0].npcEventType
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+      propertyPath: npcEvents.Array.data[1].npcEventType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
       propertyPath: npcEvents.Array.data[0].targetLocation
+      value: 
+      objectReference: {fileID: 546638882}
+    - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+      propertyPath: npcEvents.Array.data[1].targetLocation
       value: 
       objectReference: {fileID: 546638882}
     - target: {fileID: 4790643698743401512, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
@@ -3166,7 +3186,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 2dde5ba67fdabbb49905a4f66ced5122, type: 2}
     - target: {fileID: 8678921457357418227, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.548
+      value: 3.62
       objectReference: {fileID: 0}
     - target: {fileID: 8678921457357418227, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3174,7 +3194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8678921457357418227, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.792
+      value: -6.84
       objectReference: {fileID: 0}
     - target: {fileID: 8678921457357418227, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3724,6 +3744,7 @@ GameObject:
   - component: {fileID: 543450653066419784}
   - component: {fileID: 5866666021402149938}
   - component: {fileID: 642202021}
+  - component: {fileID: 5866666021402149939}
   m_Layer: 0
   m_Name: X Bot@Dancing
   m_TagString: Untagged
@@ -5028,6 +5049,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5866666021402149939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148589004018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd01cc904aa54b81aeccd29f9346e072, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  significantMovementThreshold: 0.05
+  significantRotationThreshold: 5
 --- !u!4 &5901452234696117451
 Transform:
   m_ObjectHideFlags: 0
