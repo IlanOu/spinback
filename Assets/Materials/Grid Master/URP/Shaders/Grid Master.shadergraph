@@ -3157,8 +3157,8 @@
     "m_ObjectId": "01525e8ad27b44d1972733d4c4c4894b",
     "m_Title": "Multiply Tiling",
     "m_Position": {
-        "x": -3167.08203125,
-        "y": 2583.74951171875
+        "x": -3167.19970703125,
+        "y": 2582.399658203125
     }
 }
 
@@ -3665,7 +3665,7 @@
     "m_DefaultValue": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0
+        "z": 1.0
     },
     "m_Labels": []
 }
@@ -4179,8 +4179,8 @@
     "m_ObjectId": "12252d4d604542cf9044fe7bb6de3f6f",
     "m_Title": "Tile Automatically based on Scale",
     "m_Position": {
-        "x": -3746.58203125,
-        "y": 2580.24951171875
+        "x": -3747.19970703125,
+        "y": 2578.399658203125
     }
 }
 
@@ -4335,8 +4335,8 @@
     "m_ObjectId": "14e60c4c3313470a834c1a6b6a30d7c4",
     "m_Title": "Directional Mask",
     "m_Position": {
-        "x": -3397.581787109375,
-        "y": 1526.249755859375
+        "x": -3397.599853515625,
+        "y": 1524.7996826171875
     }
 }
 
@@ -5278,7 +5278,7 @@
     "m_DefaultValue": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0
+        "z": 1.0
     },
     "m_Labels": []
 }
@@ -5868,7 +5868,7 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "isMainTexture": false,
@@ -6705,7 +6705,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -7120,7 +7120,7 @@
     "m_DefaultValue": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0
+        "z": 1.0
     },
     "m_Labels": []
 }
@@ -8856,7 +8856,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -9292,8 +9292,8 @@
     "m_ObjectId": "5ab02ba57e63478baa601a5c387c6f7d",
     "m_Title": "Directional Mask",
     "m_Position": {
-        "x": -3224.4990234375,
-        "y": 3348.99951171875
+        "x": -3224.799560546875,
+        "y": 3347.199951171875
     }
 }
 
@@ -10070,8 +10070,8 @@
         "y": 1.0
     },
     "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0
+        "x": 1.0,
+        "y": 1.0
     },
     "m_Labels": []
 }
@@ -10946,7 +10946,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -11097,7 +11097,7 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "isMainTexture": false,
@@ -11269,7 +11269,7 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "isMainTexture": false,
@@ -11351,8 +11351,8 @@
     "m_ObjectId": "7a0d21149c41423d8336cdeb50835a1a",
     "m_Title": "Directional Mask",
     "m_Position": {
-        "x": -3433.500244140625,
-        "y": -817.499755859375
+        "x": -3433.599609375,
+        "y": -819.1998291015625
     }
 }
 
@@ -11470,7 +11470,7 @@
     "m_DefaultValue": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0
+        "z": 1.0
     },
     "m_Labels": []
 }
@@ -12321,8 +12321,8 @@
         "y": 1.0
     },
     "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0
+        "x": 1.0,
+        "y": 1.0
     },
     "m_Labels": []
 }
@@ -12333,8 +12333,8 @@
     "m_ObjectId": "87ddde2cfb254b228b3d4a9374677f76",
     "m_Title": "Multiply Tiling",
     "m_Position": {
-        "x": -3224.499755859375,
-        "y": 4422.5
+        "x": -3224.799560546875,
+        "y": 4420.80029296875
     }
 }
 
@@ -13441,6 +13441,9 @@
     "m_AlphaClip": false,
     "m_CastShadows": true,
     "m_ReceiveShadows": true,
+    "m_DisableTint": false,
+    "m_AdditionalMotionVectorMode": 0,
+    "m_AlembicMotionVectors": false,
     "m_SupportsLODCrossFade": false,
     "m_CustomEditorGUI": "",
     "m_SupportVFX": false
@@ -13491,7 +13494,7 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "isMainTexture": false,
@@ -13560,7 +13563,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -13993,8 +13996,8 @@
     "m_ObjectId": "9c3fe95f0afb435d92ac3a0a8c237a4c",
     "m_Title": "Tile Automatically based on Scale",
     "m_Position": {
-        "x": -4428.5,
-        "y": 449.49969482421877
+        "x": -4428.79931640625,
+        "y": 447.9998779296875
     }
 }
 
@@ -14037,7 +14040,7 @@
     "m_DefaultValue": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0
+        "z": 1.0
     },
     "m_Labels": []
 }
@@ -14923,8 +14926,8 @@
         "y": 1.0
     },
     "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0
+        "x": 1.0,
+        "y": 1.0
     },
     "m_Labels": []
 }
@@ -15163,7 +15166,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -15442,8 +15445,8 @@
     "m_ObjectId": "baf9e48a0a55435295cbe4752b9f6a39",
     "m_Title": "Smoothness Property",
     "m_Position": {
-        "x": 349.0000305175781,
-        "y": 2408.0
+        "x": 40.0,
+        "y": 2386.399658203125
     }
 }
 
@@ -15865,7 +15868,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -15958,8 +15961,8 @@
     "m_ObjectId": "c5e482295ece4d5aaebe55805f24c36f",
     "m_Title": "Dirt",
     "m_Position": {
-        "x": -1428.8824462890625,
-        "y": 1087.991455078125
+        "x": -1429.599853515625,
+        "y": 1086.3997802734375
     }
 }
 
@@ -16055,7 +16058,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -16885,8 +16888,8 @@
     "m_ObjectId": "d300dc7ed1c247aaacd62c35fd65c5f8",
     "m_Title": "Tile Automatically based on Scale",
     "m_Position": {
-        "x": -3798.5,
-        "y": 4419.00048828125
+        "x": -3799.19921875,
+        "y": 4417.599609375
     }
 }
 
@@ -17041,8 +17044,8 @@
     "m_ObjectId": "d5e8701f668245eda5b27f8675350ae3",
     "m_Title": "Multiply Tiling",
     "m_Position": {
-        "x": -3866.000244140625,
-        "y": 452.99969482421877
+        "x": -3866.39990234375,
+        "y": 451.199951171875
     }
 }
 
@@ -17113,7 +17116,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -17125,8 +17128,8 @@
     "m_ObjectId": "d74c00be17a44090be49556bd86305a9",
     "m_Title": "Emission Color",
     "m_Position": {
-        "x": -1957.500244140625,
-        "y": 3848.5
+        "x": -1957.5999755859375,
+        "y": 3847.19970703125
     }
 }
 
@@ -17517,7 +17520,7 @@
     "m_DefaultValue": {
         "x": 0.0,
         "y": 0.0,
-        "z": 0.0
+        "z": 1.0
     },
     "m_Labels": []
 }
@@ -17900,7 +17903,7 @@
     "m_StageCapability": 3,
     "m_BareResource": false,
     "m_Texture": {
-        "m_SerializedTexture": "{\"texture\":{\"instanceID\":0}}",
+        "m_SerializedTexture": "",
         "m_Guid": ""
     },
     "m_DefaultType": 0
@@ -18599,8 +18602,8 @@
     "m_ObjectId": "eadc78e3379c457fa9c4270a4477c6d0",
     "m_Title": "Metallic Property",
     "m_Position": {
-        "x": -1867.0621337890625,
-        "y": 2045.2537841796875
+        "x": -1867.2000732421875,
+        "y": 2043.1998291015625
     }
 }
 
