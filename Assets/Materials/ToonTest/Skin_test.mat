@@ -27,9 +27,8 @@ Material:
   m_ValidKeywords:
   - _MK_ARTISTIC_ANIMATION_STUTTER
   - _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
-  - _MK_LIGHT_BANDED
+  - _MK_LIGHT_CEL
   - _MK_OUTLINE_HULL_CLIP
-  - _MK_OUTLINE_NOISE
   - _MK_RECEIVE_SHADOWS
   - _MK_WRAPPED_DIFFUSE
   m_InvalidKeywords:
@@ -59,10 +58,11 @@ Material:
     m_Floats:
     - _DissolveAmount: 0
     - _DissolveBorderSize: 0.14
-    - _LightBands: 5
+    - _Light: 1
+    - _LightBands: 2
     - _LightBandsScale: 0.34
-    - _LightThreshold: 0
-    - _OutlineNoise: 1
+    - _LightThreshold: 0.25
+    - _OutlineNoise: 0
     - _OutlineSize: 20
     - _Smoothness: 0.5
     - _Specular: 0
