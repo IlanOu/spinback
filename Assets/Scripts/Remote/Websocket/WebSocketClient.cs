@@ -1,7 +1,7 @@
 using UnityEngine;
 using WebSocketSharp;
 
-public class WebSocketClientSharp : MonoBehaviour
+public class WebSocketClient : MonoBehaviour
 {
     [SerializeField] private string _ipAddress;
     [SerializeField] private int _port;
@@ -9,7 +9,7 @@ public class WebSocketClientSharp : MonoBehaviour
 
     private WebSocket _webSocket;
 
-    public delegate void MessageReceivedHandler(string message);
+    public delegate void MessageReceivedHandler(WebSocketEncoder.MessageData data);
     public event MessageReceivedHandler OnMessageReceived;
 
     void Start()
@@ -28,8 +28,14 @@ public class WebSocketClientSharp : MonoBehaviour
 
         _webSocket.OnMessage += (sender, e) =>
         {
-            Debug.Log("WebSocket received: " + e.Data);
-            OnMessageReceived?.Invoke(e.Data);
+            string message = e.Data;
+            Debug.Log("WebSocket received: " + message);
+
+            WebSocketEncoder.MessageData data = WebSocketEncoder.Decode(message);
+            if (data != null)
+            {
+                OnMessageReceived?.Invoke(data);
+            }
         };
 
         _webSocket.OnClose += (sender, e) =>
@@ -49,6 +55,16 @@ public class WebSocketClientSharp : MonoBehaviour
     {
         if (_webSocket != null && _webSocket.IsAlive)
         {
+            _webSocket.Send(message);
+            Debug.Log("Sent: " + message);
+        }
+    }
+
+    public void Send(WebSocketEncoder.MessageData data)
+    {
+        if (_webSocket != null && _webSocket.IsAlive)
+        {
+            string message = WebSocketEncoder.Encode(data);
             _webSocket.Send(message);
             Debug.Log("Sent: " + message);
         }
