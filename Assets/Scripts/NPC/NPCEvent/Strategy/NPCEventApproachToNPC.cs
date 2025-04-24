@@ -34,35 +34,49 @@ class NPCEventApproachToNPC : NPCEventStrategy, INPCEventStrategy
     {
         while (true)
         {
-            if (_targetNpc == null) yield break;
-
-            stoppingDistance = Mathf.Max(
-                    _targetNpc.transform.localScale.x,
-                    _targetNpc.transform.localScale.z
-                ) + Mathf.Max(
-                    parent.Obj.transform.localScale.x,
-                    parent.Obj.transform.localScale.z
-                ) + _distance;
-
-            NavMeshAgent targetAgent = _targetNpc.GetComponent<NavMeshAgent>();
-            targetPosition = targetAgent != null ? targetAgent.destination : _targetNpc.transform.position;
-
-            mainAgent.stoppingDistance = stoppingDistance;
-            mainAgent.SetDestination(targetPosition);
-
-            float distanceToTarget = Vector3.Distance(mainAgent.transform.position, targetPosition);
-            if (distanceToTarget <= stoppingDistance)
+            bool isRewinding = TimeRewindManager.Instance.IsRewinding;
+            if (isRewinding)
             {
-                mainAgent.ResetPath();
-                yield break;
+                yield return new WaitForSeconds(0.1f);
+                continue;
             }
 
-            yield return new WaitForSeconds(0.1f);
+            if (!isRewinding)
+            {
+                if (mainAgent.hasPath) yield break;
+                if (_targetNpc == null) yield break;
+
+                stoppingDistance = Mathf.Max(
+                        _targetNpc.transform.localScale.x,
+                        _targetNpc.transform.localScale.z
+                    ) + Mathf.Max(
+                        parent.Obj.transform.localScale.x,
+                        parent.Obj.transform.localScale.z
+                    ) + _distance;
+
+                NavMeshAgent targetAgent = _targetNpc.GetComponent<NavMeshAgent>();
+                targetPosition = targetAgent != null ? targetAgent.destination : _targetNpc.transform.position;
+
+                mainAgent.stoppingDistance = stoppingDistance;
+                mainAgent.SetDestination(targetPosition);
+
+                float distanceToTarget = Vector3.Distance(mainAgent.transform.position, targetPosition);
+                if (distanceToTarget <= stoppingDistance)
+                {
+                    mainAgent.ResetPath();
+                    yield break;
+                }
+
+                yield return new WaitForSeconds(0.1f);
+            }
+
+
         }
     }
 
     public void StartEvent(NavMeshAgent mainAgent) 
     {
+        mainAgent.SetDestination(_targetNpc.transform.position);
         parent.Obj.StartCoroutine(FollowTarget(mainAgent));
     }
 }
