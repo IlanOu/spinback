@@ -1,5 +1,6 @@
 
 #if UNITY_EDITOR
+using NPC.NPCEvent;
 using UnityEditor;
 using UnityEngine;
 
@@ -25,9 +26,12 @@ public class NPCEventDrawer : PropertyDrawer
     {
         EditorGUI.BeginProperty(position, label, property);
 
+        // Always shown
         var typeProp = property.FindPropertyRelative("npcEventType");
         var timeProp = property.FindPropertyRelative("TimeToStart");
+        var animProp = property.FindPropertyRelative("animationType");
 
+        // Depends on npcEventType
         var targetNpcProp = property.FindPropertyRelative("targetNpc");
         var distanceProp = property.FindPropertyRelative("distance");
         var minWanderProp = property.FindPropertyRelative("minWanderDistance");
@@ -36,11 +40,18 @@ public class NPCEventDrawer : PropertyDrawer
 
         Rect rect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
 
+        // Event Type
         EditorGUI.PropertyField(rect, typeProp, new GUIContent("Event Type"));
         rect.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-        EditorGUI.PropertyField(rect, timeProp, new GUIContent("Start Time"));
+        
+        // Animation Type
+        EditorGUI.PropertyField(rect, animProp, new GUIContent("Animation"));
         rect.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
 
+        // Start Time
+        EditorGUI.PropertyField(rect, timeProp, new GUIContent("Start Time"));
+        rect.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+        
         switch ((NPCEventType)typeProp.enumValueIndex)
         {
             case NPCEventType.ApproachToNPC:

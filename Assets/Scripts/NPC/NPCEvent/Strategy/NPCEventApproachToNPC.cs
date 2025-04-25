@@ -1,4 +1,5 @@
 using System.Collections;
+using NPC.NPCEvent;
 using UnityEngine;
 using UnityEngine.AI;
 
