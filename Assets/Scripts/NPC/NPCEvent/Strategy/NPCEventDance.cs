@@ -1,12 +1,13 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 class NPCEventDance : NPCEventStrategy, INPCEventStrategy
 {
     public NPCEventDance(NPCEvent npcEvent) : base(npcEvent) {}
 
-    public void StartEvent(NavMeshAgent mainAgent)
+    public void StartEvent()
     {
         Debug.Log("Dancing!");
     }
+    
+    public void StopEvent() {}
 }

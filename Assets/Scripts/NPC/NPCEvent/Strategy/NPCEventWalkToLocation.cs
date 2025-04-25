@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 class NPCEventWalkToLocation : NPCEventStrategy, INPCEventStrategy
 {
@@ -10,7 +9,7 @@ class NPCEventWalkToLocation : NPCEventStrategy, INPCEventStrategy
         if (targetLocation == null)
         {
             Debug.LogError("Missing parameters for NPCEventWalkToLocation");
-            this.parent.Enabled = false;
+            this.npcEvent.Enabled = false;
             return;
         }
 
@@ -19,13 +18,16 @@ class NPCEventWalkToLocation : NPCEventStrategy, INPCEventStrategy
         if (!targetLocation.CompareTag("Location"))
         {
             Debug.LogError("Target must be a location");
-            this.parent.Enabled = false;
+            this.npcEvent.Enabled = false;
             return;
         }
     }
     
-    public void StartEvent(NavMeshAgent mainAgent)
+    public void StartEvent()
     {
-        mainAgent.SetDestination(_targetLocation.transform.position);
+        _mainAgent.SetDestination(_targetLocation.transform.position);
+        _mainAgent.stoppingDistance = 0f;
     }
+
+    public void StopEvent() {}
 }

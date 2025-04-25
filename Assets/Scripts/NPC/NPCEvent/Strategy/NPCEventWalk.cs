@@ -5,23 +5,26 @@ class NPCEventWalk : NPCEventStrategy, INPCEventStrategy
 {
     private float _minWanderDistance;
     private float _maxWanderDistance;
-    Vector3 targetPosition;
+    private Vector3 targetPosition;
 
     public NPCEventWalk(NPCEvent npcEvent, float minWanderDistance, float maxWanderDistance) : base(npcEvent) 
     {
         _minWanderDistance = minWanderDistance;
         _maxWanderDistance = maxWanderDistance;
         Vector3 randomDirection = Random.insideUnitSphere * Random.Range(_minWanderDistance, _maxWanderDistance);
-        targetPosition = randomDirection + parent.Obj.transform.position;
+        targetPosition = randomDirection + base.npcEvent.Manager.transform.position;
     }
     
-    public void StartEvent(NavMeshAgent mainAgent)
+    public void StartEvent()
     {
         NavMeshHit hit;
         
         if (NavMesh.SamplePosition(targetPosition, out hit, _maxWanderDistance, NavMesh.AllAreas))
         {
-            mainAgent.SetDestination(hit.position);
+            _mainAgent.SetDestination(hit.position);
+            _mainAgent.stoppingDistance = 0f;
         }
     }
+    
+    public void StopEvent() {}
 }

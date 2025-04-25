@@ -1,6 +1,6 @@
 using System;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.AI;
 
 [Serializable]
 public class NPCEvent
@@ -8,9 +8,13 @@ public class NPCEvent
     public NPCEventType npcEventType;
     public float TimeToStart;
 
+    // Useful for this class
     private INPCEventStrategy _strategy;
+    private bool wasLaunched = false;
+    private float canStartMargeTime = 1f;
 
-    [HideInInspector] public MonoBehaviour Obj;
+    // Usefull for other class
+    [HideInInspector] public NPCEventManager Manager;
     [HideInInspector] public bool Enabled;
 
     // SPECIFIC FIELDS PER TYPE
@@ -26,9 +30,9 @@ public class NPCEvent
     // WalkToLocation
     [SerializeField] private GameObject targetLocation;
 
-    public void InitStrategy(MonoBehaviour obj)
+    public void InitStrategy(NPCEventManager obj)
     {
-        Obj = obj;
+        Manager = obj;
         Enabled = true;
         switch (npcEventType)
         {
@@ -51,12 +55,20 @@ public class NPCEvent
         }
     }
 
-    public bool InRangeToStart(float currentTime, float margeTime = 0.1f)
+    public bool InRangeToStart(float currentTime)
     {
-        return Mathf.Abs(currentTime - TimeToStart) < margeTime;
+        if (TimeToStart == -1) return false;
+        return MathF.Abs(currentTime - TimeToStart) < canStartMargeTime;
     }
 
-    public void StartEvent(NavMeshAgent mainAgent)
+    // public bool CanStart(float currentTime)
+    // {
+    //     bool canStart = TimeToStart == -1 || InRangeToStart(currentTime);
+    //     Debug.Log("CanStart: " + canStart + " isLaunching: " + _launching);
+    //     return canStart && !_launching && Enabled;
+    // }
+
+    public void StartEvent()
     {
         if (_strategy == null)
         {
@@ -69,8 +81,46 @@ public class NPCEvent
             Debug.LogError("Event not enabled");
             return;
         }
-        
-        _strategy.StartEvent(mainAgent);
-        return;
+        wasLaunched = true;
+        _strategy.StartEvent();
+    }
+
+    public void Handle()
+    {
+        float currentTime = TimeRewindManager.Instance.RecordingTime;
+
+        if (TimeToStart == -1) TimeToStart = currentTime;
+
+        if (currentTime >= TimeToStart)
+        {
+            Debug.Log("Type: " + npcEventType);
+            if (!wasLaunched) StartEvent();
+
+            HandleDestination();
+        }        
+    }
+
+    public void StopEvent()
+    {
+        _strategy.StopEvent();
+    }
+
+    private void HandleDestination()
+    {
+        if (Manager.MainAgent.destination == null) return;
+
+        if (Manager.MainAgent.remainingDistance <= Manager.MainAgent.stoppingDistance)
+        {
+            Manager.MainAgent.ResetPath();
+            _strategy.StopEvent();
+            wasLaunched = false;
+            Manager.NextEvent();
+        }
+    }
+
+    private IEnumerator StopLaunchingAfterStartingEvent()
+    {
+        yield return new WaitForSeconds(canStartMargeTime);
+        // _launching = false;
     }
 }

@@ -1,9 +1,12 @@
 
+using UnityEngine.AI;
+
 public abstract class NPCEventStrategy
 {
-    public NPCEvent parent;
+    protected NPCEvent npcEvent;
+    protected NavMeshAgent _mainAgent { get => npcEvent.Manager.MainAgent; }
     public NPCEventStrategy(NPCEvent npcEvent) 
     {
-        parent = npcEvent;
+        this.npcEvent = npcEvent;
     }
 }

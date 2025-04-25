@@ -120,7 +120,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8678921457357418227}
   - component: {fileID: 7395889155099556124}
-  - component: {fileID: 8515436372617930844}
   - component: {fileID: 6691000001212493842}
   - component: {fileID: 7608604711906239242}
   - component: {fileID: 3985863235629431245}
@@ -162,18 +161,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   significantMovementThreshold: 0.05
   significantRotationThreshold: 5
---- !u!114 &8515436372617930844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2442851481456215595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7307073f1d46490db3fa2c3fd890c3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!195 &6691000001212493842
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -230,16 +217,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32d1f5c4f15034ed89f705709ae8c8ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcEvents:
-  - npcEventType: 0
-    TimeToStart: 5
-    Obj: {fileID: 0}
-    Enabled: 0
-    targetNpc: {fileID: 0}
-    distance: 2
-    minWanderDistance: 0
-    maxWanderDistance: 0
-    targetLocation: {fileID: 0}
+  npcEvents: []
+  MainAgent: {fileID: 0}
 --- !u!1 &4427204269853417799
 GameObject:
   m_ObjectHideFlags: 0

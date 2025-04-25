@@ -1,7 +1,6 @@
 
-using UnityEngine.AI;
-
 public interface INPCEventStrategy
 {
-    public void StartEvent(NavMeshAgent mainAgent);
+    public void StartEvent();
+    public void StopEvent();
 }
