@@ -1,5 +1,5 @@
 
-public enum NPCEventType 
+public enum NPCMovementType 
 {
     ApproachToNPC,
     Dance,

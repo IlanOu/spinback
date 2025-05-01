@@ -1,26 +1,43 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AgentTimeRewindable : MonoBehaviour, ITimeRewindable
+public class NPCMovementManager : MonoBehaviour, ITimeRewindable
 {
+    [SerializeField] private List<NPCMovement> npcMovements;
+    [HideInInspector] public NavMeshAgent MainAgent;
+    private int _currentMovementIndex = 0;
+    private NPCMovement CurrentMovement => npcMovements.Count == 0 || _currentMovementIndex >= npcMovements.Count ? null : npcMovements[_currentMovementIndex];
+
     private class TimeState
     {
         public float time;
         public Vector3 velocity;
         public Vector3 destination;
         public float stoppingDistance;
+        public int currentMovementIndex;
+        public float[] movementStartTimes;
+        public bool[] movementWasLaunched;
     }
 
     private List<TimeState> timeStates = new List<TimeState>();
     private float recordInterval = 0.1f;
     private int maxStates = 3000;
 
-    private NavMeshAgent _mainAgent;
+    void Awake()
+    {
+        if (MainAgent == null)
+            MainAgent = GetComponent<NavMeshAgent>();
+    }
 
     void Start()
     {
-        _mainAgent = GetComponent<NavMeshAgent>();
+        foreach (NPCMovement npcMovement in npcMovements)
+        {
+            npcMovement.Init(this);
+        }
     }
 
     private void OnEnable()
@@ -35,19 +52,37 @@ public class AgentTimeRewindable : MonoBehaviour, ITimeRewindable
             TimeRewindManager.Instance.UnregisterRewindableObject(this);
     }
 
+    void Update()
+    {
+        HandleMovements();  
+    }
+
+    void HandleMovements()
+    {
+        if (CurrentMovement != null) CurrentMovement.Handle();
+    }
+
+    public void NextMovement()
+    {
+        _currentMovementIndex++;
+        Debug.Log("Next movement: " + _currentMovementIndex);
+    }
+
     public void InitializeStateRecording(float interval, bool adaptiveRecording)
     {
         recordInterval = interval;
         maxStates = Mathf.CeilToInt(300f / recordInterval);
         timeStates.Clear();
 
-        // Enregistrer un état initial
         TimeState initialState = new TimeState
         {
             time = 0f,
-            velocity = _mainAgent.velocity,
-            destination = _mainAgent.hasPath ? _mainAgent.destination : transform.position,
-            stoppingDistance = _mainAgent.stoppingDistance
+            velocity = MainAgent.velocity,
+            destination = MainAgent.destination != null ? MainAgent.destination : transform.position,
+            stoppingDistance = MainAgent.stoppingDistance,
+            currentMovementIndex = _currentMovementIndex,
+            movementStartTimes = npcMovements.Select(m => m.TimeToStart).ToArray(),
+            movementWasLaunched = npcMovements.Select(m => m.WasLaunched).ToArray()
         };
 
         timeStates.Add(initialState);
@@ -75,19 +110,21 @@ public class AgentTimeRewindable : MonoBehaviour, ITimeRewindable
 
     public void RecordState(float time)
     {
-        if (_mainAgent == null || !_mainAgent.isOnNavMesh) return;
+        if (MainAgent == null || !MainAgent.isOnNavMesh) return;
 
         TimeState state = new TimeState
         {
             time = time,
-            velocity = _mainAgent.velocity,
-            destination = _mainAgent.hasPath ? _mainAgent.destination : transform.position,
-            stoppingDistance = _mainAgent.stoppingDistance
+            velocity = MainAgent.velocity,
+            destination = MainAgent.hasPath ? MainAgent.destination : transform.position,
+            stoppingDistance = MainAgent.stoppingDistance,
+            currentMovementIndex = _currentMovementIndex,
+            movementStartTimes = npcMovements.Select(m => m.TimeToStart).ToArray(),
+            movementWasLaunched = npcMovements.Select(m => m.WasLaunched).ToArray()
         };
 
         timeStates.Add(state);
 
-        // Limite du nombre d'états
         while (timeStates.Count > maxStates)
             timeStates.RemoveAt(0);
     }
@@ -96,7 +133,6 @@ public class AgentTimeRewindable : MonoBehaviour, ITimeRewindable
     {
         if (timeStates.Count < 2) return;
 
-        // Recherche binaire
         int low = 0, high = timeStates.Count - 1, indexBefore = 0;
         while (low <= high)
         {
@@ -119,19 +155,29 @@ public class AgentTimeRewindable : MonoBehaviour, ITimeRewindable
         float t = (after.time > before.time) ? Mathf.Clamp01((targetTime - before.time) / (after.time - before.time)) : 0f;
 
         Vector3 rewindVelocity = Vector3.Lerp(before.velocity, after.velocity, t);
-        Vector3 rewindDestination = Vector3.Lerp(before.destination, after.destination, t);
+        Vector3 rewindDestination = before.destination;
+        float rewindStoppingDistance = before.stoppingDistance;
+        int rewindMovementIndex = before.currentMovementIndex;
 
-        float rewindStoppingDistance = Mathf.Lerp(before.stoppingDistance, after.stoppingDistance, t);
-
-        if (_mainAgent != null && _mainAgent.isOnNavMesh)
+        _currentMovementIndex = rewindMovementIndex;
+        for (int i = 0; i < npcMovements.Count; i++)
         {
-            _mainAgent.ResetPath();
-            _mainAgent.velocity = rewindVelocity;
+            if (i < before.movementStartTimes.Length)
+                npcMovements[i].TimeToStart = before.movementStartTimes[i];
+
+            if (i < before.movementWasLaunched.Length)
+                npcMovements[i].WasLaunched = before.movementWasLaunched[i];
+        }
+
+        if (MainAgent != null && MainAgent.isOnNavMesh)
+        {
+            MainAgent.ResetPath();
+            MainAgent.velocity = rewindVelocity;
             if (rewindDestination != transform.position)
             {
-                _mainAgent.SetDestination(rewindDestination);
+                MainAgent.SetDestination(rewindDestination);
             }
-            _mainAgent.stoppingDistance = rewindStoppingDistance;
+            MainAgent.stoppingDistance = rewindStoppingDistance;
         }
     }
 
