@@ -1983,6 +1983,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2949887997671886304, guid: 5e5a3ebde3bf94e13b980861f3cbf2e6, type: 3}
   m_PrefabInstance: {fileID: 546638881}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &546638883 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 972747952538860953, guid: 5e5a3ebde3bf94e13b980861f3cbf2e6, type: 3}
+  m_PrefabInstance: {fileID: 546638881}
+  m_PrefabAsset: {fileID: 0}
 --- !u!111 &642202021
 Animation:
   m_ObjectHideFlags: 0
@@ -3391,6 +3396,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+      propertyPath: npcMovements.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
       propertyPath: npcEvents.Array.data[1].distance
       value: 2
       objectReference: {fileID: 0}
@@ -3401,6 +3410,10 @@ PrefabInstance:
     - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
       propertyPath: npcEvents.Array.data[1].TimeToStart
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+      propertyPath: npcMovements.Array.data[0].distance
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
       propertyPath: npcEvents.Array.data[0].npcEventType
@@ -3419,12 +3432,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 546638882}
     - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+      propertyPath: npcMovements.Array.data[0].TimeToStart
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
       propertyPath: npcEvents.Array.data[0].maxWanderDistance
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
       propertyPath: npcEvents.Array.data[0].minWanderDistance
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+      propertyPath: npcMovements.Array.data[0].targetLocation
+      value: 
+      objectReference: {fileID: 546638883}
+    - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+      propertyPath: npcMovements.Array.data[0].npcMovementType
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4790643698743401512, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -3434,6 +3459,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 2dde5ba67fdabbb49905a4f66ced5122, type: 2}
+    - target: {fileID: 7608604711906239242, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8678921457357418227, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5.432

@@ -1,4 +1,3 @@
-using NPC.NPCEvent;
 using UnityEngine;
 using UnityEngine.AI;
 
