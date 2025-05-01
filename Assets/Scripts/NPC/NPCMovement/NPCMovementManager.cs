@@ -1,24 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NPCEventManager : MonoBehaviour, ITimeRewindable
+public class NPCMovementManager : MonoBehaviour, ITimeRewindable
 {
-    [SerializeField] private List<NPCEvent> npcEvents;
+    [SerializeField] private List<NPCMovement> npcMovements;
     [HideInInspector] public NavMeshAgent MainAgent;
-    public int _currentEventIndex = 0;
-    private bool isInRewindMode = false;
+    private int _currentMovementIndex = 0;
+    private NPCMovement CurrentMovement => npcMovements.Count == 0 || _currentMovementIndex >= npcMovements.Count ? null : npcMovements[_currentMovementIndex];
 
-    // Use full for rewindable
     private class TimeState
     {
         public float time;
         public Vector3 velocity;
         public Vector3 destination;
         public float stoppingDistance;
-        public int currentEventIndex;
+        public int currentMovementIndex;
+        public float[] movementStartTimes;
+        public bool[] movementWasLaunched;
     }
+
     private List<TimeState> timeStates = new List<TimeState>();
     private float recordInterval = 0.1f;
     private int maxStates = 3000;
@@ -31,9 +34,9 @@ public class NPCEventManager : MonoBehaviour, ITimeRewindable
 
     void Start()
     {
-        foreach (NPCEvent npcEvent in npcEvents)
+        foreach (NPCMovement npcMovement in npcMovements)
         {
-            npcEvent.InitStrategy(this);
+            npcMovement.Init(this);
         }
     }
 
@@ -51,58 +54,18 @@ public class NPCEventManager : MonoBehaviour, ITimeRewindable
 
     void Update()
     {
-        ChangeRewindMode();
-        HandleEvents();  
+        HandleMovements();  
     }
 
-    void ChangeRewindMode()
+    void HandleMovements()
     {
-        bool isRewinding = TimeRewindManager.Instance.IsRewinding;
-        float currentTime = TimeRewindManager.Instance.RecordingTime;
-        NPCEvent currentEvent = npcEvents.Count > 0 ? npcEvents[_currentEventIndex] : null;
-        // Passed to normal mode
-        if (!isRewinding && isInRewindMode)
-        {
-            isInRewindMode = false;
-            // Debug.Log("Actual index: " + _currentEventIndex);
-            // if (currentEvent != null)
-            // {
-            //     Debug.Log("TimeToStart: " + currentEvent.TimeToStart + " CanStart: " + currentEvent.CanStart(currentTime));
-            //     if (currentEvent.CanStart(currentTime))
-            //     {
-            //         currentEvent.StartEvent(currentTime);
-            //     }
-            // }
-        }
-
-        // Passed to rewind mode
-        if (isRewinding && !isInRewindMode)
-        {
-            isInRewindMode = true;
-        }
+        if (CurrentMovement != null) CurrentMovement.Handle();
     }
 
-    void HandleEvents()
+    public void NextMovement()
     {
-        if (npcEvents.Count > 0)
-        {
-            NPCEvent currentEvent = npcEvents[_currentEventIndex];
-            currentEvent.Handle();
-        }
-    }
-
-    public void NextEvent()
-    {
-        if (npcEvents.Count > _currentEventIndex + 1)
-        {
-            _currentEventIndex++;
-            Debug.Log("Next event: " + _currentEventIndex);
-        }
-    }
-
-    private IEnumerator WaitForNextEvent()
-    {
-        yield return new WaitForSeconds(recordInterval);
+        _currentMovementIndex++;
+        Debug.Log("Next movement: " + _currentMovementIndex);
     }
 
     public void InitializeStateRecording(float interval, bool adaptiveRecording)
@@ -111,14 +74,15 @@ public class NPCEventManager : MonoBehaviour, ITimeRewindable
         maxStates = Mathf.CeilToInt(300f / recordInterval);
         timeStates.Clear();
 
-        // Enregistrer un état initial
         TimeState initialState = new TimeState
         {
             time = 0f,
             velocity = MainAgent.velocity,
             destination = MainAgent.destination != null ? MainAgent.destination : transform.position,
             stoppingDistance = MainAgent.stoppingDistance,
-            currentEventIndex = _currentEventIndex
+            currentMovementIndex = _currentMovementIndex,
+            movementStartTimes = npcMovements.Select(m => m.TimeToStart).ToArray(),
+            movementWasLaunched = npcMovements.Select(m => m.WasLaunched).ToArray()
         };
 
         timeStates.Add(initialState);
@@ -154,12 +118,13 @@ public class NPCEventManager : MonoBehaviour, ITimeRewindable
             velocity = MainAgent.velocity,
             destination = MainAgent.hasPath ? MainAgent.destination : transform.position,
             stoppingDistance = MainAgent.stoppingDistance,
-            currentEventIndex = _currentEventIndex
+            currentMovementIndex = _currentMovementIndex,
+            movementStartTimes = npcMovements.Select(m => m.TimeToStart).ToArray(),
+            movementWasLaunched = npcMovements.Select(m => m.WasLaunched).ToArray()
         };
 
         timeStates.Add(state);
 
-        // Limite du nombre d'états
         while (timeStates.Count > maxStates)
             timeStates.RemoveAt(0);
     }
@@ -168,7 +133,6 @@ public class NPCEventManager : MonoBehaviour, ITimeRewindable
     {
         if (timeStates.Count < 2) return;
 
-        // Recherche binaire
         int low = 0, high = timeStates.Count - 1, indexBefore = 0;
         while (low <= high)
         {
@@ -191,13 +155,20 @@ public class NPCEventManager : MonoBehaviour, ITimeRewindable
         float t = (after.time > before.time) ? Mathf.Clamp01((targetTime - before.time) / (after.time - before.time)) : 0f;
 
         Vector3 rewindVelocity = Vector3.Lerp(before.velocity, after.velocity, t);
-        Vector3 rewindDestination = Vector3.Lerp(before.destination, after.destination, t);
+        Vector3 rewindDestination = before.destination;
+        float rewindStoppingDistance = before.stoppingDistance;
+        int rewindMovementIndex = before.currentMovementIndex;
 
-        float rewindStoppingDistance = Mathf.Lerp(before.stoppingDistance, after.stoppingDistance, t);
-        int rewindEventIndex = before.currentEventIndex;
+        _currentMovementIndex = rewindMovementIndex;
+        for (int i = 0; i < npcMovements.Count; i++)
+        {
+            if (i < before.movementStartTimes.Length)
+                npcMovements[i].TimeToStart = before.movementStartTimes[i];
 
-        _currentEventIndex = rewindEventIndex;
-        Debug.Log("Set index: " + rewindEventIndex);
+            if (i < before.movementWasLaunched.Length)
+                npcMovements[i].WasLaunched = before.movementWasLaunched[i];
+        }
+
         if (MainAgent != null && MainAgent.isOnNavMesh)
         {
             MainAgent.ResetPath();

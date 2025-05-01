@@ -1,21 +1,21 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-class NPCEventWalk : NPCEventStrategy, INPCEventStrategy
+class NPCMovementWalk : NPCMovementStrategy
 {
     private float _minWanderDistance;
     private float _maxWanderDistance;
     private Vector3 targetPosition;
 
-    public NPCEventWalk(NPCEvent npcEvent, float minWanderDistance, float maxWanderDistance) : base(npcEvent) 
+    public NPCMovementWalk(NPCMovement npcMovement, float minWanderDistance, float maxWanderDistance) : base(npcMovement) 
     {
         _minWanderDistance = minWanderDistance;
         _maxWanderDistance = maxWanderDistance;
         Vector3 randomDirection = Random.insideUnitSphere * Random.Range(_minWanderDistance, _maxWanderDistance);
-        targetPosition = randomDirection + base.npcEvent.Manager.transform.position;
+        targetPosition = randomDirection + base.npcMovement.Manager.transform.position;
     }
     
-    public void StartEvent()
+    public override void StartMovement()
     {
         NavMeshHit hit;
         
@@ -25,6 +25,4 @@ class NPCEventWalk : NPCEventStrategy, INPCEventStrategy
             _mainAgent.stoppingDistance = 0f;
         }
     }
-    
-    public void StopEvent() {}
 }

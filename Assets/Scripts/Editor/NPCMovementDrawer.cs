@@ -3,19 +3,19 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(NPCEvent))]
-public class NPCEventDrawer : PropertyDrawer
+[CustomPropertyDrawer(typeof(NPCMovement))]
+public class NPCMovementDrawer : PropertyDrawer
 {
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
-        int lines = 2; // npcEventType + TimeToStart
-        NPCEventType type = (NPCEventType)property.FindPropertyRelative("npcEventType").enumValueIndex;
+        int lines = 2; // npcMovementType + TimeToStart
+        NPCMovementType type = (NPCMovementType)property.FindPropertyRelative("npcMovementType").enumValueIndex;
 
         switch (type)
         {
-            case NPCEventType.ApproachToNPC: lines += 2; break; // targetNpc + distance
-            case NPCEventType.Walk: lines += 2; break;          // min/max wander
-            case NPCEventType.WalkToLocation: lines += 1; break; // targetLocation
+            case NPCMovementType.ApproachToNPC: lines += 2; break; // targetNpc + distance
+            case NPCMovementType.Walk: lines += 2; break;          // min/max wander
+            case NPCMovementType.WalkToLocation: lines += 1; break; // targetLocation
         }
 
         return lines * EditorGUIUtility.singleLineHeight + (lines - 1) * EditorGUIUtility.standardVerticalSpacing;
@@ -25,7 +25,7 @@ public class NPCEventDrawer : PropertyDrawer
     {
         EditorGUI.BeginProperty(position, label, property);
 
-        var typeProp = property.FindPropertyRelative("npcEventType");
+        var typeProp = property.FindPropertyRelative("npcMovementType");
         var timeProp = property.FindPropertyRelative("TimeToStart");
 
         var targetNpcProp = property.FindPropertyRelative("targetNpc");
@@ -41,9 +41,9 @@ public class NPCEventDrawer : PropertyDrawer
         EditorGUI.PropertyField(rect, timeProp, new GUIContent("Start Time"));
         rect.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
 
-        switch ((NPCEventType)typeProp.enumValueIndex)
+        switch ((NPCMovementType)typeProp.enumValueIndex)
         {
-            case NPCEventType.ApproachToNPC:
+            case NPCMovementType.ApproachToNPC:
                 // Default value
                 if (Mathf.Approximately(distanceProp.floatValue, 0f))
                 {
@@ -53,7 +53,7 @@ public class NPCEventDrawer : PropertyDrawer
                 rect.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
                 EditorGUI.PropertyField(rect, distanceProp, new GUIContent("Distance"));
                 break;
-            case NPCEventType.Walk:
+            case NPCMovementType.Walk:
                 // Default value
                 if (Mathf.Approximately(minWanderProp.floatValue, 0f) && Mathf.Approximately(maxWanderProp.floatValue, 0f))
                 {
@@ -64,7 +64,7 @@ public class NPCEventDrawer : PropertyDrawer
                 rect.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
                 EditorGUI.PropertyField(rect, maxWanderProp, new GUIContent("Max Wander Distance"));
                 break;
-            case NPCEventType.WalkToLocation:
+            case NPCMovementType.WalkToLocation:
                 EditorGUI.PropertyField(rect, targetLocationProp, new GUIContent("Target Location"));
                 break;
         }
