@@ -3391,6 +3391,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2442851481456215595, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
       propertyPath: npcEvents.Array.size
       value: 1
@@ -3503,10 +3507,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7395889155099556124, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+    - {fileID: 7608604711906239242, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2442851481456215595, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1424425906}
   m_SourcePrefab: {fileID: 100100000, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
 --- !u!4 &1424425904 stripped
 Transform:
@@ -3518,6 +3527,26 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2442851481456215595, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
   m_PrefabInstance: {fileID: 1424425903}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1424425906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424425905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6d913bd63aa40e4bb034493633d8725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modules: -1
+  recordInterval: 0.1
+  useAdaptiveRecording: 1
+  significantMovementThreshold: 0.05
+  significantRotationThreshold: 5
+  navMeshOverride: {fileID: 0}
+  animatorOverride: {fileID: 0}
+  npcMovementOverride: {fileID: 0}
 --- !u!1 &1433466205
 GameObject:
   m_ObjectHideFlags: 0
@@ -4039,12 +4068,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2442851481456215595, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
       propertyPath: animator
       value: 
-      objectReference: {fileID: 1689474351}
+      objectReference: {fileID: 0}
+    - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+      propertyPath: npcMovements.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
       propertyPath: npcEvents.Array.data[0].distance
       value: 1.5
@@ -4054,8 +4087,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1424425905}
     - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+      propertyPath: npcMovements.Array.data[0].distance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
       propertyPath: npcEvents.Array.data[0].animationType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+      propertyPath: npcMovements.Array.data[0].TimeToStart
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+      propertyPath: npcMovements.Array.data[0].targetLocation
+      value: 
+      objectReference: {fileID: 546638883}
+    - target: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+      propertyPath: npcMovements.Array.data[0].npcMovementType
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4790643698743401512, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -4113,7 +4162,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7395889155099556124, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+    - {fileID: 7608604711906239242, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8678921457357418227, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
@@ -4123,17 +4174,26 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2442851481456215595, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1689474353}
+    - targetCorrespondingSourceObject: {fileID: 2442851481456215595, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1689474355}
   m_SourcePrefab: {fileID: 100100000, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
 --- !u!4 &1689474350 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8678921457357418227, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
   m_PrefabInstance: {fileID: 1689474349}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1689474351 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7608604711906239242, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+--- !u!114 &1689474351 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3985863235629431245, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
   m_PrefabInstance: {fileID: 1689474349}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689474352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32d1f5c4f15034ed89f705709ae8c8ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1689474352 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2442851481456215595, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
@@ -4158,6 +4218,32 @@ MonoBehaviour:
   - animationType: 1
     animatorParameterName: Walking
     useTriggerInsteadOfBool: 0
+  animator: {fileID: 5866666021402149938}
+--- !u!195 &1689474354 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 6691000001212493842, guid: e689cf313e8f34856a8a787963904f6c, type: 3}
+  m_PrefabInstance: {fileID: 1689474349}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1689474355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1689474352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6d913bd63aa40e4bb034493633d8725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modules: -1
+  recordInterval: 0.1
+  useAdaptiveRecording: 1
+  significantMovementThreshold: 0.05
+  significantRotationThreshold: 5
+  navMeshOverride: {fileID: 1689474354}
+  animatorOverride: {fileID: 5866666021402149938}
+  npcMovementOverride: {fileID: 1689474351}
 --- !u!1 &1818904512
 GameObject:
   m_ObjectHideFlags: 0
@@ -4696,14 +4782,13 @@ GameObject:
   - component: {fileID: 543450653066419784}
   - component: {fileID: 5866666021402149938}
   - component: {fileID: 642202021}
-  - component: {fileID: 5866666021402149939}
   m_Layer: 0
   m_Name: X Bot@Dancing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1031632034777113621
 Transform:
   m_ObjectHideFlags: 0
@@ -6002,20 +6087,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5866666021402149939
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132148589004018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd01cc904aa54b81aeccd29f9346e072, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  significantMovementThreshold: 0.05
-  significantRotationThreshold: 5
 --- !u!4 &5901452234696117451
 Transform:
   m_ObjectHideFlags: 0

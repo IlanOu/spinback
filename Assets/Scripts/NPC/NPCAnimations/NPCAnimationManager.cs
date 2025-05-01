@@ -13,6 +13,8 @@ public class NPCAnimationConfig
 public class NPCAnimationManager : MonoBehaviour
 {
     public NPCAnimationConfig[] animationConfigs; // Tableau configurable dans l'Inspector
+    
+    [SerializeField]
     private Animator animator;
 
     void Start()
