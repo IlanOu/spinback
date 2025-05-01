@@ -44,8 +44,19 @@ public class NPCMovementManager : MonoBehaviour
     public void NextMovement()
     {
         CurrentIndex++;
-        Debug.Log("Next movement: " + CurrentIndex);
+
+        // planifie l'heure de départ du prochain mouvement, si besoin
+        if (CurrentIndex < npcMovements.Count)
+        {
+            var next = npcMovements[CurrentIndex];
+            if (next.TimeToStart < 0f)   // -1 => démarrer juste après le précédent
+            {
+                float t  = TimeRewindManager.Instance.RecordingTime;
+                next.TimeToStart = t + next.delayAfterPrevious;
+            }
+        }
     }
+
 
     /* ─────────────────── API utilisée par le Rewind ─────────────────── */
     public void ForceState(int index, float[] startTimes, bool[] launched)
@@ -55,7 +66,7 @@ public class NPCMovementManager : MonoBehaviour
         for (int i = 0; i < npcMovements.Count; i++)
         {
             if (i < startTimes.Length)  npcMovements[i].TimeToStart = startTimes[i];
-            if (i < launched.Length)    npcMovements[i].WasLaunched = launched[i];
+            if (i < launched.Length)    npcMovements[i].launched = launched[i];
         }
 
         // Optionnel : remettre l'agent dans un état cohérent.

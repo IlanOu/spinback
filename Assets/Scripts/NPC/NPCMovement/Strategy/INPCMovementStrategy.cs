@@ -1,5 +1,5 @@
-
 public interface INPCMovementStrategy
 {
-    public void StartMovement();
+    void StartMovement();
+    bool IsDone { get; }
 }

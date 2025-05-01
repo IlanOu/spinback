@@ -15,7 +15,7 @@ public class NPCMovement
     private float canStartMargeTime = 1f;
 
     // Usefull for other class
-    [HideInInspector] public bool WasLaunched;
+    [HideInInspector] public bool launched = false;
     [HideInInspector] public NPCMovementManager Manager;
     [HideInInspector] public bool Enabled;
 
@@ -32,10 +32,12 @@ public class NPCMovement
     // WalkToLocation
     [SerializeField] private GameObject targetLocation;
 
+    [Tooltip("Délai (sec) après la fin du précédent si TimeToStart vaut -1")]
+    public float delayAfterPrevious = 0f;
+    
     public void Init(NPCMovementManager obj)
     {
         Manager = obj;
-        WasLaunched = false;
         Enabled = true;
 
         _strategy = npcMovementType switch
@@ -74,29 +76,38 @@ public class NPCMovement
             return;
         }
         
-        WasLaunched = true;
         _strategy.StartMovement();
     }
 
     public void Handle()
     {
-        float currentTime = TimeRewindManager.Instance.RecordingTime;
-        bool isRewinding = TimeRewindManager.Instance.IsRewinding;
+        // 1) rien à faire pendant le rewind
+        if (TimeRewindManager.Instance.IsRewinding) return;
 
-        if (isRewinding) return;
+        float now = TimeRewindManager.Instance.RecordingTime;
 
-        if (TimeToStart == -1) TimeToStart = currentTime;
+        // 2) si pas encore planifié (-1), on attend que le manager le fasse
+        if (TimeToStart < 0f) return;
 
-        if (currentTime >= TimeToStart)
+        // 3) pas encore l'heure ?
+        if (now < TimeToStart) return;
+
+        // 4) c'est l'heure !
+        if (!launched)
         {
-            if (!WasLaunched) {
-                StartMovement();
-            }
-            
-            if (WasLaunched) HandleDestination();
+            StartMovement();
+            launched = true;
+            return;
         }
 
+        // 5) on surveille la fin
+        if (_strategy.IsDone)
+        {
+            launched = false;
+            Manager.NextMovement();
+        }
     }
+
 
     private void HandleDestination()
     {
@@ -105,7 +116,7 @@ public class NPCMovement
         {
             Debug.Log("Arrived");
             agent.ResetPath();
-            WasLaunched = false;
+            launched = false;
             Manager.NextMovement();
         }
     }

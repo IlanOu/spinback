@@ -1,20 +1,15 @@
-
-using System;
 using UnityEngine.AI;
 
 public abstract class NPCMovementStrategy : INPCMovementStrategy
 {
-    protected NPCMovement npcMovement;
-    protected NavMeshAgent _mainAgent { get => npcMovement.Manager.MainAgent; }
-    protected Action onComplete;
+    protected readonly NPCMovement   npcMovement;
+    protected NavMeshAgent MainAgent => npcMovement.Manager.MainAgent;
 
-    public NPCMovementStrategy(NPCMovement npcMovement) 
+    protected NPCMovementStrategy(NPCMovement npcMovement)
     {
         this.npcMovement = npcMovement;
     }
 
-    public virtual void StartMovement()
-    {
-        throw new NotImplementedException();
-    }
+    public abstract void StartMovement();
+    public abstract bool IsDone { get; }
 }

@@ -336,7 +336,7 @@ public class ModularTimeRewindable : MonoBehaviour, ITimeRewindable
         {
             currentIndex = _npcMgr.CurrentIndex,
             startTimes   = _npcMgr.Movements.Select(m => m.TimeToStart).ToArray(),
-            wasLaunched  = _npcMgr.Movements.Select(m => m.WasLaunched).ToArray()
+            wasLaunched  = _npcMgr.Movements.Select(m => m.launched).ToArray()
         };
     }
 

@@ -1,28 +1,63 @@
 using UnityEngine;
 using UnityEngine.AI;
+using NPC.NPCAnimations;   // enum + bus
 
 class NPCMovementWalk : NPCMovementStrategy
 {
-    private float _minWanderDistance;
-    private float _maxWanderDistance;
-    private Vector3 targetPosition;
+    private readonly float _min;
+    private readonly float _max;
+    private Vector3 targetPos;
+    private bool hasStarted = false;
 
-    public NPCMovementWalk(NPCMovement npcMovement, float minWanderDistance, float maxWanderDistance) : base(npcMovement) 
+    public NPCMovementWalk(NPCMovement npcMovement,
+        float minWander,
+        float maxWander)
+        : base(npcMovement)
     {
-        _minWanderDistance = minWanderDistance;
-        _maxWanderDistance = maxWanderDistance;
-        Vector3 randomDirection = Random.insideUnitSphere * Random.Range(_minWanderDistance, _maxWanderDistance);
-        targetPosition = randomDirection + base.npcMovement.Manager.transform.position;
+        _min = minWander;
+        _max = maxWander;
+
+        Vector3 rnd = Random.insideUnitSphere * Random.Range(_min, _max);
+        targetPos   = rnd + npcMovement.Manager.transform.position;
     }
-    
+
+    /* ---------- Lancement ---------- */
     public override void StartMovement()
     {
-        NavMeshHit hit;
-        
-        if (NavMesh.SamplePosition(targetPosition, out hit, _maxWanderDistance, NavMesh.AllAreas))
+        if (hasStarted) return;
+        hasStarted = true;
+
+        if (NavMesh.SamplePosition(targetPos, out NavMeshHit hit, _max, NavMesh.AllAreas))
         {
-            _mainAgent.SetDestination(hit.position);
-            _mainAgent.stoppingDistance = 0f;
+            MainAgent.SetDestination(hit.position);
+            MainAgent.stoppingDistance = 0f;
+
+            // Animation ON
+            NPCAnimBus.Bool(npcMovement.Manager.gameObject,
+                NPCAnimationsType.Walk,
+                true);
+        }
+    }
+
+    /* ---------- Fin du déplacement ---------- */
+    public override bool IsDone
+    {
+        get
+        {
+            // On considère terminé quand l’agent n’a plus de chemin ou
+            // qu’il est arrivé à destination.
+            bool finished = !MainAgent.pathPending &&
+                            MainAgent.remainingDistance <= MainAgent.stoppingDistance;
+
+            if (finished && hasStarted)
+            {
+                // Animation OFF (une seule fois)
+                NPCAnimBus.Bool(npcMovement.Manager.gameObject,
+                    NPCAnimationsType.Walk,
+                    false);
+                hasStarted = false;          // évite de spammer
+            }
+            return finished;
         }
     }
 }

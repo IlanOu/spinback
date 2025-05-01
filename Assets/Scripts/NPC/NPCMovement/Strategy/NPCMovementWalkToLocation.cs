@@ -1,32 +1,45 @@
+/* --------------- NPCMovementWalkToLocation ---------------- */
 using UnityEngine;
+using NPC.NPCAnimations;
 
 class NPCMovementWalkToLocation : NPCMovementStrategy
 {
-    private GameObject _targetLocation;
+    private readonly GameObject _targetLoc;
+    private bool launched = false;
 
-    public NPCMovementWalkToLocation(NPCMovement npcMovement, GameObject targetLocation) : base(npcMovement) 
+    public NPCMovementWalkToLocation(NPCMovement npcMovement, GameObject targetLocation)
+        : base(npcMovement)
     {
-        if (targetLocation == null)
-        {
-            Debug.LogError("Missing parameters for NPCMovementWalkToLocation");
-            this.npcMovement.Enabled = false;
-            return;
-        }
+        if (targetLocation == null) { Debug.LogError("Target Location null"); npcMovement.Enabled=false; return; }
+        if (!targetLocation.CompareTag("Location")) { Debug.LogError("Target must be tagged Location"); npcMovement.Enabled=false; return; }
 
-        _targetLocation = targetLocation;
-
-        if (!targetLocation.CompareTag("Location"))
-        {
-            Debug.LogError("Target must be a location");
-            this.npcMovement.Enabled = false;
-            return;
-        }
+        _targetLoc = targetLocation;
     }
-    
+
     public override void StartMovement()
     {
-        Debug.Log("Walking to location");
-        _mainAgent.SetDestination(_targetLocation.transform.position);
-        _mainAgent.stoppingDistance = 0f;
+        if (launched) return;
+        launched = true;
+
+        MainAgent.SetDestination(_targetLoc.transform.position);
+        MainAgent.stoppingDistance = 0f;
+
+        NPCAnimBus.Bool(npcMovement.Manager.gameObject, NPCAnimationsType.Walk, true);
+    }
+
+    public override bool IsDone
+    {
+        get
+        {
+            bool finished = !MainAgent.pathPending &&
+                            MainAgent.remainingDistance <= MainAgent.stoppingDistance;
+
+            if (finished && launched)
+            {
+                NPCAnimBus.Bool(npcMovement.Manager.gameObject, NPCAnimationsType.Walk, false);
+                launched = false;
+            }
+            return finished;
+        }
     }
 }
