@@ -4,6 +4,7 @@ using UnityEngine.AI;
 
 public class NPCMovementManager : MonoBehaviour
 {
+    [SerializeField] private GameObject VisualPivot;
     [SerializeField] private List<NPCMovement> npcMovements;
     
     public NavMeshAgent MainAgent { get; private set; }

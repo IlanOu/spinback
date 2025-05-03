@@ -16,6 +16,8 @@ public class NPCMovementDrawer : PropertyDrawer
             case NPCMovementType.Walk: lines += 2; break;          // min/max wander
             case NPCMovementType.WalkToLocation: lines += 1; break; // targetLocation
             case NPCMovementType.Talk:          lines += 1; break; // audioClip
+            case NPCMovementType.LookAtTarget: lines += 2; break; // target + durée
+
 
         }
 
@@ -44,6 +46,11 @@ public class NPCMovementDrawer : PropertyDrawer
 
         // Talk
         var talkClipProp = property.FindPropertyRelative("talkClip");
+        
+        // LookAtTarget
+        var lookAtTargetProp = property.FindPropertyRelative("lookAtTarget");
+        var lookAtDurationProp = property.FindPropertyRelative("lookAtDuration");
+
         
         Rect rect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
 
@@ -83,6 +90,12 @@ public class NPCMovementDrawer : PropertyDrawer
             case NPCMovementType.Talk:
                 EditorGUI.PropertyField(rect, talkClipProp, new GUIContent("Voice Clip"));
                 break;
+            case NPCMovementType.LookAtTarget:
+                EditorGUI.PropertyField(rect, lookAtTargetProp, new GUIContent("Target"));
+                rect.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+                EditorGUI.PropertyField(rect, lookAtDurationProp, new GUIContent("Hold (s)"));
+                break;
+
         }
 
         EditorGUI.EndProperty();

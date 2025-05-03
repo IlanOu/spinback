@@ -5,5 +5,6 @@ public enum NPCMovementType
     Dance,
     Walk,
     WalkToLocation,
-    Talk
+    Talk,
+    LookAtTarget
 }

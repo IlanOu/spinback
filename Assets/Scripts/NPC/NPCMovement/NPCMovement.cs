@@ -37,6 +37,10 @@ public class NPCMovement
     // Talk
     [SerializeField] private AudioClip talkClip;
     
+    // LookAtTarget
+    [SerializeField] private GameObject lookAtTarget;
+    [SerializeField] private float lookAtDuration = 2f;
+    
     [Tooltip("Délai (sec) après la fin du précédent si TimeToStart vaut -1")]
     public float delayAfterPrevious = 0f;
     
@@ -53,6 +57,7 @@ public class NPCMovement
             NPCMovementType.WalkToLocation => new NPCMovementWalkToLocation(this, targetLocation),
             NPCMovementType.Dance => new NPCMovementDance(this),
             NPCMovementType.Talk => new NPCMovementTalk(this, talkClip),   
+            NPCMovementType.LookAtTarget   => new NPCMovementLookAtTarget(this, lookAtTarget, lookAtDuration),
             _ => null
         };
 
@@ -88,6 +93,8 @@ public class NPCMovement
 
     public void Handle()
     {
+        if (_strategy == null || !Enabled) return;
+        
         // 1) rien à faire pendant le rewind
         if (TimeRewindManager.Instance.IsRewinding) return;
 
