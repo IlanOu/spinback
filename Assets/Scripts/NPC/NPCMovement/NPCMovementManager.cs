@@ -1,22 +1,14 @@
-/*
- * NPCMovementManager
- * ──────────────────
- *  • Pilote simplement les séquences de déplacement d’un NPC.
- *  • AUCUNE référence à ITimeRewindable ou aux snapshots.
- *  • Fournit ForceState pour permettre au module “NPCMovement” du
- *    ModularTimeRewindable de restaurer son état.
- */
-
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class NPCMovementManager : MonoBehaviour
 {
+    [SerializeField] private GameObject VisualPivot;
     [SerializeField] private List<NPCMovement> npcMovements;
-
+    
     public NavMeshAgent MainAgent { get; private set; }
-    public int          CurrentIndex  { get; private set; } = 0;
+    public int CurrentIndex  { get; private set; } = 0;
     public IReadOnlyList<NPCMovement> Movements => npcMovements;
 
     private NPCMovement CurrentMovement =>

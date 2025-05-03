@@ -1,15 +1,19 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 [Serializable]
 public class NPCMovement
 {
     public NPCMovementType npcMovementType;
     public float TimeToStart;
-
+    [HideInInspector]
+    public GameObject visualPivot;
+    
     // Useful for this class
     private NPCMovementStrategy _strategy;
     private float canStartMargeTime = 1f;
@@ -26,6 +30,7 @@ public class NPCMovement
     [SerializeField] private GameObject targetNpc;
     [SerializeField] private float distance = 2f;
     [SerializeField] private GameObject lookTarget;
+    
     
     // Walk
     [SerializeField] private float minWanderDistance = 5f;
@@ -44,11 +49,17 @@ public class NPCMovement
     {
         Manager = obj;
         Enabled = true;
-
+        
+        if (visualPivot == null)
+            Debug.LogWarning($"{Manager.name}: visualPivot non assigné, le NPC racine tournera.");
+        
+        Transform pivotTr = visualPivot != null ? visualPivot.transform : null;
+        
+        
         _strategy = npcMovementType switch
         {
             NPCMovementType.ApproachToNPC =>
-                new NPCMovementApproachToNPC(this, targetNpc, distance, lookTarget),
+                new NPCMovementApproachToNPC(this, targetNpc, distance, pivotTr, lookTarget),
             NPCMovementType.Walk => new NPCMovementWalk(this, minWanderDistance, maxWanderDistance),
             NPCMovementType.WalkToLocation => new NPCMovementWalkToLocation(this, targetLocation),
             NPCMovementType.Dance => new NPCMovementDance(this),
@@ -108,7 +119,7 @@ public class NPCMovement
         }
 
         // 5) on surveille la fin
-        if (_strategy.IsDone)
+        if (_strategy != null && _strategy.IsDone)
         {
             launched = false;
             Manager.NextMovement();

@@ -12,9 +12,11 @@ public class NPCMovementDrawer : PropertyDrawer
 
         switch (type)
         {
-            case NPCMovementType.ApproachToNPC: lines += 2; break; // targetNpc + distance
+            case NPCMovementType.ApproachToNPC: lines += 3; break; // targetNpc + distance + lookTarget
             case NPCMovementType.Walk: lines += 2; break;          // min/max wander
             case NPCMovementType.WalkToLocation: lines += 1; break; // targetLocation
+            case NPCMovementType.Talk:          lines += 1; break; // audioClip
+
         }
 
         return lines * EditorGUIUtility.singleLineHeight + (lines - 1) * EditorGUIUtility.standardVerticalSpacing;
@@ -24,15 +26,25 @@ public class NPCMovementDrawer : PropertyDrawer
     {
         EditorGUI.BeginProperty(position, label, property);
 
+        // Common
         var typeProp = property.FindPropertyRelative("npcMovementType");
         var timeProp = property.FindPropertyRelative("TimeToStart");
 
+        // Approach To NPC
         var targetNpcProp = property.FindPropertyRelative("targetNpc");
         var distanceProp = property.FindPropertyRelative("distance");
+        var lookTargetProp = property.FindPropertyRelative("lookTarget");
+        
+        // Walk
         var minWanderProp = property.FindPropertyRelative("minWanderDistance");
         var maxWanderProp = property.FindPropertyRelative("maxWanderDistance");
+        
+        // WalkToLocation
         var targetLocationProp = property.FindPropertyRelative("targetLocation");
 
+        // Talk
+        var talkClipProp = property.FindPropertyRelative("talkClip");
+        
         Rect rect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
 
         EditorGUI.PropertyField(rect, typeProp, new GUIContent("Event Type"));
@@ -51,6 +63,8 @@ public class NPCMovementDrawer : PropertyDrawer
                 EditorGUI.PropertyField(rect, targetNpcProp, new GUIContent("Target NPC"));
                 rect.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
                 EditorGUI.PropertyField(rect, distanceProp, new GUIContent("Distance"));
+                rect.y += EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
+                EditorGUI.PropertyField(rect, lookTargetProp, new GUIContent("Look Target (opt)"));
                 break;
             case NPCMovementType.Walk:
                 // Default value
@@ -65,6 +79,9 @@ public class NPCMovementDrawer : PropertyDrawer
                 break;
             case NPCMovementType.WalkToLocation:
                 EditorGUI.PropertyField(rect, targetLocationProp, new GUIContent("Target Location"));
+                break;
+            case NPCMovementType.Talk:
+                EditorGUI.PropertyField(rect, talkClipProp, new GUIContent("Voice Clip"));
                 break;
         }
 
