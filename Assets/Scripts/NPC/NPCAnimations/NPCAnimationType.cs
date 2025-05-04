@@ -6,6 +6,8 @@ namespace NPC.NPCAnimations
         Walk = 1,
         Idle = 2,
         Talk = 3,
-        Whisper = 4
+        Whisper = 4,
+        Yell = 5,
+        Swim = 6
     }
 }

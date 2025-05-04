@@ -41,6 +41,9 @@ public class NPCMovement
     [SerializeField] private GameObject lookAtTarget;
     [SerializeField] private float lookAtDuration = 2f;
     
+    // Yell
+    [SerializeField] private AudioClip yellClip;
+    
     [Tooltip("Délai (sec) après la fin du précédent si TimeToStart vaut -1")]
     public float delayAfterPrevious = 0f;
     
@@ -58,6 +61,8 @@ public class NPCMovement
             NPCMovementType.Dance => new NPCMovementDance(this),
             NPCMovementType.Talk => new NPCMovementTalk(this, talkClip),   
             NPCMovementType.LookAtTarget   => new NPCMovementLookAtTarget(this, lookAtTarget, lookAtDuration),
+            NPCMovementType.Yell => new NPCMovementYell(this, yellClip),
+            NPCMovementType.Swim => new NPCMovementSwim(this),
             _ => null
         };
 
@@ -68,11 +73,11 @@ public class NPCMovement
         }
     }
 
-    public bool InRangeToStart(float currentTime)
+    /*public bool InRangeToStart(float currentTime)
     {
         if (TimeToStart == -1) return false;
         return MathF.Abs(currentTime - TimeToStart) < canStartMargeTime;
-    }
+    }*/
 
     public void StartMovement()
     {
@@ -123,15 +128,15 @@ public class NPCMovement
     }
 
 
-    private void HandleDestination()
+    /*private void HandleDestination()
     {
         NavMeshAgent agent = Manager.MainAgent;
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + 0.05f)
         {
-            Debug.Log("Arrived");
+            // Debug.Log("Arrived");
             agent.ResetPath();
             launched = false;
             Manager.NextMovement();
         }
-    }
+    }*/
 }

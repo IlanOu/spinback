@@ -22,11 +22,6 @@ class NPCMovementLookAtTarget : NPCMovementStrategy
             mov.Enabled = false;
             Debug.LogError("LookAtTarget : target manquant !");
         }
-        else
-        {
-            // Debug pour vérifier que la cible est bien référencée
-            Debug.Log($"LookAtTarget initialisé avec cible: {target.name} à position {target.transform.position}");
-        }
     }
 
     public override void StartMovement()
