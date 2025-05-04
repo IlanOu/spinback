@@ -20,7 +20,7 @@ public class DryWetController : MonoBehaviour
 
     [Tooltip("Amplitude maximale de l'effet dry en dB (plus c'est grand, plus l'effet est fort)")]
     [SerializeField]
-    private float maxDryDb = 2000f;
+    private float maxDryDb = 10000f;
 
     void Start()
     {
