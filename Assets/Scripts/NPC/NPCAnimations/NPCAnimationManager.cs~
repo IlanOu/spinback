@@ -42,16 +42,31 @@ public class NPCAnimationManager : MonoBehaviour
     }
 
     /* ─────────── API publique (appels directs) ─────────── */
+    // Dans NPCAnimationManager
     public void PlayAnimation(NPCAnimationsType type, bool value = true)
     {
         var cfg = FindConfig(type);
         if (cfg == null) return;
 
         if (cfg.useTriggerInsteadOfBool)
+        {
             animator.SetTrigger(cfg.animatorParameterName);
+        }
         else
-            animator.SetBool(cfg.animatorParameterName, value);
+        {
+            // Si le bool passe de false→true, on repart de 0 sur le state
+            if (value && !animator.GetBool(cfg.animatorParameterName))
+            {
+                animator.SetBool(cfg.animatorParameterName, true);
+                animator.Play(cfg.animatorParameterName, 0, 0f); // <- restart
+            }
+            else
+            {
+                animator.SetBool(cfg.animatorParameterName, value);
+            }
+        }
     }
+
 
     public void StopAnimation(NPCAnimationsType type)
     {
