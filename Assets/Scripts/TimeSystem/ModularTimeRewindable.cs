@@ -312,10 +312,10 @@ public class ModularTimeRewindable : MonoBehaviour, ITimeRewindable
     {
         if (_animator == null || snap == null) return;
 
-        bool originalRootMotion = _animator.applyRootMotion;
+        // bool originalRootMotion = _animator.applyRootMotion;
 
         // RootMotion désactivé pendant le rewind
-        _animator.applyRootMotion = !_rewinding && originalRootMotion;
+        // _animator.applyRootMotion = !_rewinding && originalRootMotion;
 
         foreach (var kv in snap.floatParams) _animator.SetFloat(kv.Key, kv.Value);
         foreach (var kv in snap.intParams)   _animator.SetInteger(kv.Key, kv.Value);
@@ -326,7 +326,7 @@ public class ModularTimeRewindable : MonoBehaviour, ITimeRewindable
 
         _animator.Update(0f); // force update sans avancer le temps
 
-        if (!_rewinding) _animator.applyRootMotion = originalRootMotion;
+        // if (!_rewinding) _animator.applyRootMotion = originalRootMotion;
     }
 
     /* ---- NPCMovement helpers ---- */

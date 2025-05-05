@@ -7,14 +7,11 @@ public class UISoundFrequency : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private float deltaStep = 2000f;
     [SerializeField] GameObject ui;
-    [SerializeField] private Texture2D[] texture2Ds;
     private AudioMixer mixer;
-    private RawImage image;
 
     void Start()
     {
         mixer = audioSource.outputAudioMixerGroup.audioMixer;
-        image = ui.GetComponent<RawImage>();
         HideUI();
     }
 
@@ -33,16 +30,20 @@ public class UISoundFrequency : MonoBehaviour
     void ShowUI()
     {
         mixer.GetFloat("DryLevel", out float dryDb);
+        
+        int textureIndex = Mathf.Min(Mathf.CeilToInt(-dryDb / deltaStep), ui.transform.childCount - 1);
 
-        int textureIndex = Mathf.Min(Mathf.CeilToInt(-dryDb / deltaStep), texture2Ds.Length - 1);
-        image.texture = texture2Ds[textureIndex];
-
-        image.enabled = true;
+        for (int i = 0; i < ui.transform.childCount; i++)
+        {
+            ui.transform.GetChild(i).gameObject.SetActive(i == textureIndex);
+        }
     }
 
     void HideUI()
     {
-        image.enabled = false;
-        image.texture = null;
+        for (int i = 0; i < ui.transform.childCount; i++)
+        {
+            ui.transform.GetChild(i).gameObject.SetActive(false);
+        }
     }
 }
