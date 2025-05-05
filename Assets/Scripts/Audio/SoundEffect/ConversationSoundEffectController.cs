@@ -5,7 +5,8 @@ using UnityEngine.Audio;
 
 public class ConversationSoundEffectController : MonoBehaviour
 {
-    public AudioMixer mixer;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private string lowPassVariableName;
 
     [Range(0f, 1f), Header("Valeur contrôlée entre 10 et 22000 Hz")]
     public float balance = 0f;
@@ -13,6 +14,7 @@ public class ConversationSoundEffectController : MonoBehaviour
     [SerializeField, Range(0f, 1f), Header("Valeur à trouver pour avoir un son normal")]
     private float normalSoundValue = 0.5f;
 
+    [Header("Settings")]
     [SerializeField, Tooltip("Valeur minimale et maximale de l'effet sonore")]
     private Vector2 hzSettings = new Vector2(10f, 22000f);
     
@@ -27,9 +29,13 @@ public class ConversationSoundEffectController : MonoBehaviour
 
     [SerializeField] private float exponent = 4f;
     [SerializeField] private bool soundEffectEnabled = false;
+
+    /** Dynamic variables */
+    private AudioMixer mixer => audioSource.outputAudioMixerGroup.audioMixer;
     private float minHz => hzSettings.x;
     private float maxHz => hzSettings.y;
     private float marginError = 0.1f;
+    private float hz;
 
 
     void Start()
@@ -45,40 +51,66 @@ public class ConversationSoundEffectController : MonoBehaviour
 
     void Update()
     {
+        UpdateHzValue();
+        UpdateLowPass();
+        UpdateDisplay();
+    }
+
+    void UpdateHzValue()
+    {
+        // Calcul de l'écart absolu par rapport à la zone normale
+        float distanceFromNormal = Mathf.Abs(balance - normalSoundValue);
+
+        if (distanceFromNormal > marginError)
+        {
+            // Normalisation inversée
+            float t = Mathf.Clamp01(1f - distanceFromNormal);
+
+            // Application d'une courbe exponentielle
+            float curvedT = Mathf.Pow(t, exponent);
+
+            // Interpolation avec sensibilité forte près de normalSoundValue
+            hz = Mathf.Lerp(minHz, maxHz, curvedT);
+        }
+        else
+        {
+            // Dans la zone normale : pas d'effet
+            hz = maxHz;
+        }
+    }
+
+    void UpdateLowPass()
+    {
         if (soundEffectEnabled)
         {
-            float hz;
-
-            // Calcul de l'écart absolu par rapport à la zone normale
-            float distanceFromNormal = Mathf.Abs(balance - normalSoundValue);
-
-            if (distanceFromNormal > marginError)
-            {
-                // Normalisation inversée
-                float t = Mathf.Clamp01(1f - distanceFromNormal);
-
-                // Application d'une courbe exponentielle
-                float curvedT = Mathf.Pow(t, exponent);
-
-                // Interpolation avec sensibilité forte près de normalSoundValue
-                hz = Mathf.Lerp(minHz, maxHz, curvedT);
-            }
-            else
-            {
-                // Dans la zone normale : pas d'effet
-                hz = maxHz;
-            }
-
             mixer.SetFloat("MusicLowPass", musicHzSettings);
             mixer.SetFloat("CrowdLowPass", crowdHzSettings);
-            mixer.SetFloat("ConversationLowPass", hz);
+            mixer.SetFloat(lowPassVariableName, hz);
         }
         else
         {
             mixer.SetFloat("MusicLowPass", maxHz);
-            mixer.SetFloat("CrowdLowPass", maxHz);
-            mixer.SetFloat("ConversationLowPass", conversationHzSettings);
+            mixer.SetFloat("CrowdLowPass", crowdHzSettings);
+            mixer.SetFloat(lowPassVariableName, conversationHzSettings);
         }
+    }
+
+    void UpdateDisplay()
+    {
+        if (soundEffectEnabled)
+        {
+            UISoundFrequency.Instance.Show();
+            UISoundFrequency.Instance.HandleUI(hz);
+        }
+        else
+        {
+            UISoundFrequency.Instance.Hide();
+        }
+    }
+
+    public void OnZoom(float zoom)
+    {
+        
     }
     
     void OnMidiValue(MidiInput input)
