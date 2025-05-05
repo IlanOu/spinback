@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -9,6 +10,9 @@ public class UISoundFrequency : MonoBehaviour
     private bool active = false;
     private int childCount => ui.transform.childCount;
     private float deltaHzStep => maxHz / childCount;
+    
+    // The first subscriber is the only that can handle the UI
+    private GameObject subscribe;
 
     void Awake()
     {
@@ -21,14 +25,19 @@ public class UISoundFrequency : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void Show()
+    public void Show(GameObject go)
     {
+        if (active) return;
+        if (subscribe != null) return;
+
+        subscribe = go;
         active = true;
     }
 
-    public void HandleUI(float hz)
+    public void HandleUI(GameObject go, float hz)
     {
         if (!active) return;
+        if (subscribe != go) return;
         
         int textureIndex = Mathf.Min(Mathf.RoundToInt(hz / deltaHzStep), childCount - 1);
 
@@ -47,12 +56,17 @@ public class UISoundFrequency : MonoBehaviour
         }
     }
 
-    public void Hide()
+    public void Hide(GameObject go)
     {
-        active = false;
+        if (!active) return;
+        if (subscribe != go) return;
+
         for (int i = 0; i < childCount; i++)
         {
             ui.transform.GetChild(i).gameObject.SetActive(false);
         }
+
+        subscribe = null;
+        active = false;
     }
 }

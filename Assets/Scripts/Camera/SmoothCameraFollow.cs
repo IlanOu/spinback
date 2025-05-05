@@ -71,5 +71,34 @@ public class SmoothCameraFollow : MonoBehaviour
         // Appliquer le zoom de façon lisse
         currentZoom = Mathf.Lerp(currentZoom, targetZoom, zoomSmoothSpeed * Time.deltaTime);
         mainCamera.fieldOfView = currentZoom;
+
+        UpdateZoomUsingKeyboard();
+        DetectLookTarget();
+    }
+
+    void UpdateZoomUsingKeyboard()
+    {
+        targetZoom += Input.GetAxis("Vertical") * -mouseSensitivity;
+        targetZoom = Mathf.Clamp(targetZoom, minZoom, maxZoom);
+    }
+
+    private void DetectLookTarget()
+    {
+        Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); // centre de l'écran
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            GameObject target = hit.collider.gameObject;
+            Debug.Log("Regarde : " + target.name + " (" + target.tag + ")");
+
+            // Exemple : si tu veux agir selon le tag
+            if (target.CompareTag("Conversation"))
+            {
+                ConversationSoundVolumeController controller = target.GetComponent<ConversationSoundVolumeController>();
+                if (controller != null)
+                {
+                    controller.OnZoom(targetZoom, minZoom, maxZoom);
+                }
+            }
+        }
     }
 }

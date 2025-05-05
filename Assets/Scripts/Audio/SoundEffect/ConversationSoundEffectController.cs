@@ -5,6 +5,7 @@ using UnityEngine.Audio;
 
 public class ConversationSoundEffectController : MonoBehaviour
 {
+    /** Serialized variables */
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private string lowPassVariableName;
 
@@ -14,7 +15,9 @@ public class ConversationSoundEffectController : MonoBehaviour
     [SerializeField, Range(0f, 1f), Header("Valeur à trouver pour avoir un son normal")]
     private float normalSoundValue = 0.5f;
 
+    /** Settings */
     [Header("Settings")]
+
     [SerializeField, Tooltip("Valeur minimale et maximale de l'effet sonore")]
     private Vector2 hzSettings = new Vector2(10f, 22000f);
     
@@ -35,6 +38,8 @@ public class ConversationSoundEffectController : MonoBehaviour
     private float minHz => hzSettings.x;
     private float maxHz => hzSettings.y;
     private float marginError = 0.1f;
+
+    /** Private variables */
     private float hz;
 
 
@@ -58,18 +63,12 @@ public class ConversationSoundEffectController : MonoBehaviour
 
     void UpdateHzValue()
     {
-        // Calcul de l'écart absolu par rapport à la zone normale
         float distanceFromNormal = Mathf.Abs(balance - normalSoundValue);
 
         if (distanceFromNormal > marginError)
         {
-            // Normalisation inversée
             float t = Mathf.Clamp01(1f - distanceFromNormal);
-
-            // Application d'une courbe exponentielle
             float curvedT = Mathf.Pow(t, exponent);
-
-            // Interpolation avec sensibilité forte près de normalSoundValue
             hz = Mathf.Lerp(minHz, maxHz, curvedT);
         }
         else
@@ -99,23 +98,31 @@ public class ConversationSoundEffectController : MonoBehaviour
     {
         if (soundEffectEnabled)
         {
-            UISoundFrequency.Instance.Show();
-            UISoundFrequency.Instance.HandleUI(hz);
+            UISoundFrequency.Instance.Show(gameObject);
+            UISoundFrequency.Instance.HandleUI(gameObject, hz);
         }
         else
         {
-            UISoundFrequency.Instance.Hide();
+            UISoundFrequency.Instance.Hide(gameObject);
         }
-    }
-
-    public void OnZoom(float zoom)
-    {
-        
     }
     
     void OnMidiValue(MidiInput input)
     {
         balance = input.Value * (1f / 127f) - 1f;
+    }
+
+    public void EnableSoundEffect()
+    {
+        if (soundEffectEnabled) return;
+        soundEffectEnabled = true;
+        SetRandomNormalSoundValue();
+    }
+
+    public void DisableSoundEffect()
+    {
+        if (!soundEffectEnabled) return;
+        soundEffectEnabled = false;
     }
 
 }
