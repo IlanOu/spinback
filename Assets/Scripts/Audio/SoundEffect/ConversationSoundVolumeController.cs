@@ -12,6 +12,15 @@ public class ConversationSoundVolumeController : MonoBehaviour
     private float volume;
     ConversationSoundEffectController controller;
 
+    void OnEnable()
+    {
+        SmoothCameraFollow.OnZoomTargetDetected += HandleZoom;
+    }
+
+    void OnDisable()
+    {
+        SmoothCameraFollow.OnZoomTargetDetected -= HandleZoom;
+    }
 
     void Start()
     {
@@ -28,6 +37,14 @@ public class ConversationSoundVolumeController : MonoBehaviour
     void UpdateVolume()
     {
         audioSource.volume = volume;
+    }
+
+    void HandleZoom(GameObject target, float zoom, float minZoom, float maxZoom)
+    {
+        if (target == gameObject)
+        {
+            OnZoom(zoom, minZoom, maxZoom);
+        }
     }
 
     public void OnZoom(float zoom, float minZoom, float maxZoom)

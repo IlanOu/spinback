@@ -1,9 +1,12 @@
+using System;
 using DefaultNamespace;
 using Minis;
 using UnityEngine;
 
 public class SmoothCameraFollow : MonoBehaviour
 {
+    [HideInInspector] public static event Action<GameObject, float, float, float> OnZoomTargetDetected;
+
     [Header("Sensibilité")]
     [SerializeField] private float mouseSensitivity = 3.0f;
     [SerializeField] private float smoothSpeed = 5.0f;
@@ -23,7 +26,6 @@ public class SmoothCameraFollow : MonoBehaviour
     private Vector2 targetRotation;
     private float currentZoom;
     private float targetZoom;
-    
     private Camera mainCamera;
     
     void Start()
@@ -88,17 +90,9 @@ public class SmoothCameraFollow : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             GameObject target = hit.collider.gameObject;
+            OnZoomTargetDetected?.Invoke(target, targetZoom, minZoom, maxZoom);
+            
             Debug.Log("Regarde : " + target.name + " (" + target.tag + ")");
-
-            // Exemple : si tu veux agir selon le tag
-            if (target.CompareTag("Conversation"))
-            {
-                ConversationSoundVolumeController controller = target.GetComponent<ConversationSoundVolumeController>();
-                if (controller != null)
-                {
-                    controller.OnZoom(targetZoom, minZoom, maxZoom);
-                }
-            }
         }
     }
 }
