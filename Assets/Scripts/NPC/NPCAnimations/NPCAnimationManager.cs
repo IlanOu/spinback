@@ -5,71 +5,92 @@ using UnityEngine;
 [System.Serializable]
 public class NPCAnimationConfig
 {
-    public NPCAnimationsType animationType; // Ex: Walk, Dance, Talk
-    public string animatorParameterName;   // Ex: "Walk", "Dance", "IsTalking"
-    public bool useTriggerInsteadOfBool;   // Si true, SetTrigger() au lieu de SetBool()
+    public NPCAnimationsType animationType;       // Walk, Dance, Talk…
+    public string animatorParameterName;          // "Walk", "Dance", "IsTalking"
+    public bool useTriggerInsteadOfBool;          // true = Trigger, false = Bool
 }
 
 public class NPCAnimationManager : MonoBehaviour
 {
-    public NPCAnimationConfig[] animationConfigs; // Tableau configurable dans l'Inspector
-    private Animator animator;
+    [Header("Configuration des liens Enum ↔ Paramètres Animator")]
+    public NPCAnimationConfig[] animationConfigs;
 
-    void Start()
+    [SerializeField] private Animator animator;
+
+    /* ─────────── Unity ─────────── */
+    private void Awake()
     {
-        animator = GetComponent<Animator>();
         if (animator == null)
-        {
-            Debug.LogError("Animator manquant !");
-        }
+            animator = GetComponentInChildren<Animator>();
 
-        // Vérifie que chaque config a un paramètre valide dans l'Animator
-        foreach (var config in animationConfigs)
-        {
-            bool parameterExists = false;
-            foreach (AnimatorControllerParameter param in animator.parameters)
-            {
-                if (param.name == config.animatorParameterName)
-                {
-                    parameterExists = true;
-                    break;
-                }
-            }
-            if (!parameterExists)
-            {
-                Debug.LogError($"Paramètre Animator manquant : {config.animatorParameterName}");
-            }
-        }
+        if (animator == null)
+            Debug.LogError($"{name} : Animator manquant !");
     }
 
-    public void PlayAnimation(NPCAnimationsType animationType, bool value = true)
-    {
-        // Trouve la config correspondant à l'animation demandée
-        NPCAnimationConfig config = animationConfigs.FirstOrDefault(c => c.animationType == animationType);
-        if (config == null)
-        {
-            Debug.LogError($"Animation {animationType} non configurée dans NPCAnimationManager !");
-            return;
-        }
+    private void Start() => ValidateConfig();
 
-        // Joue l'animation
-        if (config.useTriggerInsteadOfBool)
-        {
-            animator.SetTrigger(config.animatorParameterName); // Ex: Dance
-        }
+    private void OnEnable()
+    {
+        NPCAnimBus.OnBool    += HandleBoolEvent;
+        NPCAnimBus.OnTrigger += HandleTriggerEvent;
+    }
+
+    private void OnDisable()
+    {
+        NPCAnimBus.OnBool    -= HandleBoolEvent;
+        NPCAnimBus.OnTrigger -= HandleTriggerEvent;
+    }
+
+    /* ─────────── API publique (appels directs) ─────────── */
+    public void PlayAnimation(NPCAnimationsType type, bool value = true)
+    {
+        var cfg = FindConfig(type);
+        if (cfg == null) return;
+
+        if (cfg.useTriggerInsteadOfBool)
+            animator.SetTrigger(cfg.animatorParameterName);
         else
-        {
-            animator.SetBool(config.animatorParameterName, value); // Ex: Walk = true/false
-        }
+            animator.SetBool(cfg.animatorParameterName, value);
     }
 
-    // Optionnel : méthode rapide pour arrêter proprement
-    public void StopAnimation(NPCAnimationsType animationType)
+    public void StopAnimation(NPCAnimationsType type)
     {
-        NPCAnimationConfig config = animationConfigs.FirstOrDefault(c => c.animationType == animationType);
-        if (config != null && !config.useTriggerInsteadOfBool)
+        var cfg = FindConfig(type);
+        if (cfg != null && !cfg.useTriggerInsteadOfBool)
+            animator.SetBool(cfg.animatorParameterName, false);
+    }
+
+    /* ─────────── Handlers du bus ─────────── */
+    private void HandleBoolEvent(GameObject sender, NPCAnimationsType type, bool value)
+    {
+        if (sender != gameObject) return;          // ignore les events destinés aux autres NPC
+        PlayAnimation(type, value);
+    }
+
+    private void HandleTriggerEvent(GameObject sender, NPCAnimationsType type)
+    {
+        if (sender != gameObject) return;
+        PlayAnimation(type);                       // valeur bool ignorée pour Trigger
+    }
+
+    /* ─────────── Helpers internes ─────────── */
+    private NPCAnimationConfig FindConfig(NPCAnimationsType type)
+    {
+        var cfg = animationConfigs.FirstOrDefault(c => c.animationType == type);
+        if (cfg == null)
+            Debug.LogWarning($"{name} : Animation {type} non configurée !");
+        return cfg;
+    }
+
+    private void ValidateConfig()
+    {
+        if (animator == null) return;
+
+        foreach (var cfg in animationConfigs)
         {
-            animator.SetBool(config.animatorParameterName, false); // Ex: Walk = false
+            bool exists = animator.parameters.Any(p => p.name == cfg.animatorParameterName);
+            if (!exists)
+                Debug.LogError($"{name} : paramètre Animator manquant ⇒ {cfg.animatorParameterName}");
         }
     }
 }
