@@ -60,6 +60,15 @@ public class NPCAnimationManager : MonoBehaviour
             animator.SetBool(cfg.animatorParameterName, false);
     }
 
+    public void StopAllAnimation()
+    {
+        foreach (var cfg in animationConfigs)
+        {
+            if (!cfg.useTriggerInsteadOfBool)
+                animator.SetBool(cfg.animatorParameterName, false);
+        }
+    }
+
     /* ─────────── Handlers du bus ─────────── */
     private void HandleBoolEvent(GameObject sender, NPCAnimationsType type, bool value)
     {
