@@ -1,14 +1,11 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class UISoundFrequency : MonoBehaviour
 {
     [HideInInspector] public static UISoundFrequency Instance { get; private set; }
     [SerializeField] private float maxHz = 22000f;
-    [SerializeField] GameObject ui;
     private bool active = false;
-    private int childCount => ui.transform.childCount;
+    private int childCount => transform.childCount;
     private float deltaHzStep => maxHz / childCount;
     
     // The first subscriber is the only that can handle the UI
@@ -22,7 +19,6 @@ public class UISoundFrequency : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     public void Show(GameObject go)
@@ -46,12 +42,12 @@ public class UISoundFrequency : MonoBehaviour
             if (i == textureIndex)
             {
                 // Enable
-                ui.transform.GetChild(i).gameObject.SetActive(true);
+                transform.GetChild(i).gameObject.SetActive(true);
             }
             else
             {
                 // Disable
-                ui.transform.GetChild(i).gameObject.SetActive(false);
+                transform.GetChild(i).gameObject.SetActive(false);
             }
         }
     }
@@ -63,7 +59,7 @@ public class UISoundFrequency : MonoBehaviour
 
         for (int i = 0; i < childCount; i++)
         {
-            ui.transform.GetChild(i).gameObject.SetActive(false);
+            transform.GetChild(i).gameObject.SetActive(false);
         }
 
         subscribe = null;

@@ -38,20 +38,6 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
---- !u!244 &-4605816431514474982
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_EffectID: e590f13793ca9462c94d3e1d0130ac29
-  m_EffectName: Attenuation
-  m_MixLevel: 1a159780124db49759afb6458e45cb5a
-  m_Parameters: []
-  m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 0
-  m_Bypass: 0
 --- !u!243 &-4173171307456517928
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -63,7 +49,6 @@ AudioMixerGroupController:
   m_GroupID: eec771455eea249748fb7a4ad7dcdddb
   m_Children:
   - {fileID: 3060225703545990038}
-  - {fileID: 4660253475651968204}
   m_Volume: f0f4d7b3454c14f8d87cdfc36437ee16
   m_Pitch: 6f2bfa2ed44e84306a5a1961dce6955e
   m_Send: 00000000000000000000000000000000
@@ -104,9 +89,7 @@ AudioMixerController:
   m_UpdateMode: 0
   m_ExposedParameters:
   - guid: 996408860d8a549db9096f3add3c14f6
-    name: LowPassConversation_1
-  - guid: 5cbcd87b4657e4023a3b5a1d44d08694
-    name: LowPassConversation_2
+    name: LowPassConvDorianTristan
   - guid: 2297ced1e885a4a0ca48c044ed66ddea
     name: CrowdLowPass
   - guid: 5020a481027ba43b89d0ffc97a28c023
@@ -118,7 +101,6 @@ AudioMixerController:
     - a8aae1c6d604e43988ef2a13a87649b8
     - eec771455eea249748fb7a4ad7dcdddb
     - 22eab1227344f4375871800366fde396
-    - b7b98ed8d582a45bab1e2dd59aeca5bd
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -234,7 +216,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Conversation1
+  m_Name: ConvDorianTristan
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: 22eab1227344f4375871800366fde396
   m_Children: []
@@ -262,26 +244,6 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
---- !u!243 &4660253475651968204
-AudioMixerGroupController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Conversation2
-  m_AudioMixer: {fileID: 24100000}
-  m_GroupID: b7b98ed8d582a45bab1e2dd59aeca5bd
-  m_Children: []
-  m_Volume: 1d36612ace7614695987d08f6ec1c022
-  m_Pitch: 3c0059efffd064c5d8b92d9440d4d663
-  m_Send: 00000000000000000000000000000000
-  m_Effects:
-  - {fileID: -4605816431514474982}
-  - {fileID: 5695692783123583357}
-  m_UserColorIndex: 0
-  m_Mute: 0
-  m_Solo: 0
-  m_BypassEffects: 0
 --- !u!244 &5561881815641463296
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -293,24 +255,6 @@ AudioMixerEffectController:
   m_EffectName: Attenuation
   m_MixLevel: dc81aafbb41a4457aa2669d7608c090f
   m_Parameters: []
-  m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 0
-  m_Bypass: 0
---- !u!244 &5695692783123583357
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_EffectID: c27b4abed67f14db890626a951c77f75
-  m_EffectName: Lowpass
-  m_MixLevel: a539723d285d648a08758d8562a997b9
-  m_Parameters:
-  - m_ParameterName: Cutoff freq
-    m_GUID: 5cbcd87b4657e4023a3b5a1d44d08694
-  - m_ParameterName: Resonance
-    m_GUID: 3026c10f5503a4142952779acd72305f
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0

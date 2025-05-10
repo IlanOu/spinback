@@ -1,17 +1,17 @@
 using UnityEngine;
 using UnityEngine.Playables;
 
+[RequireComponent(typeof(PlayableDirector))]
 public class RewindTimeline : MonoBehaviour
 {
-    public PlayableDirector director;
     public float rewindSpeedMultiplier = 5f;
 
     public bool isRewinding = false;
+    private PlayableDirector director;
 
-    void Start()
+    void Awake()
     {
-        if (director == null)
-            director = GetComponent<PlayableDirector>();
+        director = GetComponent<PlayableDirector>();
     }
 
     void Update()
