@@ -4,9 +4,9 @@ using UnityEngine.Playables;
 [RequireComponent(typeof(PlayableDirector))]
 public class RewindTimeline : MonoBehaviour
 {
-    public float rewindSpeedMultiplier = 5f;
-
-    public bool isRewinding = false;
+    [SerializeField] private float rewindSpeedMultiplier = 5f;
+    [SerializeField] private bool useRewindMode = false;
+    private bool isRewinding = false;
     private PlayableDirector director;
 
     void Awake()
@@ -22,7 +22,7 @@ public class RewindTimeline : MonoBehaviour
 
     void HandleRewindMode()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && useRewindMode)
         {
             isRewinding = !isRewinding;
 
@@ -40,7 +40,7 @@ public class RewindTimeline : MonoBehaviour
 
     void HandleRewinding()
     {
-        if (isRewinding)
+        if (isRewinding || !useRewindMode)
         {
             float scroll = Input.GetAxis("Mouse ScrollWheel");
 
