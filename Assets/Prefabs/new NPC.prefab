@@ -672,10 +672,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7773146176036933909}
-  - component: {fileID: 6763161909288186660}
-  - component: {fileID: 7837145771932963002}
-  - component: {fileID: 8989580702364954282}
   - component: {fileID: 7568836782147728488}
+  - component: {fileID: 4041403270861903469}
+  - component: {fileID: 4432531560323726076}
   m_Layer: 0
   m_Name: new NPC
   m_TagString: NPC
@@ -691,7 +690,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3225174873463678900}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.41, y: 0.38, z: -5.33}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -699,77 +698,6 @@ Transform:
   - {fileID: 2617987228765103445}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!195 &6763161909288186660
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3225174873463678900}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 0.5
-  m_Acceleration: 5
-  avoidancePriority: 50
-  m_AngularSpeed: 400
-  m_StoppingDistance: 0.1
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1.7
-  m_BaseOffset: 0
-  m_WalkableMask: 1
-  m_ObstacleAvoidanceType: 4
---- !u!114 &7837145771932963002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3225174873463678900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6d913bd63aa40e4bb034493633d8725, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navMeshOverride: {fileID: 6763161909288186660}
-  animatorOverride: {fileID: 7339479362294093831}
-  npcMovementOverride: {fileID: 8989580702364954282}
-  modules: -1
-  recordInterval: 0.1
-  useAdaptiveRecording: 1
-  significantMovementThreshold: 0.05
-  significantRotationThreshold: 5
---- !u!114 &8989580702364954282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3225174873463678900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32d1f5c4f15034ed89f705709ae8c8ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  npcMovements:
-  - npcMovementType: 3
-    TimeToStart: 3
-    launched: 0
-    Manager: {fileID: 0}
-    Enabled: 0
-    targetNpc: {fileID: 0}
-    distance: 2
-    lookTarget: {fileID: 0}
-    minWanderDistance: 0
-    maxWanderDistance: 0
-    targetLocation: {fileID: 0}
-    talkClip: {fileID: 0}
-    lookAtTarget: {fileID: 0}
-    lookAtDuration: 2
-    yellClip: {fileID: 0}
-    delayAfterPrevious: 0
 --- !u!114 &7568836782147728488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -805,6 +733,243 @@ MonoBehaviour:
     animatorParameterName: Swimming
     useTriggerInsteadOfBool: 0
   animator: {fileID: 7339479362294093831}
+--- !u!114 &4041403270861903469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3225174873463678900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a9364f047386483c8768a2d1fc8d62c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4432531560323726076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3225174873463678900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 589ab2d5070974e8c9085e5962f77c88, type: 2}
+    - {fileID: 11400000, guid: 00ab7c9645f93407696362042f3525dc, type: 2}
+    - {fileID: 11400000, guid: 36702c6d8819b4bb1991664fff728de7, type: 2}
+    - {fileID: 11400000, guid: ff90acfaf35bb4e87a81043a1a1bcce5, type: 2}
+    - {fileID: 11400000, guid: 01a35897cd4484bba9b4d02b8a2d69db, type: 2}
+    - {fileID: 11400000, guid: 28f52597352004dd783a33299b6acd2d, type: 2}
+    - {fileID: 11400000, guid: ac7af2bfb66f74a689b5ef886fa7b9bb, type: 2}
+    - {fileID: 11400000, guid: 1d9daff50ad384491b164b096d7e1e15, type: 2}
+    - {fileID: 11400000, guid: 7280ce067304244e7b399fc4f57150c2, type: 2}
+    - {fileID: 11400000, guid: 9aa131e833a7a4bccbc466bb6902a1c1, type: 2}
+    - {fileID: 11400000, guid: 5903f2e6ce9eb4ff8b9369e8ed979636, type: 2}
+    - {fileID: 11400000, guid: 2aa6aaffeee7e4de7818aee7b04bbfa2, type: 2}
+    - {fileID: 11400000, guid: 554bf28c5bfdb48479edac99f6851d6f, type: 2}
+    - {fileID: 11400000, guid: 212343440e360427f8e8c54933ceed24, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4041403270861903469}
+          m_TargetAssemblyTypeName: NPCAnimationController, Assembly-CSharp
+          m_MethodName: PlayDance
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4041403270861903469}
+          m_TargetAssemblyTypeName: NPCAnimationController, Assembly-CSharp
+          m_MethodName: StopDance
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4041403270861903469}
+          m_TargetAssemblyTypeName: NPCAnimationController, Assembly-CSharp
+          m_MethodName: PlayWalk
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4041403270861903469}
+          m_TargetAssemblyTypeName: NPCAnimationController, Assembly-CSharp
+          m_MethodName: StopWalk
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4041403270861903469}
+          m_TargetAssemblyTypeName: NPCAnimationController, Assembly-CSharp
+          m_MethodName: PlayIdle
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4041403270861903469}
+          m_TargetAssemblyTypeName: NPCAnimationController, Assembly-CSharp
+          m_MethodName: StopIdle
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4041403270861903469}
+          m_TargetAssemblyTypeName: NPCAnimationController, Assembly-CSharp
+          m_MethodName: PlayTalk
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4041403270861903469}
+          m_TargetAssemblyTypeName: NPCAnimationController, Assembly-CSharp
+          m_MethodName: StopTalk
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4041403270861903469}
+          m_TargetAssemblyTypeName: NPCAnimationController, Assembly-CSharp
+          m_MethodName: PlayYell
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4041403270861903469}
+          m_TargetAssemblyTypeName: NPCAnimationController, Assembly-CSharp
+          m_MethodName: StopYell
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4041403270861903469}
+          m_TargetAssemblyTypeName: NPCAnimationController, Assembly-CSharp
+          m_MethodName: PlayWhisper
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4041403270861903469}
+          m_TargetAssemblyTypeName: NPCAnimationController, Assembly-CSharp
+          m_MethodName: StopWhisper
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4041403270861903469}
+          m_TargetAssemblyTypeName: NPCAnimationController, Assembly-CSharp
+          m_MethodName: PlaySwim
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4041403270861903469}
+          m_TargetAssemblyTypeName: NPCAnimationController, Assembly-CSharp
+          m_MethodName: StopSwim
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &3380120349444501053
 GameObject:
   m_ObjectHideFlags: 0
