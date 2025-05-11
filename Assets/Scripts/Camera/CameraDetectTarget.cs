@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class CameraDetectTarget : MonoBehaviour
 {
+    [SerializeField] private Vector2 detectionZoneSize;
     private Camera mainCamera;
     private List<IDetectableGameObject> subscribers = new(); // objets enregistrés
     private HashSet<IDetectableGameObject> currentlyVisible = new(); // objets dans le champ actuel
@@ -31,33 +32,53 @@ public class CameraDetectTarget : MonoBehaviour
     {
         HashSet<IDetectableGameObject> newVisible = new();
 
+        // Calcul des limites de la zone centrée dans le viewport
+        float halfWidth = detectionZoneSize.x / 2f;
+        float halfHeight = detectionZoneSize.y / 2f;
+        float minX = 0.5f - halfWidth;
+        float maxX = 0.5f + halfWidth;
+        float minY = 0.5f - halfHeight;
+        float maxY = 0.5f + halfHeight;
+
         foreach (var detectable in subscribers)
         {
-            MonoBehaviour mono = detectable as MonoBehaviour;
-            if (mono == null) continue;
+            if (detectable is not MonoBehaviour mono) continue;
 
-            Vector3 viewportPos = mainCamera.WorldToViewportPoint(mono.transform.position);
+            Vector3 worldPos = mono.transform.position;
+            Vector3 viewportPos = mainCamera.WorldToViewportPoint(worldPos);
+
+            // Vérification dans la zone centrée
             bool inView =
-                viewportPos.z > 0 &&                    // devant la caméra
-                viewportPos.x >= 0 && viewportPos.x <= 1 &&
-                viewportPos.y >= 0 && viewportPos.y <= 1;
+                viewportPos.z > 0 &&
+                viewportPos.x >= minX && viewportPos.x <= maxX &&
+                viewportPos.y >= minY && viewportPos.y <= maxY;
 
-            if (inView)
+            if (!inView)
+                continue;
+
+            // Raycast pour vérifier qu'aucun obstacle ne bloque la vue
+            Vector3 camPos = mainCamera.transform.position;
+            Vector3 dirToTarget = (worldPos - camPos).normalized;
+            float distance = Vector3.Distance(camPos, worldPos);
+
+            if (Physics.Raycast(camPos, dirToTarget, out RaycastHit hit, distance))
             {
-                newVisible.Add(detectable);
-                if (!currentlyVisible.Contains(detectable))
-                    detectable.OnEnter();
+                if (hit.transform != mono.transform)
+                    continue;
             }
+
+            newVisible.Add(detectable);
+
+            if (!currentlyVisible.Contains(detectable))
+                detectable.OnEnter();
         }
 
-        // Détection des objets sortis de vision
         foreach (var previouslyVisible in currentlyVisible)
         {
             if (!newVisible.Contains(previouslyVisible))
                 previouslyVisible.OnExit();
         }
 
-        // Mise à jour de l’état
         currentlyVisible = newVisible;
     }
 }

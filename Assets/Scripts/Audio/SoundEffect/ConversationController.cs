@@ -9,7 +9,7 @@ public class ConversationController : MonoBehaviour, IDetectableGameObject
     private AudioSource audioSource;
     private CameraZoom cameraZoom;
     private bool isLookingAt = false;
-    private float marginError = 0.1f;
+    private float volumeMarginError = 0.1f;
 
     void Awake()
     {
@@ -35,7 +35,7 @@ public class ConversationController : MonoBehaviour, IDetectableGameObject
         {
             float volume = GetVolume();
             soundVolumeController.volume = volume;
-            if (volume - soundVolumeController.minVolume > marginError) soundEffectController.EnableSoundEffect();
+            if (volume - soundVolumeController.minVolume > volumeMarginError) soundEffectController.EnableSoundEffect();
             else soundEffectController.DisableSoundEffect();
         }
         else
@@ -68,9 +68,7 @@ public class ConversationController : MonoBehaviour, IDetectableGameObject
     bool IsZooming()
     {
         if (cameraZoom == null) return false;
-        if (cameraZoom.maxZoom - cameraZoom.currentZoom < marginError) return false;
-
-        return true;
+        return cameraZoom.isZooming;
     }
 
     float GetVolume()
