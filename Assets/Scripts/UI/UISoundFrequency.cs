@@ -4,9 +4,9 @@ public class UISoundFrequency : MonoBehaviour
 {
     [HideInInspector] public static UISoundFrequency Instance { get; private set; }
     [SerializeField] private float maxHz = 22000f;
+    [SerializeField] private VerticalSinusRenderer playerWave;
+    [SerializeField] private VerticalSinusRenderer targetWave;
     private bool active = false;
-    private int childCount => transform.childCount;
-    private float deltaHzStep => maxHz / childCount;
     
     // The first subscriber is the only that can handle the UI
     private GameObject subscribe;
@@ -26,30 +26,22 @@ public class UISoundFrequency : MonoBehaviour
         if (active) return;
         if (subscribe != null) return;
 
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(true);
+        }
+
         subscribe = go;
         active = true;
     }
 
-    public void HandleUI(GameObject go, float hz)
+    public void HandleUI(GameObject go, float playerHz, float targetHz)
     {
         if (!active) return;
         if (subscribe != go) return;
-        
-        int textureIndex = Mathf.Min(Mathf.RoundToInt(hz / deltaHzStep), childCount - 1);
 
-        for (int i = 0; i < childCount; i++)
-        {
-            if (i == textureIndex)
-            {
-                // Enable
-                transform.GetChild(i).gameObject.SetActive(true);
-            }
-            else
-            {
-                // Disable
-                transform.GetChild(i).gameObject.SetActive(false);
-            }
-        }
+        playerWave.SetSinusProfile(playerHz / maxHz);
+        targetWave.SetSinusProfile(targetHz / maxHz);
     }
 
     public void Hide(GameObject go)
@@ -57,7 +49,7 @@ public class UISoundFrequency : MonoBehaviour
         if (!active) return;
         if (subscribe != go) return;
 
-        for (int i = 0; i < childCount; i++)
+        for (int i = 0; i < transform.childCount; i++)
         {
             transform.GetChild(i).gameObject.SetActive(false);
         }
