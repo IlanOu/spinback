@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6558154274823746307
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33,10 +33,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5676596175274464755}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 280, y: 20}
-  m_SizeDelta: {x: 100, y: 400}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -100, y: 40}
+  m_SizeDelta: {x: 100, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &86650155336955656
 CanvasRenderer:
@@ -110,7 +110,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1325613687229764141
 RectTransform:
   m_ObjectHideFlags: 0
@@ -125,10 +125,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5676596175274464755}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 280, y: 20}
-  m_SizeDelta: {x: 2, y: 400}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -100, y: 40}
+  m_SizeDelta: {x: 2, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3811231157027205245
 CanvasRenderer:
@@ -186,7 +186,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4090762951998547705
 RectTransform:
   m_ObjectHideFlags: 0
@@ -201,10 +201,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5676596175274464755}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 280, y: 20}
-  m_SizeDelta: {x: 100, y: 400}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -100, y: 40}
+  m_SizeDelta: {x: 100, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6704017685558899061
 CanvasRenderer:
@@ -253,9 +253,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ac54882f74a41b4ad29e232a361dfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amplitude: 40
-  frequency: 2
-  speed: 4
+  amplitude: 30
+  frequency: 4
+  speed: 2
   lineColor: {r: 1, g: 1, b: 1, a: 1}
   amplitudeRange: {x: 20, y: 60}
   frequencyRange: {x: 1, y: 4}
@@ -290,9 +290,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4090762951998547705}
-  - {fileID: 6558154274823746307}
   - {fileID: 1325613687229764141}
+  - {fileID: 6558154274823746307}
+  - {fileID: 4090762951998547705}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
