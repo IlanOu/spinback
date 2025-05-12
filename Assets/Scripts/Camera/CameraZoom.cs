@@ -10,8 +10,10 @@ public class CameraZoom : MonoBehaviour
     [SerializeField] public float maxZoom = 60f;
     [SerializeField] private float zoomSmoothSpeed = 100f;
 
-    [HideInInspector] public float currentZoom;
+    public float currentZoom;
+    [HideInInspector] public bool isZooming => Mathf.Abs(maxZoom - currentZoom) > zoomMarginError;
     private float targetZoom;
+    private float zoomMarginError = 1f;
     private Camera mainCamera;
 
     void Awake()

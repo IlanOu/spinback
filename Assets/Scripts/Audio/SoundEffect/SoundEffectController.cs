@@ -37,9 +37,10 @@ public class SoundEffectController : MonoBehaviour
     private AudioMixer mixer => audioSource.outputAudioMixerGroup.audioMixer;
     private float minHz => hzSettings.x;
     private float maxHz => hzSettings.y;
-    private float marginError = 0.1f;
+    private float distanceFromNormal => Mathf.Abs(balance - normalSoundValue);
 
     /** Private variables */
+    private float marginError = 0.1f;
     private AudioSource audioSource;
     private float hz;
 
@@ -68,13 +69,9 @@ public class SoundEffectController : MonoBehaviour
 
     void UpdateHzValue()
     {
-        float distanceFromNormal = Mathf.Abs(balance - normalSoundValue);
-
         if (distanceFromNormal > marginError)
         {
-            float t = Mathf.Clamp01(1f - distanceFromNormal);
-            float curvedT = Mathf.Pow(t, exponent);
-            hz = Mathf.Lerp(minHz, maxHz, curvedT);
+            hz = GetHzFromValue(distanceFromNormal);
         }
         else
         {
@@ -103,8 +100,11 @@ public class SoundEffectController : MonoBehaviour
     {
         if (soundEffectEnabled)
         {
+            float balanceHz = GetHzFromValue(balance);
+            float normalSoundValueHz = GetHzFromValue(normalSoundValue);
             UISoundFrequency.Instance.Show(gameObject);
-            UISoundFrequency.Instance.HandleUI(gameObject, hz);
+            if (distanceFromNormal > marginError) UISoundFrequency.Instance.HandleUI(gameObject, balanceHz, normalSoundValueHz);
+            else UISoundFrequency.Instance.HandleUI(gameObject, normalSoundValueHz, normalSoundValueHz);
         }
         else
         {
@@ -128,6 +128,15 @@ public class SoundEffectController : MonoBehaviour
     {
         if (!soundEffectEnabled) return;
         soundEffectEnabled = false;
+    }
+
+    float GetHzFromValue(float value)
+    {
+        value = Mathf.Max(0f, value);
+        value = Mathf.Min(1f, value);
+        float t = Mathf.Clamp01(1f - value);
+        float curvedT = Mathf.Pow(t, exponent);
+        return Mathf.Lerp(minHz, maxHz, curvedT);
     }
 
 }
