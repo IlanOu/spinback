@@ -5,18 +5,18 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class CameraDetectTarget : MonoBehaviour
 {
-    [SerializeField] private Vector2 detectionZoneSize = new Vector2(0.5f, 0.5f);
-
     private Camera mainCamera;
-    private List<IDetectableGameObject> subscribers = new(); // objets enregistrés
-    private HashSet<IDetectableGameObject> currentlyVisible = new(); // objets dans le champ actuel
+    private List<DetectableGameObject> subscribers = new();
+
+    public Vector2 objectPosition = new Vector2(0.99f, 0.99f);
+    public Vector2 objectDetectionZone = new Vector2(0.99f, 0.99f);
 
     void Awake()
     {
         mainCamera = GetComponent<Camera>();
     }
 
-    public void Subscribe(IDetectableGameObject subscriber)
+    public void Subscribe(DetectableGameObject subscriber)
     {
         if (!subscribers.Contains(subscriber))
         {
@@ -31,16 +31,6 @@ public class CameraDetectTarget : MonoBehaviour
 
     void UpdateVisibleTargets()
     {
-        HashSet<IDetectableGameObject> newVisible = new();
-
-        // Calcul des limites de la zone centrée dans le viewport
-        float halfWidth = detectionZoneSize.x / 2f;
-        float halfHeight = detectionZoneSize.y / 2f;
-        float minX = 0.5f - halfWidth;
-        float maxX = 0.5f + halfWidth;
-        float minY = 0.5f - halfHeight;
-        float maxY = 0.5f + halfHeight;
-
         foreach (var detectable in subscribers)
         {
             if (detectable is not MonoBehaviour mono) continue;
@@ -48,14 +38,16 @@ public class CameraDetectTarget : MonoBehaviour
             Vector3 worldPos = mono.transform.position;
             Vector3 viewportPos = mainCamera.WorldToViewportPoint(worldPos);
 
-            bool inView =
+            // Test si l’objet est devant la caméra et dans le viewport [0,1]
+            bool isInView = 
                 viewportPos.z > 0 &&
-                viewportPos.x >= minX && viewportPos.x <= maxX &&
-                viewportPos.y >= minY && viewportPos.y <= maxY;
+                viewportPos.x >= 0 && viewportPos.x <= 1 &&
+                viewportPos.y >= 0 && viewportPos.y <= 1;
 
-            if (!inView)
+            if (!isInView)
                 continue;
 
+            // Raycast pour vérifier qu'aucun obstacle ne masque l’objet
             Vector3 camPos = mainCamera.transform.position;
             Vector3 dirToTarget = (worldPos - camPos).normalized;
             float distance = Vector3.Distance(camPos, worldPos);
@@ -66,38 +58,17 @@ public class CameraDetectTarget : MonoBehaviour
                     continue;
             }
 
-            newVisible.Add(detectable);
-
-            if (!currentlyVisible.Contains(detectable))
+            // Détection valide → appel OnDetect avec la position viewport (x,y)
+            Vector2 centered = new Vector2(viewportPos.x, viewportPos.y) - detectable.detectionZone;
+            float distanceFromCenter = centered.magnitude - 1; // - 1 est necessaire
+            if (distanceFromCenter <= detectable.detectionPrecision)
+            {
                 detectable.OnEnter();
+            }
+            else
+            {
+                detectable.OnExit();
+            }
         }
-
-        foreach (var previouslyVisible in currentlyVisible)
-        {
-            if (!newVisible.Contains(previouslyVisible))
-                previouslyVisible.OnExit();
-        }
-
-        currentlyVisible = newVisible;
-    }
-
-    void OnDrawGizmos()
-    {
-        if (mainCamera == null || !mainCamera.enabled)
-            return;
-
-        float halfWidth = detectionZoneSize.x / 2f;
-        float halfHeight = detectionZoneSize.y / 2f;
-
-        Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(new Vector3(0.5f - halfWidth, 0.5f - halfHeight, mainCamera.nearClipPlane + 0.5f));
-        Vector3 bottomRight = mainCamera.ViewportToWorldPoint(new Vector3(0.5f + halfWidth, 0.5f - halfHeight, mainCamera.nearClipPlane + 0.5f));
-        Vector3 topRight = mainCamera.ViewportToWorldPoint(new Vector3(0.5f + halfWidth, 0.5f + halfHeight, mainCamera.nearClipPlane + 0.5f));
-        Vector3 topLeft = mainCamera.ViewportToWorldPoint(new Vector3(0.5f - halfWidth, 0.5f + halfHeight, mainCamera.nearClipPlane + 0.5f));
-
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawLine(bottomLeft, bottomRight);
-        Gizmos.DrawLine(bottomRight, topRight);
-        Gizmos.DrawLine(topRight, topLeft);
-        Gizmos.DrawLine(topLeft, bottomLeft);
     }
 }

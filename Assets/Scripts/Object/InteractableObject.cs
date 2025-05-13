@@ -1,25 +1,18 @@
 using UnityEngine;
 
-public class InteractableObject : MonoBehaviour, IDetectableGameObject
+public class InteractableObject : MonoBehaviour
 {
-    [SerializeField] private CameraDetectTarget cameraDetectTarget;
+    [SerializeField] private DetectableGameObject detectableGameObject;
     [SerializeField] public float outlineSize = 15f;
     [SerializeField] public GameObject label3D;
-    private CameraZoom cameraZoom;
-    [HideInInspector] public bool isLookingAt = false;
+    [SerializeField] private CameraZoom cameraZoom;
     [HideInInspector] public IInteractableState currentState;
     [HideInInspector] public Material material;
+    [HideInInspector] public bool isLookingAt => detectableGameObject.isLookingAt;
 
     void Start()
     {
         material = GetComponent<Renderer>().material;
-        if (cameraDetectTarget == null)
-        {
-            Debug.LogError("CameraDetectTarget is not assigned.");
-            return;
-        }
-        cameraZoom = cameraDetectTarget.gameObject.GetComponent<CameraZoom>();
-        cameraDetectTarget.Subscribe(this);
         currentState = new OutlineInteractableState(this);
     }
 
@@ -37,15 +30,5 @@ public class InteractableObject : MonoBehaviour, IDetectableGameObject
     public void UpdateState(IInteractableState newState)
     {
         currentState = newState;
-    }
-
-    public void OnEnter()
-    {
-        isLookingAt = true;
-    }
-
-    public void OnExit()
-    {
-        isLookingAt = false;
     }
 }

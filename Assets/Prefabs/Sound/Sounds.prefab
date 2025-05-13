@@ -402,7 +402,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2189237215290445594
 Transform:
   m_ObjectHideFlags: 0
@@ -435,6 +435,7 @@ GameObject:
   - component: {fileID: 7493398608356549317}
   - component: {fileID: 1930588943733112716}
   - component: {fileID: 7981981933409291472}
+  - component: {fileID: 3492937905556847047}
   - component: {fileID: 8959813808467904873}
   m_Layer: 0
   m_Name: ConvDorianTristan
@@ -611,6 +612,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minVolume: 0.1
   volume: 0
+--- !u!114 &3492937905556847047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2627758322235961675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c9bdf9cc1a234bd8ae09c33a62c8985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraDetectTarget: {fileID: 0}
+  detectionZone: {x: 0.5, y: 0.5}
+  detectionPrecision: 0.1
+  isLookingAt: 0
 --- !u!114 &8959813808467904873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -623,7 +640,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc434121c187461ba7bc48fb16d4100, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraDetectTarget: {fileID: 0}
+  detectableGameObject: {fileID: 3492937905556847047}
+  cameraZoom: {fileID: 0}
 --- !u!1 &7995939209845836010
 GameObject:
   m_ObjectHideFlags: 0

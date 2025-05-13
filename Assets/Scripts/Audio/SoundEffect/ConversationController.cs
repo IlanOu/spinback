@@ -1,32 +1,21 @@
 using UnityEngine;
 
 [RequireComponent(typeof(SoundEffectController), typeof(SoundVolumeController), typeof(AudioSource))]
-public class ConversationController : MonoBehaviour, IDetectableGameObject
+public class ConversationController : MonoBehaviour
 {
-    [SerializeField] private CameraDetectTarget cameraDetectTarget;
+    [SerializeField] private DetectableGameObject detectableGameObject;
+    [SerializeField] private CameraZoom cameraZoom;
     private SoundEffectController soundEffectController;
     private SoundVolumeController soundVolumeController;
     private AudioSource audioSource;
-    private CameraZoom cameraZoom;
-    private bool isLookingAt = false;
     private float volumeMarginError = 0.1f;
+    private bool isLookingAt => detectableGameObject.isLookingAt;
 
     void Awake()
     {
         soundEffectController = GetComponent<SoundEffectController>();
         soundVolumeController = GetComponent<SoundVolumeController>();
         audioSource = GetComponent<AudioSource>();
-    }
-
-    void Start()
-    {
-        if (cameraDetectTarget == null)
-        {
-            Debug.LogError("CameraDetectTarget is not assigned.");
-            return;
-        }
-        cameraZoom = cameraDetectTarget.gameObject.GetComponent<CameraZoom>();
-        cameraDetectTarget.Subscribe(this);
     }
 
     void Update()
@@ -48,16 +37,6 @@ public class ConversationController : MonoBehaviour, IDetectableGameObject
     {
         soundEffectController.DisableSoundEffect();
         soundVolumeController.volume = soundVolumeController.minVolume;
-    }
-
-    public void OnEnter()
-    {
-        isLookingAt = true;
-    }
-
-    public void OnExit()
-    {
-        isLookingAt = false;
     }
 
     bool HasCameraZoom()
