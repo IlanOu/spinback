@@ -437,6 +437,7 @@ GameObject:
   - component: {fileID: 1930588943733112716}
   - component: {fileID: 7981981933409291472}
   - component: {fileID: 8959813808467904873}
+  - component: {fileID: 8777443946420598792}
   m_Layer: 0
   m_Name: ConvDorianTristan
   m_TagString: Untagged
@@ -624,7 +625,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc434121c187461ba7bc48fb16d4100, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sphereCollider: {fileID: 7493398608356549317}
+  detectableGameObject: {fileID: 8777443946420598792}
+  cameraZoom: {fileID: 0}
+--- !u!114 &8777443946420598792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2627758322235961675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c9bdf9cc1a234bd8ae09c33a62c8985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   cameraDetectTarget: {fileID: 0}
+  detectionZone: {x: 0.5, y: 0.5}
+  detectionPrecision: 0.1
+  isLookingAt: 0
 --- !u!1 &6533555509770826538
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,6 +658,7 @@ GameObject:
   - component: {fileID: 8928813243126108966}
   - component: {fileID: 7855584466042789886}
   - component: {fileID: 3923322115576973734}
+  - component: {fileID: 3948090876494138118}
   m_Layer: 0
   m_Name: ConvDorian2Pelos
   m_TagString: Untagged
@@ -826,7 +846,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc434121c187461ba7bc48fb16d4100, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sphereCollider: {fileID: 383882580826630381}
+  detectableGameObject: {fileID: 3948090876494138118}
+  cameraZoom: {fileID: 0}
+--- !u!114 &3948090876494138118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6533555509770826538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c9bdf9cc1a234bd8ae09c33a62c8985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   cameraDetectTarget: {fileID: 0}
+  detectionZone: {x: 0.5, y: 0.5}
+  detectionPrecision: 0.1
+  isLookingAt: 0
 --- !u!1 &7995939209845836010
 GameObject:
   m_ObjectHideFlags: 0

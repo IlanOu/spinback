@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(SoundEffectController), typeof(SoundVolumeController), typeof(AudioSource))]
 public class ConversationController : MonoBehaviour
 {
+    [SerializeField] private SphereCollider sphereCollider;
     [SerializeField] private DetectableGameObject detectableGameObject;
     [SerializeField] private CameraZoom cameraZoom;
     private SoundEffectController soundEffectController;
@@ -20,6 +21,7 @@ public class ConversationController : MonoBehaviour
 
     void Update()
     {
+        HandleCollider();
         if (isLookingAt && audioSource.isPlaying && HasCameraZoom() && IsZooming())
         {
             float volume = GetVolume();
@@ -55,5 +57,10 @@ public class ConversationController : MonoBehaviour
         float t = Mathf.Clamp01(1f - (cameraZoom.currentZoom - cameraZoom.minZoom) / (cameraZoom.maxZoom - cameraZoom.minZoom));
         float volume = Mathf.Lerp(cameraZoom.minZoom, 1f, t);
         return volume;
+    }
+
+    void HandleCollider()
+    {
+        sphereCollider.enabled = audioSource.isPlaying;
     }
 }

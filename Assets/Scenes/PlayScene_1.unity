@@ -474,18 +474,52 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sounds
       objectReference: {fileID: 0}
+    - target: {fileID: 2627758322235961675, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3923322115576973734, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+      propertyPath: cameraZoom
+      value: 
+      objectReference: {fileID: 330585549}
+    - target: {fileID: 3923322115576973734, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+      propertyPath: sphereCollider
+      value: 
+      objectReference: {fileID: 959597777}
     - target: {fileID: 3923322115576973734, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
       propertyPath: cameraDetectTarget
       value: 
       objectReference: {fileID: 330585550}
+    - target: {fileID: 3923322115576973734, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+      propertyPath: detectableGameObject
+      value: 
+      objectReference: {fileID: 959597773}
+    - target: {fileID: 8959813808467904873, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+      propertyPath: cameraZoom
+      value: 
+      objectReference: {fileID: 330585549}
+    - target: {fileID: 8959813808467904873, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+      propertyPath: sphereCollider
+      value: 
+      objectReference: {fileID: 1675129894}
     - target: {fileID: 8959813808467904873, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
       propertyPath: cameraDetectTarget
       value: 
       objectReference: {fileID: 330585550}
+    - target: {fileID: 8959813808467904873, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+      propertyPath: detectableGameObject
+      value: 
+      objectReference: {fileID: 1675129890}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2627758322235961675, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1675129890}
+    - targetCorrespondingSourceObject: {fileID: 6533555509770826538, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 959597773}
   m_SourcePrefab: {fileID: 100100000, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
 --- !u!82 &96449464 stripped
 AudioSource:
@@ -2149,7 +2183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee4c7d5229f74706ade91064b231059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionZoneSize: {x: 0.15, y: 0.15}
+  objectPosition: {x: 0.99, y: 0.99}
+  objectDetectionZone: {x: 0.99, y: 0.99}
 --- !u!1 &338995559
 GameObject:
   m_ObjectHideFlags: 0
@@ -3357,6 +3392,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8205591859578542161, guid: 77ba54a1d5cb8462585f3e665f055d61, type: 3}
+      propertyPath: timeline
+      value: 
+      objectReference: {fileID: 305169356}
+    - target: {fileID: 8396582347030366164, guid: 77ba54a1d5cb8462585f3e665f055d61, type: 3}
+      propertyPath: timeline
+      value: 
+      objectReference: {fileID: 305169356}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3407,6 +3450,7 @@ GameObject:
   - component: {fileID: 824282124}
   - component: {fileID: 824282123}
   - component: {fileID: 824282122}
+  - component: {fileID: 824282126}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -3442,10 +3486,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd73517266504451d8cc54dd19975565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraDetectTarget: {fileID: 330585550}
+  detectableGameObject: {fileID: 824282126}
   outlineSize: 15
   label3D: {fileID: 2132690962}
-  isLookingAt: 0
+  cameraZoom: {fileID: 330585549}
   material: {fileID: 0}
 --- !u!65 &824282123
 BoxCollider:
@@ -3521,6 +3565,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824282120}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &824282126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824282120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c9bdf9cc1a234bd8ae09c33a62c8985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraDetectTarget: {fileID: 330585550}
+  detectionZone: {x: 0.5, y: 0.5}
+  detectionPrecision: 0.1
+  isLookingAt: 0
 --- !u!82 &840334678 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 7421377599970347228, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
@@ -3811,6 +3871,32 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900888163}
   m_CullTransparentMesh: 1
+--- !u!1 &959597771 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6533555509770826538, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+  m_PrefabInstance: {fileID: 96449463}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &959597773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959597771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c9bdf9cc1a234bd8ae09c33a62c8985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraDetectTarget: {fileID: 330585550}
+  detectionZone: {x: 0.5, y: 0.5}
+  detectionPrecision: 0.1
+  isLookingAt: 0
+--- !u!135 &959597777 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 383882580826630381, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+  m_PrefabInstance: {fileID: 96449463}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &965657764
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5158,6 +5244,32 @@ Transform:
   - {fileID: 124182747}
   m_Father: {fileID: 591088474}
   m_LocalEulerAnglesHint: {x: 0, y: -89.81, z: 0}
+--- !u!1 &1675129888 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2627758322235961675, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+  m_PrefabInstance: {fileID: 96449463}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1675129890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675129888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c9bdf9cc1a234bd8ae09c33a62c8985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraDetectTarget: {fileID: 330585550}
+  detectionZone: {x: 0.5, y: 0.5}
+  detectionPrecision: 0.1
+  isLookingAt: 0
+--- !u!135 &1675129894 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 7493398608356549317, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+  m_PrefabInstance: {fileID: 96449463}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1748290641
 PrefabInstance:
   m_ObjectHideFlags: 0
