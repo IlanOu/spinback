@@ -1,0 +1,16 @@
+{
+  "name": "www.nulltale.flowfx",
+  "displayName": "FlowFx",
+  "version": "1.3.0",
+  "unity": "2022.1",
+  "description": "Flow image effect Unity Urp and VolFx",
+  "author": {
+    "name": "NullTale",
+    "email": "nulltale@gmail.com",
+    "url": "https://twitter.com/NullTale"
+  },
+  "dependencies": {
+    "com.unity.render-pipelines.universal": "10.10.1"
+  },
+  "hideInEditor": false
+}
