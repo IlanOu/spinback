@@ -55,7 +55,7 @@ public class ConversationController : MonoBehaviour
     float GetVolume()
     {
         float t = Mathf.Clamp01(1f - (cameraZoom.currentZoom - cameraZoom.minZoom) / (cameraZoom.maxZoom - cameraZoom.minZoom));
-        float volume = Mathf.Lerp(cameraZoom.minZoom, 1f, t);
+        float volume = Mathf.Lerp(soundVolumeController.minVolume, 1f, t);
         return volume;
     }
 
