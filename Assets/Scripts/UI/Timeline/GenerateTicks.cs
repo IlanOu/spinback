@@ -10,7 +10,19 @@ public class GenerateTicks : MonoBehaviour
     [SerializeField] private int ticksNumber = 12;
     private RectTransform rectTransform;
 
-    private float width => rectTransform.rect.width;
+    public float width
+    {
+        get
+        {
+            Canvas.ForceUpdateCanvases();
+        
+            // Utiliser directement la largeur calculée
+            Rect rect = rectTransform.rect;
+            return rect.size.x;
+        }
+    }
+
+
 
     void Awake()
     {
@@ -50,5 +62,8 @@ public class GenerateTicks : MonoBehaviour
             RectTransform tickTransform = tick.GetComponent<RectTransform>();
             tickTransform.anchoredPosition = new Vector3(x, 0, 0);
         }
+        
+        Debug.Log("RECT TRANSFORM " + rectTransform.rect.size.x);
+        Debug.Log("RECT TRANSFORM WIDTH " + width);
     }
 }

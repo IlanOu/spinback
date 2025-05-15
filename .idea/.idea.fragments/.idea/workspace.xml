@@ -6,15 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="bec0d240-2773-43da-a415-54460ae7df48" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.fragments/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.fragments/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/UI/SoundFrequencies/focused.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/UI/SoundFrequencies/focused.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/UI/SoundFrequencies/unfocused.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/UI/SoundFrequencies/unfocused.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/UI/SoundFrequencies/validation.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/UI/SoundFrequencies/validation.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayerActions.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/PlayerActions.inputactions" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/websocket-sharp/websocket-sharp.csproj.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Timeline/Ticks/SmallTick.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Timeline/Ticks/SmallTick.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/PlayScene_1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PlayScene_1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PlayScene_1/NavMesh-sol 3.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PlayScene_1/NavMesh-sol 3.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PlayScene_1/NavMesh-sol 3.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PlayScene_1/NavMesh-sol 3.asset.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Audio/UISoundFrequency.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Audio/UISoundFrequency.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TimeSystem/ModularTimeRewindable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TimeSystem/ModularTimeRewindable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/NavMeshAreas.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/NavMeshAreas.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraDetectTarget.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/CameraDetectTarget.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/DetectableGameObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/DetectableGameObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Timeline/GenerateTicks.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Timeline/GenerateTicks.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/DefaultVolumeProfile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/DefaultVolumeProfile.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/PC_Renderer.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/PC_Renderer.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,9 +26,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/NPC/NPCMovement/NPCMovement.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/NPC/NPCMovement/NPCMovementManager.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/TimeSystem/ModularTimeRewindable.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Camera/DetectableGameObject.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline/Runtime/TimelinePlayable.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -42,24 +41,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ui&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.27f1\Editor\Unity.exe" />
@@ -122,6 +121,9 @@
       <workItem from="1745568048182" duration="5314000" />
       <workItem from="1746288790303" duration="357000" />
       <workItem from="1746344715514" duration="3624000" />
+      <workItem from="1747329644700" duration="354000" />
+      <workItem from="1747330020126" duration="29000" />
+      <workItem from="1747330111352" duration="2121000" />
     </task>
     <servers />
   </component>

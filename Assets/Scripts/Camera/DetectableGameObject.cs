@@ -20,12 +20,12 @@ public class DetectableGameObject : MonoBehaviour
     public void OnEnter()
     {
         isLookingAt = true;
-        Debug.Log("Looking at " + gameObject.name);
+        Debug.Log("<color=green>LOOKING AT</color> " + gameObject.name);
     }
 
     public void OnExit()
     {
         isLookingAt = false;
-        Debug.Log("Not looking at " + gameObject.name);
+        Debug.Log("<color=red>Not looking at</color> " + gameObject.name);
     }
 }

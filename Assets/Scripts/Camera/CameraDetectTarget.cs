@@ -8,9 +8,6 @@ public class CameraDetectTarget : MonoBehaviour
     private Camera mainCamera;
     private List<DetectableGameObject> subscribers = new();
 
-    public Vector2 objectPosition = new Vector2(0.99f, 0.99f);
-    public Vector2 objectDetectionZone = new Vector2(0.99f, 0.99f);
-
     void Awake()
     {
         mainCamera = GetComponent<Camera>();
