@@ -38,6 +38,38 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &-6701501129732005940
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: e97e06019b4583342bd7db557dc9104b
+  m_EffectName: Lowpass
+  m_MixLevel: 4223a08f4ed55e7488c17636b33bdf0b
+  m_Parameters:
+  - m_ParameterName: Cutoff freq
+    m_GUID: 672ddc7dbc09db542b47f0ac23f98c72
+  - m_ParameterName: Resonance
+    m_GUID: fb876c7e1dbc0144d87149cfa515101e
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &-6438429247861930806
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 24d0c88c200f65245bbe00cd4f1badf0
+  m_EffectName: Attenuation
+  m_MixLevel: 93cbbf1c566d32f4595071f0cdeaad85
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &-4173171307456517928
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -49,6 +81,7 @@ AudioMixerGroupController:
   m_GroupID: eec771455eea249748fb7a4ad7dcdddb
   m_Children:
   - {fileID: 3060225703545990038}
+  - {fileID: 4159017415830816347}
   m_Volume: f0f4d7b3454c14f8d87cdfc36437ee16
   m_Pitch: 6f2bfa2ed44e84306a5a1961dce6955e
   m_Send: 00000000000000000000000000000000
@@ -88,6 +121,8 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
+  - guid: 672ddc7dbc09db542b47f0ac23f98c72
+    name: LowPassConvDorian2Pelos
   - guid: 996408860d8a549db9096f3add3c14f6
     name: LowPassConvDorianTristan
   - guid: 2297ced1e885a4a0ca48c044ed66ddea
@@ -101,6 +136,7 @@ AudioMixerController:
     - a8aae1c6d604e43988ef2a13a87649b8
     - eec771455eea249748fb7a4ad7dcdddb
     - 22eab1227344f4375871800366fde396
+    - 47c5e6e3a53ce324a972e48eafeb45fa
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -244,6 +280,26 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!243 &4159017415830816347
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ConvDorian2Pelos
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 47c5e6e3a53ce324a972e48eafeb45fa
+  m_Children: []
+  m_Volume: 9bc68f9198f8f474b9d2b4576cd00946
+  m_Pitch: 8e7edb28ba28fa149b782a03c4fb6509
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -6438429247861930806}
+  - {fileID: -6701501129732005940}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!244 &5561881815641463296
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
