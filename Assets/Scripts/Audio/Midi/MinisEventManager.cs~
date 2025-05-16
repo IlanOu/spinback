@@ -45,7 +45,7 @@ namespace Minis
 
         private void HandleNoteOn(MidiChannel channel, int note, float velocity)
         {
-            Debug.Log($"NOTE ON - Note: {note}, Vélocité: {velocity}");
+            // Debug.Log($"NOTE ON - Note: {note}, Vélocité: {velocity}");
             
             var midiInput = new MidiInput
             {
@@ -61,7 +61,7 @@ namespace Minis
 
         private void HandleNoteOff(MidiChannel channel, int note)
         {
-            Debug.Log($"NOTE OFF - Note: {note}");
+            // Debug.Log($"NOTE OFF - Note: {note}");
             
             var midiInput = new MidiInput
             {
@@ -80,7 +80,7 @@ namespace Minis
             // MidiJack fournit des valeurs entre 0 et 1, mais votre système attend des valeurs entre 0 et 127
             float scaledValue = knobValue * 127f;
     
-            Debug.Log($"CONTROL CHANGE REÇU - CC: {knobNumber}, Canal: {(int)channel}, Valeur: {scaledValue}/127");
+            // Debug.Log($"CONTROL CHANGE REÇU - CC: {knobNumber}, Canal: {(int)channel}, Valeur: {scaledValue}/127");
     
             var midiInput = new MidiInput
             {

@@ -498,10 +498,18 @@ PrefabInstance:
       propertyPath: cameraDetectTarget
       value: 
       objectReference: {fileID: 330585550}
+    - target: {fileID: 4954623865466805022, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+      propertyPath: m_Volume
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 8777443946420598792, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
       propertyPath: cameraDetectTarget
       value: 
       objectReference: {fileID: 330585550}
+    - target: {fileID: 8896065768247120824, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+      propertyPath: m_Volume
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 8959813808467904873, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
       propertyPath: cameraZoom
       value: 
@@ -1865,8 +1873,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 647ae74c9398643139c7a80b319dccd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewindSpeedMultiplier: 5
-  useRewindMode: 0
+  jogSensitivity: 0.01
+  jogMinimumVelocity: 0.01
+  scrollMultiplier: 5
+  pauseDelay: 0.1
 --- !u!114 &305169359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2397,14 +2407,14 @@ MonoBehaviour:
     number: 1
     channel: 6
     isPressed: 1
-  - action: 7
-    number: 2
-    channel: 6
-    isPressed: 1
   - action: 4
     number: 8
     channel: 1
     isPressed: 1
+  - action: 5
+    number: 8
+    channel: 1
+    isPressed: 0
   controlBindings:
   - action: 3
     number: 10
@@ -2414,6 +2424,9 @@ MonoBehaviour:
     channel: 1
   - action: 1
     number: 5
+    channel: 1
+  - action: 7
+    number: 9
     channel: 1
 --- !u!4 &453684888
 Transform:
@@ -3204,7 +3217,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 31
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -3224,6 +3237,7 @@ RectTransform:
   - {fileID: 1118507746}
   - {fileID: 1012077238}
   - {fileID: 509268658}
+  - {fileID: 1496902637}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3584,8 +3598,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraDetectTarget: {fileID: 330585550}
-  detectionZone: {x: 0.5, y: 0.5}
-  detectionPrecision: 0.1
+  objectType: 2
+  detectionCenter: {x: 0.5, y: 0.5}
+  detectionSize: {x: 0.1, y: 0.1}
   isLookingAt: 0
 --- !u!82 &840334678 stripped
 AudioSource:
@@ -3895,8 +3910,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraDetectTarget: {fileID: 330585550}
-  detectionZone: {x: 0.5, y: 0.5}
-  detectionPrecision: 0.1
+  objectType: 2
+  detectionCenter: {x: 0.5, y: 0.5}
+  detectionSize: {x: 0.1, y: 0.1}
   isLookingAt: 0
 --- !u!135 &959597777 stripped
 SphereCollider:
@@ -4960,6 +4976,96 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1492211442}
   m_CullTransparentMesh: 1
+--- !u!1 &1496902636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1496902637}
+  - component: {fileID: 1496902640}
+  - component: {fileID: 1496902639}
+  - component: {fileID: 1496902638}
+  m_Layer: 5
+  m_Name: Procedural Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1496902637
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496902636}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 718969100}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 10, y: 10}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1496902638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496902636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ffade7edb5b1df45a6c3642149606c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1496902639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496902636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f1c5417c9d7ab4b84e531f83f60a4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 3f91331724a9da84197e9b6d94f0483c, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+  borderWidth: 0
+  falloffDistance: 1
+--- !u!222 &1496902640
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496902636}
+  m_CullTransparentMesh: 1
 --- !u!1 &1528599025
 GameObject:
   m_ObjectHideFlags: 0
@@ -5268,8 +5374,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraDetectTarget: {fileID: 330585550}
-  detectionZone: {x: 0.5, y: 0.5}
-  detectionPrecision: 0.1
+  objectType: 2
+  detectionCenter: {x: 0.5, y: 0.5}
+  detectionSize: {x: 0.1, y: 0.1}
   isLookingAt: 0
 --- !u!135 &1675129894 stripped
 SphereCollider:

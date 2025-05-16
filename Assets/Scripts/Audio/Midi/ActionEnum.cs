@@ -6,7 +6,9 @@ namespace DefaultNamespace
         DryWetController = 1,
         Zoom = 2,
         ScrubTimeline = 3,
-        ToggleRewind = 4,
-        InvestigationReport = 5
+        TriggerRewind = 4,
+        UnTriggerRewind = 5,
+        InvestigationReport = 6,
+        ScrubTimelineVelocity = 7
     }
 }
