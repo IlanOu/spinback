@@ -84,14 +84,10 @@ public class SoundEffectController : MonoBehaviour
     {
         if (soundEffectEnabled)
         {
-            mixer.SetFloat("MusicLowPass", musicHzSettings);
-            mixer.SetFloat("CrowdLowPass", crowdHzSettings);
             mixer.SetFloat(lowPassVariableName, hz);
         }
         else
         {
-            mixer.SetFloat("MusicLowPass", maxHz);
-            mixer.SetFloat("CrowdLowPass", crowdHzSettings);
             mixer.SetFloat(lowPassVariableName, conversationHzSettings);
         }
     }
@@ -103,6 +99,7 @@ public class SoundEffectController : MonoBehaviour
             float balanceHz = GetHzFromValue(balance);
             float normalSoundValueHz = GetHzFromValue(normalSoundValue);
             UISoundFrequency.Instance.Show(gameObject);
+            
             if (distanceFromNormal > marginError) UISoundFrequency.Instance.HandleUI(gameObject, balanceHz, normalSoundValueHz);
             else UISoundFrequency.Instance.HandleUI(gameObject, normalSoundValueHz, normalSoundValueHz);
         }
@@ -122,12 +119,18 @@ public class SoundEffectController : MonoBehaviour
         if (soundEffectEnabled) return;
         soundEffectEnabled = true;
         SetRandomNormalSoundValue();
+
+        mixer.SetFloat("MusicLowPass", musicHzSettings);
+        mixer.SetFloat("CrowdLowPass", crowdHzSettings);
     }
 
     public void DisableSoundEffect()
     {
         if (!soundEffectEnabled) return;
         soundEffectEnabled = false;
+
+        mixer.SetFloat("MusicLowPass", maxHz);
+        mixer.SetFloat("CrowdLowPass", crowdHzSettings);
     }
 
     float GetHzFromValue(float value)
