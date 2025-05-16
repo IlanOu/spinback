@@ -1,12 +1,19 @@
+using DefaultNamespace;
+using Minis;
 using UnityEngine;
 using UnityEngine.Playables;
 
 [RequireComponent(typeof(PlayableDirector))]
 public class RewindTimeline : MonoBehaviour
 {
-    [SerializeField] private float rewindSpeedMultiplier = 5f;
-    [SerializeField] private bool useRewindMode = false;
-    private bool isRewinding = false;
+    [Header("Rewind Settings")]
+    [SerializeField] private float jogSensitivity = 0.1f;
+    [SerializeField] private float jogMinimumVelocity = 0.01f;
+    [SerializeField] private float scrollMultiplier = 5f;
+
+    private float jogVelocity = 0f;
+    private bool isJogging = false;
+
     private PlayableDirector director;
 
     void Awake()
@@ -14,43 +21,49 @@ public class RewindTimeline : MonoBehaviour
         director = GetComponent<PlayableDirector>();
     }
 
+    void Start()
+    {
+        MidiBindingRegistry.Instance.Bind(ActionEnum.ScrubTimeline, OnMidiJog);
+
+        // ⏯️ On laisse le Play actif
+        if (director.state != PlayState.Playing)
+            director.Play();
+    }
+
     void Update()
     {
-        HandleRewindMode();
-        HandleRewinding();
+        HandleMouseScroll();
+        HandleJogRewind();
     }
 
-    void HandleRewindMode()
+    private void HandleMouseScroll()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && useRewindMode)
-        {
-            isRewinding = !isRewinding;
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
 
-            if (isRewinding)
-            {
-                director.Pause();
-                director.Evaluate();
-            }
-            else
-            {
-                director.Play();
-            }
+        if (Mathf.Abs(scroll) > 0.001f)
+        {
+            float delta = -scroll * scrollMultiplier;
+            double newTime = director.time + delta;
+            newTime = Mathf.Clamp((float)newTime, 0f, (float)director.duration);
+            director.time = newTime;
         }
     }
 
-    void HandleRewinding()
+    private void HandleJogRewind()
     {
-        if (isRewinding || !useRewindMode)
+        if (isJogging)
         {
-            float scroll = Input.GetAxis("Mouse ScrollWheel");
-
-            if (Mathf.Abs(scroll) > 0.001f)
-            {
-                double newTime = director.time - scroll * rewindSpeedMultiplier;
-                newTime = Mathf.Clamp((float)newTime, 0f, (float)director.duration);
-                director.time = newTime;
-                director.Evaluate();
-            }
+            float delta = jogVelocity * Time.deltaTime;
+            double newTime = director.time + delta;
+            newTime = Mathf.Clamp((float)newTime, 0f, (float)director.duration);
+            director.time = newTime;
         }
+    }
+
+    private void OnMidiJog(MidiInput input)
+    {
+        float raw = -(input.Value - 64); // -63 à +63
+        jogVelocity = raw * jogSensitivity;
+        isJogging = Mathf.Abs(jogVelocity) > jogMinimumVelocity;
     }
 }

@@ -25,9 +25,9 @@ namespace UI
                 return;
             }
             
-            MidiBindingRegistry.Instance.Bind(ActionEnum.FirstScreen, (input) => SwitchScreen(ScreenIndex.First));
-            MidiBindingRegistry.Instance.Bind(ActionEnum.SecondScreen, (input) => SwitchScreen(ScreenIndex.Second));
-            MidiBindingRegistry.Instance.Bind(ActionEnum.ThirdScreen, (input) => SwitchScreen(ScreenIndex.Third));
+            // MidiBindingRegistry.Instance.Bind(ActionEnum.FirstScreen, (input) => SwitchScreen(ScreenIndex.First));
+            // MidiBindingRegistry.Instance.Bind(ActionEnum.SecondScreen, (input) => SwitchScreen(ScreenIndex.Second));
+            // MidiBindingRegistry.Instance.Bind(ActionEnum.ThirdScreen, (input) => SwitchScreen(ScreenIndex.Third));
             
             SwitchScreen(ScreenIndex.First);
         }
