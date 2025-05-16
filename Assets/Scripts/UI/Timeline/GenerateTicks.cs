@@ -10,7 +10,19 @@ public class GenerateTicks : MonoBehaviour
     [SerializeField] private int ticksNumber = 12;
     private RectTransform rectTransform;
 
-    private float width => rectTransform.rect.width;
+    public float width
+    {
+        get
+        {
+            Canvas.ForceUpdateCanvases();
+        
+            // Utiliser directement la largeur calculée
+            Rect rect = rectTransform.rect;
+            return rect.size.x;
+        }
+    }
+
+
 
     void Awake()
     {

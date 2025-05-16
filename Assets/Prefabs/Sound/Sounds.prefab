@@ -576,7 +576,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
+  m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1930588943733112716
 MonoBehaviour:
@@ -641,8 +641,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraDetectTarget: {fileID: 0}
-  detectionZone: {x: 0.5, y: 0.5}
-  detectionPrecision: 0.1
+  objectType: 0
+  detectionCenter: {x: 0.5, y: 0.5}
+  detectionSize: {x: 0.1, y: 0.1}
   isLookingAt: 0
 --- !u!1 &6533555509770826538
 GameObject:
@@ -797,7 +798,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
+  m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8928813243126108966
 MonoBehaviour:
@@ -862,8 +863,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraDetectTarget: {fileID: 0}
-  detectionZone: {x: 0.5, y: 0.5}
-  detectionPrecision: 0.1
+  objectType: 0
+  detectionCenter: {x: 0.5, y: 0.5}
+  detectionSize: {x: 0.1, y: 0.1}
   isLookingAt: 0
 --- !u!1 &7995939209845836010
 GameObject:
