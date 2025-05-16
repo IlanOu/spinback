@@ -125,8 +125,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraDetectTarget: {fileID: 0}
-  detectionZone: {x: 0.5, y: 0.5}
-  detectionPrecision: 0.1
+  objectType: 2
+  detectionCenter: {x: 0.5, y: 0.5}
+  detectionSize: {x: 0.16, y: 0.2}
   isLookingAt: 0
 --- !u!114 &2888183712263338984
 MonoBehaviour:
