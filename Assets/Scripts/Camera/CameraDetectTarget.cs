@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,12 +12,17 @@ public class CameraDetectTarget : MonoBehaviour
         mainCamera = GetComponent<Camera>();
     }
 
-    public void Subscribe(DetectableGameObject subscriber)
+    public void Subscribe(DetectableGameObject detectable)
     {
-        if (!subscribers.Contains(subscriber))
+        if (!subscribers.Contains(detectable))
         {
-            subscribers.Add(subscriber);
+            subscribers.Add(detectable);
         }
+    }
+
+    public void Unsubscribe(DetectableGameObject detectable)
+    {
+        subscribers.Remove(detectable);
     }
 
     void Update()
@@ -26,39 +30,48 @@ public class CameraDetectTarget : MonoBehaviour
         UpdateVisibleTargets();
     }
 
-    void UpdateVisibleTargets()
+    private void UpdateVisibleTargets()
     {
         foreach (var detectable in subscribers)
         {
-            if (detectable is not MonoBehaviour mono) continue;
+            if (detectable == null || detectable is not MonoBehaviour mono)
+                continue;
 
             Vector3 worldPos = mono.transform.position;
             Vector3 viewportPos = mainCamera.WorldToViewportPoint(worldPos);
 
-            // Test si l’objet est devant la caméra et dans le viewport [0,1]
-            bool isInView = 
-                viewportPos.z > 0 &&
-                viewportPos.x >= 0 && viewportPos.x <= 1 &&
-                viewportPos.y >= 0 && viewportPos.y <= 1;
+            // Objet visible dans le viewport
+            bool isInView = viewportPos.z > 0 &&
+                            viewportPos.x >= 0f && viewportPos.x <= 1f &&
+                            viewportPos.y >= 0f && viewportPos.y <= 1f;
 
             if (!isInView)
+            {
+                detectable.OnExit();
                 continue;
+            }
 
-            // Raycast pour vérifier qu'aucun obstacle ne masque l’objet
+            // Obstacle ?
             Vector3 camPos = mainCamera.transform.position;
-            Vector3 dirToTarget = (worldPos - camPos).normalized;
-            float distance = Vector3.Distance(camPos, worldPos);
+            Vector3 dirToTarget = worldPos - camPos;
+            float distance = dirToTarget.magnitude;
+            dirToTarget.Normalize();
 
             if (Physics.Raycast(camPos, dirToTarget, out RaycastHit hit, distance))
             {
                 if (hit.transform != mono.transform)
+                {
+                    detectable.OnExit();
                     continue;
+                }
             }
 
-            // Détection valide → appel OnDetect avec la position viewport (x,y)
-            Vector2 centered = new Vector2(viewportPos.x, viewportPos.y) - detectable.detectionZone;
-            float distanceFromCenter = centered.magnitude - 1; // - 1 est necessaire
-            if (distanceFromCenter <= detectable.detectionPrecision)
+            // Détection par ellipse
+            Vector2 delta = new Vector2(viewportPos.x, viewportPos.y) - detectable.detectionCenter;
+            Vector2 normalized = new Vector2(delta.x / detectable.detectionSize.x, delta.y / detectable.detectionSize.y);
+            float ellipseDistance = normalized.sqrMagnitude;
+
+            if (ellipseDistance <= 1f)
             {
                 detectable.OnEnter();
             }
@@ -66,6 +79,52 @@ public class CameraDetectTarget : MonoBehaviour
             {
                 detectable.OnExit();
             }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (mainCamera == null || subscribers == null) return;
+
+        foreach (var detectable in subscribers)
+        {
+            if (detectable == null || detectable is not MonoBehaviour mono)
+                continue;
+
+            Vector3 worldPos = mono.transform.position;
+            Vector3 viewportPos = mainCamera.WorldToViewportPoint(worldPos);
+
+            if (viewportPos.z <= 0) continue;
+
+            // Ligne vers la cible
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawLine(mainCamera.transform.position, worldPos);
+
+            // Point rouge à la position détectée dans le viewport
+            Gizmos.color = Color.red;
+            Vector3 point = mainCamera.ViewportToWorldPoint(new Vector3(viewportPos.x, viewportPos.y, 1f));
+            Gizmos.DrawSphere(point, 0.02f);
+
+            // Zone de détection (ellipse projetée)
+            DrawEllipse(detectable.detectionCenter, detectable.detectionSize);
+        }
+    }
+
+    private void DrawEllipse(Vector2 center, Vector2 radius, int segments = 32)
+    {
+        Gizmos.color = Color.green;
+        Vector3[] points = new Vector3[segments + 1];
+        for (int i = 0; i <= segments; i++)
+        {
+            float angle = 2 * Mathf.PI * i / segments;
+            float x = center.x + radius.x * Mathf.Cos(angle);
+            float y = center.y + radius.y * Mathf.Sin(angle);
+            Vector3 viewport = new Vector3(x, y, 1f);
+            points[i] = mainCamera.ViewportToWorldPoint(viewport);
+        }
+        for (int i = 0; i < segments; i++)
+        {
+            Gizmos.DrawLine(points[i], points[i + 1]);
         }
     }
 }

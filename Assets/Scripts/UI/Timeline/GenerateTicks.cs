@@ -62,8 +62,5 @@ public class GenerateTicks : MonoBehaviour
             RectTransform tickTransform = tick.GetComponent<RectTransform>();
             tickTransform.anchoredPosition = new Vector3(x, 0, 0);
         }
-        
-        Debug.Log("RECT TRANSFORM " + rectTransform.rect.size.x);
-        Debug.Log("RECT TRANSFORM WIDTH " + width);
     }
 }
