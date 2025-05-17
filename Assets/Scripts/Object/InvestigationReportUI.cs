@@ -8,31 +8,24 @@ public class InvestigationReportUI : MonoBehaviour
     [SerializeField] private GameObject investigationReportUI;
 
     private bool isShowing = false;
-    private bool isClicking = false;
 
     void Start()
     {
-        MidiBindingRegistry.Instance.Bind(ActionEnum.InvestigationReport, (input) => OnClicked());
+        MidiBindingRegistry.Instance.Bind(ActionEnum.InvestigationReport, (input) => OnControllerButtonPressed());
     }
 
     private void Update()
     {
-        isClicking = Input.GetKeyDown(KeyCode.I);
-        HandleShowInvestigationReport();
-    }
-
-    void HandleShowInvestigationReport()
-    {
-        if (detectableGameObject.isLookingAt && !isShowing && isClicking)
+        // Si la touche I est pressée, simuler l'appui sur le bouton du controller
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            ShowUI();
-            return;
+            OnControllerButtonPressed();
         }
-
-        if (isShowing && isClicking)
+        
+        // Vérifier si l'UI est affichée mais que l'objet n'est plus regardé
+        if (isShowing && !detectableGameObject.isLookingAt)
         {
             HideUI();
-            return;
         }
     }
 
@@ -48,15 +41,21 @@ public class InvestigationReportUI : MonoBehaviour
         isShowing = false;
     }
 
-    void OnClicked()
+    void OnControllerButtonPressed()
     {
-        if (isShowing)
-        {
-            HideUI();
-        }
-        else
+        if (detectableGameObject.isLookingAt && !isShowing)
         {
             ShowUI();
         }
+        else if (isShowing)
+        {
+            HideUI();
+        }
+    }
+
+    // Pour maintenir la compatibilité avec le code existant
+    void OnClicked()
+    {
+        OnControllerButtonPressed();
     }
 }
