@@ -537,6 +537,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 383882580826630381, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+      propertyPath: m_Radius
+      value: 0.73981595
+      objectReference: {fileID: 0}
+    - target: {fileID: 383882580826630381, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2189237215290445594, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -578,6 +586,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2208871588868228833, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 2208871588868228833, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.5
       objectReference: {fileID: 0}
@@ -614,8 +626,24 @@ PrefabInstance:
       value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6675564871124966790, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675564871124966790, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.587
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675564871124966790, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 7493398608356549317, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+      propertyPath: m_Radius
+      value: 0.71066046
+      objectReference: {fileID: 0}
+    - target: {fileID: 7493398608356549317, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
+      propertyPath: m_Center.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8777443946420598792, guid: d8cdc3dd8abce4505a7e4537dac04b75, type: 3}
       propertyPath: cameraDetectTarget
@@ -2280,7 +2308,8 @@ MonoBehaviour:
   maxX: 90
   minY: -90
   maxY: 45
-  useMouseControl: 0
+  useMouseControl: 1
+  hideCursorInMouseMode: 1
 --- !u!114 &330585549
 MonoBehaviour:
   m_ObjectHideFlags: 0
