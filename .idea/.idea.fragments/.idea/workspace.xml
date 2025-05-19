@@ -5,15 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bec0d240-2773-43da-a415-54460ae7df48" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/CursorManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/CursorManager.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Object/InvestigationObject.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Object/InvestigationObject.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Object/InvestigationReport.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Object/InvestigationReport/InvestigationData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Object/InvestigationReport/InvestigationData.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Object/InvestigationReport/InvestigationReportInteraction.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Object/InvestigationReport/InvestigationReportUI.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.fragments/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.fragments/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/websocket-sharp/websocket-sharp.csproj.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Object/InvestigationReportObject.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Object/InvestigationReportObject.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Object/InvestigationReportUI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Object/InvestigationReportUI.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Object/Objects.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Object/Objects.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/PlayScene_1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PlayScene_1.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/DetectableGameObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/DetectableGameObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Camera/SmoothCameraFollow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Camera/SmoothCameraFollow.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Object/InteractableObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Object/InteractableObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Object/InteractableState/IInteractableState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Object/InteractableState/IInteractableState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Object/InteractableState/InteractableState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Object/InteractableState/InteractableState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Object/InteractableState/NoneInteractableState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Object/InteractableState/NoneInteractableState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Object/InteractableState/OutlineInteractableState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Object/InteractableState/OutlineInteractableState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Object/InteractableState/TextInteractableState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Object/InteractableState/TextInteractableState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Object/InvestigationReportInteraction.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Object/InvestigationReportInteraction.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Object/InvestigationReport/InvestigationReportInteraction.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Object/InvestigationReportUI.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Object/InvestigationReportUI.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Object/InvestigationReport/InvestigationReportUI.cs.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,24 +56,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;ui&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "ui",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "E:/fichiers/ecole/2024-2025/programmation/unity/fragments/Assets/Scripts",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.27f1\Editor\Unity.exe" />

@@ -1,4 +1,7 @@
-public class NoneInteractableState : InteractableState
+namespace Object.InteractableState
 {
-    public NoneInteractableState(InteractableObject interactableObject) : base(interactableObject) {}
+    public class NoneInteractableState : InteractableState
+    {
+        public NoneInteractableState(InteractableObject interactableObject) : base(interactableObject) {}
+    }
 }

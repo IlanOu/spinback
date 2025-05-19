@@ -1,6 +1,9 @@
-public interface IInteractableState
+namespace Object.InteractableState
 {
-    public void Enable();
-    public void Handle();
-    public void Disable();
+    public interface IInteractableState
+    {
+        public void Enable();
+        public void Handle();
+        public void Disable();
+    }
 }

@@ -15,13 +15,11 @@ public class SmoothCameraFollow : MonoBehaviour
 
     [Header("Contrôle")]
     [SerializeField] private bool useMouseControl = false;
-    [SerializeField] private bool hideCursorInMouseMode = true;
+    [SerializeField] private CursorManager cursorManager;
 
     private Vector2 currentRotation;
     private Vector2 targetRotation;
     private Camera mainCamera;
-    private bool cursorWasVisible;
-    private CursorLockMode previousLockMode;
 
     void Start()
     {
@@ -29,27 +27,36 @@ public class SmoothCameraFollow : MonoBehaviour
         if (mainCamera == null)
             mainCamera = Camera.main;
 
+        // Trouver le CursorManager s'il n'est pas assigné
+        if (cursorManager == null)
+            cursorManager = FindObjectOfType<CursorManager>();
+
+        if (cursorManager != null)
+        {
+            // S'abonner à l'événement de changement d'état du curseur
+            cursorManager.OnCursorStateChanged += OnCursorStateChanged;
+            
+            // Synchroniser l'état initial
+            useMouseControl = cursorManager.IsCursorHidden();
+        }
+
         currentRotation = new Vector2(transform.eulerAngles.y, transform.eulerAngles.x);
         targetRotation = currentRotation;
-        
-        // Sauvegarder l'état initial du curseur
-        cursorWasVisible = Cursor.visible;
-        previousLockMode = Cursor.lockState;
-        
-        // Appliquer les paramètres du curseur en fonction du mode
-        UpdateCursorState();
     }
 
-    void OnEnable()
+    void OnDestroy()
     {
-        UpdateCursorState();
+        // Se désabonner de l'événement pour éviter les fuites de mémoire
+        if (cursorManager != null)
+        {
+            cursorManager.OnCursorStateChanged -= OnCursorStateChanged;
+        }
     }
 
-    void OnDisable()
+    // Méthode appelée lorsque l'état du curseur change
+    private void OnCursorStateChanged(bool isHidden)
     {
-        // Restaurer l'état du curseur lorsque le script est désactivé
-        Cursor.visible = cursorWasVisible;
-        Cursor.lockState = previousLockMode;
+        useMouseControl = isHidden;
     }
 
     void Update()
@@ -58,7 +65,10 @@ public class SmoothCameraFollow : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             useMouseControl = !useMouseControl;
-            UpdateCursorState();
+            if (cursorManager != null)
+            {
+                cursorManager.SetCursorHidden(useMouseControl);
+            }
         }
 
         // Contrôle souris (optionnel)
@@ -89,27 +99,10 @@ public class SmoothCameraFollow : MonoBehaviour
         currentRotation = Vector2.Lerp(currentRotation, targetRotation, smoothSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(currentRotation.y, currentRotation.x, 0);
         
-        // Permettre de sortir du mode souris avec la touche Escape
-        if (useMouseControl && Input.GetKeyDown(KeyCode.Escape))
+        // Vérifier si le curseur est devenu visible (par exemple via Escape)
+        if (useMouseControl && cursorManager != null && !cursorManager.IsCursorHidden())
         {
             useMouseControl = false;
-            UpdateCursorState();
-        }
-    }
-    
-    private void UpdateCursorState()
-    {
-        if (useMouseControl && hideCursorInMouseMode)
-        {
-            // Cacher et verrouiller le curseur en mode souris
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-        else
-        {
-            // Restaurer l'état du curseur
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
         }
     }
     
@@ -117,6 +110,9 @@ public class SmoothCameraFollow : MonoBehaviour
     public void SetMouseControl(bool enable)
     {
         useMouseControl = enable;
-        UpdateCursorState();
+        if (cursorManager != null)
+        {
+            cursorManager.SetCursorHidden(enable);
+        }
     }
 }

@@ -48,7 +48,7 @@ public class DetectableGameObject : MonoBehaviour
         if (!isLookingAt)
         {
             isLookingAt = true;
-            Debug.Log("<color=green>LOOKING AT</color> " + gameObject.name);
+            // Debug.Log("<color=green>LOOKING AT</color> " + gameObject.name);
         }
     }
 
@@ -57,7 +57,7 @@ public class DetectableGameObject : MonoBehaviour
         if (isLookingAt)
         {
             isLookingAt = false;
-            Debug.Log("<color=red>Not looking at</color> " + gameObject.name);
+            // Debug.Log("<color=red>Not looking at</color> " + gameObject.name);
         }
     }
 }

@@ -1,35 +1,41 @@
+using Object.InteractableState;
 using UnityEngine;
 
-public class InteractableObject : MonoBehaviour
+namespace Object
 {
-    [SerializeField] private DetectableGameObject detectableGameObject;
-    [SerializeField] public float outlineSize = 15f;
-    [SerializeField] public GameObject label3D;
-    [SerializeField] private CameraZoom cameraZoom;
-    [HideInInspector] public IInteractableState currentState;
-    [HideInInspector] public Material material;
-    public bool IsLookingAt => detectableGameObject.isLookingAt;
-    public bool alwaysShowLabel = false;
-
-    void Start()
+    public class InteractableObject : MonoBehaviour
     {
-        material = GetComponent<Renderer>().material;
-        currentState = new OutlineInteractableState(this);
-    }
+        [SerializeField] private DetectableGameObject detectableGameObject;
+        [SerializeField] public float outlineSize = 15f;
+        [SerializeField] public GameObject label3D;
+        [SerializeField] private CameraZoom cameraZoom;
+        [HideInInspector] public IInteractableState currentState;
+        [HideInInspector] public Material material;
+        public bool IsLookingAt => detectableGameObject.isLookingAt;
+        public bool alwaysShowLabel = false;
 
-    void Update()
-    {
-        currentState.Handle();
-    }
+        public bool IsFocused => IsLookingAt && IsZooming();
+    
+        void Start()
+        {
+            material = GetComponent<Renderer>().material;
+            currentState = new OutlineInteractableState(this);
+        }
 
-    public bool IsZooming()
-    {
-        if (cameraZoom == null) return false;
-        return cameraZoom.isZooming;
-    }
+        void Update()
+        {
+            currentState.Handle();
+        }
 
-    public void UpdateState(IInteractableState newState)
-    {
-        currentState = newState;
+        public bool IsZooming()
+        {
+            if (cameraZoom == null) return false;
+            return cameraZoom.isZooming;
+        }
+
+        public void UpdateState(IInteractableState newState)
+        {
+            currentState = newState;
+        }
     }
 }

@@ -1,24 +1,25 @@
-using UnityEngine;
-
-public class OutlineInteractableState : InteractableState
+namespace Object.InteractableState
 {
-    public OutlineInteractableState(InteractableObject interactableObject) : base(interactableObject) {}
-
-    public override void Enable() 
+    public class OutlineInteractableState : global::Object.InteractableState.InteractableState
     {
-        material.SetFloat("_OutlineSize", interactableObject.outlineSize);
-    }
+        public OutlineInteractableState(InteractableObject interactableObject) : base(interactableObject) {}
 
-    public override void Handle()
-    {
-        if (interactableObject.IsLookingAt && interactableObject.IsZooming())
+        public override void Enable() 
         {
-            interactableObject.UpdateState(new TextInteractableState(interactableObject));
+            material.SetFloat("_OutlineSize", interactableObject.outlineSize);
         }
-    }
 
-    public override void Disable() 
-    {
-        material.SetFloat("_OutlineSize", 0f);
+        public override void Handle()
+        {
+            if (interactableObject.IsFocused)
+            {
+                interactableObject.UpdateState(new TextInteractableState(interactableObject));
+            }
+        }
+
+        public override void Disable() 
+        {
+            material.SetFloat("_OutlineSize", 0f);
+        }
     }
 }
