@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinematics;
-using DefaultNamespace;
 using Minis;
 using UnityEngine;
 
@@ -20,7 +19,7 @@ namespace Steps
         // Listes optionnelles pour spécifier des entrées particulières si vous ne voulez pas tout écouter
         [SerializeField] private List<KeyCode> keysToMonitor = new List<KeyCode>();
         [SerializeField] private List<int> mouseButtonsToMonitor = new List<int>(); // 0=gauche, 1=droit, 2=milieu
-        [SerializeField] private List<ActionEnum> midiActionsToMonitor = new List<ActionEnum>();
+        // [SerializeField] private List<ActionEnum> midiActionsToMonitor = new List<ActionEnum>();
         
         private bool hasStarted = false;
         
@@ -30,18 +29,18 @@ namespace Steps
             if (listenToAllMidiActions)
             {
                 // Écouter toutes les actions MIDI
-                foreach (ActionEnum action in System.Enum.GetValues(typeof(ActionEnum)))
-                {
-                    MidiBindingRegistry.Instance.Bind(action, (input) => TriggerOnStart());
-                }
+                // foreach (ActionEnum action in System.Enum.GetValues(typeof(ActionEnum)))
+                // {
+                //     MidiBindingRegistry.Instance.Bind(action, (input) => TriggerOnStart());
+                // }
             }
             else
             {
                 // Écouter seulement les actions MIDI spécifiées
-                foreach (ActionEnum action in midiActionsToMonitor)
-                {
-                    MidiBindingRegistry.Instance.Bind(action, (input) => TriggerOnStart());
-                }
+                // foreach (ActionEnum action in midiActionsToMonitor)
+                // {
+                //     MidiBindingRegistry.Instance.Bind(action, (input) => TriggerOnStart());
+                // }
             }
         }
 

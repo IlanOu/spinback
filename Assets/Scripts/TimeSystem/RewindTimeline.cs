@@ -1,4 +1,3 @@
-using DefaultNamespace;
 using Minis;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -8,13 +7,12 @@ public class RewindTimeline : MonoBehaviour
 {
     [Header("Rewind Settings")]
     [SerializeField] private float jogSensitivity = 0.001f;
-    [SerializeField] private float jogMinimumVelocity = 0.01f;
     [SerializeField] private float scrollMultiplier = 5f;
     [SerializeField] private float pauseDelay = 0.1f;
+    [SerializeField] private float jogSpeed = 10f;
 
     private PlayableDirector director;
     private bool isTouchingPlatine = false;
-    private bool platineIsMoving = false;
     private float timeSinceLastJogEvent = 0f;
 
     void Awake()
@@ -24,12 +22,10 @@ public class RewindTimeline : MonoBehaviour
 
     void Start()
     {
-        MidiBindingRegistry.Instance.Bind(ActionEnum.TriggerRewind, OnMidiTriggerRewind);
-        MidiBindingRegistry.Instance.Bind(ActionEnum.UnTriggerRewind, OnMidiUnTriggerRewind);
-        MidiBindingRegistry.Instance.Bind(ActionEnum.ScrubTimeline, OnMidiJog);
-        MidiBindingRegistry.Instance.Bind(ActionEnum.ScrubTimelineVelocity, OnMidiJogWithVelocity);
+        MidiBinding.Instance.Subscribe(MidiBind.JOG_BUTTON_1, OnJogNote);
+        MidiBinding.Instance.Subscribe(MidiBind.JOG_ROLL_1, OnRoll);
+        MidiBinding.Instance.Subscribe(MidiBind.JOG_BUTTON_ROLL_1, OnRoll);
 
-        // Démarrer en lecture
         if (director.state != PlayState.Playing)
         {
             director.Play();
@@ -44,30 +40,20 @@ public class RewindTimeline : MonoBehaviour
 
     private void HandlePlatineState()
     {
-        // Incrémenter le temps depuis le dernier événement jog
         timeSinceLastJogEvent += Time.deltaTime;
-        
+
         if (isTouchingPlatine)
         {
-            // Si on n'a pas reçu d'événement jog depuis un moment, considérer que la platine ne bouge plus
             if (timeSinceLastJogEvent > pauseDelay)
             {
-                platineIsMoving = false;
-                
-                // Mettre en pause si on ne bouge pas la platine
                 if (director.state == PlayState.Playing)
-                {
                     director.Pause();
-                }
             }
         }
         else
         {
-            // Si on ne touche pas la platine, s'assurer que la lecture est active
             if (director.state != PlayState.Playing)
-            {
                 director.Play();
-            }
         }
     }
 
@@ -84,88 +70,41 @@ public class RewindTimeline : MonoBehaviour
         }
     }
 
-    private void OnMidiJog(MidiInput input)
+    void OnJogNote(float value)
     {
-        // Quand je fais tourner le disque avec le doigt dessus
-        float raw = -(input.Value - 64); // -63 à +63
-        
-        // Réinitialiser le timer
-        timeSinceLastJogEvent = 0f;
-        
-        // Vérifier si le mouvement est significatif
-        bool significantMovement = Mathf.Abs(raw) > jogMinimumVelocity;
-        
-        if (significantMovement)
+        if (value > 0)
         {
-            platineIsMoving = true;
-            
-            // S'assurer que la lecture est active pendant le scrub
+            isTouchingPlatine = true;
+
+            if (director.state == PlayState.Playing)
+                director.Pause();
+        }
+        else
+        {
+            isTouchingPlatine = false;
+
             if (director.state != PlayState.Playing)
-            {
                 director.Play();
-            }
-            
-            // Déplacer le temps
-            MoveTimeline(raw);
         }
     }
-    
-    private void OnMidiJogWithVelocity(MidiInput input)
+
+    void OnRoll(float value)
     {
-        // Quand je fais tourner le disque sans le doigt dessus
-        float raw = -(input.Value - 64); // -63 à +63
-        
-        // Réinitialiser le timer
         timeSinceLastJogEvent = 0f;
-        
-        // Vérifier si le mouvement est significatif
-        bool significantMovement = Mathf.Abs(raw) > jogMinimumVelocity;
-        
-        if (significantMovement)
-        {
-            platineIsMoving = true;
-            
-            // S'assurer que la lecture est active pendant le scrub
-            if (director.state != PlayState.Playing)
-            {
-                director.Play();
-            }
-            
-            // Déplacer le temps
-            MoveTimeline(raw);
-        }
+
+        if (director.state != PlayState.Playing)
+            director.Play();
+
+        float direction = value < 0.5f ? +1f : -1f;
+
+        MoveTimeline(direction);
     }
-    
-    private void MoveTimeline(float rawValue)
+
+    private void MoveTimeline(float direction)
     {
-        float delta = rawValue * jogSensitivity;
+        float delta = direction * jogSpeed * jogSensitivity;
         double newTime = director.time + delta;
         newTime = Mathf.Clamp((float)newTime, 0f, (float)director.duration);
         director.time = newTime;
-    }
-    
-    private void OnMidiTriggerRewind(MidiInput input)
-    {
-        // Au moment où je touche le disque
-        isTouchingPlatine = true;
-        
-        // Mettre en pause immédiatement
-        if (director.state == PlayState.Playing)
-        {
-            director.Pause();
-        }
-    }
-    
-    private void OnMidiUnTriggerRewind(MidiInput input)
-    {
-        // Au moment où j'arrête de toucher le disque
-        isTouchingPlatine = false;
-        platineIsMoving = false;
-        
-        // S'assurer que la lecture est active quand on relâche la platine
-        if (director.state != PlayState.Playing)
-        {
-            director.Play();
-        }
     }
 }

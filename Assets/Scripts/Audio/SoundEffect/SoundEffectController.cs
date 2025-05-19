@@ -1,4 +1,3 @@
-using DefaultNamespace;
 using Minis;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -51,8 +50,8 @@ public class SoundEffectController : MonoBehaviour
 
     void Start()
     {
-        SetRandomNormalSoundValue();   
-        MidiBindingRegistry.Instance.Bind(ActionEnum.DryWetController, OnMidiValue);
+        SetRandomNormalSoundValue();
+        MidiBinding.Instance.Subscribe(MidiBind.GAIN_POT_1, OnMidiValue);
     }
 
     public void SetRandomNormalSoundValue()
@@ -109,9 +108,9 @@ public class SoundEffectController : MonoBehaviour
         }
     }
     
-    void OnMidiValue(MidiInput input)
+    void OnMidiValue(float value)
     {
-        balance = input.Value * (1f / 127f) - 1f;
+        balance = value;
     }
 
     public void EnableSoundEffect()

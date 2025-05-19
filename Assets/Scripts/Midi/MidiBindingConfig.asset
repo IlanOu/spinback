@@ -1,0 +1,303 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9689f7d2c563146c1a265b8f866aad33, type: 3}
+  m_Name: MidiBindingConfig
+  m_EditorClassIdentifier: 
+  bindings:
+  - bind: 0
+    eventType: 0
+    channel: 1
+    number: 9
+  - bind: 1
+    eventType: 0
+    channel: 2
+    number: 9
+  - bind: 2
+    eventType: 1
+    channel: 1
+    number: 8
+  - bind: 3
+    eventType: 1
+    channel: 2
+    number: 8
+  - bind: 4
+    eventType: 0
+    channel: 1
+    number: 10
+  - bind: 5
+    eventType: 0
+    channel: 2
+    number: 10
+  - bind: 6
+    eventType: 1
+    channel: 1
+    number: 3
+  - bind: 7
+    eventType: 1
+    channel: 2
+    number: 3
+  - bind: 8
+    eventType: 1
+    channel: 1
+    number: 9
+  - bind: 9
+    eventType: 1
+    channel: 2
+    number: 9
+  - bind: 10
+    eventType: 1
+    channel: 1
+    number: 11
+  - bind: 11
+    eventType: 1
+    channel: 2
+    number: 11
+  - bind: 12
+    eventType: 1
+    channel: 1
+    number: 10
+  - bind: 13
+    eventType: 1
+    channel: 2
+    number: 10
+  - bind: 14
+    eventType: 1
+    channel: 1
+    number: 4
+  - bind: 15
+    eventType: 1
+    channel: 2
+    number: 4
+  - bind: 16
+    eventType: 1
+    channel: 1
+    number: 5
+  - bind: 17
+    eventType: 1
+    channel: 2
+    number: 5
+  - bind: 18
+    eventType: 1
+    channel: 1
+    number: 6
+  - bind: 19
+    eventType: 1
+    channel: 2
+    number: 6
+  - bind: 20
+    eventType: 1
+    channel: 1
+    number: 7
+  - bind: 21
+    eventType: 1
+    channel: 2
+    number: 7
+  - bind: 22
+    eventType: 1
+    channel: 1
+    number: 15
+  - bind: 23
+    eventType: 1
+    channel: 2
+    number: 15
+  - bind: 24
+    eventType: 1
+    channel: 1
+    number: 64
+  - bind: 25
+    eventType: 1
+    channel: 2
+    number: 64
+  - bind: 26
+    eventType: 1
+    channel: 1
+    number: 16
+  - bind: 27
+    eventType: 1
+    channel: 2
+    number: 16
+  - bind: 28
+    eventType: 1
+    channel: 1
+    number: 65
+  - bind: 29
+    eventType: 0
+    channel: 2
+    number: 65
+  - bind: 30
+    eventType: 0
+    channel: 1
+    number: 8
+  - bind: 31
+    eventType: 0
+    channel: 2
+    number: 8
+  - bind: 32
+    eventType: 0
+    channel: 1
+    number: 0
+  - bind: 33
+    eventType: 0
+    channel: 2
+    number: 0
+  - bind: 34
+    eventType: 1
+    channel: 1
+    number: 13
+  - bind: 35
+    eventType: 1
+    channel: 2
+    number: 13
+  - bind: 36
+    eventType: 1
+    channel: 1
+    number: 14
+  - bind: 37
+    eventType: 1
+    channel: 2
+    number: 14
+  - bind: 38
+    eventType: 0
+    channel: 1
+    number: 5
+  - bind: 39
+    eventType: 0
+    channel: 2
+    number: 5
+  - bind: 40
+    eventType: 0
+    channel: 1
+    number: 4
+  - bind: 41
+    eventType: 0
+    channel: 2
+    number: 4
+  - bind: 42
+    eventType: 1
+    channel: 1
+    number: 2
+  - bind: 43
+    eventType: 1
+    channel: 2
+    number: 2
+  - bind: 44
+    eventType: 1
+    channel: 1
+    number: 1
+  - bind: 45
+    eventType: 1
+    channel: 2
+    number: 1
+  - bind: 46
+    eventType: 1
+    channel: 1
+    number: 12
+  - bind: 47
+    eventType: 1
+    channel: 2
+    number: 12
+  - bind: 48
+    eventType: 1
+    channel: 0
+    number: 0
+  - bind: 49
+    eventType: 0
+    channel: 0
+    number: 1
+  - bind: 50
+    eventType: 1
+    channel: 0
+    number: 3
+  - bind: 51
+    eventType: 0
+    channel: 0
+    number: 3
+  - bind: 52
+    eventType: 0
+    channel: 0
+    number: 4
+  - bind: 53
+    eventType: 1
+    channel: 0
+    number: 2
+  - bind: 54
+    eventType: 1
+    channel: 0
+    number: 1
+  - bind: 55
+    eventType: 0
+    channel: 0
+    number: 0
+  - bind: 56
+    eventType: 1
+    channel: 6
+    number: 0
+  - bind: 57
+    eventType: 1
+    channel: 7
+    number: 0
+  - bind: 58
+    eventType: 1
+    channel: 6
+    number: 1
+  - bind: 59
+    eventType: 1
+    channel: 7
+    number: 1
+  - bind: 60
+    eventType: 1
+    channel: 6
+    number: 2
+  - bind: 61
+    eventType: 1
+    channel: 7
+    number: 2
+  - bind: 62
+    eventType: 1
+    channel: 6
+    number: 3
+  - bind: 63
+    eventType: 1
+    channel: 7
+    number: 3
+  - bind: 64
+    eventType: 1
+    channel: 6
+    number: 16
+  - bind: 65
+    eventType: 1
+    channel: 7
+    number: 16
+  - bind: 66
+    eventType: 1
+    channel: 6
+    number: 17
+  - bind: 67
+    eventType: 1
+    channel: 7
+    number: 17
+  - bind: 68
+    eventType: 1
+    channel: 6
+    number: 18
+  - bind: 69
+    eventType: 1
+    channel: 7
+    number: 18
+  - bind: 70
+    eventType: 1
+    channel: 6
+    number: 19
+  - bind: 71
+    eventType: 1
+    channel: 7
+    number: 19

@@ -1,6 +1,6 @@
-using DefaultNamespace;
 using Minis;
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 
 public class InvestigationReportUI : MonoBehaviour
 {
@@ -11,7 +11,8 @@ public class InvestigationReportUI : MonoBehaviour
 
     void Start()
     {
-        MidiBindingRegistry.Instance.Bind(ActionEnum.InvestigationReport, (input) => OnControllerButtonPressed());
+        MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_CUE_1, OnNote);
+        MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_ROLL_1, OnNote);
     }
 
     private void Update()
@@ -53,9 +54,12 @@ public class InvestigationReportUI : MonoBehaviour
         }
     }
 
-    // Pour maintenir la compatibilité avec le code existant
-    void OnClicked()
+    void OnNote(float value)
     {
-        OnControllerButtonPressed();
+        // Si le bouton est cliqué
+        if (value > 0)
+        {
+            OnControllerButtonPressed();
+        }
     }
 }
