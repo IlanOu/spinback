@@ -12,7 +12,14 @@ public class TextInteractableState : InteractableState
     {
         if (!interactableObject.IsZooming())
         {
-            interactableObject.UpdateState(new NoneInteractableState(interactableObject));
+            if (!interactableObject.alwaysShowLabel)
+            {
+                interactableObject.UpdateState(new NoneInteractableState(interactableObject));
+            }
+            else
+            {
+                interactableObject.UpdateState(new OutlineInteractableState(interactableObject));
+            }
         }
     }
 

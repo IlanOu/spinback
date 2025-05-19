@@ -1,8 +1,16 @@
 using UnityEngine;
 
+public enum ObjectType
+{
+    Conversation = 0, 
+    Labeled = 1,
+    InvestigationAttachment = 2,
+    Other = 3
+};
+
 public class DetectableGameObject : MonoBehaviour
 {
-    private enum ObjectType { Conversation, InteractableObject, Other };
+    
     [SerializeField] protected CameraDetectTarget cameraDetectTarget;
 
     [Header("Zone de détection (viewport)")]
@@ -28,7 +36,7 @@ public class DetectableGameObject : MonoBehaviour
                 detectionCenter = new Vector2(0.5f, 0.5f);
                 detectionSize = new Vector2(0.2f, 0.3f);
                 break;
-            case ObjectType.InteractableObject:
+            case ObjectType.Labeled:
                 detectionCenter = new Vector2(0.5f, 0.5f);
                 detectionSize = new Vector2(0.1f, 0.1f);
                 break;

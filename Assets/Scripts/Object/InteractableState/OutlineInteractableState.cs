@@ -11,7 +11,7 @@ public class OutlineInteractableState : InteractableState
 
     public override void Handle()
     {
-        if (interactableObject.isLookingAt && interactableObject.IsZooming())
+        if (interactableObject.IsLookingAt && interactableObject.IsZooming())
         {
             interactableObject.UpdateState(new TextInteractableState(interactableObject));
         }

@@ -2578,6 +2578,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Objects
       objectReference: {fileID: 0}
+    - target: {fileID: 1176299896087192751, guid: 9bc875401e25944b9bcb618ed3d97766, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1286637502852050286, guid: 9bc875401e25944b9bcb618ed3d97766, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.045305356
@@ -2619,6 +2623,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1313358770312356458, guid: 9bc875401e25944b9bcb618ed3d97766, type: 3}
+      propertyPath: objectType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1313358770312356458, guid: 9bc875401e25944b9bcb618ed3d97766, type: 3}
       propertyPath: cameraDetectTarget
       value: 
       objectReference: {fileID: 330585550}
@@ -2626,6 +2634,10 @@ PrefabInstance:
       propertyPath: cameraZoom
       value: 
       objectReference: {fileID: 330585549}
+    - target: {fileID: 2230573335305253007, guid: 9bc875401e25944b9bcb618ed3d97766, type: 3}
+      propertyPath: alwaysShowLabel
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

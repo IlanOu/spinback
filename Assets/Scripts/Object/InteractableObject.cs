@@ -8,7 +8,8 @@ public class InteractableObject : MonoBehaviour
     [SerializeField] private CameraZoom cameraZoom;
     [HideInInspector] public IInteractableState currentState;
     [HideInInspector] public Material material;
-    [HideInInspector] public bool isLookingAt => detectableGameObject.isLookingAt;
+    public bool IsLookingAt => detectableGameObject.isLookingAt;
+    public bool alwaysShowLabel = false;
 
     void Start()
     {
