@@ -104,6 +104,26 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!243 &-5454149279324731547
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ConvJulieCharles
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 3813b16c6d85c0c4e9896e46f3bb4b9d
+  m_Children: []
+  m_Volume: 996cac9c3cba0be4582dfaf90b795de0
+  m_Pitch: 699768f6760846c4ab182ef5d6ca7381
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 4662911390265415152}
+  - {fileID: -2922003641814484683}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!244 &-4848707580259760016
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -132,6 +152,7 @@ AudioMixerGroupController:
   - {fileID: 4159017415830816347}
   - {fileID: -8769548031422095786}
   - {fileID: 6619806217049010038}
+  - {fileID: -5454149279324731547}
   m_Volume: f0f4d7b3454c14f8d87cdfc36437ee16
   m_Pitch: 6f2bfa2ed44e84306a5a1961dce6955e
   m_Send: 00000000000000000000000000000000
@@ -141,6 +162,24 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &-2922003641814484683
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 8339bc9d061837c498d133092c28af42
+  m_EffectName: Lowpass
+  m_MixLevel: 03f2f3309f9bc4b44a5535b96caed636
+  m_Parameters:
+  - m_ParameterName: Cutoff freq
+    m_GUID: 45ee1bcd3e0c52945b9aa6755c2381f4
+  - m_ParameterName: Resonance
+    m_GUID: bc6abd9e97deaf147af134662adec922
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &-2161684892705371375
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -195,6 +234,8 @@ AudioMixerController:
     name: LowPassConvDorianTristan
   - guid: bc31c30c0353f76478aba87c4c0b2e3f
     name: LowPassConvJulie2Pelos
+  - guid: 45ee1bcd3e0c52945b9aa6755c2381f4
+    name: LowPassConvJulieCharles
   - guid: cd4037cc742008d44b36ac936b7e29d9
     name: LowPassConvSalomeeJulie
   - guid: 2297ced1e885a4a0ca48c044ed66ddea
@@ -211,6 +252,7 @@ AudioMixerController:
     - 47c5e6e3a53ce324a972e48eafeb45fa
     - 71181abd6d787ce4c9eaf88cad652059
     - 6c1df3b4fb6b7f5449e8d021296a4027
+    - 3813b16c6d85c0c4e9896e46f3bb4b9d
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -374,6 +416,20 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!244 &4662911390265415152
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 1fe42bd6c7500ad46be71edd8accca65
+  m_EffectName: Attenuation
+  m_MixLevel: 453e129c88d371541941b4d785047639
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &5561881815641463296
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
