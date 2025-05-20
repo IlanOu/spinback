@@ -52,6 +52,7 @@ public class SoundEffectController : MonoBehaviour
     {
         SetRandomNormalSoundValue();
         MidiBinding.Instance.Subscribe(MidiBind.GAIN_POT_1, OnMidiValue);
+        MidiBinding.Instance.Subscribe(MidiBind.GAIN_POT_2, OnMidiValue);
     }
 
     public void SetRandomNormalSoundValue()

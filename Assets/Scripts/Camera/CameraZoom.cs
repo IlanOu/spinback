@@ -26,6 +26,7 @@ public class CameraZoom : MonoBehaviour
         targetZoom = currentZoom;
 
         MidiBinding.Instance.Subscribe(MidiBind.TEMPO_FADER_1, OnMidiZoom);
+        MidiBinding.Instance.Subscribe(MidiBind.TEMPO_FADER_2, OnMidiZoom);
     }
 
     void Update()

@@ -25,6 +25,9 @@ public class RewindTimeline : MonoBehaviour
         MidiBinding.Instance.Subscribe(MidiBind.JOG_BUTTON_1, OnJogNote);
         MidiBinding.Instance.Subscribe(MidiBind.JOG_ROLL_1, OnRoll);
         MidiBinding.Instance.Subscribe(MidiBind.JOG_BUTTON_ROLL_1, OnRoll);
+        MidiBinding.Instance.Subscribe(MidiBind.JOG_BUTTON_2, OnJogNote);
+        MidiBinding.Instance.Subscribe(MidiBind.JOG_ROLL_2, OnRoll);
+        MidiBinding.Instance.Subscribe(MidiBind.JOG_BUTTON_ROLL_2, OnRoll);
 
         if (director.state != PlayState.Playing)
         {

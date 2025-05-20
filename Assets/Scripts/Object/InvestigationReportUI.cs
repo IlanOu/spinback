@@ -13,6 +13,8 @@ public class InvestigationReportUI : MonoBehaviour
     {
         MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_CUE_1, OnNote);
         MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_ROLL_1, OnNote);
+        MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_CUE_2, OnNote);
+        MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_ROLL_2, OnNote);
     }
 
     private void Update()
