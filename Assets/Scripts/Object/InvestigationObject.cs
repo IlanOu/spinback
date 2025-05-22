@@ -1,9 +1,5 @@
-using System;
-using DefaultNamespace;
-using Minis;
 using Nenn.InspectorEnhancements.Runtime.Attributes;
 using Object.InvestigationReport;
-using TMPro;
 using UnityEngine;
 
 namespace Object
@@ -18,7 +14,10 @@ namespace Object
         
         void Start()
         {
-            MidiBindingRegistry.Instance.Bind(ActionEnum.InvestigationReport, (input) => OnControllerButtonPressed());
+                MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_CUE_1, (input) => OnControllerButtonPressed());
+            MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_CUE_2, (input) => OnControllerButtonPressed());
+            MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_ROLL_1, (input) => OnControllerButtonPressed());
+            MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_ROLL_2, (input) => OnControllerButtonPressed());
         }
 
         private void Update()

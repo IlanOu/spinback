@@ -1,12 +1,10 @@
+using System;
 using System.Collections.Generic;
-using DefaultNamespace;
-using Minis;
-using Object.InvestigationReport;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Object
+namespace Object.InvestigationReport
 {
     public class InvestigationReportUI : MonoBehaviour
     {
@@ -31,7 +29,10 @@ namespace Object
         void Start()
         {
             investigationReportUI.SetActive(false);
-            MidiBindingRegistry.Instance.Bind(ActionEnum.InvestigationReport, (input) => DisplayReport());
+            MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_CUE_1, (input) => DisplayReport());
+            MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_CUE_2, (input) => DisplayReport());
+            MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_ROLL_1, (input) => DisplayReport());
+            MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_ROLL_2, (input) => DisplayReport());
             
             // Trouver le CursorManager s'il n'est pas assigné
             if (cursorManager == null)
@@ -112,7 +113,7 @@ namespace Object
                     return;
                 }
                 // Assign unique id
-                data.id = System.Guid.NewGuid().ToString();
+                data.id = Guid.NewGuid().ToString();
                 
                 // Add to list
                 investigationReportItems.Add(data);
