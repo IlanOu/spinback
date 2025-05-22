@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Skin 2
+  m_Shader: {fileID: 4800000, guid: df695d70c539c3d4c87b79de307ab7bb, type: 3}
+  m_Parent: {fileID: 2100000, guid: 8c9066c4aafc5cf4b88eadeb89ba0e36, type: 2}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _MK_ARTISTIC_ANIMATION_STUTTER
+  - _MK_DETAIL_BLEND_MIX
+  - _MK_ENVIRONMENT_REFLECTIONS_ADVANCED
+  - _MK_LIGHT_CEL
+  - _MK_RECEIVE_SHADOWS
+  - _MK_WRAPPED_DIFFUSE
+  m_InvalidKeywords:
+  - _RECEIVESHADOWS_ON
+  - _WRAPPEDLIGHTING_ON
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap:
+    IGNOREPROJECTOR: False
+    RenderType: Opaque
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats: []
+    m_Colors:
+    - _AlbedoColor: {r: 0.9622642, g: 0.67784834, b: 0.41304737, a: 1}
+    - _Color: {r: 0.9622641, g: 0.67784834, b: 0.41304734, a: 1}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
