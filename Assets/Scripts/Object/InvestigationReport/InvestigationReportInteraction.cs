@@ -1,29 +1,26 @@
 using UnityEngine;
 
-namespace Object
+public class InvestigationReportInteraction : MonoBehaviour
 {
-    public class InvestigationReportInteraction : MonoBehaviour
+    [SerializeField] private DetectableGameObject detectableGameObject;
+    [SerializeField] private float outlineWidth = 0.005f;
+
+    private Material material;
+
+    void Awake()
     {
-        [SerializeField] private DetectableGameObject detectableGameObject;
-        [SerializeField] private float outlineWidth = 0.005f;
+        material = GetComponent<Renderer>().material;
+    }
 
-        private Material material;
-
-        void Awake()
+    void Update()
+    {
+        if (detectableGameObject.isLookingAt)
         {
-            material = GetComponent<Renderer>().material;
+            material.SetFloat("_OutlineWidth", outlineWidth);
         }
-
-        void Update()
+        else
         {
-            if (detectableGameObject.isLookingAt)
-            {
-                material.SetFloat("_OutlineWidth", outlineWidth);
-            }
-            else
-            {
-                material.SetFloat("_OutlineWidth", 0f);
-            }
+            material.SetFloat("_OutlineWidth", 0f);
         }
     }
 }

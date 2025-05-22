@@ -15,7 +15,7 @@ MonoBehaviour:
   active: 1
   type:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   intensity:
     m_OverrideState: 1
     m_Value: 0.37
@@ -43,19 +43,19 @@ MonoBehaviour:
     m_Value: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 0.55
+    m_Value: 0.31
   intensity:
     m_OverrideState: 1
-    m_Value: 7.29
+    m_Value: 3.98
   scatter:
-    m_OverrideState: 0
-    m_Value: 0.7
+    m_OverrideState: 1
+    m_Value: 0.68
   clamp:
     m_OverrideState: 0
     m_Value: 65204.9
   tint:
     m_OverrideState: 1
-    m_Value: {r: 0.8396226, g: 0.47921857, b: 0.7508504, a: 1}
+    m_Value: {r: 0.9528302, g: 0.78141505, b: 0.7775454, a: 1}
   highQualityFiltering:
     m_OverrideState: 1
     m_Value: 0
@@ -87,7 +87,7 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.25
+    m_Value: 0.186
 --- !u!114 &-6051573558263965203
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -103,13 +103,13 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
+    m_Value: {x: 0.55187887, y: 1, z: 0.8957948, w: -0.19087139}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
+    m_Value: {x: 1, y: 0.8737525, z: 0.82092345, w: 0}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: 0}
+    m_Value: {x: 1, y: 0.89324504, z: 0.92494893, w: 0.008298757}
   shadowsStart:
     m_OverrideState: 0
     m_Value: 0
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba95ee541be4fe3b76c758f1424e975, type: 3}
   m_Name: FlowVol
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_Fade:
     m_OverrideState: 1
     m_Value: 0.784
@@ -188,7 +188,7 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0
   m_Samples:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1
   m_Angle:
     m_OverrideState: 1
@@ -242,22 +242,22 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 2.4
+    m_Value: 0.37
   tintColor:
-    m_OverrideState: 0
-    m_Value: {r: 1, g: 0, b: 0.916172, a: 1}
+    m_OverrideState: 1
+    m_Value: {r: 0.89103734, g: 0.5707547, b: 1, a: 1}
   bloomMip:
     m_OverrideState: 0
     m_Value: 1
   firstFlareIntensity:
     m_OverrideState: 1
-    m_Value: 24.95
+    m_Value: 27.44
   secondaryFlareIntensity:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 4.27
   warpedFlareIntensity:
     m_OverrideState: 1
-    m_Value: 10.47
+    m_Value: 12.76
   warpedFlareScale:
     m_OverrideState: 0
     m_Value: {x: 1, y: 1}
@@ -272,7 +272,7 @@ MonoBehaviour:
     m_Value: 1
   startingPosition:
     m_OverrideState: 1
-    m_Value: 1.83
+    m_Value: 1.25
   scale:
     m_OverrideState: 1
     m_Value: 1.79
@@ -281,7 +281,7 @@ MonoBehaviour:
     m_Value: 0.25
   streaksLength:
     m_OverrideState: 1
-    m_Value: 0.073
+    m_Value: 0.67
   streaksOrientation:
     m_OverrideState: 1
     m_Value: 39.58
@@ -293,7 +293,7 @@ MonoBehaviour:
     m_Value: 4
   chromaticAbberationIntensity:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
 --- !u!114 &7337936286448029533
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -315,7 +315,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.356
+    m_Value: 0.409
   smoothness:
     m_OverrideState: 1
     m_Value: 0.626
@@ -345,8 +345,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   center:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {x: 0.5, y: 0.5}
   scale:
-    m_OverrideState: 1
-    m_Value: 1
+    m_OverrideState: 0
+    m_Value: 0.72

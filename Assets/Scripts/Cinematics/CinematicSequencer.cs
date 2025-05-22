@@ -10,7 +10,6 @@ namespace Cinematics
     {
         [SerializeField] private string nextSceneName;
         [SerializeField] private PlayableDirector cinematicDirector;
-        [SerializeField] private bool isLastCinematicBeforeGameplay = false;
 
         private void Awake()
         {
@@ -23,6 +22,8 @@ namespace Cinematics
         {
             if (cinematicDirector != null)
             {
+                MidiBinding.Instance.Subscribe(MidiBind.IN_BUTTON_LONG_PRESS_1, (float value) => OnCinematicCompleted(cinematicDirector));
+                MidiBinding.Instance.Subscribe(MidiBind.IN_BUTTON_LONG_PRESS_2, (float value) => OnCinematicCompleted(cinematicDirector));
                 cinematicDirector.stopped += OnCinematicCompleted;
                 if (cinematicDirector.state != PlayState.Playing)
                     cinematicDirector.Play();

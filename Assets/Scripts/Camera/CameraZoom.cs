@@ -1,4 +1,3 @@
-using DefaultNamespace;
 using Minis;
 using UnityEngine;
 
@@ -26,7 +25,8 @@ public class CameraZoom : MonoBehaviour
         currentZoom = mainCamera.fieldOfView;
         targetZoom = currentZoom;
 
-        MidiBindingRegistry.Instance.Bind(ActionEnum.Zoom, OnMidiZoom);
+        MidiBinding.Instance.Subscribe(MidiBind.TEMPO_FADER_1, OnMidiZoom);
+        MidiBinding.Instance.Subscribe(MidiBind.TEMPO_FADER_2, OnMidiZoom);
     }
 
     void Update()
@@ -50,11 +50,8 @@ public class CameraZoom : MonoBehaviour
         mainCamera.fieldOfView = currentZoom;
     }
 
-    void OnMidiZoom(MidiInput input)
+    void OnMidiZoom(float value)
     {
-        Debug.Log("MidiZoom: " + input.Value);
-
-        float normalizedValue = 1 - (input.Value / 127f);
-        targetZoom = Mathf.Lerp(minZoom, maxZoom, normalizedValue);
+        targetZoom = Mathf.Lerp(minZoom, maxZoom, 1 - value);
     }
 }

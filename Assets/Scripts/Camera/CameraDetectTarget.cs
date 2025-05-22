@@ -16,6 +16,9 @@ public class CameraDetectTarget : MonoBehaviour
     {
         if (!subscribers.Contains(detectable))
         {
+            if (detectable is MonoBehaviour mono && mono.GetComponent<Collider>() == null)
+                Debug.LogWarning($"[CameraDetectTarget] {mono.name} n'a pas de collider : Collider.Raycast() ne fonctionnera pas.");
+
             subscribers.Add(detectable);
         }
     }
@@ -51,19 +54,24 @@ public class CameraDetectTarget : MonoBehaviour
                 continue;
             }
 
-            // Obstacle ?
             Vector3 camPos = mainCamera.transform.position;
             Vector3 dirToTarget = worldPos - camPos;
             float distance = dirToTarget.magnitude;
             dirToTarget.Normalize();
 
-            if (Physics.Raycast(camPos, dirToTarget, out RaycastHit hit, distance))
+            if (mono.TryGetComponent(out Collider collider))
             {
-                if (hit.transform != mono.transform)
+                Ray ray = new Ray(camPos, dirToTarget);
+                if (!collider.Raycast(ray, out RaycastHit hitInfo, distance))
                 {
                     detectable.OnExit();
                     continue;
                 }
+            }
+            else
+            {
+                detectable.OnExit();
+                continue;
             }
 
             // Détection par ellipse
