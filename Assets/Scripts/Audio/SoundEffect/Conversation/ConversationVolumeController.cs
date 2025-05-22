@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class SoundVolumeController : MonoBehaviour
+public class ConversationVolumeController : MonoBehaviour
 {
 
     [Header("Settings")]
