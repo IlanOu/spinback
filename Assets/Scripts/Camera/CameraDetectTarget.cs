@@ -40,10 +40,17 @@ public class CameraDetectTarget : MonoBehaviour
             if (detectable == null || detectable is not MonoBehaviour mono)
                 continue;
 
-            Vector3 worldPos = mono.transform.position;
+            if (!mono.TryGetComponent(out Collider collider))
+            {
+                detectable.OnExit();
+                continue;
+            }
+
+            // On utilise le centre du collider pour éviter un pivot trop bas
+            Vector3 worldPos = collider.bounds.center;
             Vector3 viewportPos = mainCamera.WorldToViewportPoint(worldPos);
 
-            // Objet visible dans le viewport
+            // Vérifie si la cible est dans le viewport
             bool isInView = viewportPos.z > 0 &&
                             viewportPos.x >= 0f && viewportPos.x <= 1f &&
                             viewportPos.y >= 0f && viewportPos.y <= 1f;
@@ -59,22 +66,28 @@ public class CameraDetectTarget : MonoBehaviour
             float distance = dirToTarget.magnitude;
             dirToTarget.Normalize();
 
-            if (mono.TryGetComponent(out Collider collider))
-            {
-                Ray ray = new Ray(camPos, dirToTarget);
-                if (!collider.Raycast(ray, out RaycastHit hitInfo, distance))
-                {
-                    detectable.OnExit();
-                    continue;
-                }
-            }
-            else
+            // Raycast pour s'assurer que la cible est atteignable
+            Ray ray = new Ray(camPos, dirToTarget);
+            if (!collider.Raycast(ray, out RaycastHit hitInfo, distance))
             {
                 detectable.OnExit();
                 continue;
             }
 
-            // Détection par ellipse
+            // Vérifie s’il y a un autre collider entre la caméra et la cible
+            bool isObstructed = false;
+            RaycastHit[] hits = Physics.RaycastAll(ray, distance);
+            foreach (var hit in hits)
+            {
+                if (hit.collider != collider && !hit.collider.isTrigger)
+                {
+                    isObstructed = true;
+                    break;
+                }
+            }
+            detectable.OnObstructed(isObstructed);
+
+            // Détection par ellipse dans le viewport
             Vector2 delta = new Vector2(viewportPos.x, viewportPos.y) - detectable.detectionCenter;
             Vector2 normalized = new Vector2(delta.x / detectable.detectionSize.x, delta.y / detectable.detectionSize.y);
             float ellipseDistance = normalized.sqrMagnitude;

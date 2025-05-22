@@ -241,6 +241,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8461202454766429718, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
+      propertyPath: m_text
+      value: Naviguez dans votre souvenir en tournant la platine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5795689182579871479, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
@@ -424,6 +428,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8461202454766429718, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
+      propertyPath: m_text
+      value: "Tournez le potentiom\xE8tre jusqu'\xE0 entendre la conversation"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5795689182579871479, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
@@ -597,7 +605,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8305172635289748593, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -220
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 8305172635289748593, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -610,6 +618,10 @@ PrefabInstance:
     - target: {fileID: 8305172635289748593, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461202454766429718, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
+      propertyPath: m_text
+      value: Zoomez sur Dorian en utilisant le slider
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
