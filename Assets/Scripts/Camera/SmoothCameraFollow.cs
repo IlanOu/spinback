@@ -8,18 +8,23 @@ public class SmoothCameraFollow : MonoBehaviour
     [SerializeField] private float smoothSpeed = 5.0f;
 
     [Header("Limites")]
-    [SerializeField] private float minX = -90.0f; // Yaw
+    [SerializeField] private float minX = -90.0f;
     [SerializeField] private float maxX = 90.0f;
-    [SerializeField] private float minY = -90.0f; // Pitch
+    [SerializeField] private float minY = -90.0f;
     [SerializeField] private float maxY = 90.0f;
 
     [Header("Contrôle")]
     [SerializeField] private bool useMouseControl = false;
+    [SerializeField] private bool hideCursorInMouseMode = true;
     [SerializeField] private CursorManager cursorManager;
 
     private Vector2 currentRotation;
     private Vector2 targetRotation;
     private Camera mainCamera;
+    
+    private bool cursorWasVisiblePriorToScript;
+    private CursorLockMode previousLockModePriorToScript;
+    private bool isSubscribedToCursorManager = false;
 
     void Start()
     {
@@ -27,51 +32,88 @@ public class SmoothCameraFollow : MonoBehaviour
         if (mainCamera == null)
             mainCamera = Camera.main;
 
-        // Trouver le CursorManager s'il n'est pas assigné
+        currentRotation = new Vector2(transform.eulerAngles.y, transform.eulerAngles.x);
+        targetRotation = currentRotation;
+        
         if (cursorManager == null)
             cursorManager = FindObjectOfType<CursorManager>();
 
         if (cursorManager != null)
         {
-            // S'abonner à l'événement de changement d'état du curseur
-            cursorManager.OnCursorStateChanged += OnCursorStateChanged;
-            
-            // Synchroniser l'état initial
+            SubscribeToCursorManagerEvents();
             useMouseControl = cursorManager.IsCursorHidden();
         }
-
-        currentRotation = new Vector2(transform.eulerAngles.y, transform.eulerAngles.x);
-        targetRotation = currentRotation;
-    }
-
-    void OnDestroy()
-    {
-        // Se désabonner de l'événement pour éviter les fuites de mémoire
-        if (cursorManager != null)
+        else
         {
-            cursorManager.OnCursorStateChanged -= OnCursorStateChanged;
+            cursorWasVisiblePriorToScript = Cursor.visible;
+            previousLockModePriorToScript = Cursor.lockState;
+            UpdateInternalCursorState();
         }
     }
 
-    // Méthode appelée lorsque l'état du curseur change
-    private void OnCursorStateChanged(bool isHidden)
+    void OnEnable()
+    {
+        if (cursorManager != null && !isSubscribedToCursorManager)
+        {
+            SubscribeToCursorManagerEvents();
+            useMouseControl = cursorManager.IsCursorHidden();
+        }
+        else if (cursorManager == null)
+        {
+            UpdateInternalCursorState();
+        }
+    }
+
+    void OnDisable()
+    {
+        if (cursorManager != null && isSubscribedToCursorManager)
+        {
+            UnsubscribeFromCursorManagerEvents();
+        }
+        else if (cursorManager == null)
+        {
+            if (Application.isPlaying) 
+            {
+                Cursor.visible = cursorWasVisiblePriorToScript;
+                Cursor.lockState = previousLockModePriorToScript;
+            }
+        }
+    }
+    
+    void OnDestroy()
+    {
+        if (cursorManager != null && isSubscribedToCursorManager)
+        {
+            UnsubscribeFromCursorManagerEvents();
+        }
+    }
+
+    private void SubscribeToCursorManagerEvents()
+    {
+        if (cursorManager == null || isSubscribedToCursorManager) return;
+        cursorManager.OnCursorStateChanged += HandleCursorManagerStateChanged;
+        isSubscribedToCursorManager = true;
+    }
+
+    private void UnsubscribeFromCursorManagerEvents()
+    {
+        if (cursorManager == null || !isSubscribedToCursorManager) return;
+        cursorManager.OnCursorStateChanged -= HandleCursorManagerStateChanged;
+        isSubscribedToCursorManager = false;
+    }
+    
+    private void HandleCursorManagerStateChanged(bool isHidden)
     {
         useMouseControl = isHidden;
     }
 
     void Update()
     {
-        // Vérifier si le mode de contrôle a changé
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            useMouseControl = !useMouseControl;
-            if (cursorManager != null)
-            {
-                cursorManager.SetCursorHidden(useMouseControl);
-            }
+            SetMouseControl(!useMouseControl);
         }
-
-        // Contrôle souris (optionnel)
+        
         if (useMouseControl)
         {
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
@@ -80,8 +122,7 @@ public class SmoothCameraFollow : MonoBehaviour
             targetRotation.x += mouseX;
             targetRotation.y -= mouseY;
         }
-
-        // Contrôle ZQSD (toujours actif) (Utilisation des touches QASD)
+        
         if (Input.GetKey(KeyCode.A))
             targetRotation.x -= keyboardRotationSpeed * Time.deltaTime;
         if (Input.GetKey(KeyCode.D))
@@ -90,29 +131,55 @@ public class SmoothCameraFollow : MonoBehaviour
             targetRotation.y -= keyboardRotationSpeed * Time.deltaTime;
         if (Input.GetKey(KeyCode.S))
             targetRotation.y += keyboardRotationSpeed * Time.deltaTime;
-
-        // Clamps
+        
         targetRotation.x = Mathf.Clamp(targetRotation.x, minX, maxX);
         targetRotation.y = Mathf.Clamp(targetRotation.y, minY, maxY);
-
-        // Lissage
+        
         currentRotation = Vector2.Lerp(currentRotation, targetRotation, smoothSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(currentRotation.y, currentRotation.x, 0);
         
-        // Vérifier si le curseur est devenu visible (par exemple via Escape)
-        if (useMouseControl && cursorManager != null && !cursorManager.IsCursorHidden())
+        if (useMouseControl && Input.GetKeyDown(KeyCode.Escape))
+        {
+            SetMouseControl(false);
+        }
+        
+        if (cursorManager != null && useMouseControl && !cursorManager.IsCursorHidden())
         {
             useMouseControl = false;
         }
     }
     
-    // Méthode publique pour activer/désactiver le contrôle par souris
+    private void UpdateInternalCursorState()
+    {
+        if (cursorManager != null) return;
+
+        if (useMouseControl && hideCursorInMouseMode)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+    
     public void SetMouseControl(bool enable)
     {
         useMouseControl = enable;
         if (cursorManager != null)
         {
-            cursorManager.SetCursorHidden(enable);
+            cursorManager.SetCursorHidden(useMouseControl);
         }
+        else
+        {
+            UpdateInternalCursorState();
+        }
+    }
+    
+    public bool IsMouseControlActive()
+    {
+        return useMouseControl;
     }
 }
