@@ -6,7 +6,6 @@ public class GenerateTicks : MonoBehaviour
     [SerializeField] private GameObject longTickPrefab;
     [SerializeField] private GameObject mediumTickPrefab;
     [SerializeField] private GameObject smallTickPrefab;
-    [SerializeField] private float timeLength = 120f;
     [SerializeField] private int ticksNumber = 12;
     private RectTransform rectTransform;
 

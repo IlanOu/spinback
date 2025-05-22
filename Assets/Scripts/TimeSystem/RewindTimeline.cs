@@ -29,6 +29,9 @@ public class RewindTimeline : MonoBehaviour
         MidiBinding.Instance.Subscribe(MidiBind.JOG_ROLL_2, OnRoll);
         MidiBinding.Instance.Subscribe(MidiBind.JOG_BUTTON_ROLL_2, OnRoll);
 
+        MidiBinding.Instance.Subscribe(MidiBind.PLAY_BUTTON_1, OnPlayButton);
+        MidiBinding.Instance.Subscribe(MidiBind.PLAY_BUTTON_2, OnPlayButton);
+
         if (director.state != PlayState.Playing)
         {
             director.Play();
@@ -55,8 +58,8 @@ public class RewindTimeline : MonoBehaviour
         }
         else
         {
-            if (director.state != PlayState.Playing)
-                director.Play();
+            // if (director.state != PlayState.Playing)
+            //     director.Play();
         }
     }
 
@@ -109,5 +112,16 @@ public class RewindTimeline : MonoBehaviour
         double newTime = director.time + delta;
         newTime = Mathf.Clamp((float)newTime, 0f, (float)director.duration);
         director.time = newTime;
+    }
+
+    void OnPlayButton(float value)
+    {
+        if (value == 1)
+        {
+            if (director.state != PlayState.Playing)
+                director.Play();
+            else
+                director.Pause();
+        }
     }
 }

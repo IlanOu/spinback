@@ -45,6 +45,8 @@ public class MidiBinding : MonoBehaviour
 
     void OnEnable()
     {
+        if (_inputCallback == null) return;
+        
         _inputCallback.OnNoteOn += OnWillNoteOn;
         _inputCallback.OnNoteOff += OnWillNoteOff;
         _inputCallback.OnAftertouch += OnWillAftertouch;
@@ -55,6 +57,8 @@ public class MidiBinding : MonoBehaviour
 
     void OnDisable()
     {
+        if (_inputCallback == null) return;
+        
         _inputCallback.OnNoteOn -= OnWillNoteOn;
         _inputCallback.OnNoteOff -= OnWillNoteOff;
         _inputCallback.OnAftertouch -= OnWillAftertouch;
@@ -71,6 +75,7 @@ public class MidiBinding : MonoBehaviour
             return;
         }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
 
         config.Initialize();
         _inputCallback = GetComponent<MidiInputCallback>();

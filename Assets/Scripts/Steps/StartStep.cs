@@ -1,7 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinematics;
-using Minis;
 using UnityEngine;
 
 namespace Steps
@@ -29,18 +29,10 @@ namespace Steps
             if (listenToAllMidiActions)
             {
                 // Écouter toutes les actions MIDI
-                // foreach (ActionEnum action in System.Enum.GetValues(typeof(ActionEnum)))
-                // {
-                //     MidiBindingRegistry.Instance.Bind(action, (input) => TriggerOnStart());
-                // }
-            }
-            else
-            {
-                // Écouter seulement les actions MIDI spécifiées
-                // foreach (ActionEnum action in midiActionsToMonitor)
-                // {
-                //     MidiBindingRegistry.Instance.Bind(action, (input) => TriggerOnStart());
-                // }
+                foreach (MidiBind bind in Enum.GetValues(typeof(MidiBind)))
+                {
+                    MidiBinding.Instance.Subscribe(bind, (float value) => TriggerOnStart());
+                }
             }
         }
 
