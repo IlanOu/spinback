@@ -1,60 +1,61 @@
 using UnityEngine;
+using UnityEngine.Playables;
+using UnityEngine.UI;
 
 public class UISoundFrequency : MonoBehaviour
 {
-    [HideInInspector] public static UISoundFrequency Instance { get; private set; }
-    [SerializeField] private float maxHz = 22000f;
-    [SerializeField] private VerticalSinusRenderer playerWave;
-    [SerializeField] private VerticalSinusRenderer targetWave;
+    [SerializeField] private Slider slider;
+    [SerializeField] private float noiseAmplitude = 0.05f; // Maximum offset
+    [SerializeField] private float noiseSpeed = 1f;         // Speed of noise variation
+    [SerializeField] PlayableDirector director;
+
     private bool active = false;
-    
-    // The first subscriber is the only that can handle the UI
-    private GameObject subscribe;
+    private float baseValue = 0f;
+    private float noiseSeed;
 
     void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
+        noiseSeed = Random.Range(0f, 1000f); // Random start for variety
     }
 
-    public void Show(GameObject go)
+    void Update()
+    {
+        if (!active) return;
+
+        float time = (float)director.time * noiseSpeed;
+        float noise = Mathf.PerlinNoise(noiseSeed, time) * 2f - 1f; // Range [-1,1]
+        float noisyValue = Mathf.Clamp01(baseValue + noise * noiseAmplitude);
+
+        slider.value = noisyValue;
+    }
+
+    public void Show()
     {
         if (active) return;
-        if (subscribe != null) return;
 
         for (int i = 0; i < transform.childCount; i++)
         {
             transform.GetChild(i).gameObject.SetActive(true);
         }
 
-        subscribe = go;
         active = true;
     }
 
-    public void HandleUI(GameObject go, float playerHz, float targetHz)
+    public void HandleUI(float distance)
     {
         if (!active) return;
-        if (subscribe != go) return;
-
-        playerWave.SetSinusProfile(playerHz / maxHz);
-        targetWave.SetSinusProfile(targetHz / maxHz);
+        baseValue = Mathf.Clamp01(distance);
     }
 
-    public void Hide(GameObject go)
+    public void Hide()
     {
         if (!active) return;
-        if (subscribe != go) return;
 
         for (int i = 0; i < transform.childCount; i++)
         {
             transform.GetChild(i).gameObject.SetActive(false);
         }
 
-        subscribe = null;
         active = false;
     }
 }
