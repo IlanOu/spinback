@@ -23,6 +23,7 @@ namespace Object
         private int maxReportItems = 9;
         
         private List<InvestigationData> investigationReportItems = new List<InvestigationData>();
+        private Dictionary<string, GameObject> uiItemsMap = new Dictionary<string, GameObject>();
         private bool cursorStateBeforeShow = false;
 
 #region Unity Callbacks
@@ -123,6 +124,14 @@ namespace Object
         
         public void ClearReport()
         {
+            // Supprimer tous les éléments UI
+            foreach (var item in uiItemsMap.Values)
+            {
+                if (item != null)
+                    Destroy(item);
+            }
+            
+            uiItemsMap.Clear();
             investigationReportItems.Clear();
         }
         
@@ -162,12 +171,24 @@ namespace Object
             });
 
             item.name = data.id;
+            
+            // Stocker la référence à l'élément UI dans le dictionnaire
+            uiItemsMap[data.id] = item;
         }
         
         public void RemoveUIItem(InvestigationData data)
         {
-            var item = investigationReportUI.transform.Find(data.id);
-            Destroy(item.gameObject);
+            if (uiItemsMap.TryGetValue(data.id, out GameObject item))
+            {
+                if (item != null)
+                    Destroy(item);
+                
+                uiItemsMap.Remove(data.id);
+            }
+            else
+            {
+                Debug.LogWarning("UI item with ID " + data.id + " not found in dictionary");
+            }
         }
 
 #endregion
