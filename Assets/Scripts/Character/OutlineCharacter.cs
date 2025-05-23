@@ -6,11 +6,12 @@ public class OutlineCharacter : MonoBehaviour
     [SerializeField] private Outline outline;
     [SerializeField] private DetectableGameObject detectableGameObject;
     [SerializeField] private CameraZoom cameraZoom;
-    [SerializeField] private float outlineWidth = 1.5f;
+    [SerializeField, Range(0f, 1f)] private float zoomValue = 0.5f;
+    [SerializeField] private float outlineWidth = 1f;
     [SerializeField] private bool alwaysVisible = false;
 
     private bool isLookingAt => detectableGameObject.isLookingAt;
-    private bool isZooming => cameraZoom.isZooming;
+    private bool isZooming => cameraZoom.IsZooming(zoomValue);
 
     void Update()
     {

@@ -9,6 +9,7 @@ namespace Object
         [SerializeField] public float outlineSize = 15f;
         [SerializeField] public GameObject label3D;
         [SerializeField] private CameraZoom cameraZoom;
+        [SerializeField, Range(0f, 1f)] private float zoomValue = 0.3f;
         [HideInInspector] public IInteractableState currentState;
         [HideInInspector] public Material material;
         public bool IsLookingAt => detectableGameObject.isLookingAt;
@@ -30,7 +31,7 @@ namespace Object
         public bool IsZooming()
         {
             if (cameraZoom == null) return false;
-            return cameraZoom.isZooming;
+            return cameraZoom.IsZooming(zoomValue);
         }
 
         public void UpdateState(IInteractableState newState)

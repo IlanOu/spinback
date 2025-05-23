@@ -10,9 +10,7 @@ public class CameraZoom : MonoBehaviour
     [SerializeField] private float zoomSmoothSpeed = 100f;
 
     public float currentZoom;
-    [HideInInspector] public bool isZooming => Mathf.Abs(maxZoom - currentZoom) > zoomMarginError;
     private float targetZoom;
-    private float zoomMarginError = 1f;
     private Camera mainCamera;
 
     void Awake()
@@ -53,5 +51,11 @@ public class CameraZoom : MonoBehaviour
     void OnMidiZoom(float value)
     {
         targetZoom = Mathf.Lerp(minZoom, maxZoom, 1 - value);
+    }
+
+    public bool IsZooming(float value)
+    {
+        float expectedZoom = Mathf.Lerp(minZoom, maxZoom, 1 - value);
+        return expectedZoom > currentZoom;
     }
 }

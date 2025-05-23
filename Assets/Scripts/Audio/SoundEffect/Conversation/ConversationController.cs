@@ -6,6 +6,7 @@ public class ConversationController : MonoBehaviour
     [SerializeField] private SphereCollider sphereCollider;
     [SerializeField] private DetectableGameObject detectableGameObject;
     [SerializeField] private CameraZoom cameraZoom;
+    [SerializeField, Range(0f, 1f)] private float zoomValue = 0.1f;
     [HideInInspector] public float normalSoundValue;
     [HideInInspector] public AudioSource audioSource;
     private ConversationVolumeController soundVolumeController;
@@ -56,7 +57,7 @@ public class ConversationController : MonoBehaviour
     bool IsZooming()
     {
         if (cameraZoom == null) return false;
-        return cameraZoom.isZooming;
+        return cameraZoom.IsZooming(zoomValue);
     }
 
     float GetVolume()

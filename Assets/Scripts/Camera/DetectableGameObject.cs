@@ -23,16 +23,8 @@ public class DetectableGameObject : MonoBehaviour
     [HideInInspector] public bool isLookingAt = false;
     [HideInInspector] public bool isObstructed = false;
 
-    protected void Start()
+    void Awake()
     {
-        if (cameraDetectTarget == null)
-        {
-            Debug.LogError("CameraDetectTarget is not assigned.");
-            return;
-        }
-
-        cameraDetectTarget.Subscribe(this);
-
         switch (objectType)
         {
             case ObjectType.Conversation:
@@ -50,12 +42,22 @@ public class DetectableGameObject : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        if (cameraDetectTarget == null)
+        {
+            Debug.LogError("CameraDetectTarget is not assigned.");
+            return;
+        }
+
+        cameraDetectTarget.Subscribe(this);
+    }
+
     public void OnEnter()
     {
         if (!isLookingAt)
         {
             isLookingAt = true;
-            // Debug.Log("<color=green>LOOKING AT</color> " + gameObject.name);
         }
     }
 
@@ -64,13 +66,11 @@ public class DetectableGameObject : MonoBehaviour
         if (isLookingAt)
         {
             isLookingAt = false;
-            // Debug.Log("<color=red>Not looking at</color> " + gameObject.name);
         }
 
         if (isObstructed)
         {
             isObstructed = false;
-            Debug.Log("<color=red>Not obstructed</color> " + gameObject.name);
         }
     }
 
@@ -79,10 +79,5 @@ public class DetectableGameObject : MonoBehaviour
         if (obstructed == isObstructed) return;
 
         isObstructed = obstructed;
-
-        if (obstructed)
-            Debug.Log("<color=red>Obstructed</color> " + gameObject.name);
-        else
-            Debug.Log("<color=green>Not obstructed</color> " + gameObject.name);
     }
 }

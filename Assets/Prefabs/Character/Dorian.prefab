@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraDetectTarget: {fileID: 0}
-  objectType: 2
+  objectType: 3
   detectionCenter: {x: 0.5, y: 0.5}
   detectionSize: {x: 0.1, y: 0.1}
   isLookingAt: 0
@@ -330,8 +330,9 @@ MonoBehaviour:
   outline: {fileID: 5350175278180443371}
   detectableGameObject: {fileID: 7963492186122502506}
   cameraZoom: {fileID: 0}
+  zoomValue: 0.75
   outlineWidth: 1
-  alwaysVisible: 0
+  alwaysVisible: 1
 --- !u!114 &5193468307347550461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,7 +348,8 @@ MonoBehaviour:
   detectableGameObject: {fileID: 7963492186122502506}
   nameText: {fileID: 5133242198749812479}
   cameraZoom: {fileID: 0}
-  alwaysVisible: 0
+  zoomValue: 0.75
+  alwaysVisible: 1
 --- !u!114 &3354293733738046921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1385,12 +1387,12 @@ GameObject:
   - component: {fileID: 4208985928861477219}
   - component: {fileID: 459385225911917693}
   m_Layer: 0
-  m_Name: Name
+  m_Name: Dorian Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4660478763625992445
 RectTransform:
   m_ObjectHideFlags: 0
