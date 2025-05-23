@@ -11,8 +11,8 @@ namespace UI.Toggle
 
         private void Start()
         {
-            onImage.enabled = true;
-            offImage.enabled = false;
+            onImage.enabled = false;
+            offImage.enabled = true;
         }
 
         public void OnToggle(bool value)

@@ -37,8 +37,8 @@ namespace UI.Toggle
         
         private void UpdateVisuals()
         {
-            Color targetSwitchColor = isOn ? switchOffColor : switchOnColor;
-            Color targetCaseColor = isOn ? caseOffColor : caseOnColor;
+            Color targetSwitchColor = !isOn ? switchOffColor : switchOnColor;
+            Color targetCaseColor = !isOn ? caseOffColor : caseOnColor;
             
             background.DOColor(targetSwitchColor, animationDuration);
             caseBackground.DOColor(targetCaseColor, animationDuration);

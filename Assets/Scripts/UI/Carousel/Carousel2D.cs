@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 namespace UI.Carousel
 {
@@ -20,16 +21,18 @@ namespace UI.Carousel
         
         [Header("Snap Settings")]
         [SerializeField] private bool snapToItems = true;
-        [SerializeField] private float dragThreshold = 0.2f;
+        [SerializeField] private float swipeThreshold = 0.3f;
+        [SerializeField] private float velocityThreshold = 500f;
         
         private RectTransform viewportTransform;
         private float viewportWidth;
         private float contentWidth;
         private float currentPosition = 0f;
-        private float dragStartPosition;
+        private Vector2 dragStartPosition;
         private Vector2 lastDragPosition;
-        private float dragDistance;
+        private float dragTime;
         private bool isDragging = false;
+        private List<float> itemPositions = new List<float>();
         
         private void Awake()
         {
@@ -45,12 +48,14 @@ namespace UI.Carousel
         private void Start()
         {
             CalculateWidths();
+            CalculateItemPositions();
             UpdateButtonsState();
         }
         
         private void OnRectTransformDimensionsChange()
         {
             CalculateWidths();
+            CalculateItemPositions();
             ClampPosition();
             UpdateButtonsState();
         }
@@ -77,18 +82,79 @@ namespace UI.Carousel
             contentWidth += totalPadding + spacingTotal;
         }
         
+        private void CalculateItemPositions()
+        {
+            itemPositions.Clear();
+            
+            if (contentContainer.childCount == 0)
+                return;
+                
+            // Calculate each possible snap position
+            float leftEdgePosition = -layoutGroup.padding.left;
+            
+            // Add the leftmost position (0)
+            itemPositions.Add(0);
+            
+            // Calculate positions for each item
+            for (int i = 0; i < contentContainer.childCount; i++)
+            {
+                RectTransform child = contentContainer.GetChild(i) as RectTransform;
+                if (child != null)
+                {
+                    // Position where this item is at the left edge of viewport
+                    float itemPosition = leftEdgePosition;
+                    
+                    // Only add positions that would show new content and are within bounds
+                    if (itemPosition > -(contentWidth - viewportWidth) && itemPosition < 0)
+                    {
+                        itemPositions.Add(itemPosition);
+                    }
+                    
+                    // Move to next item position
+                    leftEdgePosition -= child.rect.width;
+                    if (i < contentContainer.childCount - 1) // Add spacing except after last item
+                    {
+                        leftEdgePosition -= layoutGroup.spacing;
+                    }
+                }
+            }
+            
+            // Add the rightmost position
+            float maxPosition = -(contentWidth - viewportWidth);
+            if (maxPosition < 0 && !itemPositions.Contains(maxPosition))
+            {
+                itemPositions.Add(maxPosition);
+            }
+            
+            // Remove duplicates and sort
+            HashSet<float> uniquePositions = new HashSet<float>(itemPositions);
+            itemPositions = new List<float>(uniquePositions);
+            itemPositions.Sort((a, b) => b.CompareTo(a)); // Sort descending (right to left)
+            
+            // Debug positions
+            Debug.Log($"Calculated {itemPositions.Count} snap positions:");
+            for (int i = 0; i < itemPositions.Count; i++)
+            {
+                Debug.Log($"Position {i}: {itemPositions[i]}");
+            }
+        }
+        
         public void GoToNext()
         {
-            float itemWidth = GetAverageItemWidth();
-            float newPosition = currentPosition - itemWidth;
-            ScrollTo(newPosition);
+            int currentIndex = FindClosestPositionIndex(currentPosition);
+            if (currentIndex < itemPositions.Count - 1)
+            {
+                ScrollTo(itemPositions[currentIndex + 1]);
+            }
         }
         
         public void GoToPrevious()
         {
-            float itemWidth = GetAverageItemWidth();
-            float newPosition = currentPosition + itemWidth;
-            ScrollTo(newPosition);
+            int currentIndex = FindClosestPositionIndex(currentPosition);
+            if (currentIndex > 0)
+            {
+                ScrollTo(itemPositions[currentIndex - 1]);
+            }
         }
         
         public void ScrollTo(float position)
@@ -104,25 +170,22 @@ namespace UI.Carousel
                 });
         }
         
-        private float GetAverageItemWidth()
+        private int FindClosestPositionIndex(float position)
         {
-            if (contentContainer.childCount == 0)
-                return 0;
-                
-            float totalWidth = 0;
-            int childCount = contentContainer.childCount;
+            float minDistance = float.MaxValue;
+            int closestIndex = 0;
             
-            for (int i = 0; i < childCount; i++)
+            for (int i = 0; i < itemPositions.Count; i++)
             {
-                RectTransform child = contentContainer.GetChild(i) as RectTransform;
-                if (child != null)
+                float distance = Mathf.Abs(position - itemPositions[i]);
+                if (distance < minDistance)
                 {
-                    totalWidth += child.rect.width;
+                    minDistance = distance;
+                    closestIndex = i;
                 }
             }
             
-            float averageWidth = totalWidth / childCount;
-            return averageWidth + layoutGroup.spacing;
+            return closestIndex;
         }
         
         private void ClampPosition()
@@ -134,11 +197,13 @@ namespace UI.Carousel
         
         private void UpdateButtonsState()
         {
+            int currentIndex = FindClosestPositionIndex(currentPosition);
+            
             if (prevButton != null)
-                prevButton.interactable = currentPosition < 0;
+                prevButton.interactable = currentIndex > 0;
                 
             if (nextButton != null)
-                nextButton.interactable = currentPosition > -(contentWidth - viewportWidth);
+                nextButton.interactable = currentIndex < itemPositions.Count - 1;
         }
         
         public void OnBeginDrag(PointerEventData eventData)
@@ -148,9 +213,9 @@ namespace UI.Carousel
                 
             isDragging = true;
             DOTween.Kill(contentContainer);
-            dragStartPosition = contentContainer.anchoredPosition.x;
+            dragStartPosition = eventData.position;
             lastDragPosition = eventData.position;
-            dragDistance = 0;
+            dragTime = Time.time;
         }
         
         public void OnDrag(PointerEventData eventData)
@@ -172,7 +237,6 @@ namespace UI.Carousel
                 newPosition = maxPosition + (newPosition - maxPosition) * 0.3f;
                 
             contentContainer.anchoredPosition = new Vector2(newPosition, contentContainer.anchoredPosition.y);
-            dragDistance += delta;
         }
         
         public void OnEndDrag(PointerEventData eventData)
@@ -183,32 +247,48 @@ namespace UI.Carousel
             isDragging = false;
             currentPosition = contentContainer.anchoredPosition.x;
             
-            // Snap to nearest item if enabled
+            // Calculate velocity
+            float dragDuration = Time.time - dragTime;
+            float dragDistance = eventData.position.x - dragStartPosition.x;
+            float velocity = dragDuration > 0 ? dragDistance / dragDuration : 0;
+            
             if (snapToItems)
             {
-                float velocity = Mathf.Abs(dragDistance) / Time.deltaTime;
-                if (velocity > dragThreshold)
+                int targetIndex;
+                
+                // Determine target based on swipe velocity
+                if (Mathf.Abs(velocity) > velocityThreshold)
                 {
-                    // Swipe detected, move to next/previous item
-                    if (dragDistance > 0)
-                        GoToPrevious();
-                    else
-                        GoToNext();
+                    int currentIndex = FindClosestPositionIndex(currentPosition);
+                    if (velocity > 0) // Swiping right (previous)
+                    {
+                        targetIndex = Mathf.Max(0, currentIndex - 1);
+                    }
+                    else // Swiping left (next)
+                    {
+                        targetIndex = Mathf.Min(itemPositions.Count - 1, currentIndex + 1);
+                    }
+                }
+                else if (Mathf.Abs(dragDistance) > viewportWidth * swipeThreshold)
+                {
+                    // Determine direction based on drag distance
+                    int currentIndex = FindClosestPositionIndex(currentPosition);
+                    if (dragDistance > 0) // Dragged right (previous)
+                    {
+                        targetIndex = Mathf.Max(0, currentIndex - 1);
+                    }
+                    else // Dragged left (next)
+                    {
+                        targetIndex = Mathf.Min(itemPositions.Count - 1, currentIndex + 1);
+                    }
                 }
                 else
                 {
-                    // Snap to nearest item
-                    float itemWidth = GetAverageItemWidth();
-                    float offset = currentPosition % itemWidth;
-                    float targetPosition;
-                    
-                    if (Mathf.Abs(offset) > itemWidth / 2)
-                        targetPosition = currentPosition - (itemWidth + offset);
-                    else
-                        targetPosition = currentPosition - offset;
-                        
-                    ScrollTo(targetPosition);
+                    // Snap to closest position
+                    targetIndex = FindClosestPositionIndex(currentPosition);
                 }
+                
+                ScrollTo(itemPositions[targetIndex]);
             }
             else
             {
@@ -220,6 +300,33 @@ namespace UI.Carousel
         private bool IsHorizontalDrag(PointerEventData eventData)
         {
             return Mathf.Abs(eventData.delta.x) > Mathf.Abs(eventData.delta.y);
+        }
+        
+        // Méthode publique pour aller à un élément spécifique par index
+        public void GoToItem(int itemIndex)
+        {
+            if (itemIndex >= 0 && itemIndex < contentContainer.childCount)
+            {
+                // Recalculer les positions au cas où
+                CalculateItemPositions();
+                
+                // Calculer la position exacte de l'élément
+                float position = 0;
+                position -= layoutGroup.padding.left;
+                
+                for (int i = 0; i < itemIndex; i++)
+                {
+                    RectTransform child = contentContainer.GetChild(i) as RectTransform;
+                    if (child != null)
+                    {
+                        position -= child.rect.width;
+                        position -= layoutGroup.spacing;
+                    }
+                }
+                
+                // Trouver la position de snap la plus proche
+                ScrollTo(position);
+            }
         }
     }
 }
