@@ -5,15 +5,8 @@ public enum ObjectType
     Conversation = 0, 
     Labeled = 1,
     InvestigationAttachment = 2,
-    Other = 3
-};
-
-public enum ObjectType
-{
-    Conversation = 0, 
-    Labeled = 1,
-    InvestigationAttachment = 2,
-    Other = 3
+    Character = 3,
+    Other = 4
 };
 
 [RequireComponent(typeof(Collider))]
