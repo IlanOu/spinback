@@ -8,6 +8,15 @@ public enum ObjectType
     Other = 3
 };
 
+public enum ObjectType
+{
+    Conversation = 0, 
+    Labeled = 1,
+    InvestigationAttachment = 2,
+    Other = 3
+};
+
+[RequireComponent(typeof(Collider))]
 public class DetectableGameObject : MonoBehaviour
 {
     
@@ -19,6 +28,7 @@ public class DetectableGameObject : MonoBehaviour
     [SerializeField] public Vector2 detectionCenter = new Vector2(0.5f, 0.5f); // Centre dans le viewport
     [SerializeField] public Vector2 detectionSize = new Vector2(0.1f, 0.1f);   // Demi-largeur et demi-hauteur (ellipse)
     [HideInInspector] public bool isLookingAt = false;
+    [HideInInspector] public bool isObstructed = false;
 
     protected void Start()
     {
@@ -40,6 +50,10 @@ public class DetectableGameObject : MonoBehaviour
                 detectionCenter = new Vector2(0.5f, 0.5f);
                 detectionSize = new Vector2(0.1f, 0.1f);
                 break;
+            case ObjectType.Character:
+                detectionCenter = new Vector2(0.5f, 0.7f);
+                detectionSize = new Vector2(0.1f, 0.25f);
+                break;
         }
     }
 
@@ -59,5 +73,23 @@ public class DetectableGameObject : MonoBehaviour
             isLookingAt = false;
             // Debug.Log("<color=red>Not looking at</color> " + gameObject.name);
         }
+
+        if (isObstructed)
+        {
+            isObstructed = false;
+            Debug.Log("<color=red>Not obstructed</color> " + gameObject.name);
+        }
+    }
+
+    public void OnObstructed(bool obstructed)
+    {
+        if (obstructed == isObstructed) return;
+
+        isObstructed = obstructed;
+
+        if (obstructed)
+            Debug.Log("<color=red>Obstructed</color> " + gameObject.name);
+        else
+            Debug.Log("<color=green>Not obstructed</color> " + gameObject.name);
     }
 }
