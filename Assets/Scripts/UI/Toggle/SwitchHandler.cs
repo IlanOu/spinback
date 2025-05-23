@@ -1,0 +1,47 @@
+using System;
+using DG.Tweening;
+using UnityEngine;
+using UnityEngine.UI;
+
+namespace UI.Toggle
+{
+    public class SwitchHandler : MonoBehaviour
+    {
+        [SerializeField] private bool isOn = true;
+        
+        [Header("Switch")]
+        [SerializeField] private GameObject switchBtn;
+        [SerializeField] private Image background;
+        [SerializeField] private Color switchOnColor;
+        [SerializeField] private Color switchOffColor;
+        
+        [Header("Case")]
+        [SerializeField] private Image caseBackground;
+        [SerializeField] private Color caseOnColor;
+        [SerializeField] private Color caseOffColor;
+
+        [Header("Animation")]
+        [SerializeField] private float animationDuration = 0.2f;
+
+        private void Start()
+        {
+            UpdateVisuals();
+        }
+
+        public void OnSwitchButtonClicked()
+        {
+            isOn = !isOn;
+            switchBtn.transform.DOLocalMoveX(-switchBtn.transform.localPosition.x, animationDuration);
+            UpdateVisuals();
+        }
+        
+        private void UpdateVisuals()
+        {
+            Color targetSwitchColor = isOn ? switchOffColor : switchOnColor;
+            Color targetCaseColor = isOn ? caseOffColor : caseOnColor;
+            
+            background.DOColor(targetSwitchColor, animationDuration);
+            caseBackground.DOColor(targetCaseColor, animationDuration);
+        }
+    }
+}
