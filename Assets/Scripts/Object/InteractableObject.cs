@@ -8,19 +8,27 @@ namespace Object
         [SerializeField] private DetectableGameObject detectableGameObject;
         [SerializeField] public float outlineSize = 15f;
         [SerializeField] public GameObject label3D;
-        [SerializeField] private CameraZoom cameraZoom;
         [SerializeField, Range(0f, 1f)] private float zoomValue = 0.3f;
         [HideInInspector] public IInteractableState currentState;
         [HideInInspector] public Material material;
+        private CameraZoom cameraZoom;
         public bool IsLookingAt => detectableGameObject.isLookingAt;
         public bool alwaysShowLabel = false;
 
         public bool IsFocused => IsLookingAt && IsZooming();
-    
-        void Start()
+
+        void Awake()
         {
             material = GetComponent<Renderer>().material;
             currentState = new OutlineInteractableState(this);
+        }
+    
+        void Start()
+        {
+            cameraZoom = Camera.main.GetComponent<CameraZoom>();
+
+            CameraZoomSettings settings = GlobalCameraSettings.Instance.GetSettings<CameraZoomSettings>(ObjectType.Object);
+            zoomValue = settings.zoomValue;
         }
 
         void Update()

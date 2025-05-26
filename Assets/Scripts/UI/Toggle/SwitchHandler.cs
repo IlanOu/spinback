@@ -7,7 +7,6 @@ namespace UI.Toggle
 {
     public class SwitchHandler : MonoBehaviour
     {
-        [SerializeField] private bool isOn = true;
         
         [Header("Switch")]
         [SerializeField] private GameObject switchBtn;
@@ -22,15 +21,22 @@ namespace UI.Toggle
 
         [Header("Animation")]
         [SerializeField] private float animationDuration = 0.2f;
+        private Clue clue;
+        private bool isOn => clue.enabled;
 
         private void Start()
         {
             UpdateVisuals();
         }
 
+        public void SetClue(Clue clue)
+        {
+            this.clue = clue;
+        }
+
         public void OnSwitchButtonClicked()
         {
-            isOn = !isOn;
+            clue.enabled = !clue.enabled;
             switchBtn.transform.DOLocalMoveX(-switchBtn.transform.localPosition.x, animationDuration);
             UpdateVisuals();
         }

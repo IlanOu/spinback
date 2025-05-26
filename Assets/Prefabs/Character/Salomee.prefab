@@ -1643,7 +1643,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c9bdf9cc1a234bd8ae09c33a62c8985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraDetectTarget: {fileID: 0}
   objectType: 3
   detectionCenter: {x: 0.5, y: 0.5}
   detectionSize: {x: 0.1, y: 0.1}
@@ -1681,8 +1680,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outline: {fileID: 1806756291166318243}
   detectableGameObject: {fileID: 6852552431225505625}
-  cameraZoom: {fileID: 0}
-  zoomValue: 0.75
   outlineWidth: 1
   alwaysVisible: 0
 --- !u!114 &7922282022511373357
@@ -1699,8 +1696,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectableGameObject: {fileID: 6852552431225505625}
   nameText: {fileID: 4832583419434793445}
-  cameraZoom: {fileID: 0}
-  zoomValue: 0.75
   alwaysVisible: 0
 --- !u!1 &5672418587759933423
 GameObject:

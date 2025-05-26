@@ -5,12 +5,20 @@ public class NameCharacter : MonoBehaviour
 {
     [SerializeField] private DetectableGameObject detectableGameObject;
     [SerializeField] private GameObject nameText;
-    [SerializeField] private CameraZoom cameraZoom;
-    [SerializeField, Range(0f, 1f)] private float zoomValue = 0.5f;
     [SerializeField] private bool alwaysVisible = false;
 
+    private CameraZoom cameraZoom;
+    private float zoomValue;
     private bool isLookingAt => detectableGameObject.isLookingAt;
     private bool isZooming => cameraZoom.IsZooming(zoomValue);
+
+    void Start()
+    {
+        cameraZoom = Camera.main.GetComponent<CameraZoom>();
+
+        CameraZoomSettings settings = GlobalCameraSettings.Instance.GetSettings<CameraZoomSettings>(ObjectType.Character);
+        zoomValue = settings.zoomValue;
+    }
 
     void Update()
     {

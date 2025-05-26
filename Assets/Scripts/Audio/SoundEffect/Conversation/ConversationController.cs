@@ -5,13 +5,15 @@ public class ConversationController : MonoBehaviour
 {
     [SerializeField] private SphereCollider sphereCollider;
     [SerializeField] private DetectableGameObject detectableGameObject;
-    [SerializeField] private CameraZoom cameraZoom;
-    [SerializeField, Range(0f, 1f)] private float zoomValue = 0.1f;
     [HideInInspector] public float normalSoundValue;
     [HideInInspector] public AudioSource audioSource;
     private ConversationVolumeController soundVolumeController;
+    private CameraZoom cameraZoom;
+    private float zoomValue;
     private float volumeMarginError = 0.1f;
     private bool isLookingAt => detectableGameObject.isLookingAt;
+    private bool isZooming => cameraZoom != null && cameraZoom.IsZooming(zoomValue);
+    private bool isFocused => isLookingAt && isZooming;
     private bool isRewinding;
 
     void Awake()
@@ -22,15 +24,21 @@ public class ConversationController : MonoBehaviour
 
     void Start()
     {
+        cameraZoom = Camera.main.GetComponent<CameraZoom>();
+
+        CameraZoomSettings settings = GlobalCameraSettings.Instance.GetSettings<CameraZoomSettings>(ObjectType.Conversation);
+        zoomValue = settings.zoomValue;
+
         MidiBinding.Instance.Subscribe(MidiBind.JOG_BUTTON_1, OnJogNote);
         MidiBinding.Instance.Subscribe(MidiBind.JOG_BUTTON_2, OnJogNote);
+        
         SetRandomNormalSoundValue();
     }
 
     void Update()
     {
         HandleCollider();
-        if (isLookingAt && (audioSource.isPlaying || isRewinding || true) && HasCameraZoom() && IsZooming())
+        if (isFocused && (audioSource.isPlaying || isRewinding))
         {
             float volume = GetVolume();
             soundVolumeController.volume = volume;
@@ -47,17 +55,6 @@ public class ConversationController : MonoBehaviour
     {
         ConversationManager.Instance.DisableSoundEffect(this);
         soundVolumeController.volume = soundVolumeController.minVolume;
-    }
-
-    bool HasCameraZoom()
-    {
-        return cameraZoom != null;
-    }
-
-    bool IsZooming()
-    {
-        if (cameraZoom == null) return false;
-        return cameraZoom.IsZooming(zoomValue);
     }
 
     float GetVolume()
