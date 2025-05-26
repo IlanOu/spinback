@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8659484875081672675}
   - component: {fileID: 7960378785706690447}
+  - component: {fileID: 4848323166877981965}
+  - component: {fileID: 4527590316718577545}
   m_Layer: 5
   m_Name: Tooltips
   m_TagString: Untagged
@@ -65,6 +67,81 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &4848323166877981965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3665418974678842327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821c06832c75346dbafc75c6f3298066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potentiometerTooltip: {fileID: 5989675664209497915}
+  sliderTooltip: {fileID: 8968143945575313082}
+  jogWheelTooltip: {fileID: 1664552739977696493}
+--- !u!114 &4527590316718577545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3665418974678842327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 6da4b32cecc1746fa8ef947ab9a1cac2, type: 2}
+    - {fileID: 11400000, guid: abd57b2c71913469295f0c1c5913c225, type: 2}
+    - {fileID: 11400000, guid: fece517384ff34aaa8dcac81d5fa1a71, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4848323166877981965}
+          m_TargetAssemblyTypeName: TooltipActivator, Assembly-CSharp
+          m_MethodName: EnablePotentiometerTooltip
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4848323166877981965}
+          m_TargetAssemblyTypeName: TooltipActivator, Assembly-CSharp
+          m_MethodName: EnableSliderTooltip
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4848323166877981965}
+          m_TargetAssemblyTypeName: TooltipActivator, Assembly-CSharp
+          m_MethodName: EnableJogWheelTooltip
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &398537521526101507
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -249,8 +326,64 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 5795689182579871479, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1341595666005902062, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3017711485866547261}
+    - targetCorrespondingSourceObject: {fileID: 1341595666005902062, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6385268365120696203}
   m_SourcePrefab: {fileID: 100100000, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
+--- !u!1 &1664552739977696493 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1341595666005902062, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
+  m_PrefabInstance: {fileID: 398537521526101507}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3017711485866547261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664552739977696493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821c06832c75346dbafc75c6f3298066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potentiometerTooltip: {fileID: 0}
+  sliderTooltip: {fileID: 0}
+  jogWheelTooltip: {fileID: 0}
+--- !u!114 &6385268365120696203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664552739977696493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 6da4b32cecc1746fa8ef947ab9a1cac2, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1664552739977696493}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
 --- !u!224 &8558533922831979122 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8305172635289748593, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
@@ -436,13 +569,69 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 5795689182579871479, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1341595666005902062, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2516885808517238891}
+    - targetCorrespondingSourceObject: {fileID: 1341595666005902062, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6628529626546536058}
   m_SourcePrefab: {fileID: 100100000, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
 --- !u!224 &3656978886782323108 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8305172635289748593, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
   m_PrefabInstance: {fileID: 4720287454941023701}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5989675664209497915 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1341595666005902062, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
+  m_PrefabInstance: {fileID: 4720287454941023701}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2516885808517238891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5989675664209497915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821c06832c75346dbafc75c6f3298066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potentiometerTooltip: {fileID: 0}
+  sliderTooltip: {fileID: 0}
+  jogWheelTooltip: {fileID: 0}
+--- !u!114 &6628529626546536058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5989675664209497915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 6da4b32cecc1746fa8ef947ab9a1cac2, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5989675664209497915}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
 --- !u!1001 &7992606488942767188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -627,10 +816,66 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 5795689182579871479, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1341595666005902062, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2442668627656143219}
+    - targetCorrespondingSourceObject: {fileID: 1341595666005902062, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9117376716003039957}
   m_SourcePrefab: {fileID: 100100000, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
 --- !u!224 &2137687837424216101 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8305172635289748593, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
   m_PrefabInstance: {fileID: 7992606488942767188}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8968143945575313082 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1341595666005902062, guid: 57e4e712617094c16bcd6271e081b931, type: 3}
+  m_PrefabInstance: {fileID: 7992606488942767188}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2442668627656143219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8968143945575313082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 821c06832c75346dbafc75c6f3298066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  potentiometerTooltip: {fileID: 0}
+  sliderTooltip: {fileID: 0}
+  jogWheelTooltip: {fileID: 0}
+--- !u!114 &9117376716003039957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8968143945575313082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 6da4b32cecc1746fa8ef947ab9a1cac2, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8968143945575313082}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
