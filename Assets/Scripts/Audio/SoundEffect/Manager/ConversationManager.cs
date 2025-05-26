@@ -6,6 +6,7 @@ public class ConversationManager : MonoBehaviour
     [HideInInspector] public static ConversationManager Instance;
     [SerializeField] private ConversationEffectManager conversationEffectManager;
     [SerializeField] private ConversationUIManager conversationUIManager;
+    [SerializeField] private VignetteController vignetteController;
     [SerializeField] private CrowdEffectManager crowdEffectManager;
     [SerializeField] private MusicEffectManager musicEffectManager;
     [SerializeField] private bool conversationEffectEnabled = false;
@@ -50,6 +51,7 @@ public class ConversationManager : MonoBehaviour
         if (conversationEffectEnabled) return;
         conversationEffectEnabled = true;
 
+        vignetteController.Enable();
         musicEffectManager.Enable();
         crowdEffectManager.Enable();
     }
@@ -62,6 +64,7 @@ public class ConversationManager : MonoBehaviour
         if (!conversationEffectEnabled) return;
         conversationEffectEnabled = false;
 
+        vignetteController.Disable();
         musicEffectManager.Disable();
         crowdEffectManager.Disable();
     }

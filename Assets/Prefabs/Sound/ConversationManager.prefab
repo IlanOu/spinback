@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8673999146062359229}
   - component: {fileID: 6069374650203739234}
   - component: {fileID: 1971457875478910186}
+  - component: {fileID: 1404405572086767151}
   m_Layer: 0
   m_Name: ConversationManager
   m_TagString: Untagged
@@ -79,6 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conversationEffectManager: {fileID: 112206988453311689}
   conversationUIManager: {fileID: 5761255004908766598}
+  vignetteController: {fileID: 1404405572086767151}
   crowdEffectManager: {fileID: 1971457875478910186}
   musicEffectManager: {fileID: 6069374650203739234}
   conversationEffectEnabled: 0
@@ -97,7 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicSources:
-  - {fileID: 0}
   - {fileID: 0}
   audioMixer: {fileID: 24100000, guid: d474be4b20a584b55ab062a9a59fb1f1, type: 2}
   musicVolumeSettings: {x: 0.5, y: 1}
@@ -120,3 +121,18 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: d474be4b20a584b55ab062a9a59fb1f1, type: 2}
   crowdVolumeSettings: {x: 0.5, y: 1}
   crowdLowPassSettings: {x: 2000, y: 2000}
+--- !u!114 &1404405572086767151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319623387500123090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2d6c87c85b5a4c98a2c187077904b32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: {fileID: 0}
+  vignetteSettings: {x: 0.6, y: 0.6}
+  fadeDuration: 0.5
