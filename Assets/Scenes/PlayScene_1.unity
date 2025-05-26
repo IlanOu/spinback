@@ -4247,6 +4247,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ConversationManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1404405572086767151, guid: 06196455c05894216aa94af14a39afff, type: 3}
+      propertyPath: volume
+      value: 
+      objectReference: {fileID: 2590591005023121271}
     - target: {fileID: 1971457875478910186, guid: 06196455c05894216aa94af14a39afff, type: 3}
       propertyPath: 'crowdSources.Array.data[0]'
       value: 
@@ -7088,6 +7092,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a8b63055371999499e0de95bbf17ec5, type: 3}
+--- !u!114 &2590591005023121271 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8381354630402568964, guid: 5a8b63055371999499e0de95bbf17ec5, type: 3}
+  m_PrefabInstance: {fileID: 2590591005023121270}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3080006178211904895
 PrefabInstance:
   m_ObjectHideFlags: 0
