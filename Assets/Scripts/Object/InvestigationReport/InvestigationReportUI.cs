@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Cinematics;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,10 +18,13 @@ namespace Object.InvestigationReport
         [SerializeField] private GameObject gridLayoutGroupPrefab; // Nouveau prefab pour la grille
         [SerializeField] private CursorManager cursorManager;
         [SerializeField] private UI.Carousel.Carousel2D carousel; // Référence au carousel
+        [SerializeField] private Button signButton;
         
         [Header("Configuration")]
         [SerializeField] private int maxReportItems = 9;
         [SerializeField] private int itemsPerGrid = 4; // Nombre d'items par grille
+        
+        [SerializeField] private string endCinematicName = "EndScene";
         
         private bool isShowing = false;
         private List<InvestigationData> investigationReportItems = new List<InvestigationData>();
@@ -36,6 +41,8 @@ namespace Object.InvestigationReport
             MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_CUE_2, (input) => DisplayReport());
             MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_ROLL_1, (input) => DisplayReport());
             MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_ROLL_2, (input) => DisplayReport());
+            
+            signButton.onClick.AddListener(EndCinematic);
             
             // Trouver le CursorManager s'il n'est pas assigné
             if (cursorManager == null)
@@ -102,6 +109,12 @@ namespace Object.InvestigationReport
                 // Restaurer l'état précédent du curseur
                 cursorManager.SetCursorHidden(cursorStateBeforeShow);
             }
+        }
+        
+        void EndCinematic()
+        {
+            HideUI();
+            SceneTransitionBlinker.Instance.TransitionToSceneWithVideo(endCinematicName);
         }
 
         void DisplayReport()
