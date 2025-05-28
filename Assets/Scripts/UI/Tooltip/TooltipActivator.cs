@@ -25,31 +25,47 @@ public class TooltipActivator : MonoBehaviour
 
     void DisablePotentiometerTooltip()
     {
-        potentiometerTooltip.SetActive(false);
+        if (potentiometerTooltip != null)
+        {
+            potentiometerTooltip.SetActive(false);
+        }
     }
 
     void DisableSliderTooltip()
     {
-        sliderTooltip.SetActive(false);
+        if (sliderTooltip != null)
+        {
+            sliderTooltip.SetActive(false);
+        }
     }
 
     void DisableJogWheelTooltip()
     {
-        jogWheelTooltip.SetActive(false);
+        if (jogWheelTooltip != null)
+        {
+            jogWheelTooltip.SetActive(false);
+        }
     }
 
     public void EnablePotentiometerTooltip()
     {
-        potentiometerTooltip.SetActive(true);
+        if (potentiometerTooltip != null)
+        {
+            potentiometerTooltip.SetActive(true);
+        }
     }
 
     public void EnableSliderTooltip()
     {
+        if (sliderTooltip != null)
         sliderTooltip.SetActive(true);
     }
 
     public void EnableJogWheelTooltip()
     {
-        jogWheelTooltip.SetActive(true);
+        if (jogWheelTooltip != null)
+        {
+            jogWheelTooltip.SetActive(true);
+        }
     }
 }

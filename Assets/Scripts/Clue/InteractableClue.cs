@@ -18,10 +18,7 @@ public class InteractableClue : MonoBehaviour
         CameraZoomSettings settings = GlobalCameraSettings.Instance.GetSettings<CameraZoomSettings>(detectableGameObject.objectType);
         zoomValue = settings.zoomValue;
 
-        MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_CUE_1, (input) => OnControllerButtonPressed());
-        MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_CUE_2, (input) => OnControllerButtonPressed());
-        MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_ROLL_1, (input) => OnControllerButtonPressed());
-        MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_ROLL_2, (input) => OnControllerButtonPressed());
+        MidiBinding.Instance.Subscribe(MidiBind.BROWSER_BUTTON, (input) => OnControllerButtonPressed());
     }
 
     void Update()

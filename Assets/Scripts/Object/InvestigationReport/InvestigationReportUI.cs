@@ -4,7 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
-using UI.Toggle; // important pour .ToList()
+using UI.Toggle;
+using Unity.VisualScripting; // important pour .ToList()
 
 namespace Object.InvestigationReport
 {
@@ -33,10 +34,11 @@ namespace Object.InvestigationReport
         {
             investigationReportUI.SetActive(false);
 
-            MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_CUE_1, (input) => DisplayReport());
-            MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_CUE_2, (input) => DisplayReport());
-            MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_ROLL_1, (input) => DisplayReport());
-            MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_ROLL_2, (input) => DisplayReport());
+            MidiBinding.Instance.Subscribe(MidiBind.BROWSER_BUTTON, (input) =>
+            {
+                if (input == 1)
+                    DisplayReport();
+            });
 
             if (cursorManager == null)
                 cursorManager = FindObjectOfType<CursorManager>();
