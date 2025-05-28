@@ -18,6 +18,7 @@ public class ConversationManager : MonoBehaviour
 
     /** Dynamic Variables */
     private float normal => conversationController != null ? conversationController.normalSoundValue : 1f;
+    private float distance => conversationEffectEnabled ? GetDistance(normal, balance) : 1f;
 
     void Awake()
     {
@@ -37,8 +38,6 @@ public class ConversationManager : MonoBehaviour
 
     void Update()
     {
-        float distance = conversationEffectEnabled ? GetDistance(normal, balance) : 1f;
-
         conversationEffectManager.Handle(distance, conversationEffectEnabled);
         conversationUIManager.Handle(distance, conversationEffectEnabled);
     }

@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1237965122222010747}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -960, y: -540, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -56,6 +56,8 @@ MonoBehaviour:
   canvasGroup: {fileID: 8850539650843656628}
   uiRectTransform: {fileID: 5521304227661342112}
   timerFillImage: {fileID: 4769743367802888025}
+  useMidiTriggers: 1
+  midiBindings: 
 --- !u!1 &2675159928609567382
 GameObject:
   m_ObjectHideFlags: 0

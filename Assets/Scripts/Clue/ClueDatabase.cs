@@ -37,7 +37,7 @@ public class ClueDatabase : ScriptableObject
         }
     }
 
-    public void AddClue(Clue originalClue)
+    public bool AddClue(Clue originalClue)
     {
         Clue clueCopy = new Clue
         {
@@ -51,9 +51,10 @@ public class ClueDatabase : ScriptableObject
         if (_clues.Exists(c => c.popup == clueCopy.popup && c.hours == clueCopy.hours && c.text == clueCopy.text))
         {
             Debug.Log("Clue already exists in the database.");
-            return;
+            return false;
         }
         _clues.Add(clueCopy);
+        return true;
     }
 
     public void ClearDatabase()

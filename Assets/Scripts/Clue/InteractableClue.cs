@@ -36,7 +36,10 @@ public class InteractableClue : MonoBehaviour
     {
         if (isFocused && isInteractable)
         {
-            ClueDatabase.Instance.AddClue(clue);
+            if (ClueDatabase.Instance.AddClue(clue))
+            {
+                PopupUI.Instance.Show(clue.popup);
+            }
         }
     }
 
