@@ -170,7 +170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5353eca7f30b66643abed7d07589a8fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isOn: 1
   switchBtn: {fileID: 2902695954122681310}
   background: {fileID: 5097768867675991978}
   switchOnColor: {r: 1, g: 0.49411768, b: 0.16470589, a: 1}
@@ -1116,7 +1115,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: -40
+  m_lineSpacing: -25
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0

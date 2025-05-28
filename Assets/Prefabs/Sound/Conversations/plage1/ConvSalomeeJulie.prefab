@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4625496762447075977}
   - component: {fileID: 600382997811057298}
   - component: {fileID: 1822144861626890858}
+  - component: {fileID: 8346523097361220225}
   m_Layer: 0
   m_Name: ConvSalomeeJulie
   m_TagString: Untagged
@@ -182,7 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sphereCollider: {fileID: 143065703943427514}
   detectableGameObject: {fileID: 1822144861626890858}
-  cameraZoom: {fileID: 0}
+  clue: {fileID: 0}
   normalSoundValue: 0
   audioSource: {fileID: 0}
 --- !u!114 &1822144861626890858
@@ -197,8 +198,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c9bdf9cc1a234bd8ae09c33a62c8985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraDetectTarget: {fileID: 0}
   objectType: 0
   detectionCenter: {x: 0.5, y: 0.5}
   detectionSize: {x: 0.1, y: 0.1}
   isLookingAt: 0
+  isObstructed: 0
+--- !u!114 &8346523097361220225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 600150850267604042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe87bc6f2fce4363b65799fb325fd8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clue:
+    id: 
+    popup: "Julie et Salom\xE9 avait l'air de parler de quelque chose d'important"
+    text: "Julie et Salom\xE9 buvait pour ne plus penser \xE0 quelque chose, elle
+      voulaient passer outre un \xE9v\xE8nement"
+    hours: 02h00
+    enabled: 1
+  detectableGameObject: {fileID: 1822144861626890858}

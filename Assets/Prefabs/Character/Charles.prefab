@@ -575,6 +575,51 @@ Transform:
   - {fileID: 6561908507251346928}
   m_Father: {fileID: 7527995727733724649}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2441708045858640623
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2571471914063252875}
+  - component: {fileID: 6336775716610754187}
+  m_Layer: 0
+  m_Name: CharlesClueActivator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2571471914063252875
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2441708045858640623}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4675868017093400298}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6336775716610754187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2441708045858640623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cea929138bf64109b2a9cbf345189f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clue: {fileID: 5801691779272011850}
 --- !u!1 &2463419205141332254
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,6 +635,7 @@ GameObject:
   - component: {fileID: 5567555436802458459}
   - component: {fileID: 3682081532140627196}
   - component: {fileID: 5702722376971242605}
+  - component: {fileID: 5801691779272011850}
   m_Layer: 0
   m_Name: CHARLES_SKIN
   m_TagString: Untagged
@@ -725,6 +771,25 @@ MonoBehaviour:
   detectableGameObject: {fileID: 3287196571539071114}
   nameText: {fileID: 5962365897063638813}
   alwaysVisible: 0
+--- !u!114 &5801691779272011850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2463419205141332254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe87bc6f2fce4363b65799fb325fd8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clue:
+    id: 
+    popup: "Charles \xE9tait ivre mort"
+    text: "Charles \xE9tait tellement ivre hier soir, au bord du coma \xE9thylique"
+    hours: 02h00
+    enabled: 1
+  detectableGameObject: {fileID: 3287196571539071114}
 --- !u!1 &2540594756554201668
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,6 +822,7 @@ Transform:
   m_Children:
   - {fileID: 612303150026217185}
   - {fileID: 5041995828609080833}
+  - {fileID: 2571471914063252875}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4327079345945481794

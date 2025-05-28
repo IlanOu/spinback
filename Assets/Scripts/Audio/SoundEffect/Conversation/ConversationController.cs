@@ -5,6 +5,7 @@ public class ConversationController : MonoBehaviour
 {
     [SerializeField] private SphereCollider sphereCollider;
     [SerializeField] private DetectableGameObject detectableGameObject;
+    [SerializeField] private InteractableClue clue;
     [HideInInspector] public float normalSoundValue;
     [HideInInspector] public AudioSource audioSource;
     private ConversationVolumeController soundVolumeController;
@@ -20,6 +21,7 @@ public class ConversationController : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         soundVolumeController = GetComponent<ConversationVolumeController>();
+        clue = GetComponent<InteractableClue>();
     }
 
     void Start()
@@ -42,7 +44,11 @@ public class ConversationController : MonoBehaviour
         {
             float volume = GetVolume();
             soundVolumeController.volume = volume;
-            if (volume - soundVolumeController.minVolume > volumeMarginError) ConversationManager.Instance.EnableSoundEffect(this);
+            if (volume - soundVolumeController.minVolume > volumeMarginError)
+            {
+                if (clue != null) clue.EnableInteractability();
+                ConversationManager.Instance.EnableSoundEffect(this);
+            }
             else ConversationManager.Instance.DisableSoundEffect(this);
         }
         else
@@ -53,6 +59,7 @@ public class ConversationController : MonoBehaviour
 
     void DisableSoundConversation()
     {
+        if (clue != null) clue.DisableInteractability();
         ConversationManager.Instance.DisableSoundEffect(this);
         soundVolumeController.volume = soundVolumeController.minVolume;
     }

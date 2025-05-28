@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8247707877538734402}
   - component: {fileID: 8339850993164056332}
   - component: {fileID: 7558647799154111311}
+  - component: {fileID: 5253216566386873011}
   m_Layer: 0
   m_Name: ConvDorian2Pelos
   m_TagString: Untagged
@@ -182,7 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sphereCollider: {fileID: 2504921342890647824}
   detectableGameObject: {fileID: 7558647799154111311}
-  cameraZoom: {fileID: 0}
+  clue: {fileID: 0}
   normalSoundValue: 0
   audioSource: {fileID: 0}
 --- !u!114 &7558647799154111311
@@ -197,8 +198,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c9bdf9cc1a234bd8ae09c33a62c8985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraDetectTarget: {fileID: 0}
   objectType: 0
   detectionCenter: {x: 0.5, y: 0.5}
   detectionSize: {x: 0.1, y: 0.1}
   isLookingAt: 0
+  isObstructed: 0
+--- !u!114 &5253216566386873011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8732777148421061234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe87bc6f2fce4363b65799fb325fd8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clue:
+    id: 
+    popup: Kevin et Jean sont irresponsables et un peu bordeline
+    text: "Kevin et Jean ne font pas attention aux autres, encore moins \xE0 Tristan
+      qui a l'air d\xE9j\xE0 allum\xE9"
+    hours: 02h00
+    enabled: 1
+  detectableGameObject: {fileID: 7558647799154111311}

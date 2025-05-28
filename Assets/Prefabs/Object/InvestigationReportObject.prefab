@@ -124,11 +124,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c9bdf9cc1a234bd8ae09c33a62c8985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraDetectTarget: {fileID: 0}
   objectType: 2
   detectionCenter: {x: 0.5, y: 0.5}
   detectionSize: {x: 0.16, y: 0.2}
   isLookingAt: 0
+  isObstructed: 0
 --- !u!114 &2888183712263338984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +158,9 @@ MonoBehaviour:
   detectableGameObject: {fileID: 8319409184478580558}
   investigationReportUI: {fileID: 0}
   itemList: {fileID: 0}
-  investigationReportItemPrefab: {fileID: 2508525120970581943, guid: 2a27e775159911d4c8b1b532ecf9dc42, type: 3}
+  investigationReportItemPrefab: {fileID: 644416814349457276, guid: 047fd84e80a016743b424f06961f5811, type: 3}
+  gridLayoutGroupPrefab: {fileID: 9145195716958007432, guid: 06327641055ebb64a8a4d0dbb0091550, type: 3}
   cursorManager: {fileID: 0}
-  maxReportItems: 9
+  carousel: {fileID: 0}
+  maxReportItems: 100
+  itemsPerGrid: 4

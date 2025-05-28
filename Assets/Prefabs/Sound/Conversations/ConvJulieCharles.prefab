@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2417178704469361692}
   - component: {fileID: 6522151296204285375}
   - component: {fileID: 3509356851013936792}
+  - component: {fileID: 6790893008533121820}
   m_Layer: 0
   m_Name: ConvJulieCharles
   m_TagString: Untagged
@@ -166,7 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c9bdf9cc1a234bd8ae09c33a62c8985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraDetectTarget: {fileID: 0}
   objectType: 0
   detectionCenter: {x: 0.5, y: 0.5}
   detectionSize: {x: 0.1, y: 0.1}
@@ -200,7 +200,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sphereCollider: {fileID: 5598043364735383555}
   detectableGameObject: {fileID: 2417178704469361692}
-  cameraZoom: {fileID: 0}
-  zoomValue: 0.1
+  clue: {fileID: 0}
   normalSoundValue: 0
   audioSource: {fileID: 0}
+--- !u!114 &6790893008533121820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3441458693341743773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe87bc6f2fce4363b65799fb325fd8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clue:
+    id: 
+    popup: "Julie est all\xE9e parler \xE0 Charles sur le baclon"
+    text: "Quand Charles est all\xE9 vormir sur le balcon Julie l'a rejoint"
+    hours: 02h02
+    enabled: 1
+  detectableGameObject: {fileID: 2417178704469361692}

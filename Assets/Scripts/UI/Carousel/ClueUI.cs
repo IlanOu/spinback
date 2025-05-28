@@ -8,7 +8,7 @@ public class ClueUI : MonoBehaviour
 
     public void SetClue(Clue clue)
     {
-        title.text = clue.title;
-        description.text = clue.description;
+        title.text = clue.hours;
+        description.text = clue.text;
     }
 }

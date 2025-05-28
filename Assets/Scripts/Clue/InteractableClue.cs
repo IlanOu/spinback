@@ -4,6 +4,7 @@ public class InteractableClue : MonoBehaviour
 {
     [SerializeField] private Clue clue;
     [SerializeField] private DetectableGameObject detectableGameObject;
+    private bool isInteractable = false;
     private CameraZoom cameraZoom;
     private float zoomValue;
     private bool isLookingAt => detectableGameObject.isLookingAt;
@@ -33,9 +34,24 @@ public class InteractableClue : MonoBehaviour
 
     void OnControllerButtonPressed()
     {
-        if (isFocused)
+        if (isFocused && isInteractable)
         {
             ClueDatabase.Instance.AddClue(clue);
         }
+    }
+
+    public void ToggleInteractability()
+    {
+        isInteractable = !isInteractable;
+    }
+
+    public void EnableInteractability()
+    {
+        isInteractable = true;
+    }
+
+    public void DisableInteractability()
+    {
+        isInteractable = false;
     }
 }

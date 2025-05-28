@@ -370,13 +370,16 @@ GameObject:
   - component: {fileID: 9175333019345180997}
   - component: {fileID: 8359044040930665840}
   - component: {fileID: 3756616648839686208}
+  - component: {fileID: 395378391563250438}
+  - component: {fileID: 5373490802153215762}
+  - component: {fileID: 4783730008051977289}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &899554783640224709
 Transform:
   m_ObjectHideFlags: 0
@@ -482,8 +485,9 @@ MonoBehaviour:
   detectableGameObject: {fileID: 3756616648839686208}
   outlineSize: 15
   label3D: {fileID: 3550341202889856254}
-  cameraZoom: {fileID: 0}
+  zoomValue: 0.3
   material: {fileID: 0}
+  alwaysShowLabel: 1
 --- !u!114 &3756616648839686208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,8 +500,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c9bdf9cc1a234bd8ae09c33a62c8985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraDetectTarget: {fileID: 0}
-  objectType: 2
+  objectType: 1
   detectionCenter: {x: 0.5, y: 0.5}
   detectionSize: {x: 0.1, y: 0.1}
   isLookingAt: 0
+  isObstructed: 0
+--- !u!114 &395378391563250438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4204347891655931439}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7756f28da8644eb789b15f63ff51817, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectableGameObject: {fileID: 3756616648839686208}
+  outlineWidth: 0.005
+--- !u!114 &5373490802153215762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4204347891655931439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe87bc6f2fce4363b65799fb325fd8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clue:
+    id: 
+    popup: 
+    text: 
+    hours: 
+    enabled: 1
+  detectableGameObject: {fileID: 3756616648839686208}
+--- !u!114 &4783730008051977289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4204347891655931439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals: []
+    m_Events: []

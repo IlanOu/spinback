@@ -166,7 +166,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c9bdf9cc1a234bd8ae09c33a62c8985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraDetectTarget: {fileID: 0}
   objectType: 0
   detectionCenter: {x: 0.5, y: 0.5}
   detectionSize: {x: 0.1, y: 0.1}
@@ -200,7 +199,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sphereCollider: {fileID: 5382726827695171641}
   detectableGameObject: {fileID: 6289096303617599347}
-  cameraZoom: {fileID: 0}
-  zoomValue: 0.1
+  clue: {fileID: 0}
   normalSoundValue: 0
   audioSource: {fileID: 0}
