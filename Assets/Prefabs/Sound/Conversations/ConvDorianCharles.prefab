@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6289096303617599347}
   - component: {fileID: 1114326922236505625}
   - component: {fileID: 7384599193925311636}
+  - component: {fileID: 8327181568658151978}
   m_Layer: 0
   m_Name: ConvDorianCharles
   m_TagString: Untagged
@@ -202,3 +203,18 @@ MonoBehaviour:
   clue: {fileID: 0}
   normalSoundValue: 0
   audioSource: {fileID: 0}
+--- !u!114 &8327181568658151978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3413661311624942005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 433feeca55f0b441ebab7ada50855580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcs:
+  - {fileID: 0}
+  - {fileID: 0}

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6522151296204285375}
   - component: {fileID: 3509356851013936792}
   - component: {fileID: 6790893008533121820}
+  - component: {fileID: 2281063371620870440}
   m_Layer: 0
   m_Name: ConvJulieCharles
   m_TagString: Untagged
@@ -222,3 +223,18 @@ MonoBehaviour:
     hours: 02h02
     enabled: 1
   detectableGameObject: {fileID: 2417178704469361692}
+--- !u!114 &2281063371620870440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3441458693341743773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 433feeca55f0b441ebab7ada50855580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcs:
+  - {fileID: 0}
+  - {fileID: 0}

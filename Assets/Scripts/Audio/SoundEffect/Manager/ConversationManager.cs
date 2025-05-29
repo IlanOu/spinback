@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(ConversationEffectManager), typeof(ConversationUIManager))]
@@ -19,6 +21,7 @@ public class ConversationManager : MonoBehaviour
     /** Dynamic Variables */
     private float normal => conversationController != null ? conversationController.normalSoundValue : 1f;
     private float distance => conversationEffectEnabled ? GetDistance(normal, balance) : 1f;
+    private List<GameObject> otherNPCs => conversationController != null ? AllNPCs.Instance.NPCs.Except(conversationController.npcs).ToList() : new List<GameObject>();
 
     void Awake()
     {
@@ -47,6 +50,8 @@ public class ConversationManager : MonoBehaviour
         if (conversationController != null && conversationController != controller) return;
         conversationController = controller;
 
+        UpdateNPCVisibility(true);
+
         if (conversationEffectEnabled) return;
         conversationEffectEnabled = true;
 
@@ -58,6 +63,8 @@ public class ConversationManager : MonoBehaviour
     public void DisableSoundEffect(ConversationController controller)
     {
         if (conversationController != controller) return;
+
+        UpdateNPCVisibility(false);
         conversationController = null;
 
         if (!conversationEffectEnabled) return;
@@ -75,9 +82,42 @@ public class ConversationManager : MonoBehaviour
         float normalizedDistance = distance / maxDistance;
         return Mathf.Max(0f, normalizedDistance - marginError);
     }
-    
+
     void OnPotentiometer(float value)
     {
         balance = value;
+    }
+
+    void UpdateNPCVisibility(bool visible)
+    {
+        if (conversationController == null) return;
+
+        foreach (GameObject npc in conversationController.npcs)
+        {
+            OutlineCharacter outlineCharacter = npc.GetComponentInChildren<OutlineCharacter>();
+            NameCharacter nameCharacter = npc.GetComponentInChildren<NameCharacter>();
+            if (outlineCharacter != null)
+            {
+                outlineCharacter.ForceVisibility(visible);
+            }
+            if (nameCharacter != null)
+            {
+                nameCharacter.ForceVisibility(visible);
+            }
+        }
+
+        foreach (GameObject npc in otherNPCs)
+        {
+            OutlineCharacter outlineCharacter = npc.GetComponentInChildren<OutlineCharacter>();
+            NameCharacter nameCharacter = npc.GetComponentInChildren<NameCharacter>();
+            if (outlineCharacter != null)
+            {
+                outlineCharacter.EnableVisibility(!visible);
+            }
+            if (nameCharacter != null)
+            {
+                nameCharacter.EnableVisibility(!visible);
+            }
+        }
     }
 }

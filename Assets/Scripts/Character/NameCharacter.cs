@@ -6,6 +6,8 @@ public class NameCharacter : MonoBehaviour
     [SerializeField] private DetectableGameObject detectableGameObject;
     [SerializeField] private GameObject nameText;
     [SerializeField] private bool alwaysVisible = false;
+    private bool enableVisibility = true;
+    private bool forceVisibility = false;
 
     private CameraZoom cameraZoom;
     private float zoomValue;
@@ -22,7 +24,7 @@ public class NameCharacter : MonoBehaviour
 
     void Update()
     {
-        if ((isLookingAt && isZooming) || alwaysVisible)
+        if ((((isLookingAt && isZooming) || alwaysVisible) && enableVisibility) || forceVisibility)
         {
             nameText.SetActive(true);
         }
@@ -35,5 +37,17 @@ public class NameCharacter : MonoBehaviour
     public void DisableAlwaysVisible()
     {
         alwaysVisible = false;
+    }
+    
+    public void ForceVisibility(bool visible)
+    {
+        enableVisibility = visible ? true : enableVisibility;
+        forceVisibility = visible;
+    }
+
+    public void EnableVisibility(bool visible)
+    {
+        forceVisibility = false;
+        enableVisibility = visible;
     }
 }

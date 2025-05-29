@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8339850993164056332}
   - component: {fileID: 7558647799154111311}
   - component: {fileID: 5253216566386873011}
+  - component: {fileID: 8728849963854489613}
   m_Layer: 0
   m_Name: ConvDorian2Pelos
   m_TagString: Untagged
@@ -223,3 +224,19 @@ MonoBehaviour:
     hours: 02h00
     enabled: 1
   detectableGameObject: {fileID: 7558647799154111311}
+--- !u!114 &8728849963854489613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8732777148421061234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 433feeca55f0b441ebab7ada50855580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

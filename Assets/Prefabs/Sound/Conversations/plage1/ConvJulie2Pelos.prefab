@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8152387633622322255}
   - component: {fileID: 4311801642956529848}
   - component: {fileID: 5579626599529298600}
+  - component: {fileID: 569429202873098340}
   m_Layer: 0
   m_Name: ConvJulie2Pelos
   m_TagString: Untagged
@@ -222,3 +223,19 @@ MonoBehaviour:
     hours: 02h01
     enabled: 1
   detectableGameObject: {fileID: 4311801642956529848}
+--- !u!114 &569429202873098340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5752846242428963435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 433feeca55f0b441ebab7ada50855580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcs:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

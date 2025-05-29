@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(ConversationVolumeController), typeof(AudioSource))]
@@ -9,6 +10,7 @@ public class ConversationController : MonoBehaviour
     [HideInInspector] public float normalSoundValue;
     [HideInInspector] public AudioSource audioSource;
     private ConversationVolumeController soundVolumeController;
+    private ConversingNPCs conversingNPCs;
     private CameraZoom cameraZoom;
     private float zoomValue;
     private float volumeMarginError = 0.1f;
@@ -16,11 +18,13 @@ public class ConversationController : MonoBehaviour
     private bool isZooming => cameraZoom != null && cameraZoom.IsZooming(zoomValue);
     private bool isFocused => isLookingAt && isZooming;
     private bool isRewinding;
+    public List<GameObject> npcs => conversingNPCs != null ? conversingNPCs.GetNPCs() : new();
 
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         soundVolumeController = GetComponent<ConversationVolumeController>();
+        conversingNPCs = GetComponent<ConversingNPCs>();
         clue = GetComponent<InteractableClue>();
     }
 
