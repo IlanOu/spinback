@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using Cinematics;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using UI.Toggle;
-using Unity.VisualScripting; // important pour .ToList()
+using Unity.VisualScripting;
 
 namespace Object.InvestigationReport
 {
@@ -18,11 +20,15 @@ namespace Object.InvestigationReport
         [SerializeField] private GameObject investigationReportItemPrefab;
         [SerializeField] private GameObject gridLayoutGroupPrefab;
         [SerializeField] private CursorManager cursorManager;
-        [SerializeField] private UI.Carousel.Carousel2D carousel;
 
+        [SerializeField] private UI.Carousel.Carousel2D carousel; // Référence au carousel
+        [SerializeField] private Button signButton;
+        
         [Header("Configuration")]
         [SerializeField] private int maxReportItems = 9;
-        [SerializeField] private int itemsPerGrid = 4;
+        [SerializeField] private int itemsPerGrid = 4; // Nombre d'items par grille
+        
+        [SerializeField] private string endCinematicName = "EndScene";
 
         private bool isShowing = false;
         private List<Clue> investigationReportItems = new List<Clue>();
@@ -39,7 +45,10 @@ namespace Object.InvestigationReport
                 if (input == 1)
                     DisplayReport();
             });
-
+            
+            signButton.onClick.AddListener(EndCinematic);
+            
+            // Trouver le CursorManager s'il n'est pas assigné
             if (cursorManager == null)
                 cursorManager = FindObjectOfType<CursorManager>();
 
@@ -84,6 +93,12 @@ namespace Object.InvestigationReport
                 cursorManager.SetHideOnClickEnabled(true);
                 cursorManager.SetCursorHidden(cursorStateBeforeShow);
             }
+        }
+        
+        void EndCinematic()
+        {
+            HideUI();
+            SceneTransitionBlinker.Instance.TransitionToSceneWithVideo(endCinematicName);
         }
 
         void DisplayReport()
