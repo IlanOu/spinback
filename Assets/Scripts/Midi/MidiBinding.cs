@@ -46,7 +46,7 @@ public class MidiBinding : MonoBehaviour
     void OnEnable()
     {
         if (_inputCallback == null) return;
-        
+
         _inputCallback.OnNoteOn += OnWillNoteOn;
         _inputCallback.OnNoteOff += OnWillNoteOff;
         _inputCallback.OnAftertouch += OnWillAftertouch;
@@ -58,7 +58,7 @@ public class MidiBinding : MonoBehaviour
     void OnDisable()
     {
         if (_inputCallback == null) return;
-        
+
         _inputCallback.OnNoteOn -= OnWillNoteOn;
         _inputCallback.OnNoteOff -= OnWillNoteOff;
         _inputCallback.OnAftertouch -= OnWillAftertouch;
@@ -81,7 +81,7 @@ public class MidiBinding : MonoBehaviour
         _inputCallback = GetComponent<MidiInputCallback>();
     }
 
-     private void Handle(MidiBindingConfig.MidiEventType type, int number, int channel, float value)
+    private void Handle(MidiBindingConfig.MidiEventType type, int number, int channel, float value)
     {
         if (config.TryGetBind(type, number, channel, out var bind) &&
             _listeners.TryGetValue(bind, out var callback))
@@ -97,10 +97,15 @@ public class MidiBinding : MonoBehaviour
         else
             _listeners[bind] += callback;
     }
-    
+
     public void Unsubscribe(MidiBind bind, Action<float> callback)
     {
         if (_listeners.ContainsKey(bind))
             _listeners[bind] -= callback;
+    }
+    
+    public void UnsubscribeAll()
+    {
+        _listeners.Clear();
     }
 }
