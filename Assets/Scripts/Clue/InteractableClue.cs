@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class InteractableClue : MonoBehaviour
 {
+    public Action OnClueAdded;
     [SerializeField] private Clue clue;
     [SerializeField] private DetectableGameObject detectableGameObject;
     private bool isInteractable = false;
@@ -36,6 +38,7 @@ public class InteractableClue : MonoBehaviour
             if (ClueDatabase.Instance.AddClue(clue))
             {
                 PopupUI.Instance.Show(clue.popup);
+                OnClueAdded?.Invoke();
             }
         }
     }

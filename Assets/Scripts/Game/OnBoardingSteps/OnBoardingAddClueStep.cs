@@ -5,18 +5,21 @@ public class OnBoardingAddClueStep : OnBoardingStep
     public OnBoardingAddClueStep(OnboardingManager manager) : base(manager) { }
     public override OnBoardingStep NextStep() => new OnBoardingOpenReportStep(manager);
     private GameObject clue => manager.clue;
+    private InteractableClue interactableClue;
 
     public override void Show()
     {
-        InteractableClue interactableClue = clue.GetComponent<InteractableClue>();
-        if (interactableClue != null)
-        {
-            interactableClue.EnableInteractability();
-        }
+        interactableClue = clue.GetComponent<InteractableClue>();
+        interactableClue.EnableInteractability();
+
+        interactableClue.OnClueAdded += manager.NextStep;
     }
 
     public override void Hide()
     {
-        manager.NextStep();
+        interactableClue.OnClueAdded -= manager.NextStep;
+
+        OutlineObject outlineObject = clue.GetComponent<OutlineObject>();
+        outlineObject.EnableVisibility(false);
     }
 }
