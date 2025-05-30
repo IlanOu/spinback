@@ -7,6 +7,7 @@ namespace Object.InteractableState
         protected InteractableObject interactableObject;
         protected GameObject gameObject => interactableObject.gameObject;
         protected Material material => interactableObject.material;
+        protected Outline outline => interactableObject.outline;
 
         public InteractableState(InteractableObject interactableObject)
         {

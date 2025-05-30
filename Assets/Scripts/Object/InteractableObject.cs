@@ -11,6 +11,7 @@ namespace Object
         [SerializeField, Range(0f, 1f)] private float zoomValue = 0.3f;
         [HideInInspector] public IInteractableState currentState;
         [HideInInspector] public Material material;
+        [HideInInspector] public Outline outline;
         private CameraZoom cameraZoom;
         public bool IsLookingAt => detectableGameObject.isLookingAt;
         public bool alwaysShowLabel = false;
@@ -20,6 +21,7 @@ namespace Object
         void Awake()
         {
             material = GetComponent<Renderer>().material;
+            outline = GetComponent<Outline>();
             currentState = new OutlineInteractableState(this);
         }
     

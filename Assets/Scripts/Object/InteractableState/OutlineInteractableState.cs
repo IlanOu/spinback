@@ -6,7 +6,15 @@ namespace Object.InteractableState
 
         public override void Enable() 
         {
-            material.SetFloat("_OutlineSize", interactableObject.outlineSize);
+            if (outline != null)
+            {
+                outline.enabled = true;
+                outline.OutlineWidth = interactableObject.outlineSize;
+            }
+            else
+            {
+                material.SetFloat("_OutlineSize", interactableObject.outlineSize);
+            }
         }
 
         public override void Handle()
@@ -19,7 +27,14 @@ namespace Object.InteractableState
 
         public override void Disable() 
         {
-            material.SetFloat("_OutlineSize", 0f);
+            if (outline != null)
+            {
+                outline.enabled = false;
+            }
+            else
+            {
+                material.SetFloat("_OutlineSize", 0f);
+            }
         }
     }
 }

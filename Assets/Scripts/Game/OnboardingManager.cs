@@ -11,6 +11,10 @@ public class OnboardingManager : MonoBehaviour
     [Header("On Start")]
     [HideInInspector] public SmoothCameraFollow cameraFollow;
     [HideInInspector] public CameraZoom cameraZoom;
+    [Header("Focus step")]
+    [SerializeField] public TooltipActivator tooltipActivator;
+    [Header("Add clue step")]
+    [SerializeField] public GameObject clue;
 
     void Awake()
     {
@@ -26,6 +30,16 @@ public class OnboardingManager : MonoBehaviour
     {
         cameraFollow = Camera.main.GetComponent<SmoothCameraFollow>();
         cameraZoom = Camera.main.GetComponent<CameraZoom>();
+
+        currentStep = null;
+    }
+
+    void Update()
+    {
+        if (currentStep != null)
+        {
+            currentStep.Handle();
+        }
     }
 
     public void StartOnboarding()
@@ -40,11 +54,16 @@ public class OnboardingManager : MonoBehaviour
 
         cameraFollow.enabled = true;
         cameraFollow.SetTargetRotation(rotation);
+
+        StartStep();
     }
 
     public void StartStep()
     {
-        currentStep.Show();
+        if (currentStep != null)
+        {
+            currentStep.Show();
+        }
     }
 
     public void NextStep()
@@ -54,7 +73,7 @@ public class OnboardingManager : MonoBehaviour
 
         if (currentStep != null)
         {
-            currentStep.Show();
+            StartStep();
         }
         else
         {
@@ -62,13 +81,9 @@ public class OnboardingManager : MonoBehaviour
         }
     }
 
-    public void FinishStep()
-    {
-        NextStep();
-    }
-    
     public void FinishOnboarding()
     {
+        currentStep = null;
         director.Play();
     }
 }

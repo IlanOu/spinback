@@ -2,16 +2,21 @@ using UnityEngine;
 
 public class OnBoardingAddClueStep : OnBoardingStep
 {
-    public OnBoardingAddClueStep(OnboardingManager manager) : base(manager) {}
+    public OnBoardingAddClueStep(OnboardingManager manager) : base(manager) { }
     public override OnBoardingStep NextStep() => new OnBoardingOpenReportStep(manager);
+    private GameObject clue => manager.clue;
 
-    public new void Hide()
+    public override void Show()
     {
-        throw new System.NotImplementedException();
+        InteractableClue interactableClue = clue.GetComponent<InteractableClue>();
+        if (interactableClue != null)
+        {
+            interactableClue.EnableInteractability();
+        }
     }
 
-    public new void Show()
+    public override void Hide()
     {
-        throw new System.NotImplementedException();
+        manager.NextStep();
     }
 }

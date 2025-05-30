@@ -4,10 +4,33 @@ namespace Object.InteractableState
     {
         public TextInteractableState(InteractableObject interactableObject) : base(interactableObject) {}
 
-        public override void Enable() 
+        public override void Enable()
         {
-            material.SetFloat("_OutlineSize", interactableObject.outlineSize);
-            interactableObject.label3D.SetActive(true);
+            if (outline != null)
+            {
+                outline.enabled = true;
+                outline.OutlineWidth = interactableObject.outlineSize;
+            }
+            else
+            {
+                material.SetFloat("_OutlineSize", interactableObject.outlineSize);
+            }
+
+            if (interactableObject.label3D != null)
+            {
+                interactableObject.label3D.SetActive(true);
+            }
+            else
+            {
+                if (interactableObject.alwaysShowLabel)
+                {
+                    interactableObject.UpdateState(new OutlineInteractableState(interactableObject));
+                }
+                else
+                {
+                    interactableObject.UpdateState(new NoneInteractableState(interactableObject));
+                }
+            }
         }
 
         public override void Handle()
@@ -27,8 +50,19 @@ namespace Object.InteractableState
 
         public override void Disable() 
         {
-            material.SetFloat("_OutlineSize", 0f);
-            interactableObject.label3D.SetActive(false);
+            if (outline != null)
+            {
+                outline.enabled = false;
+            }
+            else
+            {
+                material.SetFloat("_OutlineSize", 0f);
+            }
+
+            if (interactableObject.label3D != null)
+            {
+                interactableObject.label3D.SetActive(false);
+            }
         }
     }
 }
