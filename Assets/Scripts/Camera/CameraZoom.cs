@@ -12,16 +12,19 @@ public class CameraZoom : MonoBehaviour
     public float currentZoom;
     private float targetZoom;
     private Camera mainCamera;
+    private float speed;
 
     void Awake()
     {
         mainCamera = GetComponent<Camera>();
     }
 
-    void Start()
+    void OnEnable()
     {
+        speed = zoomSmoothSpeed;
+        
         currentZoom = mainCamera.fieldOfView;
-        targetZoom = currentZoom;
+        targetZoom = maxZoom;
 
         MidiBinding.Instance.Subscribe(MidiBind.TEMPO_FADER_1, OnMidiZoom);
         MidiBinding.Instance.Subscribe(MidiBind.TEMPO_FADER_2, OnMidiZoom);
@@ -30,6 +33,7 @@ public class CameraZoom : MonoBehaviour
     void Update()
     {
         HandleZoom();
+        HandleSpeed();
     }
 
     void HandleZoom()
@@ -43,9 +47,16 @@ public class CameraZoom : MonoBehaviour
             targetZoom += zoomStep * Time.deltaTime;
 
         targetZoom = Mathf.Clamp(targetZoom, minZoom, maxZoom);
-
-        currentZoom = Mathf.Lerp(currentZoom, targetZoom, zoomSmoothSpeed * Time.deltaTime);
+        currentZoom = Mathf.Lerp(currentZoom, targetZoom, speed * Time.deltaTime);
         mainCamera.fieldOfView = currentZoom;
+    }
+
+    void HandleSpeed()
+    {
+        if (currentZoom == maxZoom || currentZoom == minZoom)
+        {
+            speed = zoomSmoothSpeed;
+        }
     }
 
     void OnMidiZoom(float value)
@@ -57,5 +68,15 @@ public class CameraZoom : MonoBehaviour
     {
         float expectedZoom = Mathf.Lerp(minZoom, maxZoom, 1 - value);
         return expectedZoom > currentZoom;
+    }
+
+    public void SetTargetZoom(float zoom)
+    {
+        targetZoom = zoom;
+    }
+
+    public void SetSpeed(float newSpeed)
+    {
+        speed = newSpeed;
     }
 }

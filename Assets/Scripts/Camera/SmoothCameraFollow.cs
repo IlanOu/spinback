@@ -21,7 +21,7 @@ public class SmoothCameraFollow : MonoBehaviour
     private Vector2 currentRotation;
     private Vector2 targetRotation;
     private Camera mainCamera;
-    
+
     private bool cursorWasVisiblePriorToScript;
     private CursorLockMode previousLockModePriorToScript;
     private bool isSubscribedToCursorManager = false;
@@ -34,7 +34,7 @@ public class SmoothCameraFollow : MonoBehaviour
 
         currentRotation = new Vector2(transform.eulerAngles.y, transform.eulerAngles.x);
         targetRotation = currentRotation;
-        
+
         if (cursorManager == null)
             cursorManager = FindObjectOfType<CursorManager>();
 
@@ -72,14 +72,14 @@ public class SmoothCameraFollow : MonoBehaviour
         }
         else if (cursorManager == null)
         {
-            if (Application.isPlaying) 
+            if (Application.isPlaying)
             {
                 Cursor.visible = cursorWasVisiblePriorToScript;
                 Cursor.lockState = previousLockModePriorToScript;
             }
         }
     }
-    
+
     void OnDestroy()
     {
         if (cursorManager != null && isSubscribedToCursorManager)
@@ -101,7 +101,7 @@ public class SmoothCameraFollow : MonoBehaviour
         cursorManager.OnCursorStateChanged -= HandleCursorManagerStateChanged;
         isSubscribedToCursorManager = false;
     }
-    
+
     private void HandleCursorManagerStateChanged(bool isHidden)
     {
         useMouseControl = isHidden;
@@ -113,7 +113,7 @@ public class SmoothCameraFollow : MonoBehaviour
         {
             SetMouseControl(!useMouseControl);
         }
-        
+
         if (useMouseControl)
         {
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
@@ -122,7 +122,7 @@ public class SmoothCameraFollow : MonoBehaviour
             targetRotation.x += mouseX;
             targetRotation.y -= mouseY;
         }
-        
+
         if (Input.GetKey(KeyCode.A))
             targetRotation.x -= keyboardRotationSpeed * Time.deltaTime;
         if (Input.GetKey(KeyCode.D))
@@ -131,24 +131,24 @@ public class SmoothCameraFollow : MonoBehaviour
             targetRotation.y -= keyboardRotationSpeed * Time.deltaTime;
         if (Input.GetKey(KeyCode.S))
             targetRotation.y += keyboardRotationSpeed * Time.deltaTime;
-        
+
         targetRotation.x = Mathf.Clamp(targetRotation.x, minX, maxX);
         targetRotation.y = Mathf.Clamp(targetRotation.y, minY, maxY);
-        
+
         currentRotation = Vector2.Lerp(currentRotation, targetRotation, smoothSpeed * Time.deltaTime);
         transform.rotation = Quaternion.Euler(currentRotation.y, currentRotation.x, 0);
-        
+
         if (useMouseControl && Input.GetKeyDown(KeyCode.Escape))
         {
             SetMouseControl(false);
         }
-        
+
         if (cursorManager != null && useMouseControl && !cursorManager.IsCursorHidden())
         {
             useMouseControl = false;
         }
     }
-    
+
     private void UpdateInternalCursorState()
     {
         if (cursorManager != null) return;
@@ -164,7 +164,7 @@ public class SmoothCameraFollow : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
         }
     }
-    
+
     public void SetMouseControl(bool enable)
     {
         useMouseControl = enable;
@@ -177,9 +177,14 @@ public class SmoothCameraFollow : MonoBehaviour
             UpdateInternalCursorState();
         }
     }
-    
+
     public bool IsMouseControlActive()
     {
         return useMouseControl;
+    }
+    
+    public void SetTargetRotation(Vector2 rotation)
+    {
+        targetRotation = rotation;
     }
 }
