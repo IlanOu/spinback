@@ -1,4 +1,6 @@
 using System;
+using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InteractableClue : MonoBehaviour
@@ -20,18 +22,31 @@ public class InteractableClue : MonoBehaviour
         CameraZoomSettings settings = GlobalCameraSettings.Instance.GetSettings<CameraZoomSettings>(detectableGameObject.objectType);
         zoomValue = settings.zoomValue;
 
-        MidiBinding.Instance.Subscribe(MidiBind.BROWSER_BUTTON, (input) => OnControllerButtonPressed());
+        MidiBinding.Instance.Subscribe(MidiBind.BROWSER_BUTTON, OnControllerButtonPressed);
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))
         {
-            OnControllerButtonPressed();
+            AddClue();
         }
     }
 
-    void OnControllerButtonPressed()
+    void OnDisable()
+    {
+        MidiBinding.Instance.Unsubscribe(MidiBind.BROWSER_BUTTON, OnControllerButtonPressed);
+    }
+
+    void OnControllerButtonPressed(float value)
+    {
+        if (value == 1)
+        {
+            AddClue();
+        }
+    }
+
+    void AddClue()
     {
         if (isFocused && isInteractable)
         {

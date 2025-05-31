@@ -6,20 +6,25 @@ public class OnBoardingFocusStep : OnBoardingStep
     public override OnBoardingStep NextStep() => new OnBoardingAddClueStep(manager);
     private TooltipActivator tooltipActivator => manager.tooltipActivator;
 
+    private bool mouseTooltipEnabled => tooltipActivator.mouseTooltip.activeSelf;
+    private bool sliderTooltipEnabled => tooltipActivator.sliderTooltip.activeSelf;
+
     public override void Show()
     {
+        tooltipActivator.EnableMouseTooltip();
         tooltipActivator.EnableSliderTooltip();
-
-        MidiBinding.Instance.Subscribe(MidiBind.TEMPO_FADER_1, OnSlider);
-        MidiBinding.Instance.Subscribe(MidiBind.TEMPO_FADER_2, OnSlider);
     }
 
-    void OnSlider(float value) => EndStep();
+    public override void Handle()
+    {
+        if (mouseTooltipEnabled && sliderTooltipEnabled)
+        {
+            EndStep();
+        }
+    }
     
     void EndStep()
     {
-        MidiBinding.Instance.Unsubscribe(MidiBind.TEMPO_FADER_1, OnSlider);
-        MidiBinding.Instance.Unsubscribe(MidiBind.TEMPO_FADER_2, OnSlider);
         manager.NextStep();
     }
 }

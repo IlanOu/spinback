@@ -2,12 +2,17 @@ using UnityEngine;
 
 public class TooltipActivator : MonoBehaviour
 {
-    [SerializeField] private GameObject potentiometerTooltip;
-    [SerializeField] private GameObject sliderTooltip;
-    [SerializeField] private GameObject jogWheelTooltip;
+    [SerializeField] public GameObject mouseTooltip;
+    [SerializeField] public GameObject potentiometerTooltip;
+    [SerializeField] public GameObject sliderTooltip;
+    [SerializeField] public GameObject jogWheelTooltip;
+    private Vector3 lastMousePosition;
 
     void Start()
     {
+        // Mouse
+        lastMousePosition = Input.mousePosition;
+
         // Potentiometer
         MidiBinding.Instance.Subscribe(MidiBind.GAIN_POT_1, (float value) => DisablePotentiometerTooltip());
         MidiBinding.Instance.Subscribe(MidiBind.GAIN_POT_2, (float value) => DisablePotentiometerTooltip());
@@ -21,6 +26,23 @@ public class TooltipActivator : MonoBehaviour
         MidiBinding.Instance.Subscribe(MidiBind.JOG_ROLL_2, (float value) => DisableJogWheelTooltip());
         MidiBinding.Instance.Subscribe(MidiBind.JOG_BUTTON_ROLL_1, (float value) => DisableJogWheelTooltip());
         MidiBinding.Instance.Subscribe(MidiBind.JOG_BUTTON_ROLL_2, (float value) => DisableJogWheelTooltip());
+    }
+
+    void Update()
+    {
+        // If the mouse has moved, disable the tooltip
+        if (mouseTooltip.activeSelf && Input.mousePosition != lastMousePosition)
+        {
+            DisableMouseTooltip();
+        }
+    }
+    
+    void DisableMouseTooltip()
+    {
+        if (mouseTooltip != null)
+        {
+            mouseTooltip.SetActive(false);
+        }
     }
 
     void DisablePotentiometerTooltip()
@@ -44,6 +66,14 @@ public class TooltipActivator : MonoBehaviour
         if (jogWheelTooltip != null)
         {
             jogWheelTooltip.SetActive(false);
+        }
+    }
+
+    public void EnableMouseTooltip()
+    {
+        if (mouseTooltip != null)
+        {
+            mouseTooltip.SetActive(true);
         }
     }
 

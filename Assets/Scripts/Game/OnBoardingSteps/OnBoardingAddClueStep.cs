@@ -18,6 +18,7 @@ public class OnBoardingAddClueStep : OnBoardingStep
     public override void Hide()
     {
         interactableClue.OnClueAdded -= manager.NextStep;
+        interactableClue.enabled = false;
 
         OutlineObject outlineObject = clue.GetComponent<OutlineObject>();
         outlineObject.EnableVisibility(false);
