@@ -4,6 +4,8 @@ using UnityEngine.Video;
 using UnityEngine.Audio;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using ThreadPriority = System.Threading.ThreadPriority;
 
 namespace Cinematics 
 {
@@ -31,6 +33,13 @@ namespace Cinematics
         [SerializeField] private string masterMixerName = "Master"; // Nom du groupe de mixage principal
         [SerializeField] private string volumeParameterName = "MasterVolume"; // Nom du paramètre de volume
 
+        [Header("Optimisation")]
+        [SerializeField] private bool loadSceneDuringVideo = true;
+        [SerializeField] private float preloadDelay = 0.5f; // Délai avant de commencer le chargement
+        [SerializeField] private ThreadPriority loadingPriority = ThreadPriority.BelowNormal; // Priorité du thread de chargement
+        [SerializeField] private float maxLoadingTimePerFrame = 0.01f; // Temps max de chargement par frame (en secondes)
+        [SerializeField] private bool waitForVideoToFinish = true; // Attendre la fin de la vidéo avant d'activer la scène
+
         private Vector2 topClosedPos;
         private Vector2 bottomClosedPos;
         private Vector2 topOpenPos;
@@ -42,6 +51,10 @@ namespace Cinematics
         // Référence au mixer trouvé dynamiquement
         private AudioMixer _masterMixer;
         private float _originalMixerVolume = 0f;
+        
+        // Pour le chargement asynchrone
+        private AsyncOperation _sceneLoadOperation;
+        private bool _isLoadingScene = false;
 
         private void Awake()
         {
@@ -71,6 +84,7 @@ namespace Cinematics
         {
             // Réinitialiser les sources audio pour la nouvelle scène
             _activeAudioSources.Clear();
+            _isLoadingScene = false;
             
             // Essayer de trouver le mixer audio dans la nouvelle scène
             FindAudioMixer();
@@ -152,6 +166,7 @@ namespace Cinematics
                 videoPlayer.playOnAwake = false;
                 videoPlayer.isLooping = false;
                 videoPlayer.renderMode = VideoRenderMode.RenderTexture;
+                videoPlayer.skipOnDrop = false; // Ne pas sauter de frames pour une lecture plus fluide
                 
                 // Cache le panel vidéo au départ
                 if (videoPanel != null)
@@ -171,10 +186,13 @@ namespace Cinematics
         }
 
         /// <summary>
-        /// Transition complète avec vidéo : blink (fermeture) → vidéo → chargement → blink (ouverture)
+        /// Transition complète avec vidéo : blink (fermeture) → vidéo + chargement → blink (ouverture)
         /// </summary>
         public void TransitionToSceneWithVideo(string sceneName, VideoClip videoClip = null)
         {
+            if (_isLoadingScene) return; // Éviter les transitions multiples
+            
+            _isLoadingScene = true;
             StartCoroutine(BlinkWithVideoThenLoad(sceneName, videoClip));
         }
 
@@ -183,6 +201,9 @@ namespace Cinematics
         /// </summary>
         public void TransitionToScene(string sceneName)
         {
+            if (_isLoadingScene) return; // Éviter les transitions multiples
+            
+            _isLoadingScene = true;
             StartCoroutine(BlinkThenLoad(sceneName));
         }
 
@@ -194,14 +215,39 @@ namespace Cinematics
             // Fermeture
             yield return StartCoroutine(Blink(close: true));
 
-            // Joue la vidéo si disponible
-            if (videoPlayer != null && (videoClip != null || transitionVideo != null))
+            // Préparer la vidéo
+            VideoClip clipToPlay = videoClip ?? transitionVideo;
+            bool hasVideo = videoPlayer != null && clipToPlay != null;
+            
+            // Démarrer la lecture de la vidéo
+            if (hasVideo)
             {
-                yield return StartCoroutine(PlayTransitionVideo(videoClip ?? transitionVideo));
+                StartCoroutine(PlayTransitionVideo(clipToPlay));
+                
+                // Attendre un peu avant de commencer le chargement pour laisser la vidéo démarrer correctement
+                if (preloadDelay > 0)
+                    yield return new WaitForSecondsRealtime(preloadDelay);
             }
-
-            // Chargement de la nouvelle scène
-            yield return SceneManager.LoadSceneAsync(sceneName);
+            
+            // Démarrer le chargement de la scène en arrière-plan si on a une vidéo
+            if (hasVideo && loadSceneDuringVideo)
+            {
+                // Chargement optimisé
+                yield return StartCoroutine(LoadSceneAsyncOptimized(sceneName, clipToPlay));
+            }
+            else
+            {
+                // Pas de vidéo ou chargement pendant vidéo désactivé
+                if (hasVideo)
+                {
+                    // Attendre la fin de la vidéo
+                    yield return StartCoroutine(WaitForVideoToFinish(clipToPlay));
+                }
+                
+                // Charger la scène normalement
+                yield return SceneManager.LoadSceneAsync(sceneName);
+            }
+            
             yield return new WaitForEndOfFrame();
 
             // Force les panels à être sur le dessus
@@ -212,13 +258,113 @@ namespace Cinematics
             
             // Fade in audio après l'ouverture
             StartCoroutine(FadeInAudio());
+            
+            _isLoadingScene = false;
         }
-
+        
+        private IEnumerator LoadSceneAsyncOptimized(string sceneName, VideoClip clip)
+        {
+            // Démarrer le chargement asynchrone
+            _sceneLoadOperation = SceneManager.LoadSceneAsync(sceneName);
+            _sceneLoadOperation.allowSceneActivation = false;
+            
+            // Définir la priorité du thread de chargement (si possible)
+            try
+            {
+                Thread.CurrentThread.Priority = loadingPriority;
+            }
+            catch (System.Exception)
+            {
+                // Ignorer si on ne peut pas changer la priorité
+            }
+            
+            float lastTime = Time.realtimeSinceStartup;
+            float videoLength = (float)clip.length;
+            float timer = 0f;
+            
+            // Attendre que le chargement soit presque terminé
+            while (_sceneLoadOperation.progress < 0.9f)
+            {
+                // Limiter le temps de chargement par frame pour éviter les saccades
+                float currentTime = Time.realtimeSinceStartup;
+                float deltaTime = currentTime - lastTime;
+                
+                if (deltaTime < maxLoadingTimePerFrame)
+                {
+                    // Attendre pour donner plus de temps à la vidéo
+                    yield return new WaitForEndOfFrame();
+                }
+                else
+                {
+                    timer += deltaTime;
+                }
+                
+                lastTime = Time.realtimeSinceStartup;
+                
+                // Si on a dépassé la durée de la vidéo, ne pas attendre plus
+                if (timer > videoLength * 0.9f && !waitForVideoToFinish)
+                {
+                    break;
+                }
+                
+                yield return null;
+            }
+            
+            // Attendre que la vidéo soit terminée si demandé
+            if (waitForVideoToFinish)
+            {
+                while (videoPlayer.isPlaying)
+                {
+                    yield return null;
+                }
+            }
+            else
+            {
+                // Sinon, attendre au moins 75% de la durée de la vidéo
+                float minWaitTime = videoLength * 0.75f;
+                if (timer < minWaitTime)
+                {
+                    yield return new WaitForSecondsRealtime(minWaitTime - timer);
+                }
+            }
+            
+            // Cacher le panel vidéo
+            if (videoPanel != null)
+            {
+                videoPanel.gameObject.SetActive(false);
+            }
+            
+            // Activer la scène
+            _sceneLoadOperation.allowSceneActivation = true;
+            
+            // Attendre que la scène soit activée
+            while (!_sceneLoadOperation.isDone)
+            {
+                yield return null;
+            }
+            
+            // Restaurer la priorité du thread
+            try
+            {
+                Thread.CurrentThread.Priority = ThreadPriority.Normal;
+            }
+            catch (System.Exception)
+            {
+                // Ignorer si on ne peut pas changer la priorité
+            }
+        }
+        
         private IEnumerator PlayTransitionVideo(VideoClip clip)
         {
             // Active et configure la vidéo
-            videoPanel.gameObject.SetActive(true);
+            if (videoPanel != null)
+                videoPanel.gameObject.SetActive(true);
+                
             videoPlayer.clip = clip;
+            
+            // Configurer la priorité de la vidéo
+            videoPlayer.playbackSpeed = 1.0f;
+            videoPlayer.skipOnDrop = false; // Ne pas sauter de frames
             
             // Prépare la vidéo
             videoPlayer.Prepare();
@@ -230,14 +376,26 @@ namespace Cinematics
             // Joue la vidéo
             videoPlayer.Play();
             
-            // Attend la fin de la vidéo
+            // Attendre quelques frames pour s'assurer que la vidéo démarre correctement
+            for (int i = 0; i < 5; i++)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+        }
+        
+        private IEnumerator WaitForVideoToFinish(VideoClip clip)
+        {
+            // Attendre que la vidéo soit terminée
             while (videoPlayer.isPlaying)
             {
                 yield return null;
             }
-
-            // Cache le panel vidéo
-            videoPanel.gameObject.SetActive(false);
+            
+            // Cacher le panel vidéo
+            if (videoPanel != null)
+            {
+                videoPanel.gameObject.SetActive(false);
+            }
         }
 
         private IEnumerator BlinkThenLoad(string sceneName)
@@ -260,9 +418,11 @@ namespace Cinematics
             
             // Fade in audio après l'ouverture
             StartCoroutine(FadeInAudio());
+            
+            _isLoadingScene = false;
         }
 
-        /// <summary>
+                /// <summary>
         /// Effectue un blink complet avec vidéo optionnelle au milieu
         /// </summary>
         public IEnumerator BlinkAndDoWithVideo(System.Func<IEnumerator> actionToRunMidBlink, VideoClip videoClip = null)
@@ -274,15 +434,40 @@ namespace Cinematics
             yield return StartCoroutine(Blink(true));
             Debug.Log("Fermeture des paupières");
             
-            // Joue la vidéo si disponible
-            if (videoPlayer != null && (videoClip != null || transitionVideo != null))
+            // Préparer la vidéo
+            VideoClip clipToPlay = videoClip ?? transitionVideo;
+            bool hasVideo = videoPlayer != null && clipToPlay != null;
+            
+            // Démarrer la lecture de la vidéo
+            if (hasVideo)
             {
-                yield return StartCoroutine(PlayTransitionVideo(videoClip ?? transitionVideo));
+                StartCoroutine(PlayTransitionVideo(clipToPlay));
+                
+                // Attendre un peu avant d'exécuter l'action pour laisser la vidéo démarrer correctement
+                if (preloadDelay > 0)
+                    yield return new WaitForSecondsRealtime(preloadDelay);
             }
             
-            // Exécute l'action centrale
+            // Exécuter l'action en parallèle avec la vidéo
             if (actionToRunMidBlink != null)
-                yield return StartCoroutine(actionToRunMidBlink());
+            {
+                if (hasVideo)
+                {
+                    // Exécuter l'action avec une limitation de temps par frame pour éviter les saccades
+                    StartCoroutine(ExecuteActionWithTimeLimit(actionToRunMidBlink));
+                }
+                else
+                {
+                    // Pas de vidéo, exécuter l'action normalement
+                    yield return StartCoroutine(actionToRunMidBlink());
+                }
+            }
+            
+            // Attendre la fin de la vidéo si nécessaire
+            if (hasVideo)
+            {
+                yield return StartCoroutine(WaitForVideoToFinish(clipToPlay));
+            }
 
             yield return new WaitForEndOfFrame();
             BringToFront();
@@ -293,6 +478,32 @@ namespace Cinematics
             
             // Fade in audio après l'ouverture
             StartCoroutine(FadeInAudio());
+        }
+        
+        private IEnumerator ExecuteActionWithTimeLimit(System.Func<IEnumerator> action)
+        {
+            IEnumerator actionEnumerator = action();
+            float lastTime = Time.realtimeSinceStartup;
+            
+            while (actionEnumerator.MoveNext())
+            {
+                // Limiter le temps d'exécution par frame pour éviter les saccades
+                float currentTime = Time.realtimeSinceStartup;
+                float deltaTime = currentTime - lastTime;
+                
+                if (deltaTime < maxLoadingTimePerFrame)
+                {
+                    // Continuer l'action
+                    yield return actionEnumerator.Current;
+                }
+                else
+                {
+                    // Attendre la frame suivante pour donner plus de temps à la vidéo
+                    yield return new WaitForEndOfFrame();
+                }
+                
+                lastTime = Time.realtimeSinceStartup;
+            }
         }
 
         /// <summary>
@@ -493,5 +704,65 @@ namespace Cinematics
                 }
             }
         }
+        
+        /// <summary>
+        /// Obtient la durée estimée de la transition complète
+        /// </summary>
+        public float GetEstimatedTransitionDuration(bool withVideo, VideoClip customClip = null)
+        {
+            float duration = blinkDuration * 2; // Fermeture + ouverture
+            
+            if (withVideo)
+            {
+                VideoClip clip = customClip ?? transitionVideo;
+                if (clip != null)
+                {
+                    duration += (float)clip.length;
+                }
+            }
+            
+            // Ajouter un petit délai pour le chargement de la scène
+            duration += 0.2f;
+            
+            return duration;
+        }
+        
+        /// <summary>
+        /// Méthode utilitaire pour tester la transition
+        /// </summary>
+        public void TestTransition(string sceneName, bool withVideo)
+        {
+            if (_isLoadingScene) return;
+            
+            if (withVideo)
+            {
+                TransitionToSceneWithVideo(sceneName);
+            }
+            else
+            {
+                TransitionToScene(sceneName);
+            }
+        }
+        
+        /// <summary>
+        /// Vérifie si une transition est en cours
+        /// </summary>
+        public bool IsTransitioning()
+        {
+            return _isLoadingScene;
+        }
+        
+        /// <summary>
+        /// Configure les paramètres d'optimisation pour la vidéo
+        /// </summary>
+        public void ConfigureOptimization(bool loadDuringVideo, float delay, ThreadPriority priority, float maxTimePerFrame, bool waitForVideo)
+        {
+            loadSceneDuringVideo = loadDuringVideo;
+            preloadDelay = delay;
+            loadingPriority = priority;
+            maxLoadingTimePerFrame = maxTimePerFrame;
+            waitForVideoToFinish = waitForVideo;
+        }
     }
 }
+

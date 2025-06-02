@@ -536,6 +536,11 @@ MonoBehaviour:
   audioFadeDuration: 0.5
   masterMixerName: SoundMixer
   volumeParameterName: Master
+  loadSceneDuringVideo: 0
+  preloadDelay: 1
+  loadingPriority: 0
+  maxLoadingTimePerFrame: 0.01
+  waitForVideoToFinish: 1
 --- !u!1 &1795329118
 GameObject:
   m_ObjectHideFlags: 0
