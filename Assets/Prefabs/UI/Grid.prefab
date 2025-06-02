@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1195600327158697299}
   - component: {fileID: 3059163510471052748}
-  - component: {fileID: 4415111632429590454}
+  - component: {fileID: 5473510163771751180}
   m_Layer: 5
   m_Name: Grid
   m_TagString: Untagged
@@ -45,7 +45,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9145195716958007432}
   m_CullTransparentMesh: 1
---- !u!114 &4415111632429590454
+--- !u!114 &5473510163771751180
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -54,7 +54,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9145195716958007432}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 47ce5f1986b933046b61b616cc1c90ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
@@ -62,10 +62,15 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 380, y: 140}
-  m_Spacing: {x: 40, y: 20}
-  m_Constraint: 1
-  m_ConstraintCount: 2
+  m_ChildAlignment: 4
+  fitType: 0
+  rows: 2
+  columns: 2
+  cellSize: {x: 465.3236, y: 150}
+  spacing: {x: 0, y: 0}
+  fitX: 1
+  fitY: 1
+  keepCellsSquare: 0
+  fillFirst: 0
+  sortVertically: 0
+  sortHorizontally: 0
