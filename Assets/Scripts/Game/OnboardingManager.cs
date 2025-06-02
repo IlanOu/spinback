@@ -15,6 +15,8 @@ public class OnboardingManager : MonoBehaviour
     [SerializeField] public TooltipActivator tooltipActivator;
     [Header("Add clue step")]
     [SerializeField] public GameObject clue;
+    [Header("Open report step")]
+    [SerializeField] public ReportUI reportUI;
 
     void Awake()
     {
@@ -84,6 +86,10 @@ public class OnboardingManager : MonoBehaviour
     public void FinishOnboarding()
     {
         currentStep = null;
+        
+        reportUI.HideUI();
+        reportUI.gameObject.SetActive(false);
+
         director.Play();
     }
 }
