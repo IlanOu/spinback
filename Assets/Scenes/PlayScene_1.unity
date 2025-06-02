@@ -2253,9 +2253,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 718969100}
     m_Modifications:
+    - target: {fileID: 2442668627656143219, guid: 216c2157308a94374ac3ee23bf0c9912, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2516885808517238891, guid: 216c2157308a94374ac3ee23bf0c9912, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3017711485866547261, guid: 216c2157308a94374ac3ee23bf0c9912, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3665418974678842327, guid: 216c2157308a94374ac3ee23bf0c9912, type: 3}
       propertyPath: m_Name
       value: Tooltips
+      objectReference: {fileID: 0}
+    - target: {fileID: 3665418974678842327, guid: 216c2157308a94374ac3ee23bf0c9912, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4848323166877981965, guid: 216c2157308a94374ac3ee23bf0c9912, type: 3}
+      propertyPath: mouseTooltip
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8659484875081672675, guid: 216c2157308a94374ac3ee23bf0c9912, type: 3}
       propertyPath: m_Pivot.x
@@ -3794,6 +3814,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1151590287}
   m_Mesh: {fileID: -2842192024665760666, guid: 98da7dc9eae564427b3321f8ad527452, type: 3}
+--- !u!114 &1174398025 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5365371427306541880, guid: 981b6552a72d57a47a04fcc956d2d563, type: 3}
+  m_PrefabInstance: {fileID: 2017265513}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1184548617
 GameObject:
   m_ObjectHideFlags: 0
@@ -3901,9 +3932,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2017265516}
     - target: {fileID: 7455198362862092662, guid: 086bd01026bf94a55b3f49e6dc708d86, type: 3}
+      propertyPath: signButton
+      value: 
+      objectReference: {fileID: 1174398025}
+    - target: {fileID: 7455198362862092662, guid: 086bd01026bf94a55b3f49e6dc708d86, type: 3}
       propertyPath: cursorManager
       value: 
       objectReference: {fileID: 1359928343}
+    - target: {fileID: 7455198362862092662, guid: 086bd01026bf94a55b3f49e6dc708d86, type: 3}
+      propertyPath: endCinematicName
+      value: Cinematic End
+      objectReference: {fileID: 0}
     - target: {fileID: 7455198362862092662, guid: 086bd01026bf94a55b3f49e6dc708d86, type: 3}
       propertyPath: investigationReportUI
       value: 
@@ -4652,6 +4691,11 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1 &1546208543 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3477625418988314021, guid: 086bd01026bf94a55b3f49e6dc708d86, type: 3}
+  m_PrefabInstance: {fileID: 1200068940}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1555092968 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2883309899724087968, guid: 56139c9716f56493c9c3fb56b93d9080, type: 3}
@@ -5958,6 +6002,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8346523097361220225, guid: ffb9488f67e544b71971e01fd9e2d457, type: 3}
+      propertyPath: clue.text
+      value: "Julie et Salom\xE9 buvaient pour ne plus penser \xE0 quelque chose,
+        elle voulaient passer outre un \xE9v\xE8nement"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8346523097361220225, guid: ffb9488f67e544b71971e01fd9e2d457, type: 3}
+      propertyPath: clue.popup
+      value: "Julie et Salom\xE9 avaient l'air de parler de quelque chose d'important"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6671,6 +6724,22 @@ PrefabInstance:
     - target: {fileID: 2478097796560211418, guid: 981b6552a72d57a47a04fcc956d2d563, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5365371427306541880, guid: 981b6552a72d57a47a04fcc956d2d563, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5365371427306541880, guid: 981b6552a72d57a47a04fcc956d2d563, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5365371427306541880, guid: 981b6552a72d57a47a04fcc956d2d563, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1546208543}
+    - target: {fileID: 5365371427306541880, guid: 981b6552a72d57a47a04fcc956d2d563, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7729,11 +7798,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4842616975173341158, guid: 0a4e24f3161574cd980e6a9c463ac215, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -960
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4842616975173341158, guid: 0a4e24f3161574cd980e6a9c463ac215, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -540
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4842616975173341158, guid: 0a4e24f3161574cd980e6a9c463ac215, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7846,8 +7915,8 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 9211640250901555175, guid: 56139c9716f56493c9c3fb56b93d9080, type: 3}
   m_PrefabInstance: {fileID: 7252866623831011571}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &8218978384563263333 stripped
-Transform:
+--- !u!224 &8218978384563263333 stripped
+RectTransform:
   m_CorrespondingSourceObject: {fileID: 4842616975173341158, guid: 0a4e24f3161574cd980e6a9c463ac215, type: 3}
   m_PrefabInstance: {fileID: 7250792686931179794}
   m_PrefabAsset: {fileID: 0}
