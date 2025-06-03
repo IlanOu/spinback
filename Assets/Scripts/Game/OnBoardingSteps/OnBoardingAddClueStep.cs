@@ -1,18 +1,19 @@
-using UnityEngine;
 
 public class OnBoardingAddClueStep : OnBoardingStep
 {
     public OnBoardingAddClueStep(OnboardingManager manager) : base(manager) { }
-    public override OnBoardingStep NextStep() => new OnBoardingOpenReportStep(manager);
-    private GameObject clue => manager.clue;
-    private InteractableClue interactableClue;
+    public override OnBoardingStep NextStep() => null;
+    private InteractableClue interactableClue => manager.interactableClue;
+    private OutlineObject outlineClue => manager.outlineClue;
 
     public override void Show()
     {
-        interactableClue = clue.GetComponent<InteractableClue>();
         interactableClue.EnableInteractability();
-
         interactableClue.OnClueAdded += manager.NextStep;
+
+        outlineClue.EnableVisibility(true);
+
+        TooltipActivator.Instance.EnableTooltip(TooltipType.AddClue);
     }
 
     public override void Hide()
@@ -20,7 +21,8 @@ public class OnBoardingAddClueStep : OnBoardingStep
         interactableClue.OnClueAdded -= manager.NextStep;
         interactableClue.enabled = false;
 
-        OutlineObject outlineObject = clue.GetComponent<OutlineObject>();
-        outlineObject.EnableVisibility(false);
+        outlineClue.EnableVisibility(false);
+
+        TooltipActivator.Instance.DisableAllTooltips();
     }
 }

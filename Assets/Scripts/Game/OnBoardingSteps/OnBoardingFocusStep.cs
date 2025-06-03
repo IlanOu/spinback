@@ -1,18 +1,15 @@
-using UnityEngine;
 
 public class OnBoardingFocusStep : OnBoardingStep
 {
     public OnBoardingFocusStep(OnboardingManager manager) : base(manager) { }
     public override OnBoardingStep NextStep() => new OnBoardingAddClueStep(manager);
-    private TooltipActivator tooltipActivator => manager.tooltipActivator;
-
-    private bool mouseTooltipEnabled => tooltipActivator.mouseTooltip.activeSelf;
-    private bool sliderTooltipEnabled => tooltipActivator.sliderTooltip.activeSelf;
+    private bool mouseTooltipEnabled => TooltipActivator.Instance.mouseTooltip.activeSelf;
+    private bool sliderTooltipEnabled => TooltipActivator.Instance.sliderTooltip.activeSelf;
 
     public override void Show()
     {
-        tooltipActivator.EnableMouseTooltip();
-        tooltipActivator.EnableSliderTooltip();
+        TooltipActivator.Instance.EnableTooltip(TooltipType.Mouse);
+        TooltipActivator.Instance.EnableTooltip(TooltipType.Slider);
     }
 
     public override void Handle()
@@ -22,9 +19,14 @@ public class OnBoardingFocusStep : OnBoardingStep
             EndStep();
         }
     }
-    
+
     void EndStep()
     {
         manager.NextStep();
+    }
+
+    public override void Hide()
+    {
+        TooltipActivator.Instance.DisableAllTooltips();
     }
 }

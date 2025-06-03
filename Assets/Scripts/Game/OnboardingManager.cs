@@ -11,10 +11,11 @@ public class OnboardingManager : MonoBehaviour
     [Header("On Start")]
     [HideInInspector] public SmoothCameraFollow cameraFollow;
     [HideInInspector] public CameraZoom cameraZoom;
-    [Header("Focus step")]
-    [SerializeField] public TooltipActivator tooltipActivator;
     [Header("Add clue step")]
     [SerializeField] public GameObject clue;
+    [HideInInspector] public InteractableClue interactableClue;
+    [HideInInspector] public OutlineObject outlineClue;
+
     [Header("Open report step")]
     [SerializeField] public ReportUI reportUI;
 
@@ -33,6 +34,9 @@ public class OnboardingManager : MonoBehaviour
         cameraFollow = Camera.main.GetComponent<SmoothCameraFollow>();
         cameraZoom = Camera.main.GetComponent<CameraZoom>();
 
+        interactableClue = clue.GetComponent<InteractableClue>();
+        outlineClue = clue.GetComponent<OutlineObject>();
+
         currentStep = null;
     }
 
@@ -42,6 +46,11 @@ public class OnboardingManager : MonoBehaviour
         {
             currentStep.Handle();
         }
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            NextStep();
+        }
     }
 
     public void StartOnboarding()
@@ -49,13 +58,16 @@ public class OnboardingManager : MonoBehaviour
         Vector2 rotation = Camera.main.transform.localEulerAngles;
 
         director.Pause();
-        currentStep = new OnBoardingFocusStep(this);
+        currentStep = new OnBoardingOpenReportStep(this);
 
         cameraZoom.enabled = true;
         cameraZoom.SetSpeed(5f);
 
         cameraFollow.enabled = true;
         cameraFollow.SetTargetRotation(rotation);
+
+        interactableClue.DisableInteractability();
+        outlineClue.EnableVisibility(false);
 
         StartStep();
     }

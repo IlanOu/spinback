@@ -27,7 +27,7 @@ public class InteractableClue : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             AddClue();
         }
