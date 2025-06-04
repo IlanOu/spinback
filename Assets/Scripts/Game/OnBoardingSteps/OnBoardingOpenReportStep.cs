@@ -1,4 +1,6 @@
 
+using UI.Report;
+
 public class OnBoardingOpenReportStep : OnBoardingStep
 {
     public OnBoardingOpenReportStep(OnboardingManager manager) : base(manager) {}

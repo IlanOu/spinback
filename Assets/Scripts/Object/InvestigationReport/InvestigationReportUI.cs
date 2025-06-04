@@ -2,12 +2,10 @@ using System;
 using System.Collections.Generic;
 using Cinematics;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using UI.Toggle;
-using Unity.VisualScripting;
 
 namespace Object.InvestigationReport
 {
@@ -19,7 +17,6 @@ namespace Object.InvestigationReport
         [SerializeField] private GameObject itemList;
         [SerializeField] private GameObject investigationReportItemPrefab;
         [SerializeField] private GameObject gridLayoutGroupPrefab;
-        [SerializeField] private CursorManager cursorManager;
 
         [SerializeField] private UI.Carousel.Carousel2D carousel; // Référence au carousel
         [SerializeField] private Button signButton;
@@ -35,6 +32,9 @@ namespace Object.InvestigationReport
         private Dictionary<string, GameObject> uiItemsMap = new Dictionary<string, GameObject>();
         private List<GameObject> gridContainers = new List<GameObject>();
         private bool cursorStateBeforeShow = false;
+        
+        // Token pour la commande de curseur
+        private CursorCommandToken cursorToken;
 
         void Start()
         {
@@ -47,10 +47,6 @@ namespace Object.InvestigationReport
             });
             
             signButton.onClick.AddListener(EndCinematic);
-            
-            // Trouver le CursorManager s'il n'est pas assigné
-            if (cursorManager == null)
-                cursorManager = FindObjectOfType<CursorManager>();
 
             if (carousel == null)
                 carousel = GetComponentInChildren<UI.Carousel.Carousel2D>();
@@ -67,12 +63,14 @@ namespace Object.InvestigationReport
 
         void ShowUI()
         {
-            if (cursorManager != null)
-            {
-                cursorStateBeforeShow = cursorManager.IsCursorHidden();
-                cursorManager.SetHideOnClickEnabled(false);
-                cursorManager.SetCursorHidden(false);
-            }
+            // Sauvegarder l'état du curseur avant d'afficher l'UI
+            cursorStateBeforeShow = CursorManager.Instance.IsCursorHidden();
+            
+            // Désactiver temporairement le hideOnClick
+            CursorManager.Instance.SetHideOnClickEnabled(false);
+            
+            // Demander que le curseur soit visible avec une priorité élevée (80)
+            cursorToken = CursorManager.Instance.AddCommand("InvestigationReport", true, 80);
 
             investigationReportUI.SetActive(true);
             isShowing = true;
@@ -88,10 +86,17 @@ namespace Object.InvestigationReport
             investigationReportUI.SetActive(false);
             isShowing = false;
 
-            if (cursorManager != null)
+            // Réactiver le hideOnClick
+            CursorManager.Instance.SetHideOnClickEnabled(true);
+            
+            // Libérer la commande de curseur
+            if (cursorToken != null)
             {
-                cursorManager.SetHideOnClickEnabled(true);
-                cursorManager.SetCursorHidden(cursorStateBeforeShow);
+                cursorToken.Dispose();
+                cursorToken = null;
+                
+                // Restaurer l'état précédent du curseur
+                CursorManager.Instance.SetDefaultCursorHidden(cursorStateBeforeShow);
             }
         }
         
@@ -247,10 +252,30 @@ namespace Object.InvestigationReport
 
         private void OnDisable()
         {
-            if (isShowing && cursorManager)
+            if (isShowing)
             {
-                cursorManager.SetHideOnClickEnabled(true);
-                cursorManager.SetCursorHidden(cursorStateBeforeShow);
+                // Réactiver le hideOnClick
+                CursorManager.Instance.SetHideOnClickEnabled(true);
+                
+                // Libérer la commande de curseur
+                if (cursorToken != null)
+                {
+                    cursorToken.Dispose();
+                    cursorToken = null;
+                    
+                    // Restaurer l'état précédent du curseur
+                    CursorManager.Instance.SetDefaultCursorHidden(cursorStateBeforeShow);
+                }
+            }
+        }
+
+        private void OnDestroy()
+        {
+            // S'assurer que la commande est libérée
+            if (cursorToken != null)
+            {
+                cursorToken.Dispose();
+                cursorToken = null;
             }
         }
 

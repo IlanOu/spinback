@@ -1,9 +1,10 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Events;
 using DG.Tweening;
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class CircularMenu : MonoBehaviour
 {
@@ -25,10 +26,8 @@ public class CircularMenu : MonoBehaviour
     [Header("Menu Items")] [SerializeField]
     private List<MenuItem> menuItems = new List<MenuItem>();
 
-    [Header("Visual Elements")] [SerializeField]
-    private Image backgroundImage;
+    [Header("Visual Elements")]
 
-    [SerializeField] private Color backgroundActiveColor = new Color(0, 0, 0, 0.7f);
     [SerializeField] private Transform arrowIndicator; // Flèche au centre
     [SerializeField] private float selectedItemScale = 1.2f; // Échelle de l'élément sélectionné
 
@@ -44,8 +43,8 @@ public class CircularMenu : MonoBehaviour
     private UnityEvent onMenuOpen; // Événements à déclencher quand le menu s'ouvre
 
     [SerializeField] private UnityEvent onMenuClose; // Événements à déclencher quand le menu se ferme
-    
-    [System.Serializable]
+
+    [Serializable]
     public class MenuItem
     {
         public string name;
@@ -67,6 +66,9 @@ public class CircularMenu : MonoBehaviour
     private Sequence _arrowPulseSequence;
     private Image[] _itemImages; // Références aux composants Image des éléments
     private Color[] _itemOriginalColors; // Couleurs originales des éléments
+
+    private CursorCommandToken cursorToken;
+    private PauseCommandToken pauseToken;
 
     private void Start()
     {
@@ -171,7 +173,7 @@ public class CircularMenu : MonoBehaviour
                 {
                     menuItems[i].itemTransform.pivot = new Vector2(0.5f, 0.5f);
                 }
-                catch (System.Exception)
+                catch (Exception)
                 {
                     Debug.LogWarning($"Impossible de modifier le pivot de l'élément {menuItems[i].name}");
                 }
@@ -208,15 +210,18 @@ public class CircularMenu : MonoBehaviour
 
         // Appliquer les états actifs/inactifs
         ApplyItemStates();
-        
+
         // Déclencher les événements d'ouverture
         onMenuOpen?.Invoke();
 
         // Animer l'ouverture
         StartCoroutine(AnimateOpen());
 
-        // Mettre le jeu en pause
-        Time.timeScale = 0f;
+        // Mettre le jeu en pause via le PauseManager
+        pauseToken = PauseManager.Instance.AddPauseCommand("CircularMenu", 50);
+
+        // Demander que le curseur soit visible
+        cursorToken = CursorManager.Instance.AddCommand("CircularMenu", true, 50);
 
         Debug.Log("Menu opened");
     }
@@ -229,15 +234,24 @@ public class CircularMenu : MonoBehaviour
 
         // Réinitialiser les échelles des éléments
         ResetItemScales();
-        
+
         // Déclencher les événements de fermeture
         onMenuClose?.Invoke();
 
         // Animer la fermeture
         StartCoroutine(AnimateClose());
 
-        // Reprendre le jeu
-        Time.timeScale = 1f;
+        Debug.Log("Menu closed 1");
+
+        // Reprendre le jeu via le PauseManager
+        pauseToken?.Dispose();
+        pauseToken = null;
+
+        Debug.Log("Menu closed 2");
+
+        // Libérer la commande de curseur
+        cursorToken?.Dispose();
+        cursorToken = null;
 
         Debug.Log("Menu closed");
     }
@@ -312,20 +326,6 @@ public class CircularMenu : MonoBehaviour
     {
         _isAnimating = true;
 
-        // Animer le fond - MODIFICATION ICI
-        if (backgroundImage != null)
-        {
-            // S'assurer que le background est actif avant d'animer
-            backgroundImage.gameObject.SetActive(true);
-            backgroundImage.color =
-                new Color(backgroundActiveColor.r, backgroundActiveColor.g, backgroundActiveColor.b, 0f);
-
-            // Utiliser une séquence DOTween pour s'assurer que l'animation se termine correctement
-            Sequence bgSequence = DOTween.Sequence();
-            bgSequence.Append(backgroundImage.DOFade(backgroundActiveColor.a, animationDuration))
-                .SetUpdate(true); // Pour que l'animation fonctionne en pause
-        }
-
         // Animer les éléments
         float timer = 0f;
         while (timer < animationDuration)
@@ -371,21 +371,6 @@ public class CircularMenu : MonoBehaviour
 
         // Attendre un peu pour que l'animation de la flèche commence
         yield return new WaitForSecondsRealtime(arrowAppearDuration * 0.5f);
-
-        // Animer le fond - MODIFICATION ICI
-        if (backgroundImage != null)
-        {
-            // Utiliser une séquence DOTween pour s'assurer que l'animation se termine correctement
-            Sequence bgSequence = DOTween.Sequence();
-            bgSequence.Append(backgroundImage.DOFade(0f, animationDuration))
-                .SetUpdate(true) // Pour que l'animation fonctionne en pause
-                .OnComplete(() =>
-                {
-                    // Désactiver le background seulement à la fin de l'animation
-                    if (!_isOpen)
-                        backgroundImage.gameObject.SetActive(false);
-                });
-        }
 
         // Animer les éléments
         float timer = 0f;
@@ -508,12 +493,6 @@ public class CircularMenu : MonoBehaviour
 
     private void SetMenuVisibility(bool visible)
     {
-        // Activer/désactiver le fond seulement si on n'est pas en train d'animer
-        if (backgroundImage != null && !_isAnimating)
-        {
-            backgroundImage.gameObject.SetActive(visible);
-        }
-
         // Activer/désactiver les éléments du menu
         foreach (var item in menuItems)
         {
@@ -666,6 +645,9 @@ public class CircularMenu : MonoBehaviour
                 item.itemTransform.DOKill();
             }
         }
+
+        cursorToken?.Dispose();
+        pauseToken?.Dispose();
 
         // Remettre le timeScale à 1 au cas où
         Time.timeScale = 1f;
