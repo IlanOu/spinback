@@ -103,7 +103,6 @@ MonoBehaviour:
   longTickPrefab: {fileID: 5418285603651605820, guid: 1e4883a682f284c2bbd0f2e482aa392c, type: 3}
   mediumTickPrefab: {fileID: 9059249665414381620, guid: d81e2d25a61d144a7b9762a2c67fe561, type: 3}
   smallTickPrefab: {fileID: 8638283631648808792, guid: 6acfc802684ab46ab82be06d398d94a7, type: 3}
-  timeLength: 120
   ticksNumber: 60
 --- !u!1 &2033992734161203520
 GameObject:
@@ -115,6 +114,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8465244439054945945}
   - component: {fileID: 1308037229998597032}
+  - component: {fileID: 3005079408605885878}
   m_Layer: 5
   m_Name: TimelineUI
   m_TagString: Untagged
@@ -168,6 +168,21 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &3005079408605885878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033992734161203520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2853e91c90b4a8fa593431c0982b0e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationDuration: 0.3
+  animateScale: 1
+  animateFade: 1
 --- !u!1 &2577162943295546435
 GameObject:
   m_ObjectHideFlags: 0
