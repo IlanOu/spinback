@@ -2,7 +2,7 @@
 public class OnBoardingAddClueStep : OnBoardingStep
 {
     public OnBoardingAddClueStep(OnboardingManager manager) : base(manager) { }
-    public override OnBoardingStep NextStep() => null;
+    public override OnBoardingStep NextStep() => new OnBoardingSeeClueStep(manager);
     private InteractableClue interactableClue => manager.interactableClue;
     private OutlineObject outlineClue => manager.outlineClue;
 
