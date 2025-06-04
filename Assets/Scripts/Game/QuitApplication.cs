@@ -12,7 +12,7 @@ namespace Game
         public void ExitGame()
         {
             confirmationPopup.Show(
-                "Quitter l'application",
+                "Quitter l'application ?",
                 ConfirmationPopup.PopupType.YesNo,
                 ConfirmationPopup.PopupMode.Blocking,
                 () =>

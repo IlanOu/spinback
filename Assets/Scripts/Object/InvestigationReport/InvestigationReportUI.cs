@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
+using UI.Popup;
 using UI.Toggle;
 
 namespace Object.InvestigationReport
@@ -20,6 +21,8 @@ namespace Object.InvestigationReport
 
         [SerializeField] private UI.Carousel.Carousel2D carousel; // Référence au carousel
         [SerializeField] private Button signButton;
+        
+        [SerializeField] private ConfirmationPopup confirmationPopup;
         
         [Header("Configuration")]
         [SerializeField] private int maxReportItems = 9;
@@ -46,7 +49,7 @@ namespace Object.InvestigationReport
                     DisplayReport();
             });
             
-            signButton.onClick.AddListener(EndCinematic);
+            signButton.onClick.AddListener(ConfirmEndCinematic);
 
             if (carousel == null)
                 carousel = GetComponentInChildren<UI.Carousel.Carousel2D>();
@@ -98,6 +101,28 @@ namespace Object.InvestigationReport
                 // Restaurer l'état précédent du curseur
                 CursorManager.Instance.SetDefaultCursorHidden(cursorStateBeforeShow);
             }
+        }
+
+        void ConfirmEndCinematic()
+        {
+            confirmationPopup.Show(
+                "Rendre votre témoignage au policier ?",
+                ConfirmationPopup.PopupType.Declaration,
+                ConfirmationPopup.PopupMode.Blocking,
+                () =>
+                {
+                    // Action à exécuter si l'utilisateur confirme
+                    Debug.Log("Quitter confirmé");
+
+                    // Utiliser le script QuitApplication
+                    EndCinematic();
+                },
+                () =>
+                {
+                    // Action à exécuter si l'utilisateur annule
+                    Debug.Log("Quitter annulé");
+                }
+            );
         }
         
         void EndCinematic()

@@ -29,6 +29,7 @@ namespace UI.Popup
             OkOnly, // Un seul bouton "OK"
             YesNo, // Deux boutons "Oui" et "Non"
             ConfirmCancel, // Deux boutons "Confirmer" et "Annuler"
+            Declaration, // Deux boutons "Signer ma déclaration" et "Revenir en jeu"
             Custom // Textes personnalisés pour les boutons
         }
 
@@ -89,8 +90,8 @@ namespace UI.Popup
             switch (type)
             {
                 case PopupType.OkOnly:
-                    if (confirmButtonText != null) confirmButtonText.text = "OK";
-                    if (cancelButton != null) cancelButton.gameObject.SetActive(false);
+                    if (!confirmButtonText != null) confirmButtonText.text = "OK";
+                    if (!cancelButton != null) cancelButton.gameObject.SetActive(false);
                     break;
 
                 case PopupType.YesNo:
@@ -102,6 +103,12 @@ namespace UI.Popup
                 case PopupType.ConfirmCancel:
                     if (confirmButtonText != null) confirmButtonText.text = "Confirmer";
                     if (cancelButtonText != null) cancelButtonText.text = "Annuler";
+                    if (cancelButton != null) cancelButton.gameObject.SetActive(true);
+                    break;
+                
+                case PopupType.Declaration:
+                    if (confirmButtonText != null) confirmButtonText.text = "Signer ma déclaration";
+                    if (cancelButtonText != null) cancelButtonText.text = "Revenir en jeu";
                     if (cancelButton != null) cancelButton.gameObject.SetActive(true);
                     break;
 

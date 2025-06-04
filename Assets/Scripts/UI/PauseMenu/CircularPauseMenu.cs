@@ -15,8 +15,6 @@ public class CircularMenu : MonoBehaviour
     [SerializeField] private float animationDuration = 0.3f;
     [SerializeField] private KeyCode toggleKey = KeyCode.Escape;
     [SerializeField] private List<MidiBind> midiBindings = new List<MidiBind>();
-
-    
     
     [SerializeField]
     private bool closeMenuOnSelection = false; // Option pour fermer automatiquement le menu à la sélection
@@ -33,7 +31,9 @@ public class CircularMenu : MonoBehaviour
 
     [SerializeField] private Transform arrowIndicator; // Flèche au centre
     [SerializeField] private float selectedItemScale = 1.2f; // Échelle de l'élément sélectionné
-
+    
+    [SerializeField] private CanvasGroup menuCanvasGroup;
+    
     [Header("Arrow Animation")] [SerializeField]
     private float arrowAppearDuration = 0.3f;
 
@@ -91,6 +91,17 @@ public class CircularMenu : MonoBehaviour
         {
             MidiBinding.Instance.Subscribe(binding, OnMidiTrigger);
         }
+
+        // Assurez-vous d'avoir un CanvasGroup
+        if (menuCanvasGroup == null)
+        {
+            menuCanvasGroup = GetComponent<CanvasGroup>();
+            if (menuCanvasGroup == null)
+            {
+                menuCanvasGroup = gameObject.AddComponent<CanvasGroup>();
+            }
+        }
+        
         
         // Stocker les références aux images et leurs couleurs originales
         for (int i = 0; i < menuItems.Count; i++)
@@ -517,6 +528,10 @@ public class CircularMenu : MonoBehaviour
                 item.itemTransform.gameObject.SetActive(visible);
             }
         }
+    
+        // Contrôler l'interactivité via le CanvasGroup
+        menuCanvasGroup.interactable = visible;
+        menuCanvasGroup.blocksRaycasts = visible;
     }
 
 
