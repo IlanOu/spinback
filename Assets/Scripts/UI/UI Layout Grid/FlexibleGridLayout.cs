@@ -1,17 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI.Table;
-using UnityEngine.UIElements;
-
 
 namespace UserInterfaceGridLayout
 {
     public class FlexibleGridLayout : LayoutGroup
     {
-
         #region ENUM CLASSES
         // Enum for the different types of fitting
         public enum FitType
@@ -20,7 +15,8 @@ namespace UserInterfaceGridLayout
             Width,
             Height,
             FixedRows,
-            FixedColumns
+            FixedColumns,
+            FixedRowsAndColumns // Nouveau type pour fixer à la fois les lignes et colonnes
         }
 
         // Enum to define what shall be filled first
@@ -45,33 +41,63 @@ namespace UserInterfaceGridLayout
         }
         #endregion
         
-
         // Serialized fields for the Inspector
         [Header("GRID SETTING")]
-        public FitType fitType = FitType.Uniform;               // The type of fitting
-        public int rows;                                        // The number of rows
-        public int columns;                                     // The number of columns
-        public Vector2 cellSize;                                // The size of each cell
-        public Vector2 spacing;                                 // The spacing between cells
+        public FitType fitType = FitType.Uniform;
+        public int rows;
+        public int columns;
+        public Vector2 cellSize;
+        public Vector2 spacing;
 
         [Header("CELL SETTINGS")]
-        public bool fitX;                   // Booleans to determine if the grid should fit in the X and Y directions
+        public bool fitX;
         public bool fitY;
-        public bool keepCellsSquare;                            // Boolean to determine if cells should be kept square
+        public bool keepCellsSquare;
+        
+        [Header("FIXED GRID SETTINGS")]
+        public bool useFixedCellSize = false; // Nouvelle option pour utiliser une taille fixe
+        public Vector2 fixedCellSize = new Vector2(100, 100); // Taille fixe des cellules
 
         [Header("SORTING SETTINGS")]
-        public SortEnum fillFirst = SortEnum.Rows;                                  // Choose what shall be filled first
-        public SortVerticalyEnum sortVertically = SortVerticalyEnum.TopToBottom;     // Vertical sorting of cells
-        public SortHorizontalyEnum sortHorizontally = SortHorizontalyEnum.LeftToRight;   // Horizontal sorting of cells
-
-
-        //-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        public SortEnum fillFirst = SortEnum.Rows;
+        public SortVerticalyEnum sortVertically = SortVerticalyEnum.TopToBottom;
+        public SortHorizontalyEnum sortHorizontally = SortHorizontalyEnum.LeftToRight;
 
         public override void CalculateLayoutInputHorizontal()
         {
             base.CalculateLayoutInputHorizontal();
 
-            // Calculate the number of rows and columns based on the fit type
+            // Si on utilise une taille fixe, on ignore les calculs de taille adaptative
+            if (useFixedCellSize)
+            {
+                cellSize = fixedCellSize;
+                
+                // Si on a choisi FixedRowsAndColumns, on utilise les valeurs définies
+                if (fitType == FitType.FixedRowsAndColumns)
+                {
+                    // Garder les valeurs de rows et columns telles quelles
+                }
+                else
+                {
+                    // Calculer le nombre de lignes et colonnes en fonction du type de fit
+                    CalculateRowsAndColumns();
+                }
+            }
+            else
+            {
+                // Calculer le nombre de lignes et colonnes en fonction du type de fit
+                CalculateRowsAndColumns();
+                
+                // Calculer la taille des cellules en fonction de l'espace disponible
+                CalculateCellSize();
+            }
+
+            // Sort and position children based on the selected sort type
+            SortAndPositionChildren();
+        }
+        
+        private void CalculateRowsAndColumns()
+        {
             if (fitType == FitType.Width || fitType == FitType.Height || fitType == FitType.Uniform)
             {
                 float squareRoot = Mathf.Sqrt(transform.childCount);
@@ -87,7 +113,12 @@ namespace UserInterfaceGridLayout
             {
                 columns = Mathf.CeilToInt(transform.childCount / (float)rows);
             }
-
+            
+            // Pour FixedRowsAndColumns, on garde les valeurs définies dans l'inspecteur
+        }
+        
+        private void CalculateCellSize()
+        {
             // Calculate the parent's width and height, subtracting the padding
             float parentWidth = rectTransform.rect.width - padding.left - padding.right;
             float parentHeight = rectTransform.rect.height - padding.top - padding.bottom;
@@ -105,9 +136,6 @@ namespace UserInterfaceGridLayout
             {
                 cellSize.y = cellSize.x;
             }
-
-            // Sort and position children based on the selected sort type
-            SortAndPositionChildren();
         }
 
         // Method to sort the children based on the selected sort type and position them in the grid
@@ -205,21 +233,11 @@ namespace UserInterfaceGridLayout
                 SetChildAlongAxis(item, 0, xPos, cellSize.x);
                 SetChildAlongAxis(item, 1, yPos, cellSize.y);
             }
-
         }
 
         // These methods are required by the LayoutGroup base class, but are not used in this script
-        public override void CalculateLayoutInputVertical()
-        {
-        }
-
-        public override void SetLayoutHorizontal()
-        {
-        }
-
-        public override void SetLayoutVertical()
-        {
-        }
+        public override void CalculateLayoutInputVertical() { }
+        public override void SetLayoutHorizontal() { }
+        public override void SetLayoutVertical() { }
     }
 }
-
