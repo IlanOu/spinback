@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4249826815292142898}
   - component: {fileID: 3062906097025999020}
   - component: {fileID: 7843273070736202881}
+  - component: {fileID: 450130125765824940}
   m_Layer: 5
   m_Name: Pause Background
   m_TagString: Untagged
@@ -113,3 +114,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: {x: 0, y: 0, z: 0, w: 0}
+--- !u!225 &450130125765824940
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6518594140585433142}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0

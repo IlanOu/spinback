@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using System.Linq;
 using UI.Popup;
 using UI.Toggle;
+using UnityEngine.Events;
 
 namespace Object.InvestigationReport
 {
@@ -30,6 +31,8 @@ namespace Object.InvestigationReport
         
         [SerializeField] private string endCinematicName = "EndScene";
 
+        public UnityEvent<bool> onReportDisplayed;
+        
         private bool isShowing = false;
         private List<Clue> investigationReportItems = new List<Clue>();
         private Dictionary<string, GameObject> uiItemsMap = new Dictionary<string, GameObject>();
@@ -137,6 +140,8 @@ namespace Object.InvestigationReport
                 ShowUI();
             else if (isShowing)
                 HideUI();
+            
+            onReportDisplayed?.Invoke(isShowing);
         }
 
         public void AddInfoToReport(Clue clue)

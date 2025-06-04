@@ -34,6 +34,8 @@ public class CircularMenu : MonoBehaviour
     
     [SerializeField] private CanvasGroup menuCanvasGroup;
     
+    // [SerializeField] private CanvasGroup canvasGroup;
+    
     [Header("Arrow Animation")] [SerializeField]
     private float arrowAppearDuration = 0.3f;
 
@@ -281,6 +283,15 @@ public class CircularMenu : MonoBehaviour
         cursorToken = null;
 
         Debug.Log("Menu closed");
+    }
+    
+    public void OnReportUI(bool reportIsVisible)
+    {
+        enabled = !reportIsVisible;
+        menuCanvasGroup.interactable = !reportIsVisible;
+        menuCanvasGroup.blocksRaycasts = !reportIsVisible;
+        menuCanvasGroup.alpha = reportIsVisible ? 0f : 1f;
+        
     }
 
     private void ResetItemScales()

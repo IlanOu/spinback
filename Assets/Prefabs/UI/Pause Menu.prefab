@@ -244,7 +244,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3706742630913215101}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -276,6 +276,7 @@ MonoBehaviour:
   menuRadius: 450
   animationDuration: 0.3
   toggleKey: 32
+  midiBindings: 32000000
   closeMenuOnSelection: 1
   startAngle: -60
   clockwiseDistribution: 1
@@ -284,7 +285,19 @@ MonoBehaviour:
     itemTransform: {fileID: 8694723341133114916}
     onSelect:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 6040943780863042745}
+          m_TargetAssemblyTypeName: CircularMenu, Assembly-CSharp
+          m_MethodName: CloseMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     isActive: 1
     inactiveAlpha: 0.5
     activeColor: {r: 1, g: 1, b: 1, a: 1}
@@ -293,7 +306,19 @@ MonoBehaviour:
     itemTransform: {fileID: 7753505841288454891}
     onSelect:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: Game.QuitApplication, Assembly-CSharp
+          m_MethodName: ExitGame
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     isActive: 1
     inactiveAlpha: 0.5
     activeColor: {r: 1, g: 1, b: 1, a: 1}
@@ -307,47 +332,20 @@ MonoBehaviour:
     inactiveAlpha: 0.5
     activeColor: {r: 1, g: 1, b: 1, a: 1}
     inactiveColor: {r: 1, g: 1, b: 1, a: 1}
-  backgroundImage: {fileID: 1672160182487521156}
-  backgroundActiveColor: {r: 0, g: 0, b: 0, a: 0.8627451}
   arrowIndicator: {fileID: 8121448967665527395}
   selectedItemScale: 1.2
+  menuCanvasGroup: {fileID: 0}
   arrowAppearDuration: 0.3
-  arrowAppearEase: 27
+  arrowAppearEase: 3
   arrowDisappearEase: 26
   arrowPulseMagnitude: 0.1
   arrowPulseSpeed: 1
   onMenuOpen:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onMenuClose:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  hideWhenMenuOpen: []
-  showWhenMenuOpen: []
+      m_Calls: []
 --- !u!1 &5124467315775367530
 GameObject:
   m_ObjectHideFlags: 0
