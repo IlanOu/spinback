@@ -14,7 +14,10 @@ public class CircularMenu : MonoBehaviour
     [SerializeField] private float menuRadius = 400f;
     [SerializeField] private float animationDuration = 0.3f;
     [SerializeField] private KeyCode toggleKey = KeyCode.Escape;
+    [SerializeField] private List<MidiBind> midiBindings = new List<MidiBind>();
 
+    
+    
     [SerializeField]
     private bool closeMenuOnSelection = false; // Option pour fermer automatiquement le menu à la sélection
 
@@ -84,6 +87,11 @@ public class CircularMenu : MonoBehaviour
             _arrowOriginalScale = arrowIndicator.localScale;
         }
 
+        foreach (var binding in midiBindings)
+        {
+            MidiBinding.Instance.Subscribe(binding, OnMidiTrigger);
+        }
+        
         // Stocker les références aux images et leurs couleurs originales
         for (int i = 0; i < menuItems.Count; i++)
         {
@@ -111,6 +119,14 @@ public class CircularMenu : MonoBehaviour
         }
     }
 
+    private void OnMidiTrigger(float value)
+    {
+        if (value == 0)
+        {
+            ToggleMenu();
+        }
+    }
+    
     private void StoreOriginalScales()
     {
         for (int i = 0; i < menuItems.Count; i++)

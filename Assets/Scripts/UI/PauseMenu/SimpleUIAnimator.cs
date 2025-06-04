@@ -16,12 +16,12 @@ namespace UI.PauseMenu
         
         private CanvasGroup _canvasGroup;
         private RectTransform _rectTransform;
-        
+
         private void Awake()
         {
             _rectTransform = GetComponent<RectTransform>();
             _canvasGroup = GetComponent<CanvasGroup>();
-            
+
             // Créer un CanvasGroup si nécessaire
             if (_canvasGroup == null && animateFade)
             {
@@ -81,6 +81,14 @@ namespace UI.PauseMenu
                 DOVirtual.DelayedCall(animationDuration, () => gameObject.SetActive(false))
                     .SetUpdate(true);
             }
+        }
+        
+        public void OnPaused(bool paused)
+        {
+            if (paused)
+                Hide();
+            else
+                Show();
         }
         
         /// <summary>

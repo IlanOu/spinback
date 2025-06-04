@@ -171,4 +171,12 @@ public class SmoothCameraFollow : MonoBehaviour
     {
         targetRotation = rotation;
     }
+    
+    public void OnPaused(bool paused)
+    {
+        if (paused)
+            DisableMouseControl();
+        else
+            EnableMouseControl();
+    }
 }
