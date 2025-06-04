@@ -2,6 +2,7 @@ using System.ComponentModel;
 using UI.Report;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.UI;
 
 public class OnboardingManager : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class OnboardingManager : MonoBehaviour
 
     [Header("Open report step")]
     [SerializeField] public ReportUI reportUI;
+    [Header("Finish step")]
+    [SerializeField] public Button validateButton;
 
     void Awake()
     {

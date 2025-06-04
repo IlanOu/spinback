@@ -227,6 +227,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06f0374fef2a34944ae1275ab9bb35e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &349479155 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5365371427306541880, guid: 981b6552a72d57a47a04fcc956d2d563, type: 3}
+  m_PrefabInstance: {fileID: 349479153}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &495705472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1776,6 +1787,10 @@ PrefabInstance:
       propertyPath: reportIconUI
       value: 
       objectReference: {fileID: 960276563}
+    - target: {fileID: 8734518220889341720, guid: d7ae65651c094452cb4b70198cd31188, type: 3}
+      propertyPath: validateButton
+      value: 
+      objectReference: {fileID: 349479155}
     - target: {fileID: 8734518220889341720, guid: d7ae65651c094452cb4b70198cd31188, type: 3}
       propertyPath: tooltipActivator
       value: 

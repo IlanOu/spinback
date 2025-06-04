@@ -10,5 +10,6 @@ public enum TooltipType
     AddClue,
     SeeClue,
     ToggleClue,
-    EyeClue
+    EyeClue,
+    ValidateReport
 };
