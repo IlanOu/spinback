@@ -125,4 +125,19 @@ public class TooltipActivator : MonoBehaviour
             }
         }
     }
+
+    public void EnablePotentiometerTooltip()
+    {
+        EnableTooltip(TooltipType.Potentiometer);
+    }
+
+    public void EnableSliderTooltip()
+    {
+        EnableTooltip(TooltipType.Slider);
+    }
+
+    public void EnableJogWheelTooltip()
+    {
+        EnableTooltip(TooltipType.JogWheel);
+    }
 }
