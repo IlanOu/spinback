@@ -27,11 +27,12 @@ public class CircleFillerUI : MonoBehaviour
     public float delayBetweenImages = 0.1f; // Délai entre l'animation de chaque image
     public Ease animationEase = Ease.OutBack;
     public bool animatePercentageText = true;
-    public bool animateClockwise = true; // Animation dans le sens des aiguilles d'une montre
+    public bool clockwiseDirection = true; // Direction du cercle (true = sens horaire, false = sens anti-horaire)
+    public bool clockwiseAnimation = true; // Direction de l'animation (true = sens horaire, false = sens anti-horaire)
     
     [Header("Contrôle dynamique")]
     [Range(0f, 100f)]
-    [SerializeField] private float targetPercentage = 0f;
+    public float targetPercentage = 0f;
     [SerializeField] private float currentPercentage = 0f; // Pour affichage dans l'inspecteur
     
     private List<Image> activeImages = new List<Image>();
@@ -180,8 +181,19 @@ public class CircleFillerUI : MonoBehaviour
             // Calculer l'angle que ce segment occupe dans le cercle
             float segmentAngle = (segment.percentage / 100f) * 360f;
             
-            // Calculer la position sur le cercle
-            float middleAngle = currentAngle + segmentAngle / 2f;
+            // Ajuster l'angle de départ en fonction du sens (horaire ou anti-horaire)
+            float middleAngle;
+            if (clockwiseDirection)
+            {
+                // Sens horaire: commence à 90° (haut) et tourne vers la droite
+                middleAngle = 90f - (currentAngle + segmentAngle / 2f);
+            }
+            else
+            {
+                // Sens anti-horaire: commence à 90° (haut) et tourne vers la gauche
+                middleAngle = 90f + (currentAngle + segmentAngle / 2f);
+            }
+            
             float radians = middleAngle * Mathf.Deg2Rad;
             Vector2 position = new Vector2(
                 circleCenter.anchoredPosition.x + circleRadius * Mathf.Cos(radians),
@@ -209,8 +221,8 @@ public class CircleFillerUI : MonoBehaviour
             currentAngle += segmentAngle;
         }
         
-        // Trier les segments par angle pour l'animation dans le sens des aiguilles d'une montre
-        if (animateClockwise)
+        // Trier les segments pour l'animation selon la direction choisie
+        if (clockwiseAnimation)
         {
             segmentInfos.Sort((a, b) => a.StartAngle.CompareTo(b.StartAngle));
         }
@@ -311,5 +323,22 @@ public class CircleFillerUI : MonoBehaviour
     public float GetCurrentPercentage()
     {
         return currentPercentage;
+    }
+    
+    // Pour changer la direction du cercle
+    public void SetClockwiseDirection(bool clockwise)
+    {
+        clockwiseDirection = clockwise;
+        // Mettre à jour le cercle si nécessaire
+        if (targetPercentage > 0)
+        {
+            FillCircle(targetPercentage);
+        }
+    }
+    
+    // Pour changer la direction de l'animation
+    public void SetClockwiseAnimation(bool clockwise)
+    {
+        clockwiseAnimation = clockwise;
     }
 }
