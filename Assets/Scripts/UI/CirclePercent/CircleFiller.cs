@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using System.Linq;
+using DG.Tweening;
 
 public class CircleFillerUI : MonoBehaviour
 {
@@ -18,6 +20,14 @@ public class CircleFillerUI : MonoBehaviour
     public float circleRadius = 200f; // Rayon en pixels pour l'UI
     public float baseImageSize = 50f; // Taille de base pour les images (en pixels)
     public RectTransform parent; // Parent où les images seront créées
+    public TextMeshProUGUI percentageText; // Texte pour afficher le pourcentage
+    
+    [Header("Animation")]
+    public float animationDuration = 0.5f; // Durée d'animation pour chaque image
+    public float delayBetweenImages = 0.1f; // Délai entre l'animation de chaque image
+    public Ease animationEase = Ease.OutBack;
+    public bool animatePercentageText = true;
+    public bool animateClockwise = true; // Animation dans le sens des aiguilles d'une montre
     
     [Header("Contrôle dynamique")]
     [Range(0f, 100f)]
@@ -27,6 +37,7 @@ public class CircleFillerUI : MonoBehaviour
     private List<Image> activeImages = new List<Image>();
     private float lastTargetPercentage = -1f; // Pour détecter les changements
     private float lastRadius = -1f; // Pour détecter les changements de rayon
+    private Sequence currentAnimation;
     
     private void Start()
     {
@@ -40,6 +51,9 @@ public class CircleFillerUI : MonoBehaviour
                 return;
             }
         }
+        
+        // Initialiser le texte du pourcentage
+        UpdatePercentageText(0, false);
         
         // Appliquer le pourcentage initial
         FillCircle(targetPercentage);
@@ -61,6 +75,12 @@ public class CircleFillerUI : MonoBehaviour
     // Fonction principale pour remplir le cercle à un pourcentage donné
     public void FillCircle(float percentage)
     {
+        // Arrêter l'animation en cours si elle existe
+        if (currentAnimation != null && currentAnimation.IsActive())
+        {
+            currentAnimation.Kill();
+        }
+        
         // Nettoyer les segments actifs
         ClearActiveSegments();
         
@@ -71,11 +91,14 @@ public class CircleFillerUI : MonoBehaviour
         // Utiliser un algorithme glouton pour trouver la meilleure combinaison
         List<CircleSegment> bestCombination = FindBestCombination(sortedSegments, percentage);
         
-        // Placer les segments sélectionnés autour du cercle
+        // Placer les segments sélectionnés autour du cercle avec animation
         PlaceSegmentsInCircle(bestCombination);
         
         // Mettre à jour le pourcentage actuel
-        currentPercentage = bestCombination.Sum(s => s.percentage);
+        float newPercentage = bestCombination.Sum(s => s.percentage);
+        UpdatePercentageText(newPercentage, true);
+        currentPercentage = newPercentage;
+        
         Debug.Log($"Pourcentage cible: {percentage}%, Pourcentage atteint: {currentPercentage}%");
     }
     
@@ -142,9 +165,15 @@ public class CircleFillerUI : MonoBehaviour
     
     private void PlaceSegmentsInCircle(List<CircleSegment> segments)
     {
+        // Créer une nouvelle séquence d'animation
+        currentAnimation = DOTween.Sequence();
+        
         // Trouver le pourcentage maximum pour normaliser les tailles
         float maxPercentage = availableSegments.Max(s => s.percentage);
         float currentAngle = 0f;
+        
+        // Préparer les informations pour chaque segment
+        List<SegmentInfo> segmentInfos = new List<SegmentInfo>();
         
         foreach (var segment in segments)
         {
@@ -159,35 +188,103 @@ public class CircleFillerUI : MonoBehaviour
                 circleCenter.anchoredPosition.y + circleRadius * Mathf.Sin(radians)
             );
             
+            // Calculer la taille de l'image proportionnellement à son pourcentage
+            float sizeRatio = segment.percentage / maxPercentage;
+            float imageSize = baseImageSize * sizeRatio;
+            
+            // Calculer l'angle pour l'orientation
+            Vector2 directionFromCenter = (position - circleCenter.anchoredPosition).normalized;
+            float angle = Mathf.Atan2(directionFromCenter.y, directionFromCenter.x) * Mathf.Rad2Deg;
+            
+            // Stocker les informations du segment
+            segmentInfos.Add(new SegmentInfo {
+                Segment = segment,
+                Position = position,
+                Angle = angle,
+                ImageSize = imageSize,
+                StartAngle = currentAngle
+            });
+            
+            // Mettre à jour l'angle pour le prochain segment
+            currentAngle += segmentAngle;
+        }
+        
+        // Trier les segments par angle pour l'animation dans le sens des aiguilles d'une montre
+        if (animateClockwise)
+        {
+            segmentInfos.Sort((a, b) => a.StartAngle.CompareTo(b.StartAngle));
+        }
+        else
+        {
+            segmentInfos.Sort((a, b) => b.StartAngle.CompareTo(a.StartAngle));
+        }
+        
+        // Créer et animer chaque segment un par un
+        float delay = 0f;
+        
+        foreach (var info in segmentInfos)
+        {
             // Créer un GameObject avec une Image UI
-            GameObject imageObj = new GameObject($"Segment_{segment.percentage}%");
+            GameObject imageObj = new GameObject($"Segment_{info.Segment.percentage}%");
             imageObj.transform.SetParent(parent.transform, false);
             
             // Ajouter et configurer le RectTransform
             RectTransform rectTransform = imageObj.AddComponent<RectTransform>();
-            rectTransform.anchoredPosition = position;
+            rectTransform.anchoredPosition = info.Position;
             
             // Ajouter et configurer l'Image
             Image image = imageObj.AddComponent<Image>();
-            image.sprite = segment.sprite;
+            image.sprite = info.Segment.sprite;
             image.preserveAspect = true; // Préserver le ratio d'aspect du sprite
             
-            // Calculer la taille de l'image proportionnellement à son pourcentage
-            // Toutes les images auront une taille relative à leur pourcentage
-            float sizeRatio = segment.percentage / maxPercentage;
-            float imageSize = baseImageSize * sizeRatio;
-            rectTransform.sizeDelta = new Vector2(imageSize, imageSize);
+            // Configurer l'image avec une taille initiale de zéro pour l'animation
+            rectTransform.sizeDelta = Vector2.zero;
             
             // Orienter l'image correctement (face vers l'extérieur du cercle)
-            Vector2 directionFromCenter = (position - circleCenter.anchoredPosition).normalized;
-            float angle = Mathf.Atan2(directionFromCenter.y, directionFromCenter.x) * Mathf.Rad2Deg;
-            rectTransform.rotation = Quaternion.Euler(0, 0, angle - 90); // -90 pour orienter correctement
+            rectTransform.rotation = Quaternion.Euler(0, 0, info.Angle - 90); // -90 pour orienter correctement
+            
+            // Ajouter l'animation à la séquence avec un délai croissant
+            currentAnimation.Insert(delay, rectTransform.DOSizeDelta(new Vector2(info.ImageSize, info.ImageSize), animationDuration)
+                .SetEase(animationEase));
             
             // Ajouter aux segments actifs
             activeImages.Add(image);
             
-            // Mettre à jour l'angle pour le prochain segment
-            currentAngle += segmentAngle;
+            // Augmenter le délai pour le prochain segment
+            delay += delayBetweenImages;
+        }
+        
+        // Jouer la séquence d'animation
+        currentAnimation.Play();
+    }
+    
+    private class SegmentInfo
+    {
+        public CircleSegment Segment;
+        public Vector2 Position;
+        public float Angle;
+        public float ImageSize;
+        public float StartAngle;
+    }
+    
+    private void UpdatePercentageText(float percentage, bool animate)
+    {
+        if (percentageText != null)
+        {
+            if (animate && animatePercentageText)
+            {
+                // Animer le texte du pourcentage
+                float startValue = currentPercentage;
+                DOTween.To(() => startValue, x => {
+                    percentageText.text = $"{Mathf.Round(x)}%";
+                }, percentage, animationDuration)
+                .SetEase(animationEase);
+            }
+            else
+            {
+                // Mettre à jour le texte sans animation
+                percentageText.text = $"{Mathf.Round(percentage)}%";
+            }
         }
     }
     
