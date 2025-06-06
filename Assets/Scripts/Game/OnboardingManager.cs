@@ -15,6 +15,7 @@ public class OnboardingManager : MonoBehaviour
     [HideInInspector] public CameraZoom cameraZoom;
     [Header("Add clue step")]
     [SerializeField] public GameObject clue;
+    [SerializeField] public ClueInteractiveIcon interactiveIcon;
     [HideInInspector] public InteractableClue interactableClue;
     [HideInInspector] public OutlineObject outlineClue;
 
@@ -72,6 +73,7 @@ public class OnboardingManager : MonoBehaviour
 
         interactableClue.DisableInteractability();
         outlineClue.EnableVisibility(false);
+        interactiveIcon.EnableVisibility(false);
 
         StartStep();
     }

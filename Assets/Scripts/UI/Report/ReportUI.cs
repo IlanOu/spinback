@@ -47,8 +47,11 @@ namespace UI.Report
                 if (input == 1)
                     ToggleVisibilityReport();
             });
-        
-            signButton.onClick.AddListener(EndCinematic);
+
+            if (signButton != null)
+            {
+                signButton.onClick.AddListener(EndCinematic);
+            }
 
             if (carousel == null)
                 carousel = GetComponentInChildren<UI.Carousel.Carousel2D>();
