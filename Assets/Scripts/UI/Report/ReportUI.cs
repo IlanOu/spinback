@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cinematics;
+using TMPro;
+using UI.Popup;
 using UI.Toggle;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,8 +21,9 @@ namespace UI.Report
         [SerializeField] private GameObject investigationReportItemPrefab;
         [SerializeField] private GameObject gridLayoutGroupPrefab;
 
-        [SerializeField] private UI.Carousel.Carousel2D carousel; // Référence au carousel
+        [SerializeField] private Carousel.Carousel2D carousel; // Référence au carousel
         [SerializeField] private Button signButton;
+        [SerializeField] private ConfirmationPopup confirmationPopup;
         [SerializeField] private ReportIcon reportIcon;
     
         [Header("Configuration")]
@@ -109,6 +112,28 @@ namespace UI.Report
 
             OnCloseReportUI?.Invoke();
         }
+
+        void ConfirmEndCinematic()
+        {
+            confirmationPopup.Show(
+                "Rendre votre témoignage au policier ?",
+                ConfirmationPopup.PopupType.Declaration,
+                ConfirmationPopup.PopupMode.Blocking,
+                () =>
+                {
+                    // Action à exécuter si l'utilisateur confirme
+                    Debug.Log("Quitter confirmé");
+
+                    // Utiliser le script QuitApplication
+                    EndCinematic();
+                },
+                () =>
+                {
+                    // Action à exécuter si l'utilisateur annule
+                    Debug.Log("Quitter annulé");
+                }
+            );
+        }
     
         void EndCinematic()
         {
@@ -189,6 +214,69 @@ namespace UI.Report
 
                 gridContainers.Add(newGrid);
             }
+        }
+
+        public void RemoveUIItem(Clue clue)
+        {
+            if (uiItemsMap.TryGetValue(clue.id, out GameObject item))
+            {
+                if (item != null)
+                    Destroy(item);
+
+                uiItemsMap.Remove(clue.id);
+            }
+
+            CheckCarouselVisibility();
+        }
+
+        private void ReorganizeItems()
+        {
+            List<Clue> tempItems = new List<Clue>(investigationReportItems);
+
+            foreach (var item in uiItemsMap.Values)
+                if (item != null) Destroy(item);
+
+            uiItemsMap.Clear();
+
+            foreach (var grid in gridContainers)
+                foreach (Transform child in grid.transform)
+                    Destroy(child.gameObject);
+
+            investigationReportItems.Clear();
+
+            foreach (var data in tempItems)
+            {
+                investigationReportItems.Add(data);
+
+                int gridIndex = (investigationReportItems.Count - 1) / itemsPerGrid;
+
+                EnsureGridExists(gridIndex);
+                GameObject targetGrid = gridContainers[gridIndex];
+
+                var item = Instantiate(investigationReportItemPrefab, targetGrid.transform, false);
+
+                var textComponent = item.GetComponentInChildren<TextMeshProUGUI>();
+                if (textComponent != null)
+                    textComponent.text = data.text;
+
+                item.name = data.id;
+                uiItemsMap[data.id] = item;
+            }
+
+            for (int i = gridContainers.Count - 1; i >= 0; i--)
+            {
+                if (gridContainers[i].transform.childCount == 0 && i == gridContainers.Count - 1)
+                {
+                    Destroy(gridContainers[i]);
+                    gridContainers.RemoveAt(i);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            CheckCarouselVisibility();
         }
 
         private void CheckCarouselVisibility()

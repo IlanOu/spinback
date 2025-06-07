@@ -22,7 +22,6 @@ namespace Object.InvestigationReport
 
         [SerializeField] private UI.Carousel.Carousel2D carousel; // Référence au carousel
         [SerializeField] private Button signButton;
-        
         [SerializeField] private ConfirmationPopup confirmationPopup;
         
         [Header("Configuration")]
