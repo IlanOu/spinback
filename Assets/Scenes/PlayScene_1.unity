@@ -325,6 +325,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5253216566386873011, guid: a4048881117cf489fa4c05ce3be518e8, type: 3}
+      propertyPath: clue.hours
+      value: Kevin et Jean insouciants
+      objectReference: {fileID: 0}
+    - target: {fileID: 5253216566386873011, guid: a4048881117cf489fa4c05ce3be518e8, type: 3}
+      propertyPath: clue.points
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8339850993164056332, guid: a4048881117cf489fa4c05ce3be518e8, type: 3}
       propertyPath: clue
       value: 
@@ -1580,6 +1588,14 @@ PrefabInstance:
       propertyPath: clue
       value: 
       objectReference: {fileID: 1683005445}
+    - target: {fileID: 6790893008533121820, guid: b23be66a00dc08745afbced6b7d4e196, type: 3}
+      propertyPath: clue.hours
+      value: Julie a rejoint Charles
+      objectReference: {fileID: 0}
+    - target: {fileID: 6790893008533121820, guid: b23be66a00dc08745afbced6b7d4e196, type: 3}
+      propertyPath: clue.points
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6793723897337242868, guid: b23be66a00dc08745afbced6b7d4e196, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1698,6 +1714,14 @@ PrefabInstance:
     - target: {fileID: 2848781745481529551, guid: fff5a92df85bd49998a8cd8ccdf67646, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579626599529298600, guid: fff5a92df85bd49998a8cd8ccdf67646, type: 3}
+      propertyPath: clue.hours
+      value: "Tristan \xE9tait d\xE9fonc\xE9"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5579626599529298600, guid: fff5a92df85bd49998a8cd8ccdf67646, type: 3}
+      propertyPath: clue.points
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 5752846242428963435, guid: fff5a92df85bd49998a8cd8ccdf67646, type: 3}
       propertyPath: m_Name
@@ -1986,6 +2010,11 @@ PrefabInstance:
     - target: {fileID: 4441320113193223843, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
       propertyPath: m_Name
       value: Appartcontainer (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5278441286953226123, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+      propertyPath: clue.text
+      value: "La veste rouge ? Elle \xE9tait d\xE9j\xE0 l\xE0 quand je suis arriv\xE9,
+        non ?"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2530,6 +2559,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ConvDorianCharles
       objectReference: {fileID: 0}
+    - target: {fileID: 7384599193925311636, guid: e15a6662da8cc0f4daf0749d51863fb9, type: 3}
+      propertyPath: clue
+      value: 
+      objectReference: {fileID: 1367666776}
     - target: {fileID: 8327181568658151978, guid: e15a6662da8cc0f4daf0749d51863fb9, type: 3}
       propertyPath: 'npcs.Array.data[0]'
       value: 
@@ -2581,7 +2614,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3413661311624942005, guid: e15a6662da8cc0f4daf0749d51863fb9, type: 3}
+      insertIndex: 6
+      addedObject: {fileID: 1367666776}
   m_SourcePrefab: {fileID: 100100000, guid: e15a6662da8cc0f4daf0749d51863fb9, type: 3}
 --- !u!82 &1367666772 stripped
 AudioSource:
@@ -2593,6 +2629,45 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8625351154876914274, guid: e15a6662da8cc0f4daf0749d51863fb9, type: 3}
   m_PrefabInstance: {fileID: 1367666771}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1367666774 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3413661311624942005, guid: e15a6662da8cc0f4daf0749d51863fb9, type: 3}
+  m_PrefabInstance: {fileID: 1367666771}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1367666775 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6289096303617599347, guid: e15a6662da8cc0f4daf0749d51863fb9, type: 3}
+  m_PrefabInstance: {fileID: 1367666771}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367666774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c9bdf9cc1a234bd8ae09c33a62c8985, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1367666776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367666774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fe87bc6f2fce4363b65799fb325fd8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clue:
+    id: 
+    popup: "Dorian a p\xE9t\xE9 un c\xE2ble"
+    text: "Apr\xE8s que Julie soit partie en larmes, Dorian est all\xE9 confronter
+      Charles."
+    hours: "Dorian a p\xE9t\xE9 un c\xE2ble"
+    points: 5
+    enabled: 1
+    isNew: 1
+  detectableGameObject: {fileID: 1367666775}
+  isInteractable: 0
 --- !u!1001 &1385364870
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3262,7 +3337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 758623761853997232, guid: 6532b93efd99c4c848cae10cde63162d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 935395715932536765, guid: 6532b93efd99c4c848cae10cde63162d, type: 3}
       propertyPath: m_Enabled
@@ -3377,6 +3452,14 @@ PrefabInstance:
     - target: {fileID: 3641212614939763822, guid: ffb9488f67e544b71971e01fd9e2d457, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8346523097361220225, guid: ffb9488f67e544b71971e01fd9e2d457, type: 3}
+      propertyPath: clue.hours
+      value: "Julie et Salom\xE9 \xE9vitaient un sujet"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8346523097361220225, guid: ffb9488f67e544b71971e01fd9e2d457, type: 3}
+      propertyPath: clue.points
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8541320291769700768, guid: ffb9488f67e544b71971e01fd9e2d457, type: 3}
       propertyPath: 'npcs.Array.data[0]'
