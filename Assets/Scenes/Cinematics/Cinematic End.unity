@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &303739095 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2515113431192243535, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-  m_PrefabInstance: {fileID: 1110723099056823968}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &495705472
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,11 +463,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &927417282 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6162677891528115815, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-  m_PrefabInstance: {fileID: 1110723099056823968}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &986845032
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1256,21 +1246,6 @@ PlayableDirector:
     value: {fileID: 990861655}
   m_ExposedReferences:
     m_References: []
---- !u!1 &1393719498 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2180350633737961632, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-  m_PrefabInstance: {fileID: 1110723099056823968}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1401077882 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4548579317617948013, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-  m_PrefabInstance: {fileID: 1110723099056823968}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1464325338 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6820859229928440130, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-  m_PrefabInstance: {fileID: 1110723099056823968}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1586914353
 GameObject:
   m_ObjectHideFlags: 0
@@ -1634,11 +1609,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1628799946137541574, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
   m_PrefabInstance: {fileID: 1110723099056823968}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1926583266 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4285867804098463046, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-  m_PrefabInstance: {fileID: 1110723099056823968}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2020971897
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1987,122 +1957,6 @@ PrefabInstance:
     - target: {fileID: 2226576976564083032, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: winPresetStates.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: losePresetStates.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: controlledObjects.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'winPresetStates.Array.data[0]'
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'winPresetStates.Array.data[1]'
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'winPresetStates.Array.data[2]'
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'winPresetStates.Array.data[3]'
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'winPresetStates.Array.data[4]'
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'losePresetStates.Array.data[0]'
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'losePresetStates.Array.data[1]'
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'losePresetStates.Array.data[2]'
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'losePresetStates.Array.data[4]'
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'controlledObjects.Array.data[0]'
-      value: 
-      objectReference: {fileID: 1401077882}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'controlledObjects.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1393719498}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'controlledObjects.Array.data[2]'
-      value: 
-      objectReference: {fileID: 927417282}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'controlledObjects.Array.data[3]'
-      value: 
-      objectReference: {fileID: 303739095}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'controlledObjects.Array.data[4]'
-      value: 
-      objectReference: {fileID: 1464325338}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'controlledObjects.Array.data[5]'
-      value: 
-      objectReference: {fileID: 1926583266}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: presets.Array.data[0].presetName
-      value: Win
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: presets.Array.data[1].presetName
-      value: Lose
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: presets.Array.data[0].gameObjectStates.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: presets.Array.data[1].gameObjectStates.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'presets.Array.data[0].gameObjectStates.Array.data[0]'
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'presets.Array.data[0].gameObjectStates.Array.data[2]'
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'presets.Array.data[0].gameObjectStates.Array.data[4]'
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'presets.Array.data[0].gameObjectStates.Array.data[5]'
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'presets.Array.data[1].gameObjectStates.Array.data[1]'
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'presets.Array.data[1].gameObjectStates.Array.data[3]'
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
-      propertyPath: 'presets.Array.data[1].gameObjectStates.Array.data[5]'
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3046843290720920377, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
       propertyPath: m_AnchorMax.y
