@@ -11,6 +11,7 @@ public class Clue
     public string hours;
     public int points;
     [HideInInspector] public bool enabled = true;
+    [HideInInspector] public bool isNew = true;
 }
 
 [CreateAssetMenu(fileName = "ClueDatabase", menuName = "Save/Clues")]
@@ -48,6 +49,7 @@ public class ClueDatabase : ScriptableObject
             text = originalClue.text,
             points = originalClue.points,
             enabled = true,
+            isNew = true
         };
 
         if (_clues.Exists(c => c.popup == clueCopy.popup && c.hours == clueCopy.hours && c.text == clueCopy.text))
