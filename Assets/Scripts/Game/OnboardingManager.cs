@@ -108,6 +108,8 @@ public class OnboardingManager : MonoBehaviour
         reportUI.HideUI();
         reportUI.gameObject.SetActive(false);
 
+        ClueDatabase.Instance.ClearDatabase();
+
         director.Play();
     }
 }
