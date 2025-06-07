@@ -9,7 +9,7 @@ public class InteractableClue : MonoBehaviour
     public Action OnClueAdded;
     [SerializeField] private Clue clue;
     [SerializeField] private DetectableGameObject detectableGameObject;
-    private bool isInteractable = false;
+    [SerializeField] private bool isInteractable = false;
     private CameraZoom cameraZoom;
     private float zoomValue;
     private bool isLookingAt => detectableGameObject.isLookingAt;
@@ -53,7 +53,7 @@ public class InteractableClue : MonoBehaviour
         {
             if (ClueDatabase.Instance.AddClue(clue))
             {
-                PopupUI.Instance.Show(clue.popup);
+                // PopupUI.Instance.Show(clue.popup);
                 ReportIcon.Instance.ShowAlertIcon();
                 OnClueAdded?.Invoke();
             }

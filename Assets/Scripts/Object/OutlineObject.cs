@@ -7,6 +7,7 @@ public class OutlineObject : MonoBehaviour
     [SerializeField] private DetectableGameObject detectableGameObject;
     [SerializeField] private float outlineWidth = 1f;
     [SerializeField] private bool alwaysVisible = false;
+    [SerializeField] private InteractableClue clue;
     private bool enableVisibility = true;
     private bool forceVisibility = false;
 
@@ -21,6 +22,11 @@ public class OutlineObject : MonoBehaviour
 
         CameraZoomSettings settings = GlobalCameraSettings.Instance.GetSettings<CameraZoomSettings>(ObjectType.Object);
         zoomValue = settings.zoomValue;
+
+        if (clue != null)
+        {
+            clue.OnClueAdded += () => EnableVisibility(false);
+        }
     }
 
     void Update()
