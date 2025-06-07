@@ -19,7 +19,7 @@ public class CameraZoom : MonoBehaviour
         mainCamera = GetComponent<Camera>();
     }
 
-    void OnEnable()
+    void Start()
     {
         speed = zoomSmoothSpeed;
         

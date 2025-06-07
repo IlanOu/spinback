@@ -75,7 +75,6 @@ public class MidiBinding : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
 
         config.Initialize();
         _inputCallback = GetComponent<MidiInputCallback>();

@@ -9,6 +9,7 @@ public class Clue
     public string popup;
     public string text;
     public string hours;
+    public int points;
     [HideInInspector] public bool enabled = true;
 }
 
@@ -45,6 +46,7 @@ public class ClueDatabase : ScriptableObject
             popup = originalClue.popup,
             hours = originalClue.hours,
             text = originalClue.text,
+            points = originalClue.points,
             enabled = true,
         };
 
