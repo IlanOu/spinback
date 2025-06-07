@@ -34,11 +34,6 @@ public class InteractableClue : MonoBehaviour
         }
     }
 
-    void OnDisable()
-    {
-        MidiBinding.Instance.Unsubscribe(MidiBind.BROWSER_BUTTON, OnControllerButtonPressed);
-    }
-
     void OnControllerButtonPressed(float value)
     {
         if (value == 1)

@@ -58,7 +58,6 @@ public class CursorManager : MonoBehaviour
         }
         
         _instance = this;
-        DontDestroyOnLoad(gameObject);
         
         // Sauvegarder l'état initial
         cursorWasVisible = Cursor.visible;

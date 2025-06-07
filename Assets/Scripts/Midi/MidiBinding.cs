@@ -45,6 +45,7 @@ public class MidiBinding : MonoBehaviour
 
     void OnEnable()
     {
+        _listeners.Clear();
         if (_inputCallback == null) return;
 
         _inputCallback.OnNoteOn += OnWillNoteOn;
@@ -75,6 +76,7 @@ public class MidiBinding : MonoBehaviour
             return;
         }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
 
         config.Initialize();
         _inputCallback = GetComponent<MidiInputCallback>();
@@ -85,7 +87,24 @@ public class MidiBinding : MonoBehaviour
         if (config.TryGetBind(type, number, channel, out var bind) &&
             _listeners.TryGetValue(bind, out var callback))
         {
-            callback?.Invoke(value);
+            foreach (var del in callback.GetInvocationList())
+            {
+                if (del.Target is UnityEngine.Object unityObj && unityObj == null)
+                {
+                    // La cible du callback a été détruite — on la supprime
+                    _listeners[bind] -= (Action<float>)del;
+                    continue;
+                }
+
+                try
+                {
+                    ((Action<float>)del)?.Invoke(value);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"Callback error in MIDI Bind: {e}");
+                }
+            }
         }
     }
 

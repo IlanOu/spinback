@@ -3,8 +3,8 @@ public class OnBoardingFocusStep : OnBoardingStep
 {
     public OnBoardingFocusStep(OnboardingManager manager) : base(manager) { }
     public override OnBoardingStep NextStep() => new OnBoardingAddClueStep(manager);
-    private bool mouseTooltipEnabled = false;
-    private bool sliderTooltipEnabled = false;
+    private bool mouseTooltipEnabled = true;
+    private bool sliderTooltipEnabled = true;
 
     public override void Show()
     {
@@ -17,7 +17,7 @@ public class OnBoardingFocusStep : OnBoardingStep
 
     public override void Handle()
     {
-        if (mouseTooltipEnabled && sliderTooltipEnabled)
+        if (!mouseTooltipEnabled && !sliderTooltipEnabled)
         {
             EndStep();
         }
