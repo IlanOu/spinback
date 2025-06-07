@@ -3,7 +3,8 @@ using UnityEngine;
 public class ReportIcon : MonoBehaviour
 {
     public static ReportIcon Instance;
-    [SerializeField] private GameObject icon;
+    [SerializeField] private GameObject openIcon;
+    [SerializeField] private GameObject closeIcon;
     [SerializeField] private GameObject alertIcon;
 
     void Awake()
@@ -18,13 +19,22 @@ public class ReportIcon : MonoBehaviour
 
     public void ShowAlertIcon()
     {
-        icon.SetActive(false);
+        openIcon.SetActive(false);
+        closeIcon.SetActive(false);
         alertIcon.SetActive(true);
     }
 
-    public void HideAlertIcon()
+    public void ShowOpenIcon()
     {
-        icon.SetActive(true);
+        openIcon.SetActive(true);
+        closeIcon.SetActive(false);
+        alertIcon.SetActive(false);
+    }
+
+    public void ShowCloseIcon()
+    {
+        openIcon.SetActive(false);
+        closeIcon.SetActive(true);
         alertIcon.SetActive(false);
     }
 }

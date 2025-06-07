@@ -77,7 +77,7 @@ namespace UI.Report
             investigationReportUI.SetActive(true);
             isShowing = true;
 
-            reportIcon.HideAlertIcon();
+            reportIcon.ShowCloseIcon();
 
             PopulateFromClues(); // 👈 CHARGER TOUS LES INDICES ICI
 
@@ -89,6 +89,8 @@ namespace UI.Report
 
         public void HideUI()
         {
+            reportIcon.ShowOpenIcon();
+            
             investigationReportUI.SetActive(false);
             isShowing = false;
 
