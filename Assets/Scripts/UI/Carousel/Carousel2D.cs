@@ -14,9 +14,9 @@ namespace UI.Carousel
         [SerializeField] private RectTransform contentContainer;
         [SerializeField] private HorizontalLayoutGroup layoutGroup;
 
-        [Header("Navigation")] [SerializeField]
-        private Button prevButton;
-
+        [Header("Navigation")]
+        
+        [SerializeField] private Button prevButton;
         [SerializeField] private Button nextButton;
         [SerializeField] private GameObject navigationContainer; // Parent des boutons de navigation
         [SerializeField] private float animationDuration = 0.3f;
