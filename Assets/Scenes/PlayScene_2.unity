@@ -647,6 +647,11 @@ MonoBehaviour:
   npcs:
   - {fileID: 1992258259}
   - {fileID: 76317144}
+--- !u!82 &211823318 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7150771095000929170, guid: 820cdb4e557e84d46bd9a5554680f918, type: 3}
+  m_PrefabInstance: {fileID: 211823309}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &240831042
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -826,6 +831,12 @@ PlayableDirector:
     value: {fileID: 4701254100533372858}
   - key: {fileID: -7740965406801307644, guid: 16be7bbe949de4cc7a99a7b414ad7484, type: 2}
     value: {fileID: 8212128412060670589}
+  - key: {fileID: 5317092639203903837, guid: 16be7bbe949de4cc7a99a7b414ad7484, type: 2}
+    value: {fileID: 376369475}
+  - key: {fileID: -6265818894542208830, guid: 16be7bbe949de4cc7a99a7b414ad7484, type: 2}
+    value: {fileID: 211823318}
+  - key: {fileID: 6928160455257127630, guid: 16be7bbe949de4cc7a99a7b414ad7484, type: 2}
+    value: {fileID: 1859596867}
   m_ExposedReferences:
     m_References:
     - 2117ea086ea024ed19dd6a22851bf5dd: {fileID: 0}
@@ -1251,6 +1262,11 @@ MonoBehaviour:
   npcs:
   - {fileID: 1992258259}
   - {fileID: 76317144}
+--- !u!82 &376369475 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7150771095000929170, guid: 820cdb4e557e84d46bd9a5554680f918, type: 3}
+  m_PrefabInstance: {fileID: 376369466}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &395579968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3840,6 +3856,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcs:
   - {fileID: 3080006178211904898}
+--- !u!82 &1859596867 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7150771095000929170, guid: 820cdb4e557e84d46bd9a5554680f918, type: 3}
+  m_PrefabInstance: {fileID: 1444878980}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1875983934 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 978991633337798958, guid: ed706768e311d400ca344007bc916814, type: 3}
