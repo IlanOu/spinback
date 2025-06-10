@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using UI.Report;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Playables;
 using UnityEngine.UI;
 
@@ -24,6 +25,8 @@ public class OnboardingManager : MonoBehaviour
     [Header("Finish step")]
     [SerializeField] public Button validateButton;
 
+    [SerializeField] public UnityEvent<bool> OnOpenReportUI;
+    
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -60,6 +63,7 @@ public class OnboardingManager : MonoBehaviour
 
     public void StartOnboarding()
     {
+        OnOpenReportUI?.Invoke(true);
         Vector2 rotation = Camera.main.transform.localEulerAngles;
 
         director.Pause();
@@ -103,6 +107,7 @@ public class OnboardingManager : MonoBehaviour
 
     public void FinishOnboarding()
     {
+        OnOpenReportUI?.Invoke(false);
         currentStep = null;
         
         reportUI.HideUI();
