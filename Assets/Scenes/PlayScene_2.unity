@@ -1490,6 +1490,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: CheckpointChanger
       objectReference: {fileID: 0}
+    - target: {fileID: 5624796500347255886, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
+      propertyPath: changeSceneKey
+      value: 257
+      objectReference: {fileID: 0}
+    - target: {fileID: 5624796500347255886, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
+      propertyPath: targetSceneName
+      value: PlayScene_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5624796500347255886, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
+      propertyPath: 'midiBindings.Array.data[0]'
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 5624796500347255886, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
+      propertyPath: 'midiBindings.Array.data[1]'
+      value: 59
+      objectReference: {fileID: 0}
+    - target: {fileID: 5624796500347255886, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
+      propertyPath: 'midiBindings.Array.data[2]'
+      value: 66
+      objectReference: {fileID: 0}
+    - target: {fileID: 5624796500347255886, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
+      propertyPath: 'midiBindings.Array.data[3]'
+      value: 67
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
