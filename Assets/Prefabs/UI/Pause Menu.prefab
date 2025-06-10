@@ -230,6 +230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7350334548102060758}
   - component: {fileID: 6040943780863042745}
+  - component: {fileID: 4590431089674159898}
   m_Layer: 0
   m_Name: Pause Menu
   m_TagString: Untagged
@@ -346,6 +347,18 @@ MonoBehaviour:
   onMenuClose:
     m_PersistentCalls:
       m_Calls: []
+--- !u!225 &4590431089674159898
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3706742630913215101}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5124467315775367530
 GameObject:
   m_ObjectHideFlags: 0
