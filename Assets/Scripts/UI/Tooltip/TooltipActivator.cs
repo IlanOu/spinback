@@ -6,9 +6,10 @@ using UnityEngine;
 public class TooltipActivator : MonoBehaviour
 {
     public static TooltipActivator Instance;
+    [SerializeField] private float timeBeforeDeactivation = 2f;
     [SerializeField] private List<TooltipEntry> tooltipEntries;
 
-    private Dictionary<TooltipType, GameObject> tooltipMap;
+    private Dictionary<TooltipType, TooltipEntry> tooltipMap;
     private Dictionary<TooltipType, List<Action>> deactivationSubscribers = new();
     private Vector3 lastMousePosition;
     private Vector3 lastCameraRotation;
@@ -23,12 +24,12 @@ public class TooltipActivator : MonoBehaviour
         Instance = this;
 
         // Initialise le dictionnaire
-        tooltipMap = new Dictionary<TooltipType, GameObject>();
+        tooltipMap = new Dictionary<TooltipType, TooltipEntry>();
         foreach (var entry in tooltipEntries)
         {
             if (!tooltipMap.ContainsKey(entry.type) && entry.tooltipObject != null)
             {
-                tooltipMap.Add(entry.type, entry.tooltipObject);
+                tooltipMap.Add(entry.type, entry);
             }
         }
     }
@@ -52,7 +53,7 @@ public class TooltipActivator : MonoBehaviour
 
     void Update()
     {
-        if (tooltipMap.TryGetValue(TooltipType.Mouse, out var mouseTooltip) && mouseTooltip.activeSelf)
+        if (tooltipMap.TryGetValue(TooltipType.Mouse, out var mouseTooltip) && mouseTooltip.tooltipObject.activeSelf)
         {
             if (Input.mousePosition != lastMousePosition || Camera.main.transform.rotation.eulerAngles != lastCameraRotation)
             {
@@ -70,22 +71,38 @@ public class TooltipActivator : MonoBehaviour
                 lastMousePosition = Input.mousePosition;
                 lastCameraRotation = Camera.main.transform.rotation.eulerAngles;
             }
-            tooltip.SetActive(true);
+            if (tooltip.checkmark != null)
+            {
+                tooltip.checkmark.SetActive(false);
+            }
+            tooltip.tooltipObject.SetActive(true);
         }
     }
 
     public void DisableTooltip(TooltipType type)
     {
-        if (tooltipMap.TryGetValue(type, out var tooltip) && tooltip.activeSelf)
+        if (tooltipMap.TryGetValue(type, out var tooltip) && tooltip.tooltipObject.activeSelf)
         {
-            tooltip.SetActive(false);
-
-            if (deactivationSubscribers.TryGetValue(type, out var subscribers))
+            if (tooltip.checkmark != null)
             {
-                foreach (var callback in subscribers)
-                {
-                    callback?.Invoke();
-                }
+                tooltip.checkmark.SetActive(true);
+                StartCoroutine(HideTooltipAfterDelay(tooltip));
+            }
+            else
+            {
+                tooltip.tooltipObject.SetActive(false);
+                NotifyDisablingTooltip(type);
+            }
+        }
+    }
+
+    void NotifyDisablingTooltip(TooltipType type)
+    {
+        if (deactivationSubscribers.TryGetValue(type, out var subscribers))
+        {
+            foreach (var callback in subscribers)
+            {
+                callback?.Invoke();
             }
         }
     }
@@ -97,9 +114,16 @@ public class TooltipActivator : MonoBehaviour
         {
             if (!exceptionSet.Contains(kvp.Key))
             {
-                kvp.Value.SetActive(false);
+                DisableTooltip(kvp.Key);
             }
         }
+    }
+
+    IEnumerator HideTooltipAfterDelay(TooltipEntry tooltip)
+    {
+        yield return new WaitForSeconds(timeBeforeDeactivation);
+        tooltip.tooltipObject.SetActive(false);
+        NotifyDisablingTooltip(tooltip.type);
     }
 
     public void SubscribeToDeactivation(TooltipType type, Action callback)

@@ -22,6 +22,8 @@ public class OnboardingManager : MonoBehaviour
 
     [Header("Open report step")]
     [SerializeField] public ReportUI reportUI;
+    [Header("Toggle step")]
+    [SerializeField] public GameObject carousel;
     [Header("Finish step")]
     [SerializeField] public Button validateButton;
 
@@ -58,7 +60,7 @@ public class OnboardingManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.N))
         {
-            NextStep();
+            TooltipActivator.Instance.DisableAllTooltips();
         }
     }
 

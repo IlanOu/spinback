@@ -9,17 +9,22 @@ public class OnBoardingReportInteractionStep : OnBoardingStep
 
     public override void Show()
     {
-        TooltipActivator.Instance.EnableTooltip(TooltipType.ToggleClue);
-        TooltipActivator.Instance.EnableTooltip(TooltipType.EyeClue);
         TooltipActivator.Instance.EnableTooltip(TooltipType.ValidateReport);
+        TooltipActivator.Instance.SubscribeToDeactivation(TooltipType.ValidateReport, TooltipDisabled);
 
-        validateButton.onClick.AddListener(manager.NextStep);
+        validateButton.onClick.AddListener(OnButtonClicked);
+    }
+    
+    private void TooltipDisabled() => manager.NextStep();
+
+    private void OnButtonClicked()
+    {
+        TooltipActivator.Instance.DisableTooltip(TooltipType.ValidateReport);
     }
 
     public override void Hide()
     {
-        TooltipActivator.Instance.DisableAllTooltips();
-        
         validateButton.onClick.RemoveListener(manager.NextStep);
+        TooltipActivator.Instance.UnsubscribeFromDeactivation(TooltipType.ValidateReport, TooltipDisabled);
     }
 }

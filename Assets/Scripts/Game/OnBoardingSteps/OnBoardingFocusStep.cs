@@ -42,8 +42,5 @@ public class OnBoardingFocusStep : OnBoardingStep
     {
         TooltipActivator.Instance.UnsubscribeFromDeactivation(TooltipType.Mouse, DisableMouseTooltip);
         TooltipActivator.Instance.UnsubscribeFromDeactivation(TooltipType.Slider, DisableSliderTooltip);
-
-        TooltipType[] exceptions = new TooltipType[] { TooltipType.AddClue };
-        TooltipActivator.Instance.DisableAllTooltips(exceptions);
     }
 }
