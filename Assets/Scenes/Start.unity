@@ -1374,6 +1374,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MidiManager
       objectReference: {fileID: 0}
+    - target: {fileID: 935395715932536765, guid: 6532b93efd99c4c848cae10cde63162d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1232347064569802673, guid: 6532b93efd99c4c848cae10cde63162d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

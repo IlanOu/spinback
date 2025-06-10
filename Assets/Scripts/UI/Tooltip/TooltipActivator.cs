@@ -100,7 +100,10 @@ public class TooltipActivator : MonoBehaviour
     {
         if (deactivationSubscribers.TryGetValue(type, out var subscribers))
         {
-            foreach (var callback in subscribers)
+            // Créer une copie de la liste pour éviter les problèmes de modification pendant l'itération
+            List<Action> subscribersCopy = new List<Action>(subscribers);
+        
+            foreach (var callback in subscribersCopy)
             {
                 callback?.Invoke();
             }
