@@ -6,9 +6,9 @@ public class OutlineObject : MonoBehaviour
     [SerializeField] private Outline outline;
     [SerializeField] private DetectableGameObject detectableGameObject;
     [SerializeField] private float outlineWidth = 1f;
+    [SerializeField] private bool enableVisibility = true;
     [SerializeField] private bool alwaysVisible = false;
     [SerializeField] private InteractableClue clue;
-    private bool enableVisibility = true;
     private bool forceVisibility = false;
 
     private CameraZoom cameraZoom;

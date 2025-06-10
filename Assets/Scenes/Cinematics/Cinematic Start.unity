@@ -958,6 +958,7 @@ MonoBehaviour:
   outline: {fileID: 1070387965}
   detectableGameObject: {fileID: 1070387966}
   outlineWidth: 2
+  enableVisibility: 0
   alwaysVisible: 0
   clue: {fileID: 0}
 --- !u!114 &1070387965
@@ -1034,6 +1035,7 @@ MonoBehaviour:
   text: {fileID: 963994918}
   commandText: "Ajouter cet \xE9l\xE9ment \xE0 mon t\xE9moignage"
   validateText: "\xC9l\xE9ment ajout\xE9"
+  enableVisibility: 0
   alwaysVisible: 0
   visibleDuration: 3
   clueIcons:

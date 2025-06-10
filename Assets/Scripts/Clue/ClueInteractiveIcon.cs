@@ -20,10 +20,10 @@ public class ClueInteractiveIcon : MonoBehaviour
     [SerializeField] private TextMeshPro text;
     [SerializeField] private string commandText = "Ajouter cet élément à mon témoignage";
     [SerializeField] private string validateText = "Élément ajouté";
+    [SerializeField] private bool enableVisibility = true;
     [SerializeField] private bool alwaysVisible = false;
     [SerializeField] private float visibleDuration = 3f;
     [SerializeField] private ClueIcon[] clueIcons;
-    private bool enableVisibility = true;
     private bool forceVisibility = false;
     private bool canChangeState = true;
     private bool isEnable = false;
