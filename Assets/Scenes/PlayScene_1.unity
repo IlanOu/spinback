@@ -331,7 +331,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5253216566386873011, guid: a4048881117cf489fa4c05ce3be518e8, type: 3}
       propertyPath: clue.points
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8339850993164056332, guid: a4048881117cf489fa4c05ce3be518e8, type: 3}
       propertyPath: clue
@@ -2755,7 +2755,7 @@ MonoBehaviour:
     text: "Apr\xE8s que Julie soit partie en larmes, Dorian est all\xE9 confronter
       Charles."
     hours: "Dorian a p\xE9t\xE9 un c\xE2ble"
-    points: 5
+    points: 4
     enabled: 1
     isNew: 1
   detectableGameObject: {fileID: 1367666775}
@@ -3560,7 +3560,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8346523097361220225, guid: ffb9488f67e544b71971e01fd9e2d457, type: 3}
       propertyPath: clue.points
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8541320291769700768, guid: ffb9488f67e544b71971e01fd9e2d457, type: 3}
       propertyPath: 'npcs.Array.data[0]'
