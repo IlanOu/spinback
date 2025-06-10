@@ -2482,6 +2482,58 @@ PrefabInstance:
       propertyPath: investigationReportUI
       value: 
       objectReference: {fileID: 886701077}
+    - target: {fileID: 1033988310710498975, guid: fff5384277c514a5ea1dad78198dbad5, type: 3}
+      propertyPath: onReportDisplayed.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033988310710498975, guid: fff5384277c514a5ea1dad78198dbad5, type: 3}
+      propertyPath: onReportDisplayed.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033988310710498975, guid: fff5384277c514a5ea1dad78198dbad5, type: 3}
+      propertyPath: onReportDisplayed.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033988310710498975, guid: fff5384277c514a5ea1dad78198dbad5, type: 3}
+      propertyPath: onReportDisplayed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 330585548}
+    - target: {fileID: 1033988310710498975, guid: fff5384277c514a5ea1dad78198dbad5, type: 3}
+      propertyPath: onReportDisplayed.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 101670069}
+    - target: {fileID: 1033988310710498975, guid: fff5384277c514a5ea1dad78198dbad5, type: 3}
+      propertyPath: onReportDisplayed.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033988310710498975, guid: fff5384277c514a5ea1dad78198dbad5, type: 3}
+      propertyPath: onReportDisplayed.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033988310710498975, guid: fff5384277c514a5ea1dad78198dbad5, type: 3}
+      propertyPath: onReportDisplayed.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnPaused
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033988310710498975, guid: fff5384277c514a5ea1dad78198dbad5, type: 3}
+      propertyPath: onReportDisplayed.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: OnReportUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033988310710498975, guid: fff5384277c514a5ea1dad78198dbad5, type: 3}
+      propertyPath: onReportDisplayed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SmoothCameraFollow, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033988310710498975, guid: fff5384277c514a5ea1dad78198dbad5, type: 3}
+      propertyPath: onReportDisplayed.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: CircularMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033988310710498975, guid: fff5384277c514a5ea1dad78198dbad5, type: 3}
+      propertyPath: onReportDisplayed.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033988310710498975, guid: fff5384277c514a5ea1dad78198dbad5, type: 3}
+      propertyPath: onReportDisplayed.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2214020904023357757, guid: fff5384277c514a5ea1dad78198dbad5, type: 3}
       propertyPath: m_Pivot.x
       value: 0
