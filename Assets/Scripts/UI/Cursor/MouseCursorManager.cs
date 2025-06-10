@@ -76,7 +76,8 @@ namespace UI.Cursor
 
             bool overButton = false;
             foreach (var res in results)
-                if (res.gameObject.GetComponent<Button>() != null)
+                if (res.gameObject.GetComponentInParent<Selectable>() != null &&
+                    res.gameObject.GetComponentInParent<Selectable>().IsInteractable())
                 {
                     overButton = true;
                     break;
