@@ -1,3 +1,4 @@
+using System;
 using Minis;
 using UnityEngine;
 
@@ -19,7 +20,7 @@ public class CameraZoom : MonoBehaviour
         mainCamera = GetComponent<Camera>();
     }
 
-    void Start()
+    /*void Start()
     {
         speed = zoomSmoothSpeed;
         
@@ -28,6 +29,23 @@ public class CameraZoom : MonoBehaviour
 
         MidiBinding.Instance.Subscribe(MidiBind.TEMPO_FADER_1, OnMidiZoom);
         MidiBinding.Instance.Subscribe(MidiBind.TEMPO_FADER_2, OnMidiZoom);
+    }*/
+
+    private void OnEnable()
+    {
+        speed = zoomSmoothSpeed;
+        
+        currentZoom = mainCamera.fieldOfView;
+        targetZoom = maxZoom;
+
+        MidiBinding.Instance.Subscribe(MidiBind.TEMPO_FADER_1, OnMidiZoom);
+        MidiBinding.Instance.Subscribe(MidiBind.TEMPO_FADER_2, OnMidiZoom);
+    }
+    
+    private void OnDisable()
+    {
+        MidiBinding.Instance.Unsubscribe(MidiBind.TEMPO_FADER_1, OnMidiZoom);
+        MidiBinding.Instance.Unsubscribe(MidiBind.TEMPO_FADER_2, OnMidiZoom);
     }
 
     void Update()
@@ -61,6 +79,7 @@ public class CameraZoom : MonoBehaviour
 
     void OnMidiZoom(float value)
     {
+        Debug.Log("Midi zoom: " + value);
         targetZoom = Mathf.Lerp(minZoom, maxZoom, 1 - value);
     }
 
