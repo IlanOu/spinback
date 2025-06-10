@@ -39,6 +39,7 @@ public class OnboardingManager : MonoBehaviour
 
     void Start()
     {
+        OnOpenReportUI?.Invoke(false);
         cameraFollow = Camera.main.GetComponent<SmoothCameraFollow>();
         cameraZoom = Camera.main.GetComponent<CameraZoom>();
 
