@@ -12,5 +12,10 @@ namespace UI.Cursor
         {
             cursorImage.sprite = Sprite.Create(cursorTexture, new Rect(0, 0, cursorTexture.width, cursorTexture.height), Vector2.zero);
         }
+        
+        public void DisplayCursor(bool display)
+        {
+            cursorImage.enabled = display;
+        }
     }
 }
