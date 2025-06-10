@@ -200,7 +200,7 @@ public class CircularMenu : MonoBehaviour
                 // S'assurer que le pivot est au centre (0.5, 0.5) pour un positionnement correct
                 try
                 {
-                    menuItems[i].itemTransform.pivot = new Vector2(0.5f, 0.5f);
+                    menuItems[i].itemTransform.pivot = new Vector2(0.5f, 0f);
                 }
                 catch (Exception)
                 {

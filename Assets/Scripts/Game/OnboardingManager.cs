@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using UI.Report;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Playables;
 using UnityEngine.UI;
 
@@ -21,9 +22,13 @@ public class OnboardingManager : MonoBehaviour
 
     [Header("Open report step")]
     [SerializeField] public ReportUI reportUI;
+    [Header("Toggle step")]
+    [SerializeField] public GameObject carousel;
     [Header("Finish step")]
     [SerializeField] public Button validateButton;
 
+    [SerializeField] public UnityEvent<bool> OnOpenReportUI;
+    
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -36,6 +41,7 @@ public class OnboardingManager : MonoBehaviour
 
     void Start()
     {
+        OnOpenReportUI?.Invoke(false);
         cameraFollow = Camera.main.GetComponent<SmoothCameraFollow>();
         cameraZoom = Camera.main.GetComponent<CameraZoom>();
 
@@ -54,12 +60,13 @@ public class OnboardingManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.N))
         {
-            NextStep();
+            TooltipActivator.Instance.DisableAllTooltips();
         }
     }
 
     public void StartOnboarding()
     {
+        OnOpenReportUI?.Invoke(true);
         Vector2 rotation = Camera.main.transform.localEulerAngles;
 
         director.Pause();
@@ -103,6 +110,7 @@ public class OnboardingManager : MonoBehaviour
 
     public void FinishOnboarding()
     {
+        OnOpenReportUI?.Invoke(false);
         currentStep = null;
         
         reportUI.HideUI();

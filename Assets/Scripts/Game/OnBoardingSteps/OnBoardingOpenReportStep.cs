@@ -1,5 +1,6 @@
 
 using UI.Report;
+using UnityEditor;
 
 public class OnBoardingOpenReportStep : OnBoardingStep
 {
@@ -10,19 +11,25 @@ public class OnBoardingOpenReportStep : OnBoardingStep
 
     public override void Show()
     {
-        reportUI.OnOpenReportUI += manager.NextStep;
+        reportUI.OnOpenReportUI += OnOpenReportUI;
 
         TooltipActivator.Instance.EnableTooltip(TooltipType.OpenReport);
+        TooltipActivator.Instance.SubscribeToDeactivation(TooltipType.OpenReport, TooltipDisabled);
 
         reportIcon = reportUI.gameObject.GetComponent<ReportIcon>();
         reportIcon.ShowAlertIcon();
     }
 
-    public override void Hide()
-    {
-        reportUI.OnOpenReportUI -= manager.NextStep;
+    private void TooltipDisabled() => manager.NextStep();
 
-        TooltipActivator.Instance.DisableAllTooltips();
+    private void OnOpenReportUI()
+    {
+        TooltipActivator.Instance.DisableTooltip(TooltipType.OpenReport);
     }
 
+    public override void Hide()
+    {
+        reportUI.OnOpenReportUI -= OnOpenReportUI;
+        TooltipActivator.Instance.UnsubscribeFromDeactivation(TooltipType.OpenReport, TooltipDisabled);
+    }
 }

@@ -18,6 +18,7 @@ public class EndUIPresets : MonoBehaviour
     }
     
     [Header("Configuration")]
+    [SerializeField] private int maxScore = 1;
     public CircleFillerUI circleFillerUI;
     [Range(0, 100)]
     public float winThreshold = 50f; // Seuil pour déterminer Win/Lose
@@ -59,9 +60,25 @@ public class EndUIPresets : MonoBehaviour
             ValidatePresets();
         }
         
+        // Initialiser le score total
+        SetTotalScore();
+        
         // Appliquer le preset initial
         ApplyPresetByPercentage(currentPercentage);
         lastPercentage = currentPercentage;
+    }
+    
+    private void SetTotalScore()
+    {
+        int totalPoints = 0;
+        ClueDatabase.Instance.Clues.ForEach(clue =>
+        {
+            if (clue.enabled)
+            {
+                totalPoints += clue.points;
+            }
+        });
+        currentPercentage = (float)totalPoints / maxScore * 100f;
     }
     
     // Valider que les presets existants ont le bon nombre d'états

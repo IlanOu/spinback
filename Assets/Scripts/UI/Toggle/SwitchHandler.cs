@@ -32,17 +32,19 @@ namespace UI.Toggle
         public void SetClue(Clue clue)
         {
             this.clue = clue;
+            UpdateVisuals();
         }
 
         public void OnSwitchButtonClicked()
         {
             clue.enabled = !clue.enabled;
-            switchBtn.transform.DOLocalMoveX(-switchBtn.transform.localPosition.x, animationDuration);
             UpdateVisuals();
         }
         
         private void UpdateVisuals()
         {
+            switchBtn.transform.DOLocalMoveX((isOn ? 1 : -1) * Mathf.Abs(switchBtn.transform.localPosition.x), animationDuration);
+            
             Color targetSwitchColor = !isOn ? switchOffColor : switchOnColor;
             Color targetCaseColor = !isOn ? caseOffColor : caseOnColor;
             
