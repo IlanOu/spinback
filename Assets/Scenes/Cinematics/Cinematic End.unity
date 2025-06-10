@@ -2510,6 +2510,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -75
       objectReference: {fileID: 0}
+    - target: {fileID: 2371442129639528430, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
+      propertyPath: maxScore
+      value: 27
+      objectReference: {fileID: 0}
     - target: {fileID: 2515113431192243535, guid: d1e87b3e105a109439194f4c7a842034, type: 3}
       propertyPath: m_IsActive
       value: 1
