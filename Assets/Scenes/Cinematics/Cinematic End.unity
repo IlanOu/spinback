@@ -463,6 +463,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+<<<<<<< Updated upstream
 --- !u!1001 &986845032
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -575,6 +576,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+=======
+>>>>>>> Stashed changes
 --- !u!95 &990861655 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7611485635854998405, guid: 1e07ea67cf42e8048845438d32d7fab6, type: 3}
@@ -1233,11 +1236,11 @@ PlayableDirector:
   - key: {fileID: -3007649100636342254, guid: 4a13df678f14b9142a542599805072fe, type: 2}
     value: {fileID: 990861655}
   - key: {fileID: 3704237268081014578, guid: 4a13df678f14b9142a542599805072fe, type: 2}
-    value: {fileID: 986845035}
+    value: {fileID: 0}
   - key: {fileID: 8037376839198134431, guid: 4a13df678f14b9142a542599805072fe, type: 2}
     value: {fileID: 1292470944}
   - key: {fileID: 3704237268081014578, guid: 7ca443c93eb5a894eb9d8b6ebfca679a, type: 2}
-    value: {fileID: 986845035}
+    value: {fileID: 0}
   - key: {fileID: 8037376839198134431, guid: 7ca443c93eb5a894eb9d8b6ebfca679a, type: 2}
     value: {fileID: 1292470944}
   - key: {fileID: 4381200422033201657, guid: 7ca443c93eb5a894eb9d8b6ebfca679a, type: 2}
@@ -3676,17 +3679,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 1970508022845330364, guid: 1e07ea67cf42e8048845438d32d7fab6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 986845033}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e07ea67cf42e8048845438d32d7fab6, type: 3}
---- !u!4 &6964961336107060463 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1970508022845330364, guid: 1e07ea67cf42e8048845438d32d7fab6, type: 3}
-  m_PrefabInstance: {fileID: 6964961336107060462}
-  m_PrefabAsset: {fileID: 0}
 --- !u!95 &6964961336107060464 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 8362208074151230869, guid: 1e07ea67cf42e8048845438d32d7fab6, type: 3}
