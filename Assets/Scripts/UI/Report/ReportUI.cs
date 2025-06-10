@@ -56,7 +56,14 @@ namespace UI.Report
 
             if (signButton != null)
             {
-                signButton.onClick.AddListener(EndCinematic);
+                if (confirmationPopup)
+                {
+                    signButton.onClick.AddListener(ConfirmEndCinematic);
+                }
+                else
+                {
+                    signButton.onClick.AddListener(EndCinematic);
+                } 
             }
 
             if (carousel == null)
