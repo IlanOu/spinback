@@ -37,10 +37,17 @@ public class MidiInputCallback : MonoBehaviour
     void OnEnable()
     {
         InputSystem.onDeviceChange += OnDeviceChange;
+
+        foreach (var device in InputSystem.devices)
+        {
+            if (device is MidiDevice midiDevice)
+                ConnectMidiDevice(midiDevice);
+        }
     }
 
     void OnDisable()
     {
+        InputSystem.onDeviceChange -= OnDeviceChange;
         DisconnectAllDevices();
     }
 
