@@ -2035,6 +2035,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2091570116}
     m_Modifications:
+    - target: {fileID: 9415050220645254, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9415050220645254, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9415050220645254, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b6d5f9084cd59544ebabdad41818d918, type: 2}
+    - target: {fileID: 1182861397892944105, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.261
+      objectReference: {fileID: 0}
+    - target: {fileID: 1557668353115114191, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b6d5f9084cd59544ebabdad41818d918, type: 2}
     - target: {fileID: 1676485163136460613, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.07
@@ -2075,6 +2095,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1720629396514223876, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103598705189216364, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3df786fa512f6244fb81e69c7107383a, type: 2}
+    - target: {fileID: 3366108011776579735, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4441320113193223843, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
       propertyPath: m_Name
       value: Appartcontainer (1)
@@ -2084,7 +2116,51 @@ PrefabInstance:
       value: "La veste rouge ? Elle \xE9tait d\xE9j\xE0 l\xE0 quand je suis arriv\xE9,
         non ?"
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5717620275895596066, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3df786fa512f6244fb81e69c7107383a, type: 2}
+    - target: {fileID: 6388793912318075029, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6388793912318075029, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433827873185502708, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 6388793912318075029, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 7997124370742136968, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 3366108011776579735, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 1720629396514223876, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 4507306899534362159, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 8799814184561514205, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 7596307735121737139, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 4483656408485756538, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 7548903519690961856, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 170123846054696521, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 962593219838864082, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 7393851689143718935, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 7598091680174545601, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 7499577614194680264, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 5366870394687356923, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 5381350068750145916, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 1957778187765549111, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 5420311315013126685, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 5420311315013139341, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 5420311315013138413, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 5420311315013140609, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 5420311315013120767, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 2882525310156336337, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 621399215588114126, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 7528210351737808706, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 7832289524401172233, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 7609370609592113982, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+    - {fileID: 5392140881963059936, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -4210,6 +4286,18 @@ PrefabInstance:
     - target: {fileID: 1237965122222010747, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5624796500347255886, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
+      propertyPath: midiBindings.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5624796500347255886, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
+      propertyPath: 'midiBindings.Array.data[0]'
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 5624796500347255886, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
+      propertyPath: 'midiBindings.Array.data[1]'
+      value: 68
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

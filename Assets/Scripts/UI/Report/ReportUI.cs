@@ -48,7 +48,13 @@ namespace UI.Report
         {
             investigationReportUI.SetActive(false);
 
-            MidiBinding.Instance.Subscribe(MidiBind.MASTER_BUTTON, (input) =>
+            MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_CUE_1, (input) =>
+            {
+                if (input == 1)
+                    ToggleVisibilityReport();
+            });
+            
+            MidiBinding.Instance.Subscribe(MidiBind.BUTTON_1_ROLL_1, (input) =>
             {
                 if (input == 1)
                     ToggleVisibilityReport();

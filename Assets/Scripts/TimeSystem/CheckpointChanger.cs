@@ -279,6 +279,8 @@ namespace TimeSystem
                 return;
             }
             
+            Debug.Log("AAAAA " + targetSceneName);
+            
             if (useVideoTransition)
                 SceneTransitionBlinker.Instance.TransitionToSceneWithVideo(targetSceneName);
             else
