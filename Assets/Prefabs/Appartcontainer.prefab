@@ -1146,6 +1146,7 @@ MonoBehaviour:
   outline: {fileID: 1081316726023205258}
   detectableGameObject: {fileID: 1306377468504780754}
   outlineWidth: 2
+  enableVisibility: 1
   alwaysVisible: 0
   clue: {fileID: 7103522583472484994}
 --- !u!114 &7103522583472484994
@@ -1189,6 +1190,7 @@ MonoBehaviour:
   text: {fileID: 2941979295532980976}
   commandText: "Ajouter cet \xE9l\xE9ment \xE0 mon t\xE9moignage"
   validateText: "\xC9l\xE9ment ajout\xE9"
+  enableVisibility: 1
   alwaysVisible: 0
   visibleDuration: 3
   clueIcons:
@@ -1310,14 +1312,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3917487699090260987}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: 0.091, y: 3.725, z: 2.342}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2544030504805786119}
+  - {fileID: 2275264589609299097}
   m_Father: {fileID: 1676485163136460613}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -5, z: 0}
 --- !u!95 &6885610315769686280
 Animator:
   serializedVersion: 7
@@ -3579,6 +3581,84 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7768873901944809308, guid: 57df82bc3ccfe344499a13dc4400ac61, type: 3}
   m_PrefabInstance: {fileID: 415393958152985487}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1736670282209463154
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7507420099800380182}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 9909a05cdd707164a9a384fdfe187225, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4.487865
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9909a05cdd707164a9a384fdfe187225, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.487865
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9909a05cdd707164a9a384fdfe187225, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4.4878645
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9909a05cdd707164a9a384fdfe187225, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9909a05cdd707164a9a384fdfe187225, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9909a05cdd707164a9a384fdfe187225, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9909a05cdd707164a9a384fdfe187225, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.3118829
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9909a05cdd707164a9a384fdfe187225, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.31188294
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9909a05cdd707164a9a384fdfe187225, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.63460934
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9909a05cdd707164a9a384fdfe187225, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.63460946
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9909a05cdd707164a9a384fdfe187225, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9909a05cdd707164a9a384fdfe187225, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9909a05cdd707164a9a384fdfe187225, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9909a05cdd707164a9a384fdfe187225, type: 3}
+      propertyPath: m_Name
+      value: DiscoBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6317578925029434746, guid: 9909a05cdd707164a9a384fdfe187225, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a362ca43c3162a343ae8235e0376b5e7, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9909a05cdd707164a9a384fdfe187225, type: 3}
+--- !u!4 &2275264589609299097 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9909a05cdd707164a9a384fdfe187225, type: 3}
+  m_PrefabInstance: {fileID: 1736670282209463154}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2045585959525236709
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4076,6 +4156,7 @@ MonoBehaviour:
   outline: {fileID: 7861879689325775642}
   detectableGameObject: {fileID: 6967017033459767013}
   outlineWidth: 2
+  enableVisibility: 1
   alwaysVisible: 0
   clue: {fileID: 5278441286953226123}
 --- !u!114 &5278441286953226123
@@ -4118,6 +4199,7 @@ MonoBehaviour:
   text: {fileID: 6913198650269411986}
   commandText: "Ajouter cet \xE9l\xE9ment \xE0 mon t\xE9moignage"
   validateText: "\xC9l\xE9ment ajout\xE9"
+  enableVisibility: 1
   alwaysVisible: 0
   visibleDuration: 3
   clueIcons:
