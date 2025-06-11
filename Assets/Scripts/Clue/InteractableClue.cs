@@ -49,7 +49,6 @@ public class InteractableClue : MonoBehaviour
         {
             if (ClueDatabase.Instance.AddClue(clue))
             {
-                // PopupUI.Instance.Show(clue.popup);
                 ReportIcon.Instance.ShowAlertIcon();
                 OnClueAdded?.Invoke();
             }

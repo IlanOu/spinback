@@ -82,6 +82,8 @@ public class OnboardingManager : MonoBehaviour
         outlineClue.EnableVisibility(false);
         interactiveIcon.EnableVisibility(false);
 
+        ClueDatabase.Instance.ClearDatabase();
+
         StartStep();
     }
 

@@ -147,7 +147,7 @@ namespace Object.InvestigationReport
         {
             if (investigationReportItems.Count >= maxReportItems) return;
 
-            if (investigationReportItems.Any(d => d.text == clue.text)) return;
+            if (investigationReportItems.Any(d => d.title == clue.title)) return;
 
             clue.id = Guid.NewGuid().ToString();
             investigationReportItems.Add(clue);
@@ -251,7 +251,7 @@ namespace Object.InvestigationReport
 
                 var textComponent = item.GetComponentInChildren<TextMeshProUGUI>();
                 if (textComponent != null)
-                    textComponent.text = data.text;
+                    textComponent.text = data.title;
 
                 item.name = data.id;
                 uiItemsMap[data.id] = item;

@@ -5128,14 +5128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe87bc6f2fce4363b65799fb325fd8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clue:
-    id: 
-    popup: "Ce mug a \xE9t\xE9 ajout\xE9 \xE0 la fiche d'enqu\xEAte"
-    text: Mug du policier
-    hours: Element 1
-    points: 0
-    enabled: 1
-    isNew: 1
+  clue: {fileID: 11400000, guid: ea05175b1df82463cb45e9372cd5ac1b, type: 2}
   detectableGameObject: {fileID: 1070387966}
   isInteractable: 0
 --- !u!114 &1070387964
