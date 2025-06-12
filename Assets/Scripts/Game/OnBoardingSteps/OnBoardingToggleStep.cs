@@ -26,6 +26,7 @@ public class OnBoardingToggleStep : OnBoardingStep
 
     private void OnToggleChanged()
     {
+        button.interactable = false;
         TooltipActivator.Instance.DisableTooltip(TooltipType.ToggleClue);
         TooltipActivator.Instance.DisableTooltip(TooltipType.ToggleClick);
     }

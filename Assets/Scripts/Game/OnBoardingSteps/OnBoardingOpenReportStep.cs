@@ -11,6 +11,9 @@ public class OnBoardingOpenReportStep : OnBoardingStep
 
     public override void Show()
     {
+        reportUI.CanOpenReport(true);
+        reportUI.CanCloseReport(false);
+
         reportUI.OnOpenReportUI += OnOpenReportUI;
 
         TooltipActivator.Instance.EnableTooltip(TooltipType.OpenReport);

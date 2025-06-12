@@ -1,4 +1,5 @@
 
+using UI.Report;
 using UnityEngine.UI;
 
 public class OnBoardingReportInteractionStep : OnBoardingStep
@@ -6,6 +7,7 @@ public class OnBoardingReportInteractionStep : OnBoardingStep
     public OnBoardingReportInteractionStep(OnboardingManager manager) : base(manager) { }
     public override OnBoardingStep NextStep() => null;
     private Button validateButton => manager.validateButton;
+    private ReportUI reportUI => manager.reportUI;
 
     public override void Show()
     {
@@ -24,6 +26,7 @@ public class OnBoardingReportInteractionStep : OnBoardingStep
 
     public override void Hide()
     {
+        reportUI.CanCloseReport(true);
         validateButton.onClick.RemoveListener(manager.NextStep);
         TooltipActivator.Instance.UnsubscribeFromDeactivation(TooltipType.ValidateReport, TooltipDisabled);
     }

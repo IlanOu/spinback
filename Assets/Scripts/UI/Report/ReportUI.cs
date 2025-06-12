@@ -36,6 +36,8 @@ namespace UI.Report
         public UnityEvent<bool> onReportDisplayed;
         
         private bool isShowing = false;
+        private bool canOpenReport = true;
+        private bool canCloseReport = true;
         private List<Clue> investigationReportItems = new List<Clue>();
         private Dictionary<string, GameObject> uiItemsMap = new Dictionary<string, GameObject>();
         private List<GameObject> gridContainers = new List<GameObject>();
@@ -84,6 +86,7 @@ namespace UI.Report
 
         public void ShowUI()
         {
+            if (!canOpenReport) return;
             // Sauvegarder l'état du curseur avant d'afficher l'UI
             cursorStateBeforeShow = CursorManager.Instance.IsCursorHidden();
         
@@ -108,6 +111,7 @@ namespace UI.Report
 
         public void HideUI()
         {
+            if (!canCloseReport) return;
             reportIcon.ShowOpenIcon();
             
             investigationReportUI.SetActive(false);
@@ -153,7 +157,7 @@ namespace UI.Report
     
         void EndCinematic()
         {
-            HideUI();
+            ForceHideReport();
             SceneTransitionBlinker.Instance.TransitionToSceneWithVideo(endCinematicName);
         }
 
@@ -165,6 +169,28 @@ namespace UI.Report
                 ShowUI();
             
             onReportDisplayed?.Invoke(isShowing);
+        }
+
+        public void CanOpenReport(bool value)
+        {
+            canOpenReport = value;
+        }
+
+        public void CanCloseReport(bool value)
+        {
+            canCloseReport = value;
+        }
+
+        void ForceShowReport()
+        {
+            CanOpenReport(true);
+            ForceShowReport();
+        }
+
+        void ForceHideReport()
+        {
+            CanCloseReport(true);
+            ForceHideReport();
         }
 
         public void AddInfoToReport(Clue clue)

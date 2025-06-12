@@ -8,6 +8,9 @@ public class OnBoardingSeeClueStep : OnBoardingStep
 
     public override void Show()
     {
+        reportUI.CanOpenReport(true);
+        reportUI.CanCloseReport(false);
+        
         TooltipActivator.Instance.EnableTooltip(TooltipType.SeeClue);
         TooltipActivator.Instance.SubscribeToDeactivation(TooltipType.SeeClue, TooltipDisabled);
         reportUI.OnOpenReportUI += OnOpenReportUI;

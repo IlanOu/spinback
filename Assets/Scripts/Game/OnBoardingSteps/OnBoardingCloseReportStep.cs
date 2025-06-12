@@ -20,6 +20,10 @@ public class OnBoardingCloseReportStep : OnBoardingStep
     IEnumerator WaitBeforeCloseReportTooltip()
     {
         yield return new WaitForSeconds(3f);
+
+        reportUI.CanCloseReport(true);
+        reportUI.CanOpenReport(false);
+        
         TooltipActivator.Instance.EnableTooltip(TooltipType.CloseReport);
         TooltipActivator.Instance.SubscribeToDeactivation(TooltipType.CloseReport, TooltipDisabled);
     }
