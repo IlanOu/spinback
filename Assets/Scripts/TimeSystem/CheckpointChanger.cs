@@ -3,6 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.Playables;
 
 namespace TimeSystem
 {
@@ -17,6 +18,7 @@ namespace TimeSystem
         [SerializeField] private string targetSceneName;
         [SerializeField] private bool useVideoTransition = true;
         [SerializeField] private KeyCode changeSceneKey = KeyCode.Space;
+        [SerializeField] private PlayableDirector director;
         
         [Header("Configuration de confirmation")]
         [SerializeField] private float confirmationTimeWindow = 2f;
@@ -257,6 +259,7 @@ namespace TimeSystem
                 // Confirmer le changement
                 _waitingForConfirmation = false;
                 HideConfirmationUI();
+                StopTimeline();
                 PerformSceneChange();
             }
             else
@@ -265,6 +268,17 @@ namespace TimeSystem
                 _waitingForConfirmation = true;
                 _confirmationTimer = confirmationTimeWindow;
                 ShowConfirmationUI();
+            }
+        }
+        
+        /// <summary>
+        /// Stop la timeline avant la transition
+        /// </summary>
+        private void StopTimeline()
+        {
+            if (director != null)
+            {
+                director.Pause();
             }
         }
         
@@ -278,9 +292,7 @@ namespace TimeSystem
                 Debug.LogError("Nom de scène cible non défini!");
                 return;
             }
-            
-            Debug.Log("AAAAA " + targetSceneName);
-            
+
             if (useVideoTransition)
                 SceneTransitionBlinker.Instance.TransitionToSceneWithVideo(targetSceneName);
             else

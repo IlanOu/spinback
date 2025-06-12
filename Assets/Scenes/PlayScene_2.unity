@@ -697,14 +697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe87bc6f2fce4363b65799fb325fd8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clue:
-    id: 
-    popup: 
-    text: Tristan a fournit Kevin et Jean en drogue
-    hours: "Tristan poss\xE9dait de la drogue "
-    points: -1
-    enabled: 1
-    isNew: 1
+  clue: {fileID: 11400000, guid: af9ce646164774e03b3b3bee904b38e6, type: 2}
   detectableGameObject: {fileID: 211823312}
   isInteractable: 0
 --- !u!114 &211823314
@@ -1311,15 +1304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe87bc6f2fce4363b65799fb325fd8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clue:
-    id: 
-    popup: 
-    text: "Julie \xE9tait partie rejoindre quelqu\u2019un apr\xE8s un appel vers
-      21h"
-    hours: "Julie \xE9tait partie quelques minutes"
-    points: -2
-    enabled: 1
-    isNew: 1
+  clue: {fileID: 11400000, guid: b83c9a349ac0a442ba208c77ced04d2c, type: 2}
   detectableGameObject: {fileID: 376369469}
   isInteractable: 0
 --- !u!114 &376369471
@@ -1490,6 +1475,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CheckpointChanger
       objectReference: {fileID: 0}
+    - target: {fileID: 5624796500347255886, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
+      propertyPath: director
+      value: 
+      objectReference: {fileID: 305169356}
     - target: {fileID: 5624796500347255886, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
       propertyPath: changeSceneKey
       value: 257
@@ -2033,11 +2022,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6434913753634654695, guid: 3aa0cf1beaea5ef48b39d6ddbd111f68, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6434913753634654695, guid: 3aa0cf1beaea5ef48b39d6ddbd111f68, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6434913753634654695, guid: 3aa0cf1beaea5ef48b39d6ddbd111f68, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2049,19 +2038,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6434913753634654695, guid: 3aa0cf1beaea5ef48b39d6ddbd111f68, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 315
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6434913753634654695, guid: 3aa0cf1beaea5ef48b39d6ddbd111f68, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -26.940117
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6551763881536010471, guid: 3aa0cf1beaea5ef48b39d6ddbd111f68, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6551763881536010471, guid: 3aa0cf1beaea5ef48b39d6ddbd111f68, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6551763881536010471, guid: 3aa0cf1beaea5ef48b39d6ddbd111f68, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2069,11 +2058,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6551763881536010471, guid: 3aa0cf1beaea5ef48b39d6ddbd111f68, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 315
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6551763881536010471, guid: 3aa0cf1beaea5ef48b39d6ddbd111f68, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -268.17966
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6586095673172729833, guid: 3aa0cf1beaea5ef48b39d6ddbd111f68, type: 3}
       propertyPath: m_Name
@@ -2085,11 +2074,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8781856623814789617, guid: 3aa0cf1beaea5ef48b39d6ddbd111f68, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8781856623814789617, guid: 3aa0cf1beaea5ef48b39d6ddbd111f68, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8781856623814789617, guid: 3aa0cf1beaea5ef48b39d6ddbd111f68, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2097,11 +2086,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8781856623814789617, guid: 3aa0cf1beaea5ef48b39d6ddbd111f68, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 315
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8781856623814789617, guid: 3aa0cf1beaea5ef48b39d6ddbd111f68, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -405.05988
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2379,7 +2368,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &996922294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3160,23 +3149,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4792564440394631544, guid: f8636f170cc20407cbbcb469167e26dd, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4792564440394631544, guid: f8636f170cc20407cbbcb469167e26dd, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4792564440394631544, guid: f8636f170cc20407cbbcb469167e26dd, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1496
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4792564440394631544, guid: f8636f170cc20407cbbcb469167e26dd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 748
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4792564440394631544, guid: f8636f170cc20407cbbcb469167e26dd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -85.09065
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8465244439054945945, guid: f8636f170cc20407cbbcb469167e26dd, type: 3}
       propertyPath: m_Pivot.x
@@ -3331,6 +3320,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Appartcontainer
       objectReference: {fileID: 0}
+    - target: {fileID: 5278441286953226123, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+      propertyPath: clue
+      value: 
+      objectReference: {fileID: 11400000, guid: 33ee500bb4bde4980b82611ac7ec41ec, type: 2}
+    - target: {fileID: 7103522583472484994, guid: 7c0cd71b0a753f4428c2c54e698c6ba8, type: 3}
+      propertyPath: clue
+      value: 
+      objectReference: {fileID: 11400000, guid: 16bf6b949843e4dcfacefd0315e15ab6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3554,14 +3551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe87bc6f2fce4363b65799fb325fd8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clue:
-    id: 
-    popup: 
-    text: "Julie \xE9tait stress\xE9e \xE0 l\u2019id\xE9e que Charles d\xE9barque"
-    hours: "Charles a finalement d\xE9barqu\xE9 "
-    points: 4
-    enabled: 1
-    isNew: 1
+  clue: {fileID: 11400000, guid: 4f3b5b37086eb4675a2f81370bae4e7a, type: 2}
   detectableGameObject: {fileID: 1444878983}
   isInteractable: 0
 --- !u!114 &1444878985
@@ -4436,14 +4426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe87bc6f2fce4363b65799fb325fd8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clue:
-    id: 
-    popup: 
-    text: "Charles n\u2019\xE9tait pas convi\xE9 \xE0 cette soir\xE9e"
-    hours: "Charles n\u2019\xE9tait pas invit\xE9"
-    points: 5
-    enabled: 1
-    isNew: 1
+  clue: {fileID: 11400000, guid: e97b68ae387464e3988e45902d16acd8, type: 2}
   detectableGameObject: {fileID: 2755032449753628962}
   isInteractable: 0
 --- !u!1001 &2763560512861031434
@@ -4766,15 +4749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe87bc6f2fce4363b65799fb325fd8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clue:
-    id: 
-    popup: 
-    text: "La rambarde du balcon n\u2019avait pas l\u2019air en bon \xE9tat peut-\xEAtre
-      qu\u2019elle a c\xE9der"
-    hours: "Le balcon n'\xE9tait pas tr\xE8s solide"
-    points: 5
-    enabled: 1
-    isNew: 1
+  clue: {fileID: 11400000, guid: 0fdd9449e6cd54033ac5f084ba92a729, type: 2}
   detectableGameObject: {fileID: 4701254100533372859}
   isInteractable: 0
 --- !u!4 &5459983693284384239 stripped
@@ -4995,14 +4970,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe87bc6f2fce4363b65799fb325fd8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clue:
-    id: 
-    popup: 
-    text: "En d\xE9but de soir\xE9e, Tristan avait l\u2019air contrari\xE9"
-    hours: "Tristan \xE9tait un peu en retrait "
-    points: -3
-    enabled: 1
-    isNew: 1
+  clue: {fileID: 11400000, guid: d950127a80c5a444f9d0e275abe8f114, type: 2}
   detectableGameObject: {fileID: 9144910123600784897}
   isInteractable: 0
 --- !u!1660057539 &9223372036854775807

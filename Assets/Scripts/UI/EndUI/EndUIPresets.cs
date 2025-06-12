@@ -18,8 +18,7 @@ public class EndUIPresets : MonoBehaviour
     }
     
     [Header("Configuration")]
-    [SerializeField] private int maxScore = 1;
-    public CircleFillerUI circleFillerUI;
+    public CircleFiller circleFillerUI;
     [Range(0, 100)]
     public float winThreshold = 50f; // Seuil pour déterminer Win/Lose
     
@@ -40,7 +39,7 @@ public class EndUIPresets : MonoBehaviour
         // Vérifier les références
         if (circleFillerUI == null)
         {
-            circleFillerUI = GetComponentInChildren<CircleFillerUI>();
+            circleFillerUI = GetComponentInChildren<CircleFiller>();
             if (circleFillerUI == null)
             {
                 Debug.LogError("EndUIPresets nécessite une référence à CircleFillerUI.");
@@ -70,15 +69,7 @@ public class EndUIPresets : MonoBehaviour
     
     private void SetTotalScore()
     {
-        int totalPoints = 0;
-        ClueDatabase.Instance.Clues.ForEach(clue =>
-        {
-            if (clue.enabled)
-            {
-                totalPoints += clue.points;
-            }
-        });
-        currentPercentage = (float)totalPoints / maxScore * 100f;
+        currentPercentage = ClueDatabase.Instance.GetTotalPoints() / ClueDatabase.Instance.GetMaxPoints() * 100f;
     }
     
     // Valider que les presets existants ont le bon nombre d'états

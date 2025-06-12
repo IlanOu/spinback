@@ -5,7 +5,7 @@ using TMPro;
 using System.Linq;
 using DG.Tweening;
 
-public class CircleFillerUI : MonoBehaviour
+public class CircleFiller : MonoBehaviour
 {
     [System.Serializable]
     public class CircleSegment
