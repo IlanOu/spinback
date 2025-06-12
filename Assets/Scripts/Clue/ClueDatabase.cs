@@ -64,7 +64,7 @@ public class ClueDatabase : ScriptableObject
         int totalPoints = 0;
         foreach (var clue in _clues)
         {
-            if (clue.enabled)
+            if (clue.isAdded && clue.enabled)
             {
                 totalPoints += clue.points;
             }
