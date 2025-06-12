@@ -3665,6 +3665,54 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoundFrequency
       objectReference: {fileID: 0}
+    - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
+      propertyPath: colorGradient.ctime0
+      value: 6554
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
+      propertyPath: colorGradient.ctime1
+      value: 13107
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
+      propertyPath: colorGradient.ctime2
+      value: 42598
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
+      propertyPath: colorGradient.key0.b
+      value: 0.034506977
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
+      propertyPath: colorGradient.key0.g
+      value: 0.8980392
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
+      propertyPath: colorGradient.key0.r
+      value: 0.015686285
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
+      propertyPath: colorGradient.key1.b
+      value: 0.015686285
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
+      propertyPath: colorGradient.key1.g
+      value: 0.6563153
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
+      propertyPath: colorGradient.key1.r
+      value: 0.8980392
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
+      propertyPath: colorGradient.key2.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
+      propertyPath: colorGradient.key2.g
+      value: 0.63569504
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
+      propertyPath: colorGradient.key2.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
