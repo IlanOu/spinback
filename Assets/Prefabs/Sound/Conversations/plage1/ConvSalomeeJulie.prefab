@@ -185,7 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sphereCollider: {fileID: 143065703943427514}
   detectableGameObject: {fileID: 1822144861626890858}
-  clue: {fileID: 0}
+  timeBeforeInteractionVisibility: 5
   normalSoundValue: 0
   audioSource: {fileID: 0}
 --- !u!114 &1822144861626890858
@@ -217,14 +217,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe87bc6f2fce4363b65799fb325fd8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clue:
-    id: 
-    popup: "Julie et Salom\xE9 avait l'air de parler de quelque chose d'important"
-    text: "Julie et Salom\xE9 buvait pour ne plus penser \xE0 quelque chose, elle
-      voulaient passer outre un \xE9v\xE8nement"
-    hours: 02h00
-    enabled: 1
+  clue: {fileID: 0}
   detectableGameObject: {fileID: 1822144861626890858}
+  isInteractable: 0
 --- !u!114 &8541320291769700768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,57 +243,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3641212614939763822}
     m_Modifications:
-    - target: {fileID: 258889912244315354, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
-      propertyPath: m_fontSize
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 258889912244315354, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
-      propertyPath: m_margin.z
-      value: 9.89484
-      objectReference: {fileID: 0}
-    - target: {fileID: 258889912244315354, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 804436449648140579, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
       propertyPath: m_Name
       value: ClueText
-      objectReference: {fileID: 0}
-    - target: {fileID: 804436449648140579, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1482166803638992936, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.024999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 1482166803638992936, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.024999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 1482166803638992936, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.024999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 4611763991643762157, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4611763991643762157, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.0092
-      objectReference: {fileID: 0}
-    - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 5.6000004
-      objectReference: {fileID: 0}
-    - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 5.6000004
-      objectReference: {fileID: 0}
-    - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 5.6000004
       objectReference: {fileID: 0}
     - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
       propertyPath: m_LocalPosition.x

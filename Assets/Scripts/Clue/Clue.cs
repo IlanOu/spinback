@@ -10,4 +10,11 @@ public class Clue : ScriptableObject
     [HideInInspector] public bool isAdded = false;
     [HideInInspector] public bool enabled = true;
     [HideInInspector] public bool isNew = true;
+
+    public void Reset()
+    {
+        isAdded = false;
+        enabled = true;
+        isNew = true;
+    }
 }

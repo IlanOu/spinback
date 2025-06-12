@@ -33,6 +33,7 @@ public class ClueInteractiveIcon : MonoBehaviour
     private float zoomValue = 0.5f;
     private bool isLookingAt => detectableGameObject.isLookingAt;
     private bool isZooming => cameraZoom != null && cameraZoom.IsZooming(zoomValue);
+    private Clue clue => interactableClue.clue;
 
     void Start()
     {
@@ -58,7 +59,11 @@ public class ClueInteractiveIcon : MonoBehaviour
     {
         if (canChangeState)
         {
-            if ((((isLookingAt && isZooming) || alwaysVisible) && enableVisibility) || forceVisibility)
+            bool shouldBeVisible = (isLookingAt && isZooming) || alwaysVisible || forceVisibility;
+            bool hasClue = clue != null;
+            bool isNotAdded = !clue.isAdded;
+
+            if (enableVisibility && shouldBeVisible && hasClue && isNotAdded)
             {
                 EnableInteractive();
             }
@@ -110,11 +115,11 @@ public class ClueInteractiveIcon : MonoBehaviour
 
     private void SetIconVisibility(ClueIconType visibleType)
     {
-        foreach (var clue in clueIcons)
+        foreach (var icon in clueIcons)
         {
-            if (clue.renderer != null)
+            if (icon.renderer != null)
             {
-                clue.renderer.gameObject.SetActive(clue.type == visibleType);
+                icon.renderer.gameObject.SetActive(icon.type == visibleType);
             }
         }
     }

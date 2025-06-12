@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ClueDatabase", menuName = "Save/ClueDatabase")]
 public class ClueDatabase : ScriptableObject
 {
+    public bool isInstanciated = false;
     [SerializeField] private List<Clue> _clues = new();
     public List<Clue> Clues => _clues;
     public List<Clue> AddedClues => _clues.FindAll(c => c.isAdded);
@@ -22,7 +23,6 @@ public class ClueDatabase : ScriptableObject
                     Debug.LogError("ClueDatabase asset not found in Resources!");
                     return null;
                 }
-                _instance.ClearDatabase();
             }
             return _instance;
         }
@@ -40,9 +40,7 @@ public class ClueDatabase : ScriptableObject
     {
         foreach (var clue in _clues)
         {
-            clue.isAdded = false;
-            clue.enabled = true;
-            clue.isNew = true;
+            clue.Reset();
         }
     }
 

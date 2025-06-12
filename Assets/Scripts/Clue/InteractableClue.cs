@@ -7,7 +7,7 @@ using UnityEngine;
 public class InteractableClue : MonoBehaviour
 {
     public Action OnClueAdded;
-    [SerializeField] private Clue clue;
+    [SerializeField] public Clue clue;
     [SerializeField] private DetectableGameObject detectableGameObject;
     [SerializeField] private bool isInteractable = false;
     private CameraZoom cameraZoom;

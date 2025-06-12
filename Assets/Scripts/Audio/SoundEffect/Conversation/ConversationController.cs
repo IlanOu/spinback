@@ -1,19 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 [RequireComponent(typeof(ConversationVolumeController), typeof(AudioSource))]
 public class ConversationController : MonoBehaviour
 {
     [SerializeField] private SphereCollider sphereCollider;
     [SerializeField] private DetectableGameObject detectableGameObject;
-    [SerializeField] private InteractableClue clue;
+    [SerializeField] private float timeBeforeInteractionVisibility = 5f;
     [HideInInspector] public float normalSoundValue;
     [HideInInspector] public AudioSource audioSource;
     private ConversationVolumeController soundVolumeController;
     private ConversingNPCs conversingNPCs;
     private CameraZoom cameraZoom;
+    private InteractableClue clue;
+    private ClueInteractiveIcon clueInteractiveIcon;
     private float zoomValue;
     private float volumeMarginError = 0.1f;
+    private float lastTimeEnable = -1f;
     private bool isLookingAt => detectableGameObject.isLookingAt;
     private bool isZooming => cameraZoom != null && cameraZoom.IsZooming(zoomValue);
     private bool isFocused => isLookingAt && isZooming;
@@ -26,6 +30,7 @@ public class ConversationController : MonoBehaviour
         soundVolumeController = GetComponent<ConversationVolumeController>();
         conversingNPCs = GetComponent<ConversingNPCs>();
         clue = GetComponent<InteractableClue>();
+        clueInteractiveIcon = GetComponent<ClueInteractiveIcon>();
     }
 
     void Start()
@@ -50,7 +55,15 @@ public class ConversationController : MonoBehaviour
             soundVolumeController.volume = volume;
             if (volume - soundVolumeController.minVolume > volumeMarginError)
             {
-                if (clue != null) clue.EnableInteractability();
+                if (lastTimeEnable < 0)
+                {
+                    lastTimeEnable = Time.time;
+                }
+                else if (Time.time - lastTimeEnable > timeBeforeInteractionVisibility)
+                {
+                    clueInteractiveIcon.EnableVisibility(true);
+                }
+                clue.EnableInteractability();
                 ConversationManager.Instance.EnableSoundEffect(this);
             }
             else ConversationManager.Instance.DisableSoundEffect(this);
@@ -63,7 +76,10 @@ public class ConversationController : MonoBehaviour
 
     void DisableSoundConversation()
     {
-        if (clue != null) clue.DisableInteractability();
+        lastTimeEnable = -1f;
+        clue.DisableInteractability();
+        clueInteractiveIcon.EnableVisibility(false);
+
         ConversationManager.Instance.DisableSoundEffect(this);
         soundVolumeController.volume = soundVolumeController.minVolume;
     }
