@@ -5,7 +5,7 @@ using UnityEngine.Playables;
 [RequireComponent(typeof(ConversationVolumeController), typeof(AudioSource))]
 public class ConversationController : MonoBehaviour
 {
-    [SerializeField] private SphereCollider sphereCollider;
+    [SerializeField] private Collider[] colliders;
     [SerializeField] private DetectableGameObject detectableGameObject;
     [SerializeField] private float timeBeforeInteractionVisibility = 5f;
     [HideInInspector] public float normalSoundValue;
@@ -93,7 +93,10 @@ public class ConversationController : MonoBehaviour
 
     void HandleCollider()
     {
-        sphereCollider.enabled = audioSource.isPlaying || (isRewinding && isLookingAt);
+        foreach (Collider collider in colliders)
+        {
+            collider.enabled = audioSource.isPlaying || (isRewinding && isLookingAt);
+        }
     }
 
     void OnJogNote(float value)

@@ -20,7 +20,7 @@ public class InteractableClue : MonoBehaviour
     {
         cameraZoom = Camera.main.GetComponent<CameraZoom>();
 
-        CameraZoomSettings settings = GlobalCameraSettings.Instance.GetSettings<CameraZoomSettings>(detectableGameObject.objectType);
+        CameraZoomSettings settings = GlobalCameraSettings.Instance.GetSettings<CameraZoomSettings>(ObjectType.Conversation);
         zoomValue = settings.zoomValue;
 
         MidiBinding.Instance.Subscribe(MidiBind.BUTTON_2_CUE_1, OnControllerButtonPressed);

@@ -17,8 +17,8 @@ public class DetectionZoneOffset : MonoBehaviour
 
     void OnDisable()
     {
-        detectableGameObject.detectionCenter = originalDetectionCenter;
-        detectableGameObject.detectionSize = originalDetectionSize;
+        // detectableGameObject.detectionCenter = originalDetectionCenter;
+        // detectableGameObject.detectionSize = originalDetectionSize;
 
         Debug.Log(originalDetectionCenter);
     }
@@ -27,10 +27,10 @@ public class DetectionZoneOffset : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(0.01f);
 
-        originalDetectionCenter = detectableGameObject.detectionCenter;
-        originalDetectionSize = detectableGameObject.detectionSize;
+        // originalDetectionCenter = detectableGameObject.detectionCenter;
+        // originalDetectionSize = detectableGameObject.detectionSize;
 
-        detectableGameObject.detectionCenter = newDetectionCenter;
-        detectableGameObject.detectionSize = newDetectionSize;
+        // detectableGameObject.detectionCenter = newDetectionCenter;
+        // detectableGameObject.detectionSize = newDetectionSize;
     }
 }

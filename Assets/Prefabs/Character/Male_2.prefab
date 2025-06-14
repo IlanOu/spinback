@@ -961,7 +961,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1076605d19f0b43d2a148de9eb84d403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCamera: {fileID: 0}
+  lockRotationX: 0
+  lockRotationY: 0
+  lockRotationZ: 0
 --- !u!114 &4409444182557586890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1306,6 +1308,7 @@ GameObject:
   - component: {fileID: 6389159345355312581}
   - component: {fileID: 9211640250901555175}
   - component: {fileID: 698881384633126396}
+  - component: {fileID: 156050899573257619}
   - component: {fileID: 3010543666122573524}
   - component: {fileID: 1604053887399284378}
   - component: {fileID: 1916920974647955353}
@@ -1375,10 +1378,33 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.13102062
-  m_Height: 0.27640057
+  m_Radius: 0.119275965
+  m_Height: 0.37035418
   m_Direction: 1
-  m_Center: {x: -2.9103853e-10, y: 1.5407238, z: 0.015339166}
+  m_Center: {x: -0.009006688, y: 1.5877196, z: 0.018077126}
+--- !u!136 &156050899573257619
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5206112028036777738}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.15541899
+  m_Height: 1.4644302
+  m_Direction: 1
+  m_Center: {x: -0.0034900012, y: 0.76916105, z: 0.0050745606}
 --- !u!114 &3010543666122573524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1391,11 +1417,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c9bdf9cc1a234bd8ae09c33a62c8985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectType: 3
-  detectionCenter: {x: 0.5, y: 0.5}
-  detectionSize: {x: 0.1, y: 0.1}
-  isLookingAt: 0
-  isObstructed: 0
 --- !u!114 &1604053887399284378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1600,11 +1621,11 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6615434337646332195, guid: 65ade8e4b4521ca47b9b9b8673f63e86, type: 3}
-  - {fileID: -1846407553807266444, guid: 65ade8e4b4521ca47b9b9b8673f63e86, type: 3}
-  - {fileID: 1432594464388952545, guid: 65ade8e4b4521ca47b9b9b8673f63e86, type: 3}
+  - {fileID: 2100000, guid: 4a758d92233c8934dba2e897ffd489e1, type: 2}
+  - {fileID: 2100000, guid: 7e71e457aa343b547b795b3f0462fbc0, type: 2}
+  - {fileID: 2100000, guid: c04fd6011b8905e4d852317712face77, type: 2}
   - {fileID: -1812103721715802958, guid: 65ade8e4b4521ca47b9b9b8673f63e86, type: 3}
-  - {fileID: 6699446615349125189, guid: 65ade8e4b4521ca47b9b9b8673f63e86, type: 3}
+  - {fileID: 2100000, guid: e3a573c1c6692a4488d2121015df623c, type: 2}
   - {fileID: 1840035539215654679, guid: 65ade8e4b4521ca47b9b9b8673f63e86, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0

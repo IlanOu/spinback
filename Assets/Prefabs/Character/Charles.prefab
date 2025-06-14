@@ -631,6 +631,7 @@ GameObject:
   - component: {fileID: 5041995828609080833}
   - component: {fileID: 5717333725461921727}
   - component: {fileID: 399461901949722872}
+  - component: {fileID: 3643447590457650159}
   - component: {fileID: 3287196571539071114}
   - component: {fileID: 5567555436802458459}
   - component: {fileID: 3682081532140627196}
@@ -701,10 +702,33 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.13102062
-  m_Height: 0.27640057
+  m_Radius: 0.119275965
+  m_Height: 0.37035418
   m_Direction: 1
-  m_Center: {x: -2.9103853e-10, y: 1.5407238, z: 0.015339166}
+  m_Center: {x: -0.009006688, y: 1.5877196, z: 0.018077126}
+--- !u!136 &3643447590457650159
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2463419205141332254}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.15541899
+  m_Height: 1.4644302
+  m_Direction: 1
+  m_Center: {x: -0.0034900012, y: 0.76916105, z: 0.0050745606}
 --- !u!114 &3287196571539071114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -717,11 +741,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c9bdf9cc1a234bd8ae09c33a62c8985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectType: 3
-  detectionCenter: {x: 0.5, y: 0.5}
-  detectionSize: {x: 0.1, y: 0.1}
-  isLookingAt: 0
-  isObstructed: 0
 --- !u!114 &5567555436802458459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -783,13 +802,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe87bc6f2fce4363b65799fb325fd8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clue:
-    id: 
-    popup: "Charles \xE9tait ivre mort"
-    text: "Charles \xE9tait tellement ivre hier soir, au bord du coma \xE9thylique"
-    hours: 02h00
-    enabled: 1
+  clue: {fileID: 0}
   detectableGameObject: {fileID: 3287196571539071114}
+  isInteractable: 0
 --- !u!1 &2540594756554201668
 GameObject:
   m_ObjectHideFlags: 0
@@ -2044,7 +2059,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1076605d19f0b43d2a148de9eb84d403, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCamera: {fileID: 0}
+  lockRotationX: 0
+  lockRotationY: 0
+  lockRotationZ: 0
 --- !u!114 &4392662524159123235
 MonoBehaviour:
   m_ObjectHideFlags: 0

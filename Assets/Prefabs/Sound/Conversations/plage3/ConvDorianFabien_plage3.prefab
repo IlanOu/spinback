@@ -10,10 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3512973233157143847}
   - component: {fileID: 1755475090137301339}
-  - component: {fileID: 1400337922615838948}
-  - component: {fileID: 2755567610791495457}
-  - component: {fileID: 1709607628198855855}
-  - component: {fileID: 3679468484903990747}
   m_Layer: 0
   m_Name: ConvDorianFabien_plage3
   m_TagString: Untagged
@@ -45,7 +41,7 @@ AudioSource:
   m_GameObject: {fileID: 8992818009331205159}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -4173171307456517928, guid: d474be4b20a584b55ab062a9a59fb1f1, type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -133,72 +129,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!135 &1400337922615838948
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8992818009331205159}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2755567610791495457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8992818009331205159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baef62bc3560543e3b7eeee73245745b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minVolume: 0.1
-  volume: 0
---- !u!114 &1709607628198855855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8992818009331205159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bc434121c187461ba7bc48fb16d4100, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sphereCollider: {fileID: 1400337922615838948}
-  detectableGameObject: {fileID: 3679468484903990747}
-  cameraZoom: {fileID: 0}
-  normalSoundValue: 0
-  audioSource: {fileID: 0}
---- !u!114 &3679468484903990747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8992818009331205159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c9bdf9cc1a234bd8ae09c33a62c8985, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraDetectTarget: {fileID: 0}
-  objectType: 0
-  detectionCenter: {x: 0.5, y: 0.5}
-  detectionSize: {x: 0.1, y: 0.1}
-  isLookingAt: 0

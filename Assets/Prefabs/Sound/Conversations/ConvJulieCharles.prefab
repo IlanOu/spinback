@@ -10,12 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 9038899457658681928}
   - component: {fileID: 2120522421181120186}
-  - component: {fileID: 5598043364735383555}
+  - component: {fileID: 4243897551826164016}
   - component: {fileID: 2417178704469361692}
   - component: {fileID: 6522151296204285375}
   - component: {fileID: 3509356851013936792}
   - component: {fileID: 6790893008533121820}
   - component: {fileID: 2281063371620870440}
+  - component: {fileID: 1671308674935996070}
   m_Layer: 0
   m_Name: ConvJulieCharles
   m_TagString: Untagged
@@ -136,8 +137,8 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!135 &5598043364735383555
-SphereCollider:
+--- !u!65 &4243897551826164016
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -155,8 +156,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.1849979, y: 0.9597652, z: 1}
+  m_Center: {x: 0.021827161, y: -0.20263934, z: 0}
 --- !u!114 &2417178704469361692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,11 +170,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c9bdf9cc1a234bd8ae09c33a62c8985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectType: 0
-  detectionCenter: {x: 0.5, y: 0.5}
-  detectionSize: {x: 0.1, y: 0.1}
-  isLookingAt: 0
-  isObstructed: 0
 --- !u!114 &6522151296204285375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,7 +196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc434121c187461ba7bc48fb16d4100, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sphereCollider: {fileID: 5598043364735383555}
+  colliders:
+  - {fileID: 4243897551826164016}
   detectableGameObject: {fileID: 2417178704469361692}
   timeBeforeInteractionVisibility: 5
   normalSoundValue: 0
@@ -217,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fe87bc6f2fce4363b65799fb325fd8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clue: {fileID: 0}
+  clue: {fileID: 11400000, guid: e33d7bca55f0041308da15132e039d59, type: 2}
   detectableGameObject: {fileID: 2417178704469361692}
   isInteractable: 0
 --- !u!114 &2281063371620870440
@@ -235,6 +232,34 @@ MonoBehaviour:
   npcs:
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &1671308674935996070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3441458693341743773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab61b1a85ab0741d9a6ef6087070097d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectableGameObject: {fileID: 2417178704469361692}
+  interactableClue: {fileID: 6790893008533121820}
+  interactive: {fileID: 6793723897337242868}
+  text: {fileID: 6266207284946805005}
+  commandText: "Ajouter cet \xE9l\xE9ment \xE0 mon t\xE9moignage"
+  validateText: "\xC9l\xE9ment ajout\xE9"
+  enableVisibility: 0
+  alwaysVisible: 0
+  visibleDuration: 3
+  clueIcons:
+  - type: 0
+    texture: {fileID: 2800000, guid: bffb0a3f78d6241749c51d1c6f7a3391, type: 3}
+    renderer: {fileID: 2471252794247575945}
+  - type: 1
+    texture: {fileID: 2800000, guid: 49203f16631b044f1b934bb46f54a17c, type: 3}
+    renderer: {fileID: 4994760736505837292}
 --- !u!1001 &6152419926624241111
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -295,5 +320,31 @@ PrefabInstance:
 --- !u!4 &321223574543280948 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
+  m_PrefabInstance: {fileID: 6152419926624241111}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2471252794247575945 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8586796591118580830, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
+  m_PrefabInstance: {fileID: 6152419926624241111}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &4994760736505837292 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1166781117748392763, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
+  m_PrefabInstance: {fileID: 6152419926624241111}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6266207284946805005 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 258889912244315354, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
+  m_PrefabInstance: {fileID: 6152419926624241111}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6793723897337242868 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 804436449648140579, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
   m_PrefabInstance: {fileID: 6152419926624241111}
   m_PrefabAsset: {fileID: 0}

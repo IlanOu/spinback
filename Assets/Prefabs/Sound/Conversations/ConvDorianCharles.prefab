@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8625351154876914274}
   - component: {fileID: 8135775192322791551}
-  - component: {fileID: 5382726827695171641}
+  - component: {fileID: 3938419030084697392}
   - component: {fileID: 6289096303617599347}
-  - component: {fileID: 1114326922236505625}
-  - component: {fileID: 7384599193925311636}
+  - component: {fileID: 4283615923715997627}
   - component: {fileID: 8327181568658151978}
+  - component: {fileID: 6416398654458116408}
   m_Layer: 0
   m_Name: ConvDorianCharles
   m_TagString: Untagged
@@ -35,6 +35,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2338029378246122462}
   - {fileID: 8439647522292166557}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -47,7 +48,7 @@ AudioSource:
   m_GameObject: {fileID: 3413661311624942005}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -4173171307456517928, guid: d474be4b20a584b55ab062a9a59fb1f1, type: 2}
+  OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -135,8 +136,8 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!135 &5382726827695171641
-SphereCollider:
+--- !u!65 &3938419030084697392
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -154,8 +155,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.6436944, y: 1.1482469, z: 1.0481262}
+  m_Center: {x: 0.1781528, y: -0.3723296, z: -0.02406311}
 --- !u!114 &6289096303617599347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,12 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c9bdf9cc1a234bd8ae09c33a62c8985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectType: 0
-  detectionCenter: {x: 0.5, y: 0.5}
-  detectionSize: {x: 0.1, y: 0.1}
-  isLookingAt: 0
-  isObstructed: 0
---- !u!114 &1114326922236505625
+--- !u!114 &4283615923715997627
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,28 +178,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3413661311624942005}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baef62bc3560543e3b7eeee73245745b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0fe87bc6f2fce4363b65799fb325fd8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minVolume: 0.1
-  volume: 0
---- !u!114 &7384599193925311636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3413661311624942005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bc434121c187461ba7bc48fb16d4100, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sphereCollider: {fileID: 5382726827695171641}
+  clue: {fileID: 11400000, guid: 47f844d9b68ab4a3787608ab59150b92, type: 2}
   detectableGameObject: {fileID: 6289096303617599347}
-  timeBeforeInteractionVisibility: 5
-  normalSoundValue: 0
-  audioSource: {fileID: 0}
+  isInteractable: 0
 --- !u!114 &8327181568658151978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,6 +199,79 @@ MonoBehaviour:
   npcs:
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &6416398654458116408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3413661311624942005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab61b1a85ab0741d9a6ef6087070097d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectableGameObject: {fileID: 6289096303617599347}
+  interactableClue: {fileID: 4283615923715997627}
+  interactive: {fileID: 3396477680995442781}
+  text: {fileID: 2854327530526139812}
+  commandText: "Ajouter cet \xE9l\xE9ment \xE0 mon t\xE9moignage"
+  validateText: "\xC9l\xE9ment ajout\xE9"
+  enableVisibility: 0
+  alwaysVisible: 0
+  visibleDuration: 3
+  clueIcons:
+  - type: 0
+    texture: {fileID: 2800000, guid: bffb0a3f78d6241749c51d1c6f7a3391, type: 3}
+    renderer: {fileID: 5990129203323452704}
+  - type: 1
+    texture: {fileID: 2800000, guid: 49203f16631b044f1b934bb46f54a17c, type: 3}
+    renderer: {fileID: 3763432564663480901}
+--- !u!1 &8518193454426205012
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2338029378246122462}
+  - component: {fileID: 5125660032584087583}
+  m_Layer: 0
+  m_Name: ConvDorianCharlesClueActivator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2338029378246122462
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8518193454426205012}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.9912155, z: -0, w: -0.13225643}
+  m_LocalPosition: {x: -3.8309994, y: -1.25, z: 6.3159995}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8625351154876914274}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5125660032584087583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8518193454426205012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cea929138bf64109b2a9cbf345189f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clue: {fileID: 4283615923715997627}
 --- !u!1001 &2597267212282741118
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -276,6 +329,32 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
+--- !u!114 &2854327530526139812 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 258889912244315354, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
+  m_PrefabInstance: {fileID: 2597267212282741118}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &3396477680995442781 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 804436449648140579, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
+  m_PrefabInstance: {fileID: 2597267212282741118}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3763432564663480901 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1166781117748392763, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
+  m_PrefabInstance: {fileID: 2597267212282741118}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5990129203323452704 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8586796591118580830, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
+  m_PrefabInstance: {fileID: 2597267212282741118}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8439647522292166557 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
