@@ -100,7 +100,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4624926344665646028}
-  - component: {fileID: 8295399544380741533}
   m_Layer: 5
   m_Name: TimeLabels
   m_TagString: Untagged
@@ -127,22 +126,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8295399544380741533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1371854037806516241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdbef7aac75744479a6293fa6079723c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startHourText: 02h00
-  endHourText: 02h02
-  startMinuteText: 00:00
-  endMinuteText: 00:02
 --- !u!1 &1879938956089099735
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,7 +135,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4906098570917217900}
-  - component: {fileID: 3836307332464301308}
   m_Layer: 5
   m_Name: TickContainer
   m_TagString: Untagged
@@ -179,22 +161,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: -90}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3836307332464301308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1879938956089099735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5da00f38f271b4e37ab773e570403607, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  longTickPrefab: {fileID: 5418285603651605820, guid: 1e4883a682f284c2bbd0f2e482aa392c, type: 3}
-  mediumTickPrefab: {fileID: 9059249665414381620, guid: d81e2d25a61d144a7b9762a2c67fe561, type: 3}
-  smallTickPrefab: {fileID: 8638283631648808792, guid: 6acfc802684ab46ab82be06d398d94a7, type: 3}
-  ticksNumber: 30
 --- !u!1 &2033992734161203520
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,10 +274,10 @@ RectTransform:
   - {fileID: 8559951207286555582}
   m_Father: {fileID: 8465244439054945945}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 698.9834, y: -58.07765}
-  m_SizeDelta: {x: 1397.9668, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6123518708240822642
 GameObject:
@@ -421,8 +387,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: -40}
+  m_AnchoredPosition: {x: 1.760498, y: 0}
+  m_SizeDelta: {x: -113.7379, y: -40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8444192899813878804
 GameObject:

@@ -19,6 +19,8 @@ public class OnboardingManager : MonoBehaviour
     [SerializeField] public ClueInteractiveIcon interactiveIcon;
     [HideInInspector] public InteractableClue interactableClue;
     [HideInInspector] public OutlineObject outlineClue;
+    [SerializeField] public GameObject activeItemInScene;
+    [SerializeField] public GameObject disactiveItemInScene;
 
     [Header("Open report step")]
     [SerializeField] public ReportUI reportUI;

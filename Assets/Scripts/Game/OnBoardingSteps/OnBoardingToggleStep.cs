@@ -10,6 +10,8 @@ public class OnBoardingToggleStep : OnBoardingStep
     public override OnBoardingStep NextStep() =>  new OnBoardingReportInteractionStep(manager);
     private GameObject carousel => manager.carousel;
     private Button button;
+    private GameObject activeItemInScene => manager.activeItemInScene;
+    private GameObject disactiveItemInScene => manager.disactiveItemInScene;
 
     public override void Show()
     {
@@ -26,6 +28,8 @@ public class OnBoardingToggleStep : OnBoardingStep
 
     private void OnToggleChanged()
     {
+        activeItemInScene.SetActive(false);
+        disactiveItemInScene.SetActive(true);
         button.interactable = false;
         TooltipActivator.Instance.DisableTooltip(TooltipType.ToggleClue);
         TooltipActivator.Instance.DisableTooltip(TooltipType.ToggleClick);

@@ -1,5 +1,6 @@
 
 using UnityEditor;
+using UnityEngine;
 
 public class OnBoardingAddClueStep : OnBoardingStep
 {
@@ -8,6 +9,8 @@ public class OnBoardingAddClueStep : OnBoardingStep
     private InteractableClue interactableClue => manager.interactableClue;
     private OutlineObject outlineClue => manager.outlineClue;
     private ClueInteractiveIcon interactiveIcon => manager.interactiveIcon;
+    private GameObject activeItemInScene => manager.activeItemInScene;
+    private GameObject disactiveItemInScene => manager.disactiveItemInScene;
 
     public override void Show()
     {
@@ -26,6 +29,7 @@ public class OnBoardingAddClueStep : OnBoardingStep
 
     private void OnClueAdded()
     {
+        activeItemInScene.SetActive(true);
         TooltipActivator.Instance.DisableTooltip(TooltipType.AddClue);
     }
 
