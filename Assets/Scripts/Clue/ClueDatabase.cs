@@ -23,6 +23,7 @@ public class ClueDatabase : ScriptableObject
                     Debug.LogError("ClueDatabase asset not found in Resources!");
                     return null;
                 }
+                _instance.isInstanciated = false;
             }
             return _instance;
         }

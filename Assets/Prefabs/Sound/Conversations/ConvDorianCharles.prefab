@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3938419030084697392}
   - component: {fileID: 6289096303617599347}
   - component: {fileID: 4283615923715997627}
-  - component: {fileID: 8327181568658151978}
   - component: {fileID: 6416398654458116408}
   m_Layer: 0
   m_Name: ConvDorianCharles
@@ -184,21 +183,6 @@ MonoBehaviour:
   clue: {fileID: 11400000, guid: 47f844d9b68ab4a3787608ab59150b92, type: 2}
   detectableGameObject: {fileID: 6289096303617599347}
   isInteractable: 0
---- !u!114 &8327181568658151978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3413661311624942005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 433feeca55f0b441ebab7ada50855580, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  npcs:
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &6416398654458116408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,6 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clue: {fileID: 4283615923715997627}
+  interactiveIcon: {fileID: 6416398654458116408}
 --- !u!1001 &2597267212282741118
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -284,33 +269,49 @@ PrefabInstance:
       propertyPath: m_Name
       value: ClueText
       objectReference: {fileID: 0}
+    - target: {fileID: 804436449648140579, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.04
+      objectReference: {fileID: 0}
     - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.077
+      value: -1.261
       objectReference: {fileID: 0}
     - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.039
+      value: 0.213
       objectReference: {fileID: 0}
     - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.417
+      value: -2.929
       objectReference: {fileID: 0}
     - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.95086664
+      value: 0.9632631
       objectReference: {fileID: 0}
     - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.09560687
       objectReference: {fileID: 0}
     - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.30960077
+      value: 0.24973814
       objectReference: {fileID: 0}
     - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.024787286
       objectReference: {fileID: 0}
     - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

@@ -1,13 +1,14 @@
+using System.ComponentModel;
 using UnityEngine;
 
 public class ClueManager : MonoBehaviour
 {
+    [SerializeField] ClueDatabase db;
     void Awake()
     {
-        ClueDatabase db = ClueDatabase.Instance;
+        db = ClueDatabase.Instance;
         if (!db.isInstanciated)
         {
-            db.isInstanciated = true;
             db.ClearDatabase();
         }
     }
