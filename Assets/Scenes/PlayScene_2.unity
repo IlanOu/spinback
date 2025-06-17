@@ -930,6 +930,7 @@ GameObject:
   - component: {fileID: 330585548}
   - component: {fileID: 330585549}
   - component: {fileID: 330585550}
+  - component: {fileID: 330585551}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1108,6 +1109,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee4c7d5229f74706ade91064b231059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &330585551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2679336e6ce44d6496d2c611baa1f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixerGroup: {fileID: 280729487132561362, guid: d474be4b20a584b55ab062a9a59fb1f1, type: 2}
+  UISounds: {fileID: 11400000, guid: f43911c3ba1fa4b338d9c42aa7f685c3, type: 2}
 --- !u!1 &372468810
 GameObject:
   m_ObjectHideFlags: 0
@@ -1380,6 +1395,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CheckpointChanger
       objectReference: {fileID: 0}
+    - target: {fileID: 3933178338910847645, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e7d6a90854f7ed0438b2078bb2b30ef7, type: 3}
     - target: {fileID: 5624796500347255886, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
       propertyPath: director
       value: 
@@ -1391,6 +1410,10 @@ PrefabInstance:
     - target: {fileID: 5624796500347255886, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
       propertyPath: targetSceneName
       value: PlayScene_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5624796500347255886, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
+      propertyPath: startAtZeroDegrees
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5624796500347255886, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
       propertyPath: midiBindings.Array.size
@@ -1417,8 +1440,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
---- !u!4 &408391845 stripped
-Transform:
+--- !u!224 &408391845 stripped
+RectTransform:
   m_CorrespondingSourceObject: {fileID: 1003408698763417101, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
   m_PrefabInstance: {fileID: 408391844}
   m_PrefabAsset: {fileID: 0}
@@ -3117,23 +3140,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8465244439054945945, guid: f8636f170cc20407cbbcb469167e26dd, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8465244439054945945, guid: f8636f170cc20407cbbcb469167e26dd, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8465244439054945945, guid: f8636f170cc20407cbbcb469167e26dd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8465244439054945945, guid: f8636f170cc20407cbbcb469167e26dd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8465244439054945945, guid: f8636f170cc20407cbbcb469167e26dd, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -432.90936
+      value: -428.55
       objectReference: {fileID: 0}
     - target: {fileID: 8465244439054945945, guid: f8636f170cc20407cbbcb469167e26dd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

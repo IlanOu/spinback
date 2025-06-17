@@ -13,35 +13,48 @@ namespace TimeSystem
     /// </summary>
     public class CheckpointChanger : MonoBehaviour
     {
-        [Header("Configuration")] 
-        [SerializeField] private string targetSceneName;
+        [Header("Configuration")] [SerializeField]
+        private string targetSceneName;
+
         [SerializeField] private bool useVideoTransition = true;
         [SerializeField] private KeyCode changeSceneKey = KeyCode.Space;
         [SerializeField] private float confirmationTimeWindow = 2f;
         [SerializeField] private bool startAtZeroDegrees = true; // Toggle pour commencer à 0° ou 90°
         [SerializeField] private float delayBeforeSceneChange = 0.5f; // Délai après l'animation
 
-        [Header("Animation de base")] 
-        [SerializeField] private float animationDuration = 0.3f;
+        [Header("Animation de base")] [SerializeField]
+        private float animationDuration = 0.3f;
+
         [SerializeField] private RectTransform arrowTransform;
-        
-        [Header("Effets d'animation")]
-        [SerializeField] private Ease startEase = Ease.OutQuint; // Effet pour la première partie de l'animation
+
+        [Header("Effets d'animation")] [SerializeField]
+        private Ease startEase = Ease.OutQuint; // Effet pour la première partie de l'animation
+
         [SerializeField] private Ease endEase = Ease.InOutBack; // Effet pour la seconde partie de l'animation
         [SerializeField] private float overshootAmount = 5f; // Amplitude du dépassement en degrés
         [SerializeField] private float startDurationRatio = 0.7f; // Ratio de la durée pour la première partie (0-1)
-        
-        [Header("Animation de balancement")]
-        [SerializeField] private float wobbleAmplitude = 5f; // Amplitude du balancement (±5° autour de la position)
+
+        [Header("Animation de balancement")] [SerializeField]
+        private float wobbleAmplitude = 5f; // Amplitude du balancement (±5° autour de la position)
+
         [SerializeField] private float wobbleFrequency = 2f; // Fréquence du balancement (oscillations par seconde)
-        
-        [Header("Timer visuel")]
-        [SerializeField] private Image timerFillImage; // Image qui se remplit/vide
+
+        [Header("Timer visuel")] [SerializeField]
+        private Image timerFillImage; // Image qui se remplit/vide
+
         [SerializeField] private Color timerStartColor = Color.white; // Couleur au début du timer
         [SerializeField] private Color timerEndColor = Color.white; // Couleur à la fin du timer
 
-        [Header("MIDI Configuration")] 
-        [SerializeField] private bool useMidiTriggers = true;
+        [Header("Images de thème")] [SerializeField]
+        private GameObject lightThemeIcon; // Icône du thème clair
+
+        [SerializeField] private GameObject darkThemeIcon; // Icône du thème sombre
+        [SerializeField] private float themeIconFadeDuration = 0.3f; // Durée de l'animation de fondu
+        [SerializeField] private Ease themeIconFadeEase = Ease.OutQuad; // Effet pour l'animation de fondu
+
+        [Header("MIDI Configuration")] [SerializeField]
+        private bool useMidiTriggers = true;
+
         [SerializeField] private List<MidiBind> midiBindings = new List<MidiBind>();
 
         // États de la flèche
@@ -56,6 +69,7 @@ namespace TimeSystem
         private Coroutine _sceneChangeCoroutine;
         private Tweener _wobbleTweener;
         private Sequence _timerSequence;
+        private Sequence _themeIconSequence;
 
         private void Start()
         {
@@ -65,13 +79,16 @@ namespace TimeSystem
             // Initialiser la rotation de la flèche en fonction du toggle
             _currentRotation = startAtZeroDegrees ? 0f : 90f;
             UpdateArrowRotation(_currentRotation, 0);
-            
+
             // Initialiser l'image du timer
             if (timerFillImage != null)
             {
                 timerFillImage.fillAmount = 0;
                 timerFillImage.gameObject.SetActive(false);
             }
+
+            // Initialiser les icônes de thème
+            UpdateThemeIcons(false);
         }
 
         private void Update()
@@ -170,11 +187,9 @@ namespace TimeSystem
 
             // Mettre la flèche en position intermédiaire avec effet
             AnimateToTransitionPosition();
-            
+
             // Démarrer l'animation de balancement après la transition
-            _currentAnimation.OnComplete(() => {
-                StartWobbleAnimation();
-            });
+            _currentAnimation.OnComplete(() => { StartWobbleAnimation(); });
         }
 
         private void ConfirmSceneChange()
@@ -187,6 +202,9 @@ namespace TimeSystem
 
             // Animer la flèche vers la position finale
             UpdateArrowRotation(_currentRotation, animationDuration);
+
+            // Mettre à jour les icônes de thème avec animation
+            UpdateThemeIcons(true);
 
             // Attendre la fin de l'animation avant de changer de scène
             if (_sceneChangeCoroutine != null)
@@ -210,7 +228,7 @@ namespace TimeSystem
         {
             // Arrêter l'animation de balancement
             StopWobbleAnimation();
-            
+
             // Arrêter l'animation du timer
             StopTimerAnimation();
 
@@ -247,19 +265,21 @@ namespace TimeSystem
 
             // Animation avec effet
             _currentAnimation = DOTween.Sequence();
-            
+
             // Calculer un léger dépassement dans la direction du mouvement
             float overshoot = _currentRotation < _transitionRotation ? overshootAmount : -overshootAmount;
-            
+
             // Première partie: aller un peu au-delà de la position cible
             _currentAnimation.Append(
-                arrowTransform.DORotate(new Vector3(0, 0, _transitionRotation + overshoot), animationDuration * startDurationRatio)
+                arrowTransform.DORotate(new Vector3(0, 0, _transitionRotation + overshoot),
+                        animationDuration * startDurationRatio)
                     .SetEase(startEase)
             );
-            
+
             // Deuxième partie: revenir à la position cible exacte
             _currentAnimation.Append(
-                arrowTransform.DORotate(new Vector3(0, 0, _transitionRotation), animationDuration * (1 - startDurationRatio))
+                arrowTransform.DORotate(new Vector3(0, 0, _transitionRotation),
+                        animationDuration * (1 - startDurationRatio))
                     .SetEase(endEase)
             );
         }
@@ -280,19 +300,19 @@ namespace TimeSystem
             {
                 // Animation avec effet
                 _currentAnimation = DOTween.Sequence();
-                
+
                 // Calculer un léger dépassement dans la direction du mouvement
                 float currentRotationZ = arrowTransform.rotation.eulerAngles.z;
                 // Normaliser l'angle entre 0 et 360
                 if (currentRotationZ > 180) currentRotationZ -= 360;
                 float overshoot = currentRotationZ < rotation ? overshootAmount : -overshootAmount;
-                
+
                 // Première partie: aller un peu au-delà de la position cible
                 _currentAnimation.Append(
                     arrowTransform.DORotate(new Vector3(0, 0, rotation + overshoot), duration * startDurationRatio)
                         .SetEase(startEase)
                 );
-                
+
                 // Deuxième partie: revenir à la position cible exacte
                 _currentAnimation.Append(
                     arrowTransform.DORotate(new Vector3(0, 0, rotation), duration * (1 - startDurationRatio))
@@ -301,31 +321,102 @@ namespace TimeSystem
             }
         }
 
+        /// <summary>
+        /// Met à jour les icônes de thème en fonction de la rotation actuelle
+        /// </summary>
+        private void UpdateThemeIcons(bool animate)
+        {
+            if (lightThemeIcon == null || darkThemeIcon == null)
+                return;
+
+            StopThemeIconAnimation();
+
+            // Déterminer quel thème est actif
+            bool isLightTheme = _currentRotation == 0f;
+
+            if (!animate)
+            {
+                // Mise à jour immédiate
+                lightThemeIcon.SetActive(isLightTheme);
+                darkThemeIcon.SetActive(!isLightTheme);
+            }
+            else
+            {
+                // Animation avec fondu
+                _themeIconSequence = DOTween.Sequence();
+
+                // Configurer les objets
+                lightThemeIcon.SetActive(true);
+                darkThemeIcon.SetActive(true);
+
+                // Obtenir les CanvasGroup ou les ajouter si nécessaire
+                CanvasGroup lightGroup = GetOrAddCanvasGroup(lightThemeIcon);
+                CanvasGroup darkGroup = GetOrAddCanvasGroup(darkThemeIcon);
+
+                // Configurer l'alpha initial
+                lightGroup.alpha = isLightTheme ? 0 : 1;
+                darkGroup.alpha = isLightTheme ? 1 : 0;
+
+                // Animer le fondu
+                _themeIconSequence.Append(
+                    lightGroup.DOFade(isLightTheme ? 1 : 0, themeIconFadeDuration)
+                        .SetEase(themeIconFadeEase)
+                );
+
+                _themeIconSequence.Join(
+                    darkGroup.DOFade(isLightTheme ? 0 : 1, themeIconFadeDuration)
+                        .SetEase(themeIconFadeEase)
+                );
+
+                // Désactiver l'icône invisible à la fin
+                _themeIconSequence.OnComplete(() =>
+                {
+                    lightThemeIcon.SetActive(isLightTheme);
+                    darkThemeIcon.SetActive(!isLightTheme);
+                });
+            }
+        }
+
+        /// <summary>
+        /// Obtient ou ajoute un CanvasGroup à un GameObject
+        /// </summary>
+        private CanvasGroup GetOrAddCanvasGroup(GameObject obj)
+        {
+            CanvasGroup group = obj.GetComponent<CanvasGroup>();
+            if (group == null)
+            {
+                group = obj.AddComponent<CanvasGroup>();
+            }
+
+            return group;
+        }
+
         private void StartWobbleAnimation()
         {
             if (arrowTransform == null)
                 return;
-                
+
             StopWobbleAnimation();
-            
+
             // Créer une animation de balancement sinusoïdal
             float baseRotation = _transitionRotation;
-            
+
             // Utiliser DOTween pour animer une valeur de 0 à 1 en boucle
             _wobbleTweener = DOTween.To(
-                () => 0f,
-                (x) => {
-                    // Calculer la rotation en fonction d'une courbe sinusoïdale
-                    float wobbleOffset = Mathf.Sin(x * Mathf.PI * 2) * wobbleAmplitude;
-                    arrowTransform.rotation = Quaternion.Euler(0, 0, baseRotation + wobbleOffset);
-                },
-                1f,
-                1f / wobbleFrequency
-            )
-            .SetEase(Ease.Linear)
-            .SetLoops(-1); // Boucle infinie
+                    () => 0f,
+                    (x) =>
+                    {
+                        // Calculer la rotation en fonction d'une courbe sinusoïdale
+                        float wobbleOffset = Mathf.Sin(x * Mathf.PI * 2) * wobbleAmplitude;
+                        arrowTransform.rotation = Quaternion.Euler(0, 0, baseRotation + wobbleOffset);
+                    },
+                    1f,
+                    1f / wobbleFrequency
+                )
+                .SetEase(Ease.Linear)
+                .SetLoops(-1); // Boucle infinie
         }
-        
+
         private void StopWobbleAnimation()
         {
             if (_wobbleTweener != null && _wobbleTweener.IsActive())
@@ -334,40 +425,38 @@ namespace TimeSystem
                 _wobbleTweener = null;
             }
         }
-        
+
         private void StartTimerAnimation()
         {
             if (timerFillImage == null)
                 return;
-                
+
             StopTimerAnimation();
-            
+
             // Activer l'image du timer
             timerFillImage.gameObject.SetActive(true);
             timerFillImage.fillAmount = 1f;
             timerFillImage.color = timerStartColor;
-            
+
             // Créer une séquence pour l'animation du timer
             _timerSequence = DOTween.Sequence();
-            
+
             // Animer le fill amount
             _timerSequence.Append(
                 timerFillImage.DOFillAmount(0f, confirmationTimeWindow)
                     .SetEase(Ease.Linear)
             );
-            
+
             // Animer la couleur
             _timerSequence.Join(
                 timerFillImage.DOColor(timerEndColor, confirmationTimeWindow)
                     .SetEase(Ease.Linear)
             );
-            
+
             // Cacher l'image à la fin
-            _timerSequence.OnComplete(() => {
-                timerFillImage.gameObject.SetActive(false);
-            });
+            _timerSequence.OnComplete(() => { timerFillImage.gameObject.SetActive(false); });
         }
-        
+
         private void StopTimerAnimation()
         {
             if (_timerSequence != null && _timerSequence.IsActive())
@@ -375,11 +464,20 @@ namespace TimeSystem
                 _timerSequence.Kill();
                 _timerSequence = null;
             }
-            
+
             // Cacher l'image du timer
             if (timerFillImage != null)
             {
                 timerFillImage.gameObject.SetActive(false);
+            }
+        }
+
+        private void StopThemeIconAnimation()
+        {
+            if (_themeIconSequence != null && _themeIconSequence.IsActive())
+            {
+                _themeIconSequence.Kill();
+                _themeIconSequence = null;
             }
         }
 
@@ -391,12 +489,13 @@ namespace TimeSystem
                 _currentAnimation = null;
             }
         }
-        
+
         private void StopAllAnimations()
         {
             StopCurrentAnimation();
             StopWobbleAnimation();
             StopTimerAnimation();
+            StopThemeIconAnimation();
         }
     }
 }
