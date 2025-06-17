@@ -85,6 +85,7 @@ public class TooltipActivator : MonoBehaviour
         {
             if (tooltip.checkmark != null)
             {
+                UISoundManager.Instance.PlayOnCheckedMark();
                 tooltip.checkmark.SetActive(true);
                 StartCoroutine(HideTooltipAfterDelay(tooltip));
             }

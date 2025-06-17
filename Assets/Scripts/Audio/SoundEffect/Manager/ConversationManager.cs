@@ -13,6 +13,7 @@ public class ConversationManager : MonoBehaviour
     [SerializeField] private MusicEffectManager musicEffectManager;
     [SerializeField] private bool conversationEffectEnabled = false;
     [SerializeField, Range(0f, 1f)] private float balance = 0f;
+    private float lastTriggeredStep = -1f;
     [SerializeField] private float marginError = 0.08f;
 
     // C'est uniquement ce controller qui va déterminer si l'effet sonore doit être activé ou non
@@ -86,6 +87,14 @@ public class ConversationManager : MonoBehaviour
     void OnPotentiometer(float value)
     {
         balance = value;
+        float currentStep = Mathf.Floor(balance * 10f) / 10f;
+
+        if (!Mathf.Approximately(currentStep, lastTriggeredStep))
+        {
+            lastTriggeredStep = currentStep;
+            if (conversationEffectEnabled)
+                UISoundManager.Instance.PlayTicPotentiometer();
+        }
     }
 
     void UpdateNPCVisibility(bool visible)
