@@ -778,6 +778,8 @@ GameObject:
   m_Component:
   - component: {fileID: 952759074}
   - component: {fileID: 952759073}
+  - component: {fileID: 952759076}
+  - component: {fileID: 952759075}
   m_Layer: 0
   m_Name: PointCursorManager
   m_TagString: Untagged
@@ -797,16 +799,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ca0ab9d431d48b2b154c394a98fd5d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorTexture: {fileID: 2800000, guid: 764a378bdaddfe443935afde995d9b70, type: 3}
-  cursorImage: {fileID: 1849489441}
---- !u!4 &952759074
-Transform:
+  normalTex: {fileID: 0}
+  focusTex: {fileID: 0}
+  normalSize: {x: 32, y: 32}
+  focusSize: {x: 48, y: 48}
+--- !u!224 &952759074
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 952759072}
-  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -814,6 +817,46 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &952759075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952759072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &952759076
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952759072}
+  m_CullTransparentMesh: 1
 --- !u!114 &963994918 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 258889912244315354, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
@@ -2507,6 +2550,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4241492493734285324, guid: 377ca799044434d89a32c36f2e59e915, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1637811445}
+    - targetCorrespondingSourceObject: {fileID: 4241492493734285324, guid: 377ca799044434d89a32c36f2e59e915, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5007606256397069516}
   m_SourcePrefab: {fileID: 100100000, guid: 377ca799044434d89a32c36f2e59e915, type: 3}
 --- !u!114 &5007606256397069515 stripped
 MonoBehaviour:
@@ -2519,6 +2565,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 755736a5edbb4785b58015017e73f6ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5007606256397069516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637811438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2679336e6ce44d6496d2c611baa1f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioMixerGroup: {fileID: 280729487132561362, guid: d474be4b20a584b55ab062a9a59fb1f1, type: 2}
+  UISounds: {fileID: 11400000, guid: f43911c3ba1fa4b338d9c42aa7f685c3, type: 2}
 --- !u!224 &6062493180089129235 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 783715980599448946, guid: e680d9b9d90da954bb181b236a1bcf82, type: 3}
@@ -2816,6 +2876,7 @@ Animator:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 952759074}
   - {fileID: 5007606256397069514}
   - {fileID: 4768308963329691939}
   - {fileID: 881662333}
@@ -2833,6 +2894,5 @@ SceneRoots:
   - {fileID: 1586914357}
   - {fileID: 2829931586945073648}
   - {fileID: 2020971897}
-  - {fileID: 952759074}
   - {fileID: 1146916740}
   - {fileID: 1907684428}
