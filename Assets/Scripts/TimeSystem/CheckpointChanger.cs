@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cinematics;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace TimeSystem
 {
@@ -17,7 +18,7 @@ namespace TimeSystem
         [SerializeField] private bool useVideoTransition = true;
         [SerializeField] private KeyCode changeSceneKey = KeyCode.Space;
         [SerializeField] private float confirmationTimeWindow = 2f;
-        [SerializeField] private float defaultArrowRotation = 0f; // 0° ou 90°
+        [SerializeField] private bool startAtZeroDegrees = true; // Toggle pour commencer à 0° ou 90°
         [SerializeField] private float delayBeforeSceneChange = 0.5f; // Délai après l'animation
 
         [Header("Animation de base")] 
@@ -33,6 +34,11 @@ namespace TimeSystem
         [Header("Animation de balancement")]
         [SerializeField] private float wobbleAmplitude = 5f; // Amplitude du balancement (±5° autour de la position)
         [SerializeField] private float wobbleFrequency = 2f; // Fréquence du balancement (oscillations par seconde)
+        
+        [Header("Timer visuel")]
+        [SerializeField] private Image timerFillImage; // Image qui se remplit/vide
+        [SerializeField] private Color timerStartColor = Color.white; // Couleur au début du timer
+        [SerializeField] private Color timerEndColor = Color.white; // Couleur à la fin du timer
 
         [Header("MIDI Configuration")] 
         [SerializeField] private bool useMidiTriggers = true;
@@ -49,15 +55,23 @@ namespace TimeSystem
         private Sequence _currentAnimation;
         private Coroutine _sceneChangeCoroutine;
         private Tweener _wobbleTweener;
+        private Sequence _timerSequence;
 
         private void Start()
         {
             // S'abonner aux événements MIDI
             SubscribeToMidi();
 
-            // Initialiser la rotation de la flèche
-            _currentRotation = defaultArrowRotation;
+            // Initialiser la rotation de la flèche en fonction du toggle
+            _currentRotation = startAtZeroDegrees ? 0f : 90f;
             UpdateArrowRotation(_currentRotation, 0);
+            
+            // Initialiser l'image du timer
+            if (timerFillImage != null)
+            {
+                timerFillImage.fillAmount = 0;
+                timerFillImage.gameObject.SetActive(false);
+            }
         }
 
         private void Update()
@@ -136,6 +150,7 @@ namespace TimeSystem
             {
                 // Confirmer le changement
                 _waitingForConfirmation = false;
+                StopTimerAnimation();
                 ConfirmSceneChange();
             }
             else
@@ -144,6 +159,7 @@ namespace TimeSystem
                 _waitingForConfirmation = true;
                 _confirmationTimer = confirmationTimeWindow;
                 PrepareSceneChange();
+                StartTimerAnimation();
             }
         }
 
@@ -194,6 +210,9 @@ namespace TimeSystem
         {
             // Arrêter l'animation de balancement
             StopWobbleAnimation();
+            
+            // Arrêter l'animation du timer
+            StopTimerAnimation();
 
             // Remettre la flèche à sa position initiale
             UpdateArrowRotation(_currentRotation, animationDuration);
@@ -315,6 +334,54 @@ namespace TimeSystem
                 _wobbleTweener = null;
             }
         }
+        
+        private void StartTimerAnimation()
+        {
+            if (timerFillImage == null)
+                return;
+                
+            StopTimerAnimation();
+            
+            // Activer l'image du timer
+            timerFillImage.gameObject.SetActive(true);
+            timerFillImage.fillAmount = 1f;
+            timerFillImage.color = timerStartColor;
+            
+            // Créer une séquence pour l'animation du timer
+            _timerSequence = DOTween.Sequence();
+            
+            // Animer le fill amount
+            _timerSequence.Append(
+                timerFillImage.DOFillAmount(0f, confirmationTimeWindow)
+                    .SetEase(Ease.Linear)
+            );
+            
+            // Animer la couleur
+            _timerSequence.Join(
+                timerFillImage.DOColor(timerEndColor, confirmationTimeWindow)
+                    .SetEase(Ease.Linear)
+            );
+            
+            // Cacher l'image à la fin
+            _timerSequence.OnComplete(() => {
+                timerFillImage.gameObject.SetActive(false);
+            });
+        }
+        
+        private void StopTimerAnimation()
+        {
+            if (_timerSequence != null && _timerSequence.IsActive())
+            {
+                _timerSequence.Kill();
+                _timerSequence = null;
+            }
+            
+            // Cacher l'image du timer
+            if (timerFillImage != null)
+            {
+                timerFillImage.gameObject.SetActive(false);
+            }
+        }
 
         private void StopCurrentAnimation()
         {
@@ -329,6 +396,7 @@ namespace TimeSystem
         {
             StopCurrentAnimation();
             StopWobbleAnimation();
+            StopTimerAnimation();
         }
     }
 }
