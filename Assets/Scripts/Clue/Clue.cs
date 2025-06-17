@@ -17,6 +17,6 @@ public class Clue : ScriptableObject
         isAdded = false;
         enabled = true;
         isNew = true;
-        Debug.Log("Clue '" + title + "' reset with value: " + isAdded);
+        // Debug.Log("Clue '" + title + "' reset with value: " + isAdded);
     }
 }

@@ -69,8 +69,19 @@ public class EndUIPresets : MonoBehaviour
     
     private void SetTotalScore()
     {
-        currentPercentage = ClueDatabase.Instance.GetTotalPoints() / ClueDatabase.Instance.GetMaxPoints() * 100f;
+        int totalPoints = ClueDatabase.Instance.GetTotalPoints();
+        int maxPoints = ClueDatabase.Instance.GetMaxPoints();
+        
+        if (maxPoints > 0)
+        {
+            currentPercentage = (float)totalPoints / maxPoints * 100f;
+        }
+        else
+        {
+            currentPercentage = 0;
+        }
     }
+
     
     // Valider que les presets existants ont le bon nombre d'états
     private void ValidatePresets()
@@ -126,6 +137,8 @@ public class EndUIPresets : MonoBehaviour
     // Méthode principale: appliquer le preset en fonction du pourcentage
     public void ApplyPresetByPercentage(float percentage)
     {
+        Debug.Log($"ApplyPresetByPercentage({percentage})");
+        
         // Mettre à jour le pourcentage
         currentPercentage = Mathf.Clamp(percentage, 0f, 100f);
         
