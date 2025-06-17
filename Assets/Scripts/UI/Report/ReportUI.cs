@@ -184,13 +184,13 @@ namespace UI.Report
         void ForceShowReport()
         {
             CanOpenReport(true);
-            ForceShowReport();
+            ShowUI();
         }
 
         void ForceHideReport()
         {
             CanCloseReport(true);
-            ForceHideReport();
+            HideUI();
         }
 
         public void AddInfoToReport(Clue clue)
