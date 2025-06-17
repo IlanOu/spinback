@@ -9,6 +9,8 @@ public class UISoundFrequency : MonoBehaviour
     [SerializeField] private float noiseSpeed = 1f;         // Speed of noise variation
     [SerializeField] PlayableDirector director;
 
+    [SerializeField] private float minSliderValue = 0.1f;
+    
     private bool active = false;
     private float baseValue = 0f;
     private float noiseSeed;
@@ -18,7 +20,7 @@ public class UISoundFrequency : MonoBehaviour
         noiseSeed = Random.Range(0f, 1000f); // Random start for variety
     }
 
-    void Update()
+    private void Update()
     {
         if (!active) return;
 
@@ -45,6 +47,7 @@ public class UISoundFrequency : MonoBehaviour
     {
         if (!active) return;
         baseValue = Mathf.Clamp01(distance);
+        baseValue = Mathf.Min(1f, baseValue + minSliderValue);
     }
 
     public void Hide()

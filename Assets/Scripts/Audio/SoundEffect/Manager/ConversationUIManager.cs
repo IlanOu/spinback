@@ -1,12 +1,14 @@
+using UI.Cursor;
 using UnityEngine;
 
 public class ConversationUIManager : MonoBehaviour
 {
     [SerializeField] private UISoundFrequency ui;
-
-    public void Handle(float distance, bool enabled)
+    [SerializeField] private PointCursorManager pointCursorManager;
+    
+    public void Handle(float distance, bool conversationEffectEnabled)
     {
-        if (enabled)
+        if (conversationEffectEnabled)
         {
             ui.Show();
             ui.HandleUI(distance);
@@ -15,5 +17,6 @@ public class ConversationUIManager : MonoBehaviour
         {
             ui.Hide();
         }
+        pointCursorManager.ToggleFocus(conversationEffectEnabled);
     }
 }
