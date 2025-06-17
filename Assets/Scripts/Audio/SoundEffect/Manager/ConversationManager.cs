@@ -44,6 +44,7 @@ public class ConversationManager : MonoBehaviour
     {
         conversationEffectManager.Handle(distance, conversationEffectEnabled);
         conversationUIManager.Handle(distance, conversationEffectEnabled);
+        musicEffectManager.Handle(distance, conversationEffectEnabled);
     }
 
     public void EnableSoundEffect(ConversationController controller)
@@ -57,7 +58,7 @@ public class ConversationManager : MonoBehaviour
         conversationEffectEnabled = true;
 
         vignetteController.Enable();
-        musicEffectManager.Enable();
+        // musicEffectManager.Enable();
         crowdEffectManager.Enable();
     }
 
@@ -72,7 +73,7 @@ public class ConversationManager : MonoBehaviour
         conversationEffectEnabled = false;
 
         vignetteController.Disable();
-        musicEffectManager.Disable();
+        // musicEffectManager.Disable();
         crowdEffectManager.Disable();
     }
 
