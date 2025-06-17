@@ -8,7 +8,7 @@ public class ConversationController : MonoBehaviour
     [SerializeField] private Collider[] colliders;
     [SerializeField] private DetectableGameObject detectableGameObject;
     [SerializeField] private float timeBeforeInteractionVisibility = 5f;
-    [HideInInspector] public float normalSoundValue;
+    public float normalSoundValue;
     [HideInInspector] public AudioSource audioSource;
     private ConversationVolumeController soundVolumeController;
     private ConversingNPCs conversingNPCs;

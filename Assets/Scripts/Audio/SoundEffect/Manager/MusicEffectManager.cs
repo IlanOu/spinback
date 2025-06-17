@@ -11,23 +11,46 @@ public class MusicEffectManager : MonoBehaviour
     [SerializeField] private Vector2 musicLowPassSettings = new Vector2(800f, 22000f);
     [SerializeField] private Vector2 resonanceSettings = new Vector2(2f, 1f);
 
-    public void Enable()
+    // public void Enable()
+    // {
+    //     audioMixer.SetFloat("MusicLowPass", musicLowPassSettings.x);
+    //     audioMixer.SetFloat("MusicResonance", resonanceSettings.x);
+    //     foreach (AudioSource source in musicSources)
+    //     {
+    //         source.volume = musicVolumeSettings.x;
+    //     }
+    // }
+
+    // public void Disable()
+    // {
+    //     audioMixer.SetFloat("MusicLowPass", musicLowPassSettings.y);
+    //     audioMixer.SetFloat("MusicResonance", resonanceSettings.y);
+    //     foreach (AudioSource source in musicSources)
+    //     {
+    //         source.volume = musicVolumeSettings.y;
+    //     }
+    // }
+
+    public void Handle(float distance, bool enabled)
     {
-        audioMixer.SetFloat("MusicLowPass", musicLowPassSettings.x);
-        audioMixer.SetFloat("MusicResonance", resonanceSettings.x);
-        foreach (AudioSource source in musicSources)
+        if (enabled)
         {
-            source.volume = musicVolumeSettings.x;
+            float hz = GetHz(distance);
+
+            audioMixer.SetFloat("MusicLowPass", hz);
+            audioMixer.SetFloat("MusicResonance", resonanceSettings.x);
+        }
+        else
+        {
+            audioMixer.SetFloat("MusicLowPass", musicLowPassSettings.y);
+            audioMixer.SetFloat("MusicResonance", resonanceSettings.y);
         }
     }
 
-    public void Disable()
+    float GetHz(float distance)
     {
-        audioMixer.SetFloat("MusicLowPass", musicLowPassSettings.y);
-        audioMixer.SetFloat("MusicResonance", resonanceSettings.y);
-        foreach (AudioSource source in musicSources)
-        {
-            source.volume = musicVolumeSettings.y;
-        }
+        float t = Mathf.Clamp01(1f - distance);
+        float curvedT = (float)Easings.ExponentialEaseOut(t);
+        return Mathf.Lerp(musicLowPassSettings.y, musicLowPassSettings.x, curvedT);
     }
 }

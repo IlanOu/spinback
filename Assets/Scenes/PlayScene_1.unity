@@ -1745,6 +1745,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9909a05cdd707164a9a384fdfe187225, type: 3}
   m_PrefabInstance: {fileID: 887208110}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &945324271 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1237965122222010747, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
+  m_PrefabInstance: {fileID: 2108878380}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &994333761
 GameObject:
   m_ObjectHideFlags: 0
@@ -2473,6 +2478,10 @@ PrefabInstance:
       propertyPath: pointCursorManager
       value: 
       objectReference: {fileID: 1133803071}
+    - target: {fileID: 6069374650203739234, guid: 06196455c05894216aa94af14a39afff, type: 3}
+      propertyPath: musicLowPassSettings.y
+      value: 20000
+      objectReference: {fileID: 0}
     - target: {fileID: 6069374650203739234, guid: 06196455c05894216aa94af14a39afff, type: 3}
       propertyPath: musicSources.Array.size
       value: 1
@@ -3270,7 +3279,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
       propertyPath: colorGradient.ctime2
-      value: 13685
+      value: 8847
       objectReference: {fileID: 0}
     - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
       propertyPath: colorGradient.ctime3
@@ -3278,6 +3287,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
       propertyPath: colorGradient.ctime4
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
+      propertyPath: colorGradient.ctime5
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
+      propertyPath: colorGradient.ctime6
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
+      propertyPath: colorGradient.ctime7
       value: 65535
       objectReference: {fileID: 0}
     - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
@@ -3322,6 +3343,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
       propertyPath: colorGradient.key4.r
+      value: 0.81960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
+      propertyPath: colorGradient.key5.b
+      value: 0.011764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
+      propertyPath: colorGradient.key5.r
+      value: 0.81960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
+      propertyPath: colorGradient.key6.b
+      value: 0.011764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
+      propertyPath: colorGradient.key6.r
+      value: 0.81960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
+      propertyPath: colorGradient.key7.b
+      value: 0.011764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
+      propertyPath: colorGradient.key7.r
       value: 0.81960785
       objectReference: {fileID: 0}
     - target: {fileID: 7693491840405935432, guid: bfe6be3c24d9d47b08f60bff4ce047bf, type: 3}
@@ -3734,13 +3779,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1237965122222010747, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2108878383}
   m_SourcePrefab: {fileID: 100100000, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
 --- !u!4 &2108878381 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1003408698763417101, guid: 5e2b0d7876ddee443967f69a9e8c0025, type: 3}
   m_PrefabInstance: {fileID: 2108878380}
   m_PrefabAsset: {fileID: 0}
+--- !u!225 &2108878383
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945324271}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1001 &106628699710707791
 PrefabInstance:
   m_ObjectHideFlags: 0
