@@ -159,16 +159,25 @@ public class TooltipActivator : MonoBehaviour
 
     public void EnablePotentiometerTooltip()
     {
-        EnableTooltip(TooltipType.Potentiometer);
+        if (GameSave.Instance.mainGameIsPlayedFirstTime && !GameSave.Instance.mainGameIsPlayedSecondTime)
+        {
+            EnableTooltip(TooltipType.Potentiometer);
+        }
     }
 
     public void EnableSliderTooltip()
     {
-        EnableTooltip(TooltipType.Slider);
+        if (GameSave.Instance.mainGameIsPlayedFirstTime && !GameSave.Instance.mainGameIsPlayedSecondTime)
+        {
+            EnableTooltip(TooltipType.Slider);
+        }
     }
 
     public void EnableJogWheelTooltip()
     {
-        EnableTooltip(TooltipType.JogWheel);
+        if (GameSave.Instance.mainGameIsPlayedFirstTime && !GameSave.Instance.mainGameIsPlayedSecondTime)
+        {
+            EnableTooltip(TooltipType.JogWheel);
+        }
     }
 }

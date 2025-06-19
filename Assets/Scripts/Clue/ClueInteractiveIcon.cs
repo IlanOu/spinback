@@ -51,6 +51,7 @@ public class ClueInteractiveIcon : MonoBehaviour
                 clue.renderer.material = matInstance;
             }
         }
+        text.text = commandText;
 
         interactableClue.OnClueAdded += ClueAdded;
     }

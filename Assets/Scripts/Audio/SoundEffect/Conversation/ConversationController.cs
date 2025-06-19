@@ -8,7 +8,7 @@ public class ConversationController : MonoBehaviour
     [SerializeField] private Collider[] colliders;
     [SerializeField] private DetectableGameObject detectableGameObject;
     [SerializeField] private float timeBeforeInteractionVisibility = 5f;
-    public float normalSoundValue;
+    [SerializeField, Range(0f, 1f)]public float normalSoundValue;
     [HideInInspector] public AudioSource audioSource;
     private ConversationVolumeController soundVolumeController;
     private ConversingNPCs conversingNPCs;
@@ -22,6 +22,7 @@ public class ConversationController : MonoBehaviour
     private bool isZooming => cameraZoom != null && cameraZoom.IsZooming(zoomValue);
     private bool isFocused => isLookingAt && isZooming;
     private bool isRewinding;
+    private bool shownIcon = false;
     public List<GameObject> npcs => conversingNPCs != null ? conversingNPCs.GetNPCs() : new();
 
     void Awake()
@@ -43,7 +44,7 @@ public class ConversationController : MonoBehaviour
         MidiBinding.Instance.Subscribe(MidiBind.JOG_BUTTON_1, OnJogNote);
         MidiBinding.Instance.Subscribe(MidiBind.JOG_BUTTON_2, OnJogNote);
         
-        SetRandomNormalSoundValue();
+        // SetRandomNormalSoundValue();
     }
 
     void Update()
@@ -59,8 +60,9 @@ public class ConversationController : MonoBehaviour
                 {
                     lastTimeEnable = Time.time;
                 }
-                else if (Time.time - lastTimeEnable > timeBeforeInteractionVisibility)
+                else if (Time.time - lastTimeEnable > timeBeforeInteractionVisibility || shownIcon)
                 {
+                    shownIcon = true;
                     clueInteractiveIcon.EnableVisibility(true);
                 }
                 clue.EnableInteractability();

@@ -44,6 +44,8 @@ public class OnboardingManager : MonoBehaviour
     void Start()
     {
         OnOpenReportUI?.Invoke(false);
+        reportUI.enabled = false;
+
         cameraFollow = Camera.main.GetComponent<SmoothCameraFollow>();
         cameraZoom = Camera.main.GetComponent<CameraZoom>();
 
@@ -51,6 +53,8 @@ public class OnboardingManager : MonoBehaviour
         outlineClue = clue.GetComponent<OutlineObject>();
 
         currentStep = null;
+
+        GameSave.Instance.StartCinematic();
     }
 
     void Update()

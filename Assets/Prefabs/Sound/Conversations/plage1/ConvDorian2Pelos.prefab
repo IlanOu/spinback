@@ -188,7 +188,7 @@ MonoBehaviour:
   - {fileID: 5804004871786064668}
   detectableGameObject: {fileID: 7558647799154111311}
   timeBeforeInteractionVisibility: 5
-  normalSoundValue: 0
+  normalSoundValue: 0.324
   audioSource: {fileID: 0}
 --- !u!114 &7558647799154111311
 MonoBehaviour:
@@ -249,8 +249,8 @@ MonoBehaviour:
   interactableClue: {fileID: 5253216566386873011}
   interactive: {fileID: 4958141645221064791}
   text: {fileID: 5508173091154343342}
-  commandText: "Ajouter cet \xE9l\xE9ment \xE0 mon t\xE9moignage"
-  validateText: "\xC9l\xE9ment ajout\xE9"
+  commandText: "Kevin et Jean \xE9taient insouciants..."
+  validateText: "Indice ajout\xE9"
   enableVisibility: 0
   alwaysVisible: 0
   visibleDuration: 3
@@ -291,31 +291,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.09
+      value: 1.0768
       objectReference: {fileID: 0}
     - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.03
+      value: 0.0157
       objectReference: {fileID: 0}
     - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.91
+      value: -4.1159
       objectReference: {fileID: 0}
     - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.9917251
+      value: -0.98861015
       objectReference: {fileID: 0}
     - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.042978086
+      value: -0.041256882
       objectReference: {fileID: 0}
     - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.12085916
+      value: 0.14460826
       objectReference: {fileID: 0}
     - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0052376348
+      value: -0.006034821
       objectReference: {fileID: 0}
     - target: {fileID: 5842574373954465507, guid: 7be0f143a50924683932d1bba0c9c5af, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

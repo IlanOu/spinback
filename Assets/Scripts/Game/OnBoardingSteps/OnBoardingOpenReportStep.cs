@@ -11,6 +11,7 @@ public class OnBoardingOpenReportStep : OnBoardingStep
 
     public override void Show()
     {
+        reportUI.enabled = true;
         reportUI.CanOpenReport(true);
         reportUI.CanCloseReport(false);
 

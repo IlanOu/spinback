@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using Cinematics;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
+using UnityEngine.UI.ProceduralImage;
 
 namespace TimeSystem
 {
@@ -13,6 +15,12 @@ namespace TimeSystem
     /// </summary>
     public class CheckpointChanger : MonoBehaviour
     {
+        [Header("Reference")]
+        [SerializeField] private PlayableDirector director;
+        [SerializeField] private ProceduralImage circleImage;
+        [SerializeField] private ProceduralImage timerImage;
+        [SerializeField] private ProceduralImage arrowImage;
+
         [Header("Configuration")] [SerializeField]
         private string targetSceneName;
 
@@ -21,6 +29,7 @@ namespace TimeSystem
         [SerializeField] private float confirmationTimeWindow = 2f;
         [SerializeField] private bool startAtZeroDegrees = true; // Toggle pour commencer à 0° ou 90°
         [SerializeField] private float delayBeforeSceneChange = 0.5f; // Délai après l'animation
+        [SerializeField] private float opacityWithNoAnimation = 40f;
 
         [Header("Animation de base")] [SerializeField]
         private float animationDuration = 0.3f;
@@ -89,6 +98,11 @@ namespace TimeSystem
 
             // Initialiser les icônes de thème
             UpdateThemeIcons(false);
+
+            // Add opacity
+            circleImage.color = new Color(circleImage.color.r, circleImage.color.g, circleImage.color.b, (opacityWithNoAnimation / 255f));
+            timerImage.color = new Color(timerImage.color.r, timerImage.color.g, timerImage.color.b, (opacityWithNoAnimation / 255f));
+            arrowImage.color = new Color(arrowImage.color.r, arrowImage.color.g, arrowImage.color.b, (opacityWithNoAnimation / 255f));
         }
 
         private void Update()
@@ -190,6 +204,11 @@ namespace TimeSystem
 
             // Démarrer l'animation de balancement après la transition
             _currentAnimation.OnComplete(() => { StartWobbleAnimation(); });
+
+            // Add opacity
+            circleImage.color = new Color(circleImage.color.r, circleImage.color.g, circleImage.color.b, 1f);
+            timerImage.color = new Color(timerImage.color.r, timerImage.color.g, timerImage.color.b, 1f);
+            arrowImage.color = new Color(arrowImage.color.r, arrowImage.color.g, arrowImage.color.b, 1f);
         }
 
         private void ConfirmSceneChange()
@@ -234,6 +253,11 @@ namespace TimeSystem
 
             // Remettre la flèche à sa position initiale
             UpdateArrowRotation(_currentRotation, animationDuration);
+
+            // Add opacity
+            circleImage.color = new Color(circleImage.color.r, circleImage.color.g, circleImage.color.b, (opacityWithNoAnimation / 255f));
+            timerImage.color = new Color(timerImage.color.r, timerImage.color.g, timerImage.color.b, (opacityWithNoAnimation / 255f));
+            arrowImage.color = new Color(arrowImage.color.r, arrowImage.color.g, arrowImage.color.b, (opacityWithNoAnimation / 255f));
         }
 
         /// <summary>
@@ -246,6 +270,8 @@ namespace TimeSystem
                 Debug.LogError("Nom de scène cible non défini!");
                 return;
             }
+
+            director.Pause();
 
             if (useVideoTransition)
                 SceneTransitionBlinker.Instance.TransitionToSceneWithVideo(targetSceneName);
