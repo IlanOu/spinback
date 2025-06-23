@@ -69,6 +69,13 @@ public class OnboardingManager : MonoBehaviour
         {
             TooltipActivator.Instance.DisableAllTooltips();
         }
+        
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            director.Pause();
+            director.time = director.duration -1;
+            director.Play();
+        }
     }
 
     public void StartOnboarding()
