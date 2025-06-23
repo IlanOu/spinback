@@ -107,7 +107,7 @@ namespace UI.Popup
                     break;
                 
                 case PopupType.Declaration:
-                    if (confirmButtonText != null) confirmButtonText.text = "Signer ma déclaration";
+                    if (confirmButtonText != null) confirmButtonText.text = "Valider mon témoignage";
                     if (cancelButtonText != null) cancelButtonText.text = "Revenir en jeu";
                     if (cancelButton != null) cancelButton.gameObject.SetActive(true);
                     break;
