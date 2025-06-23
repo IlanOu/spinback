@@ -7,6 +7,7 @@ public class GenerateLabels : MonoBehaviour
     [SerializeField] private string endHourText;
     [SerializeField] private string startMinuteText;
     [SerializeField] private string endMinuteText;
+    [SerializeField] private TMP_FontAsset font;
 
     void Start()
     {
@@ -45,5 +46,6 @@ public class GenerateLabels : MonoBehaviour
         textComponent.alignment = TextAlignmentOptions.Center;
         textComponent.fontSize = 20;
         textComponent.color = Color.white;
+        textComponent.font = font;
     }
 }

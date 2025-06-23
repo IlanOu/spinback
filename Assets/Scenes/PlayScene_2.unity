@@ -3646,6 +3646,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1656042205}
     m_Modifications:
+    - target: {fileID: 1055507776116451303, guid: f8636f170cc20407cbbcb469167e26dd, type: 3}
+      propertyPath: endHourText
+      value: 21:02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1055507776116451303, guid: f8636f170cc20407cbbcb469167e26dd, type: 3}
+      propertyPath: startHourText
+      value: 21:00
+      objectReference: {fileID: 0}
     - target: {fileID: 2033992734161203520, guid: f8636f170cc20407cbbcb469167e26dd, type: 3}
       propertyPath: m_Name
       value: TimelineUI
@@ -3972,10 +3980,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 996034239290270912, guid: 7e0639fda89a2499d8373485764e54aa, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e0639fda89a2499d8373485764e54aa, type: 3}
 --- !u!82 &2450681532571628586 stripped
 AudioSource:
@@ -4226,10 +4231,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4059179864335771982, guid: 7d078d74e4436409ba8614252275cb67, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d078d74e4436409ba8614252275cb67, type: 3}
 --- !u!1001 &3870768093011130890
 PrefabInstance:
@@ -4463,10 +4465,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4299872917086014180, guid: 8b278625950f14a94b5d186902d80fc4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b278625950f14a94b5d186902d80fc4, type: 3}
 --- !u!1001 &4556876670175785370
 PrefabInstance:
@@ -4583,10 +4582,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 622676933006807665, guid: 64dd286101bb04c54ae87fe0e57f8391, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64dd286101bb04c54ae87fe0e57f8391, type: 3}
 --- !u!4 &5121600481387127508 stripped
 Transform:
@@ -4730,10 +4726,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2007007802949524294, guid: ae59ca561d5cd451ea4835c88ce18825, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae59ca561d5cd451ea4835c88ce18825, type: 3}
 --- !u!82 &8038838751451651752 stripped
 AudioSource:
@@ -4924,10 +4917,7 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 59156926245865054, guid: 646c84ae7629d46919caba474656cda7, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6272497414733375102, guid: 646c84ae7629d46919caba474656cda7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 646c84ae7629d46919caba474656cda7, type: 3}
 --- !u!23 &9157529340881769294 stripped
 MeshRenderer:
