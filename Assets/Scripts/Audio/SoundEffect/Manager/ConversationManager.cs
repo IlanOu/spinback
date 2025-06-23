@@ -59,7 +59,7 @@ public class ConversationManager : MonoBehaviour
 
         vignetteController.Enable();
         // musicEffectManager.Enable();
-        crowdEffectManager.Enable();
+        if (crowdEffectManager) crowdEffectManager.Enable();
     }
 
     public void DisableSoundEffect(ConversationController controller)
@@ -74,7 +74,7 @@ public class ConversationManager : MonoBehaviour
 
         vignetteController.Disable();
         // musicEffectManager.Disable();
-        crowdEffectManager.Disable();
+        if (crowdEffectManager) crowdEffectManager.Disable();
     }
 
     float GetDistance(float normal, float balance)

@@ -21,7 +21,7 @@ public class OnBoardingOpenReportStep : OnBoardingStep
         TooltipActivator.Instance.SubscribeToDeactivation(TooltipType.OpenReport, TooltipDisabled);
 
         reportIcon = reportUI.gameObject.GetComponent<ReportIcon>();
-        reportIcon.ShowAlertIcon();
+        reportIcon.ShowOpenIcon();
     }
 
     private void TooltipDisabled() => manager.NextStep();

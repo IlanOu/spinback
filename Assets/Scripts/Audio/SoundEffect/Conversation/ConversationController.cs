@@ -64,8 +64,8 @@ public class ConversationController : MonoBehaviour
                 {
                     shownIcon = true;
                     clueInteractiveIcon.EnableVisibility(true);
+                    clue.EnableInteractability();
                 }
-                clue.EnableInteractability();
                 ConversationManager.Instance.EnableSoundEffect(this);
             }
             else ConversationManager.Instance.DisableSoundEffect(this);
