@@ -30,6 +30,7 @@ public class OnboardingManager : MonoBehaviour
     [SerializeField] public Button validateButton;
 
     [SerializeField] public UnityEvent<bool> OnOpenReportUI;
+    [SerializeField] public UnityEvent OnStepStart;
     
     void Awake()
     {

@@ -11,6 +11,7 @@ public class OnBoardingReportInteractionStep : OnBoardingStep
 
     public override void Show()
     {
+        manager.OnStepStart.Invoke();
         TooltipActivator.Instance.EnableTooltip(TooltipType.ValidateReport);
         TooltipActivator.Instance.SubscribeToDeactivation(TooltipType.ValidateReport, TooltipDisabled);
 
