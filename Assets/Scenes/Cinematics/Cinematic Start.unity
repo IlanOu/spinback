@@ -2523,6 +2523,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8734518220889341720, guid: d7ae65651c094452cb4b70198cd31188, type: 3}
+      propertyPath: OnStepStart.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1849489440}
+    - target: {fileID: 8734518220889341720, guid: d7ae65651c094452cb4b70198cd31188, type: 3}
       propertyPath: OnOpenReportUI.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 1
       objectReference: {fileID: 0}
@@ -2530,6 +2534,10 @@ PrefabInstance:
       propertyPath: OnOpenReportUI.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 952759072}
+    - target: {fileID: 8734518220889341720, guid: d7ae65651c094452cb4b70198cd31188, type: 3}
+      propertyPath: OnStepStart.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
     - target: {fileID: 8734518220889341720, guid: d7ae65651c094452cb4b70198cd31188, type: 3}
       propertyPath: OnOpenReportUI.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
       value: 2
