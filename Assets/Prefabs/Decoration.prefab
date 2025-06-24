@@ -1141,7 +1141,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prop_TeddyBear_01
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3619815178101587662, guid: 05cdd40ea92f078498549cef979671cf, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
