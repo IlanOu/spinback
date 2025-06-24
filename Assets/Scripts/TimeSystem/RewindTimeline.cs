@@ -11,9 +11,14 @@ public class RewindTimeline : MonoBehaviour
     [SerializeField] private float pauseDelay = 0.1f;
     [SerializeField] private float jogSpeed = 10f;
 
+    [Header("Smooth Rewind Settings")]
+    [SerializeField] private float rewindSmoothFactor = 2f; // Facteur max de vitesse
+    [SerializeField] private AnimationCurve rewindSpeedUpCurve = AnimationCurve.Linear(0, 1, 5, 2); // x = secondes, y = multiplicateur
+
     private PlayableDirector director;
     private bool isTouchingPlatine = false;
     private float timeSinceLastJogEvent = 0f;
+    private float jogHoldTime = 0f;
 
     void Awake()
     {
@@ -47,6 +52,8 @@ public class RewindTimeline : MonoBehaviour
 
         if (isTouchingPlatine)
         {
+            jogHoldTime += Time.deltaTime;
+
             if (timeSinceLastJogEvent > pauseDelay)
             {
                 if (director.state == PlayState.Playing)
@@ -55,8 +62,7 @@ public class RewindTimeline : MonoBehaviour
         }
         else
         {
-            // if (director.state != PlayState.Playing)
-            //     director.Play();
+            jogHoldTime = 0f;
         }
     }
 
@@ -105,7 +111,9 @@ public class RewindTimeline : MonoBehaviour
 
     private void MoveTimeline(float direction)
     {
-        float delta = direction * jogSpeed * jogSensitivity;
+        float smoothMultiplier = rewindSpeedUpCurve.Evaluate(jogHoldTime) * rewindSmoothFactor;
+        float delta = direction * jogSpeed * jogSensitivity * smoothMultiplier;
+
         double newTime = director.time + delta;
         newTime = Mathf.Clamp((float)newTime, 0f, (float)director.duration);
         director.time = newTime;

@@ -1,6 +1,7 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 
 namespace UI.Popup
@@ -16,6 +17,7 @@ namespace UI.Popup
         [SerializeField] private Button cancelButton;
         [SerializeField] private TextMeshProUGUI cancelButtonText;
         [SerializeField] private Button closeButton;
+        [SerializeField] private PlayableDirector director;
 
         private Action onConfirm;
         private Action onCancel;
@@ -131,6 +133,7 @@ namespace UI.Popup
         {
             Hide();
             onConfirm?.Invoke();
+            if (director != null) director.Pause();
         }
 
         private void OnCancelClicked()
