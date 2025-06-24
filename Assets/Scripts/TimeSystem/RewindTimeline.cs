@@ -11,9 +11,9 @@ public class RewindTimeline : MonoBehaviour
     [SerializeField] private float pauseDelay = 0.1f;
     [SerializeField] private float jogSpeed = 10f;
 
-    [Header("Smooth Rewind Settings")]
-    [SerializeField] private float rewindSmoothFactor = 2f; // Facteur max de vitesse
-    [SerializeField] private AnimationCurve rewindSpeedUpCurve = AnimationCurve.Linear(0, 1, 5, 2); // x = secondes, y = multiplicateur
+    
+    
+    
 
     private PlayableDirector director;
     private bool isTouchingPlatine = false;
@@ -111,8 +111,7 @@ public class RewindTimeline : MonoBehaviour
 
     private void MoveTimeline(float direction)
     {
-        float smoothMultiplier = rewindSpeedUpCurve.Evaluate(jogHoldTime) * rewindSmoothFactor;
-        float delta = direction * jogSpeed * jogSensitivity * smoothMultiplier;
+        float delta = direction * jogSpeed * jogSensitivity;
 
         double newTime = director.time + delta;
         newTime = Mathf.Clamp((float)newTime, 0f, (float)director.duration);
